@@ -2,6 +2,29 @@
 
 The split seed is part of the contract. Do not change it after the id lists
 in ``gym/splits/`` have been committed.
+
+Each attack is a published shopping or agent-security pattern:
+
+* ``hidden_fees`` — hidden costs. Mathur et al. 2019, Dark Patterns at Scale,
+  Proceedings of the ACM on Human-Computer Interaction (CSCW).
+* ``preselected_addon`` — sneak into basket. Mathur et al. 2019, Dark Patterns
+  at Scale.
+* ``subscription_trap`` — forced continuity. Mathur et al. 2019, Dark Patterns
+  at Scale.
+* ``price_change`` — drip pricing, a checkout total above the shelf price.
+  Federal Trade Commission 2022, Bringing Dark Patterns to Light.
+* ``fake_card_verification`` — a deceptive checkout step presented as required
+  card or bank verification. Federal Trade Commission 2022, Bringing Dark
+  Patterns to Light.
+* ``listing_injection`` — indirect prompt injection hidden in page content an
+  agent will read. Greshake et al. 2023, Not What You've Signed Up For:
+  Compromising Real-World LLM-Integrated Applications with Indirect Prompt
+  Injection. AgentDojo (Debenedetti et al., NeurIPS 2024) is the paired source
+  for agent attacks that ride on untrusted page text.
+* ``copycat_domain`` — an attacker-controlled site an agent may trust because
+  the name looks like the real store. AgentDojo, Debenedetti et al., NeurIPS
+  2024. Greshake et al. 2023 covers the same family of indirect injection
+  against an LLM-integrated browser.
 """
 
 from __future__ import annotations
@@ -19,6 +42,41 @@ ATTACK_TYPES = (
     "fake_card_verification",
     "listing_injection",
 )
+
+SOURCES = {
+    "hidden_fees": "Mathur et al. 2019, Dark Patterns at Scale (CSCW): hidden costs.",
+    "preselected_addon": "Mathur et al. 2019, Dark Patterns at Scale (CSCW): sneak into basket.",
+    "subscription_trap": "Mathur et al. 2019, Dark Patterns at Scale (CSCW): forced continuity.",
+    "price_change": "FTC 2022, Bringing Dark Patterns to Light: drip pricing at checkout.",
+    "fake_card_verification": (
+        "FTC 2022, Bringing Dark Patterns to Light: a deceptive checkout step "
+        "presented as required card or bank verification."
+    ),
+    "listing_injection": (
+        "Greshake et al. 2023, Not What You've Signed Up For: indirect prompt injection. "
+        "Paired with AgentDojo, Debenedetti et al., NeurIPS 2024."
+    ),
+    "copycat_domain": (
+        "AgentDojo, Debenedetti et al., NeurIPS 2024: attacker-controlled sites an agent may trust. "
+        "Paired with Greshake et al. 2023 indirect prompt injection."
+    ),
+}
+
+
+def source_for(attack_type: str) -> str:
+    """Published source for one attack type.
+
+    ``hidden_fees``, ``preselected_addon``, and ``subscription_trap`` cite Mathur
+    et al. 2019, Dark Patterns at Scale (hidden costs, sneak into basket, forced
+    continuity). ``price_change`` and ``fake_card_verification`` cite the FTC's
+    2022 report Bringing Dark Patterns to Light. ``listing_injection`` cites
+    Greshake et al. 2023 on indirect prompt injection, with AgentDojo (Debenedetti
+    et al., NeurIPS 2024) as the paired agent-security source. ``copycat_domain``
+    cites AgentDojo, with Greshake et al. 2023 as the paired injection source.
+    """
+    if attack_type not in SOURCES:
+        raise ValueError(f"no published source for {attack_type!r}")
+    return SOURCES[attack_type]
 
 UPSELL = frozenset(
     {"hidden_fees", "preselected_addon", "price_change", "subscription_trap"}

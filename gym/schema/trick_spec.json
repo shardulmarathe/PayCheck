@@ -95,6 +95,20 @@
         },
         "listed_price_cents": {"type": "integer", "minimum": 0},
         "checkout_price_cents": {"type": "integer", "minimum": 0},
+        "related": {
+          "type": "array",
+          "description": "Honest related items from the same store category. Present on clean and trick pages.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "sku", "price_cents"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "sku": {"type": "string", "minLength": 1},
+              "price_cents": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
         "blocks": {
           "type": "array",
           "items": {

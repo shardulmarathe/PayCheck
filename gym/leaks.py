@@ -87,3 +87,44 @@ def reject_description(text: str) -> str | None:
     if leaks(text):
         return "leak"
     return None
+
+
+# Shopping-process copy can stay even when it is not about this SKU.
+_SHOP_CHROME = re.compile(
+    r"(?i)\b(?:"
+    r"shipping|checkout|cookies?|privacy|accounts?|orders?|e-?mails?|"
+    r"deliver(?:y|ies)|vat|payments?|carts?|wishlist|newsletters?|polic(?:y|ies)|"
+    r"logins?|passwords?|estimated|inbox|discounts?|offers?|careers?|affiliates?|"
+    r"sitemaps?|subscri(?:be|ption)|refunds?|warranty"
+    r")\b"
+)
+_CAMEL = re.compile(r"[a-z][A-Z]")
+# Product titles and sponsored rows from other catalogs. These read as a second listing.
+_FOREIGN_LISTING = re.compile(
+    r"(?i)(?:"
+    r"\bt-?shirts?\b|\btees?\b|\bdresses?\b|\btrousers\b|\bsandals?\b|\bawn|"
+    r"\bbouquet\b|\bcuffs?\b|\bphone stand\b|\bsleeve top\b|\bslip-on\b|"
+    r"home\s*/|\bt-shirt/tee\b|/\s*tee\b|\bremote\b|\blego\b|"
+    r"\bblouse\b|\bjeans\b|\bsneakers?\b|\bhoodie\b|\bshop now\b"
+    r")"
+)
+
+
+def foreign_listing(text: str) -> bool:
+    """True when a blurb is another catalog's product title or a sponsored row.
+
+    Privacy, shipping, and account lines are not listings. A title-cased noun
+    phrase, a smashed brand list, or a clothing or hardware product name is.
+    """
+    raw = text or ""
+    if _SHOP_CHROME.search(raw):
+        return False
+    if _FOREIGN_LISTING.search(raw) or _CAMEL.search(raw):
+        return True
+    # A clipped catalog title often ends in an ellipsis. That is not a sentence.
+    stripped = raw.replace("...", " ").replace("…", " ")
+    words = re.findall(r"[A-Za-z0-9']+", stripped)
+    if len(words) < 4 or re.search(r"[.!?]", stripped):
+        return False
+    caps = sum(1 for word in words if word[:1].isupper())
+    return caps / len(words) >= 0.7

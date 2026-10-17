@@ -266,6 +266,51 @@ def test_allocate_respects_n_and_drops_held_out_types():
     assert Counter(spec["trick"]["attack_type"] for spec in specs) == expected
 
 
+def test_controls_carts_lexicon_and_topical_blurbs_do_not_separate_labels():
+    from gym.audit.shortcut import attribute_probe, echoed_html, length_probe
+    from gym.polish import word_sides
+    from gym.taxonomy import ATTACK_TYPES, source_for
+
+    specs = frozen_specs()
+    for attack in ATTACK_TYPES:
+        if attack != "none":
+            assert source_for(attack)
+    htmls = echoed_html(specs)
+    attribute = attribute_probe(htmls, specs)
+    assert attribute["pass"], attribute["separating"][:12]
+    lengths = length_probe(htmls, specs)
+    assert lengths["pass"], lengths["kinds"]
+    carts = [
+        spec
+        for spec in specs
+        if spec["page"]["kind"] == "cart"
+    ]
+    assert carts
+    assert {len(spec["page"]["cart"]) for spec in carts} == {2}
+    words = word_sides(specs)
+    for word, sides in words.items():
+        assert sides["clean"] and sides["trick"], (word, sides)
+    by_legacy = {spec["legacy_page_id"]: spec for spec in specs}
+    oats = by_legacy["test-none-110"]["page"]["product"]["description"]
+    water = by_legacy["test-hidden_fees-015"]["page"]["product"]["description"]
+    assert "JFN" not in oats and "T-Shirt" not in oats
+    assert "Awntech" not in water
+    off_topic = [
+        row for row in build_specs.last_replacements if row["reason"] == "off-topic-listing"
+    ]
+    assert off_topic
+    blob = " ".join(row["replaced_text"] for row in off_topic)
+    assert "Trousers" in blob or "trouser" in blob.lower()
+    for spec in specs:
+        assert len(spec["page"]["related"]) == 2
+        if spec["page"]["kind"] == "payment":
+            html = render_html(spec)
+            assert 'type="password"' in html
+            assert 'id="secret"' in html and 'name="secret"' in html
+        if spec["trick"]["attack_type"] != "listing_injection":
+            assert "JFN Crew Neck" not in spec["page"]["product"]["description"]
+
+
 def test_errand_quotes_match_the_correct_cart():
     evidence_price_ok()
     for errand in ERRANDS:

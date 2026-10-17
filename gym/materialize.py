@@ -47,14 +47,23 @@ def prepare_dir(path: Path) -> None:
     (path / "specs").mkdir(parents=True)
 
 
-def materialize(specs: list[dict], out_dir: Path) -> list[dict]:
+def materialize(
+    specs: list[dict],
+    out_dir: Path,
+    htmls: list[str] | None = None,
+) -> list[dict]:
+    if htmls is None:
+        from gym.audit.shortcut import echoed_html
+
+        htmls = echoed_html(specs)
+    if len(htmls) != len(specs):
+        raise RuntimeError(f"html list {len(htmls)} does not match specs {len(specs)}")
     prepare_dir(out_dir)
     labels: list[dict] = []
     with Browser(VIEWPORT) as browser:
         font_checked = False
-        for spec in specs:
+        for spec, html in zip(specs, htmls):
             validate_spec(spec)
-            html = render_html(spec, check=False)
             url = page_url(spec)
             browser.open_html(html, url)
             if not font_checked:

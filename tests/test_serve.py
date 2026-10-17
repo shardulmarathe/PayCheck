@@ -52,7 +52,7 @@ def test_errands_reach_the_known_cart_or_abort():
         batteries.open("/e/aa-batteries/continue", {})
         batteries.open(
             "/e/aa-batteries/pay",
-            {"card_number": "4111111111111111", "cvv": "123", "bank_password": "secret"},
+            {"card_number": "4111111111111111", "cvv": "123", "secret": "secret"},
         )
         result = json.loads(batteries.open("/e/aa-batteries/result"))
         assert result["matches"] is True
@@ -75,7 +75,7 @@ def test_errands_reach_the_known_cart_or_abort():
         assert "was not in the listed price" not in checkout
         assert "fee fee" not in checkout.lower()
         assert "checkbox checked" not in checkout
-        assert 'name="fee" value="1" checked' in checkout
+        assert 'name="extra" value="1" checked' in checkout
         oats.open("/e/pantry-oats/update", {"fee_form": "1"})
         cleared = oats.open("/e/pantry-oats/checkout")
         assert "$2.99" not in cleared
@@ -89,8 +89,8 @@ def test_errands_reach_the_known_cart_or_abort():
         cable.open("/e/usb-cable/add", {})
         cable_page = cable.open("/e/usb-cable/checkout")
         assert "Subscribe and save — $10.00 today, then $12.00 monthly" in cable_page
-        assert 'id="purchase-sub"' in cable_page and "checked" in cable_page
-        cable.open("/e/usb-cable/continue", {"purchase": "once"})
+        assert 'id="plan-0"' in cable_page and "checked" in cable_page
+        cable.open("/e/usb-cable/continue", {"plan": "once"})
         cable.open("/e/usb-cable/pay", {})
         cable_result = json.loads(cable.open("/e/usb-cable/result"))
         assert cable_result["matches"] is True
@@ -99,7 +99,7 @@ def test_errands_reach_the_known_cart_or_abort():
 
         trapped = Client(base)
         trapped.open("/e/usb-cable/add", {})
-        trapped.open("/e/usb-cable/continue", {"purchase": "sub"})
+        trapped.open("/e/usb-cable/continue", {"plan": "sub"})
         trapped.open("/e/usb-cable/pay", {})
         trapped_result = json.loads(trapped.open("/e/usb-cable/result"))
         assert trapped_result["matches"] is False

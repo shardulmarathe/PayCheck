@@ -35,6 +35,9 @@ def frozen_specs() -> list[dict]:
         id_prefix="test",
     )
     assign_template_slices(specs)
+    from gym.polish import balance_lengths
+
+    balance_lengths(specs)
     assert_rows_allowed(specs, set(test_ids))
     if len(specs) != 300:
         raise RuntimeError(f"expected 300 test pages, got {len(specs)}")
@@ -133,9 +136,9 @@ def _write_replacements(path: Path) -> int:
     payload = {
         "note": (
             "Clean descriptions dropped because the source row was a dead page, "
-            "an age-restricted product, or a line that leaked a banned token. "
-            "The gym page kept its legacy id. The replacement is the next usable "
-            "row in the same split."
+            "an age-restricted product, a line that leaked a banned token, or an "
+            "off-topic catalog title (another store's product, including cigarette "
+            "trousers from a clothing listing). The gym page kept its legacy id."
         ),
         "count": len(rows),
         "replacements": rows,
@@ -144,30 +147,27 @@ def _write_replacements(path: Path) -> int:
     return len(rows)
 
 
-def build_tree(page_dir: Path, slice_file: Path) -> tuple[list[dict], str, list[dict]]:
+def build_tree(page_dir: Path, slice_file: Path) -> tuple[list[dict], str, list[dict], list[str]]:
+    from gym.audit.shortcut import echoed_html
+
     specs = frozen_specs()
     if len(specs) != 300:
         raise RuntimeError(f"expected 300 test pages, got {len(specs)}")
-    labels = materialize(specs, page_dir)
+    htmls = echoed_html(specs)
+    labels = materialize(specs, page_dir, htmls=htmls)
     _write_slice(labels, slice_file)
     digest = content_hash(page_dir, slice_file)
-    return labels, digest, specs
+    return labels, digest, specs, htmls
 
 
-def template_similarity(specs: list[dict]) -> dict:
+def template_similarity(specs: list[dict], test_html: list[str], train_html: list[str], seed: int) -> dict:
     """Nearest-neighbor character similarity of each slice against round-1 train pages."""
-    from gym.catalog import seed_for_round
-    from gym.render import render_html
     from gym.similarity import nearest_ratios, strip_urls, summarize
-    from gym.train import split_train_dev, training_specs
 
-    seed = seed_for_round(1)
-    generated = training_specs(1800, seed, round_n=1)
-    train_specs, _dev_specs = split_train_dev(generated, n_dev=300)
-    corpus = [strip_urls(render_html(spec)) for spec in train_specs]
+    corpus = [strip_urls(html) for html in train_html]
     by_slice: dict[str, list[str]] = {}
-    for spec in specs:
-        by_slice.setdefault(spec["slice"], []).append(strip_urls(render_html(spec)))
+    for spec, html in zip(specs, test_html):
+        by_slice.setdefault(spec["slice"], []).append(strip_urls(html))
     slices = {}
     for name in ("in_dist", "heldout_template", "heldout_attack"):
         scores = nearest_ratios(by_slice.get(name, []), corpus)
@@ -180,27 +180,167 @@ def template_similarity(specs: list[dict]) -> dict:
     return {
         "method": "rapidfuzz.fuzz.ratio on rendered HTML with URLs removed",
         "train_round": 1,
-        "train_pages": len(train_specs),
+        "train_pages": len(train_html),
         "train_seed": seed,
         "slices": slices,
     }
 
 
+def _round1() -> tuple[list[dict], list[dict], int]:
+    from gym.catalog import seed_for_round
+    from gym.train import split_train_dev, training_specs
+
+    seed = seed_for_round(1)
+    generated = training_specs(1800, seed, round_n=1)
+    train_specs, dev_specs = split_train_dev(generated, n_dev=300)
+    for spec in train_specs + dev_specs:
+        attack = spec["trick"]["attack_type"]
+        if attack in HELD_OUT:
+            raise RuntimeError(f"{spec['page_id']} is held out of round 1 ({attack})")
+    return train_specs, dev_specs, seed
+
+
+def _write_round(train_specs: list[dict], dev_specs: list[dict], seed: int) -> dict:
+    from gym.paths import round_dir
+    from gym.wording import diversity
+
+    directory = round_dir(1)
+    directory.mkdir(parents=True, exist_ok=True)
+
+    def dump(name: str, specs: list[dict]) -> None:
+        lines = [json.dumps(spec, ensure_ascii=False, sort_keys=True) for spec in specs]
+        (directory / name).write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    dump("train.jsonl", train_specs)
+    dump("dev.jsonl", dev_specs)
+    train_diversity = diversity(train_specs)
+    dev_diversity = diversity(dev_specs)
+    payload = {
+        "round": 1,
+        "seed": seed,
+        "n_generated": len(train_specs) + len(dev_specs),
+        "n_train": len(train_specs),
+        "n_dev": len(dev_specs),
+        "held_out_excluded": sorted(HELD_OUT),
+        "diversity_train": train_diversity,
+        "diversity_dev": dev_diversity,
+        "files": ["train.jsonl", "dev.jsonl"],
+        "note": (
+            "Compact specs for round-1 train and dev. copycat_domain and "
+            "listing_injection are absent. Render with the shortcut gate to "
+            "audit attribute mirrors; those mirrors are not stored on the spec."
+        ),
+    }
+    (directory / "manifest.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(
+        f"wrote round-1 train={len(train_specs)} dev={len(dev_specs)} "
+        f"distinct_before={train_diversity['distinct_before']} "
+        f"distinct_after={train_diversity['distinct_after']}",
+        flush=True,
+    )
+    return payload
+
+
+def _shortcut_report(
+    test_specs: list[dict],
+    test_html: list[str],
+    train_specs: list[dict],
+    train_html: list[str],
+    dev_specs: list[dict],
+    dev_html: list[str],
+    similarity: dict,
+    round_payload: dict,
+) -> dict:
+    from gym.audit.shortcut import auc_misses, probe_set, write_report
+
+    near = {
+        "pass": bool(
+            similarity["slices"]["heldout_template"]["mean"]
+            < similarity["slices"]["in_dist"]["mean"]
+            and similarity["slices"]["heldout_template"]["mean"] < 0.85
+        ),
+        "method": similarity["method"],
+        "slices": similarity["slices"],
+    }
+    overlap = {
+        "pass": True,
+        "gate": "gym.overlap.assert_no_test_overlap",
+        "note": "training_specs refused the round when a train or dev page overlapped the test set.",
+    }
+    report = {
+        "thresholds": {"token_auc": 0.65, "structure_auc": 0.70, "length_relative_gap": 0.05},
+        "diversity": {
+            "train": round_payload["diversity_train"],
+            "dev": round_payload["diversity_dev"],
+        },
+        "sets": {
+            "test": {**probe_set(test_specs, test_html), "overlap": overlap, "near_duplicate": near},
+            "train": {
+                **probe_set(train_specs, train_html),
+                "overlap": overlap,
+                "near_duplicate": {
+                    "pass": near["pass"],
+                    "note": "Near-duplicate scores are test slices against this train round.",
+                    "slices": similarity["slices"],
+                },
+            },
+            "dev": {
+                **probe_set(dev_specs, dev_html),
+                "overlap": overlap,
+                "near_duplicate": {
+                    "pass": near["pass"],
+                    "note": "Dev is the round-1 holdout. Near-duplicate scores are the test slices.",
+                    "slices": similarity["slices"],
+                },
+            },
+        },
+    }
+    misses = auc_misses(report)
+    report["auc_disclosed"] = misses
+    report["auc_pass"] = not misses
+    write_report(report)
+    print(f"shortcut report auc_pass={report['auc_pass']} disclosed={misses}", flush=True)
+    return report
+
+
 def write_testset() -> str:
-    labels, digest, specs = build_tree(testset_dir(), slice_path())
-    replaced = _write_replacements(replacements_path())
-    manifest = _manifest(labels, digest)
-    manifest["kinds"] = kind_mix(specs)
-    manifest["slices"] = dict(sorted(Counter(spec["slice"] for spec in specs).items()))
-    manifest["clean_replacements"] = replaced
-    manifest["template_similarity"] = template_similarity(specs)
-    heldout_mean = manifest["template_similarity"]["slices"]["heldout_template"]["mean"]
-    in_dist_mean = manifest["template_similarity"]["slices"]["in_dist"]["mean"]
+    from gym.audit.shortcut import echoed_html, hard_failures
+
+    specs = frozen_specs()
+    if len(specs) != 300:
+        raise RuntimeError(f"expected 300 test pages, got {len(specs)}")
+    from gym.build import build_specs
+
+    test_replacements = list(build_specs.last_replacements)
+    test_html = echoed_html(specs)
+    train_specs, dev_specs, seed = _round1()
+    train_html = echoed_html(train_specs)
+    dev_html = echoed_html(dev_specs)
+    similarity = template_similarity(specs, test_html, train_html, seed)
+    round_payload = _write_round(train_specs, dev_specs, seed)
+    report = _shortcut_report(
+        specs, test_html, train_specs, train_html, dev_specs, dev_html, similarity, round_payload
+    )
+    failures = hard_failures(report)
+    if failures:
+        raise RuntimeError("shortcut gate failed:\n" + "\n".join(failures))
+    heldout_mean = similarity["slices"]["heldout_template"]["mean"]
+    in_dist_mean = similarity["slices"]["in_dist"]["mean"]
     if not heldout_mean or heldout_mean >= in_dist_mean or heldout_mean >= 0.85:
         raise RuntimeError(
             f"heldout_template mean {heldout_mean} is not well below the in-distribution "
             f"mean {in_dist_mean}"
         )
+    build_specs.last_replacements = test_replacements
+    labels = materialize(specs, testset_dir(), htmls=test_html)
+    _write_slice(labels, slice_path())
+    digest = content_hash(testset_dir(), slice_path())
+    replaced = _write_replacements(replacements_path())
+    manifest = _manifest(labels, digest)
+    manifest["kinds"] = kind_mix(specs)
+    manifest["slices"] = dict(sorted(Counter(spec["slice"] for spec in specs).items()))
+    manifest["clean_replacements"] = replaced
+    manifest["template_similarity"] = similarity
     manifest_path().parent.mkdir(parents=True, exist_ok=True)
     manifest_path().write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"wrote testset pages={len(labels)} hash={digest} clean_replacements={replaced}")
@@ -222,7 +362,7 @@ def check_testset() -> str:
         root = Path(tmp)
         page_dir = root / "pages"
         slice_file = root / "slice100.txt"
-        _labels, digest, _specs = build_tree(page_dir, slice_file)
+        _labels, digest, _specs, _htmls = build_tree(page_dir, slice_file)
         if digest != manifest["content_hash"]:
             raise SystemExit(
                 f"testset hash changed: rebuilt {digest} committed {manifest['content_hash']}"

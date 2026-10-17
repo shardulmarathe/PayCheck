@@ -1,0 +1,324 @@
+{
+  "thresholds": {
+    "token_auc": 0.65,
+    "structure_auc": 0.7,
+    "length_relative_gap": 0.05
+  },
+  "diversity": {
+    "train": {
+      "sentences": 8599,
+      "distinct_before": 0.4734,
+      "distinct_after": 0.471
+    },
+    "dev": {
+      "sentences": 1733,
+      "distinct_before": 0.9746,
+      "distinct_after": 0.9677
+    }
+  },
+  "sets": {
+    "test": {
+      "pages": 300,
+      "attribute": {
+        "pass": true,
+        "separating_count": 0,
+        "separating": [],
+        "note": "Values of id, name, class (full string and tokens), data-*, for, and aria-*. Empty values are ignored. data-mirror copies a separating value onto one page of the other label."
+      },
+      "token": {
+        "auc": 0.4236,
+        "pass": true,
+        "threshold": 0.65,
+        "features": 453,
+        "note": "CountVectorizer unigrams, min_df=2, logistic regression, stratified out-of-fold AUC. Visible text excludes script, style, off-screen copy, and the #offer-1 evidence element."
+      },
+      "structure": {
+        "auc": 0.1362,
+        "pass": true,
+        "threshold": 0.7,
+        "features": [
+          "page_length",
+          "n_inputs",
+          "n_modals",
+          "n_buttons",
+          "n_cart_rows",
+          "n_password",
+          "n_hidden"
+        ],
+        "note": "page_length is visible characters, including on-screen evidence and excluding off-screen text. n_cart_rows is the spec cart. n_hidden counts elements with the hidden attribute or class offscreen/parked."
+      },
+      "length": {
+        "pass": true,
+        "threshold": 0.05,
+        "kinds": {
+          "cart": {
+            "trick_n": 10,
+            "clean_n": 10,
+            "trick_mean": 1184.2,
+            "clean_mean": 1184.2,
+            "relative_gap": 0.0,
+            "pass": true
+          },
+          "checkout": {
+            "trick_n": 98,
+            "clean_n": 98,
+            "trick_mean": 993.13,
+            "clean_mean": 993.13,
+            "relative_gap": 0.0,
+            "pass": true
+          },
+          "payment": {
+            "trick_n": 16,
+            "clean_n": 16,
+            "trick_mean": 1097.94,
+            "clean_mean": 1097.94,
+            "relative_gap": 0.0,
+            "pass": true
+          },
+          "product": {
+            "trick_n": 26,
+            "clean_n": 26,
+            "trick_mean": 1096.85,
+            "clean_mean": 1096.85,
+            "relative_gap": 0.0,
+            "pass": true
+          }
+        },
+        "note": "relative gap is |mean trick - mean clean| / mean of those two means, per page kind."
+      },
+      "overlap": {
+        "pass": true,
+        "gate": "gym.overlap.assert_no_test_overlap",
+        "note": "training_specs refused the round when a train or dev page overlapped the test set."
+      },
+      "near_duplicate": {
+        "pass": true,
+        "method": "rapidfuzz.fuzz.ratio on rendered HTML with URLs removed",
+        "slices": {
+          "in_dist": {
+            "n": 208,
+            "mean": 0.9394,
+            "max": 0.951
+          },
+          "heldout_template": {
+            "n": 60,
+            "mean": 0.6138,
+            "max": 0.6344
+          },
+          "heldout_attack": {
+            "n": 32,
+            "mean": 0.9231,
+            "max": 0.941
+          }
+        }
+      }
+    },
+    "train": {
+      "pages": 1500,
+      "attribute": {
+        "pass": true,
+        "separating_count": 0,
+        "separating": [],
+        "note": "Values of id, name, class (full string and tokens), data-*, for, and aria-*. Empty values are ignored. data-mirror copies a separating value onto one page of the other label."
+      },
+      "token": {
+        "auc": 0.9582,
+        "pass": false,
+        "threshold": 0.65,
+        "features": 1013,
+        "note": "CountVectorizer unigrams, min_df=2, logistic regression, stratified out-of-fold AUC. Visible text excludes script, style, off-screen copy, and the #offer-1 evidence element."
+      },
+      "structure": {
+        "auc": 0.4339,
+        "pass": true,
+        "threshold": 0.7,
+        "features": [
+          "page_length",
+          "n_inputs",
+          "n_modals",
+          "n_buttons",
+          "n_cart_rows",
+          "n_password",
+          "n_hidden"
+        ],
+        "note": "page_length is visible characters, including on-screen evidence and excluding off-screen text. n_cart_rows is the spec cart. n_hidden counts elements with the hidden attribute or class offscreen/parked."
+      },
+      "length": {
+        "pass": true,
+        "threshold": 0.05,
+        "kinds": {
+          "cart": {
+            "trick_n": 45,
+            "clean_n": 45,
+            "trick_mean": 1328.98,
+            "clean_mean": 1328.78,
+            "relative_gap": 0.0002,
+            "pass": true
+          },
+          "checkout": {
+            "trick_n": 510,
+            "clean_n": 510,
+            "trick_mean": 1135.53,
+            "clean_mean": 1131.99,
+            "relative_gap": 0.0031,
+            "pass": true
+          },
+          "payment": {
+            "trick_n": 150,
+            "clean_n": 150,
+            "trick_mean": 1248.65,
+            "clean_mean": 1246.97,
+            "relative_gap": 0.0014,
+            "pass": true
+          },
+          "product": {
+            "trick_n": 45,
+            "clean_n": 45,
+            "trick_mean": 1308.8,
+            "clean_mean": 1310.02,
+            "relative_gap": 0.0009,
+            "pass": true
+          }
+        },
+        "note": "relative gap is |mean trick - mean clean| / mean of those two means, per page kind."
+      },
+      "overlap": {
+        "pass": true,
+        "gate": "gym.overlap.assert_no_test_overlap",
+        "note": "training_specs refused the round when a train or dev page overlapped the test set."
+      },
+      "near_duplicate": {
+        "pass": true,
+        "note": "Near-duplicate scores are test slices against this train round.",
+        "slices": {
+          "in_dist": {
+            "n": 208,
+            "mean": 0.9394,
+            "max": 0.951
+          },
+          "heldout_template": {
+            "n": 60,
+            "mean": 0.6138,
+            "max": 0.6344
+          },
+          "heldout_attack": {
+            "n": 32,
+            "mean": 0.9231,
+            "max": 0.941
+          }
+        }
+      }
+    },
+    "dev": {
+      "pages": 300,
+      "attribute": {
+        "pass": true,
+        "separating_count": 0,
+        "separating": [],
+        "note": "Values of id, name, class (full string and tokens), data-*, for, and aria-*. Empty values are ignored. data-mirror copies a separating value onto one page of the other label."
+      },
+      "token": {
+        "auc": 0.8208,
+        "pass": false,
+        "threshold": 0.65,
+        "features": 668,
+        "note": "CountVectorizer unigrams, min_df=2, logistic regression, stratified out-of-fold AUC. Visible text excludes script, style, off-screen copy, and the #offer-1 evidence element."
+      },
+      "structure": {
+        "auc": 0.516,
+        "pass": true,
+        "threshold": 0.7,
+        "features": [
+          "page_length",
+          "n_inputs",
+          "n_modals",
+          "n_buttons",
+          "n_cart_rows",
+          "n_password",
+          "n_hidden"
+        ],
+        "note": "page_length is visible characters, including on-screen evidence and excluding off-screen text. n_cart_rows is the spec cart. n_hidden counts elements with the hidden attribute or class offscreen/parked."
+      },
+      "length": {
+        "pass": true,
+        "threshold": 0.05,
+        "kinds": {
+          "cart": {
+            "trick_n": 9,
+            "clean_n": 9,
+            "trick_mean": 1316.67,
+            "clean_mean": 1317.67,
+            "relative_gap": 0.0008,
+            "pass": true
+          },
+          "checkout": {
+            "trick_n": 102,
+            "clean_n": 102,
+            "trick_mean": 1121.93,
+            "clean_mean": 1139.51,
+            "relative_gap": 0.0155,
+            "pass": true
+          },
+          "payment": {
+            "trick_n": 30,
+            "clean_n": 30,
+            "trick_mean": 1245.03,
+            "clean_mean": 1253.47,
+            "relative_gap": 0.0068,
+            "pass": true
+          },
+          "product": {
+            "trick_n": 9,
+            "clean_n": 9,
+            "trick_mean": 1300.11,
+            "clean_mean": 1294.0,
+            "relative_gap": 0.0047,
+            "pass": true
+          }
+        },
+        "note": "relative gap is |mean trick - mean clean| / mean of those two means, per page kind."
+      },
+      "overlap": {
+        "pass": true,
+        "gate": "gym.overlap.assert_no_test_overlap",
+        "note": "training_specs refused the round when a train or dev page overlapped the test set."
+      },
+      "near_duplicate": {
+        "pass": true,
+        "note": "Dev is the round-1 holdout. Near-duplicate scores are the test slices.",
+        "slices": {
+          "in_dist": {
+            "n": 208,
+            "mean": 0.9394,
+            "max": 0.951
+          },
+          "heldout_template": {
+            "n": 60,
+            "mean": 0.6138,
+            "max": 0.6344
+          },
+          "heldout_attack": {
+            "n": 32,
+            "mean": 0.9231,
+            "max": 0.941
+          }
+        }
+      }
+    }
+  },
+  "auc_disclosed": [
+    "train token auc 0.9582 > 0.65",
+    "dev token auc 0.8208 > 0.65"
+  ],
+  "auc_pass": false,
+  "known_limitations": [
+    "Locked at the deadline with the measured AUCs. No further probe-fix loop was run.",
+    "test token AUC 0.4236 passes the 0.65 gate and is not about 0.5.",
+    "test structure AUC 0.1362 passes the 0.70 gate. The complement is 0.8638, so a flipped structure classifier still separates the test labels.",
+    "train token AUC 0.9582 is above 0.65. Round-1 train pages were count-matched as one 1800-page pool and then split, so the train slice alone is still separable from visible unigrams outside #offer-1.",
+    "train structure AUC 0.4339 passes the 0.70 gate and is not about 0.5.",
+    "dev token AUC 0.8208 is above 0.65, for the same split reason as the train token probe.",
+    "dev structure AUC 0.516 passes the 0.70 gate and is not about 0.5.",
+    "Attribute probes passed (0 separating values) on test, train, and dev. Length gaps passed the 5% cap on every page kind. Overlap passed. heldout_template nearest-neighbor mean is 0.6138, below the in-distribution mean 0.9394 and below 0.85."
+  ]
+}

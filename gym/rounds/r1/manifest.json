@@ -1,0 +1,26 @@
+{
+  "round": 1,
+  "seed": 21261020,
+  "n_generated": 1800,
+  "n_train": 1500,
+  "n_dev": 300,
+  "held_out_excluded": [
+    "copycat_domain",
+    "listing_injection"
+  ],
+  "diversity_train": {
+    "sentences": 8599,
+    "distinct_before": 0.4734,
+    "distinct_after": 0.471
+  },
+  "diversity_dev": {
+    "sentences": 1733,
+    "distinct_before": 0.9746,
+    "distinct_after": 0.9677
+  },
+  "files": [
+    "train.jsonl",
+    "dev.jsonl"
+  ],
+  "note": "Compact specs for round-1 train and dev. copycat_domain and listing_injection are absent. Render with the shortcut gate to audit attribute mirrors; those mirrors are not stored on the spec."
+}

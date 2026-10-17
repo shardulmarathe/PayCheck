@@ -250,7 +250,7 @@ def test_catalog() -> Catalog:
                 ("Shipping", 325),
                 ("Cardboard wrap", 125),
             ),
-            "checkboxes": (("Gift wrap", 160), ("Gift note", 95)),
+            "checkboxes": (("Optional protection plan", 160), ("Gift note", 95)),
             "modals": (("Tissue wrap", 240),),
             "was_deltas": (155, 255, 355),
             "refill": "Monthly refill — {price}",

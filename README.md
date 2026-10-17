@@ -64,9 +64,11 @@ A fee is a checkout summary line. A price change is a higher price next to the s
 Content hash (SHA-256, see `gym/schema/README.md`):
 
 ```
-09e967709353fa5ba4007e4fed669df97777eaa728fe1623e3d76a83b1b8a4fe
+6370babfc63770777827e113eb5e04cf48cc304e18cb16333e23351d85f22fcc
 ```
 
 `gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).
+
+Round-1 train and dev specs are `gym/rounds/r1/train.jsonl` and `gym/rounds/r1/dev.jsonl`. Shortcut-gate results for the test set and that round are in `gym/audit/shortcut_report.json`. The test token probe is 0.4236 and the test structure probe is 0.1362. Round-1 token AUCs are above the 0.65 gate (train 0.9582, dev 0.8208) and are listed there as known limitations.
 
 Schemas, the label row, and the guard output contract are in `gym/schema/README.md`.

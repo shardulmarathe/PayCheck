@@ -624,6 +624,88 @@ _REFILL_B = (
 )
 
 
+# Each template slot uses 5 paraphrases. Four slots compose one sentence so a
+# round of 1,800 pages repeats a full sentence only a handful of times.
+_PARAPHRASES = 5
+_LINK = (
+    "for this order",
+    "on this page",
+    "before payment",
+    "as shown here",
+    "for the listed item",
+)
+_PROTECT_A = (
+    "Add the extra",
+    "Take the offer",
+    "Include the extra",
+    "Accept the extra",
+    "Bundle the extra",
+)
+_PROTECT_B = (
+    "and continue",
+    "and pay",
+    "then check out",
+    "and proceed",
+    "and move on",
+)
+_QUIET_A = (
+    "Skip the extra",
+    "Decline the offer",
+    "Pass on the extra",
+    "Drop the offer",
+    "Ignore the extra",
+)
+_QUIET_B = (
+    "and keep the cart",
+    "and stay with the item",
+    "and leave the cart",
+    "and keep going",
+    "and move ahead",
+)
+_KEEP_A = (
+    "Leave the extra",
+    "Retain the extra",
+    "Hold the added line",
+    "Carry the extra",
+    "Keep the added row",
+)
+_KEEP_B = (
+    "in place",
+    "on the order",
+    "for now",
+    "as it stands",
+    "with the item",
+)
+_DECLINE_TAIL = (
+    "leave this cart",
+    "skip this extra",
+    "stay with the item",
+    "do not add it",
+    "keep the current cart",
+)
+_OFFER_A = (
+    "Optional add",
+    "Available extra",
+    "Offered item",
+    "Listed extra",
+    "Shown add-on",
+)
+_OFFER_B = (
+    "is available",
+    "can be added",
+    "is offered",
+    "is listed",
+    "is shown",
+)
+_OFFER_C = (
+    "and is not pre-selected",
+    "and stays off",
+    "until you choose it",
+    "and is left unticked",
+    "and is not included yet",
+)
+
+
 def _pick(index: int, *columns: tuple) -> tuple:
     value = index
     chosen = []
@@ -633,61 +715,73 @@ def _pick(index: int, *columns: tuple) -> tuple:
     return tuple(chosen)
 
 
+def _slots(*columns: tuple[str, ...]) -> tuple[tuple[str, ...], ...]:
+    trimmed = tuple(column[:_PARAPHRASES] for column in columns)
+    if any(len(column) < 3 for column in trimmed):
+        raise RuntimeError("a template slot needs 3 to 5 paraphrases")
+    return trimmed
+
+
+def _line(index: int, *columns: tuple[str, ...]) -> str:
+    parts = [part.strip().rstrip(".").rstrip(",") for part in _pick(index, *_slots(*columns))]
+    return " ".join(parts)
+
+
+def _sentence(index: int, *columns: tuple[str, ...]) -> str:
+    text = _line(index, *columns)
+    return text[:1].upper() + text[1:] + "."
+
+
 def ship_text(index: int) -> str:
-    first, second, third = _pick(index, _SHIP_A, _SHIP_B, _SHIP_C)
-    return f"{first} {second}. {third}"
+    return _sentence(index, _SHIP_A, _SHIP_B, _SHIP_C, _LINK)
 
 
 def review_line(index: int) -> str:
-    first, second, third = _pick(index, _REV_A, _REV_B, _REV_C)
-    return f"{first} {{brand}} {second} {third}"
+    first, second, third, tail = _pick(index, *_slots(_REV_A, _REV_B, _REV_C, _LINK))
+    third = third.rstrip(".")
+    return f"{first.rstrip('.')} {{brand}} {second.rstrip('.')}, {third[:1].lower()}{third[1:]} {tail}."
 
 
 def fee_sentence(name: str, cents: int, index: int) -> str:
     amount = money(cents)
-    open_, mid, end = _pick(index, _FEE_OPEN, _FEE_MID, _FEE_END)
-    return f"{open_} {name} {mid} {amount} {end}"
+    open_, mid, end, tail = _pick(index, *_slots(_FEE_OPEN, _FEE_MID, _FEE_END, _LINK))
+    return f"{open_.rstrip('.')} {name} {mid.rstrip('.')} {amount} {end.rstrip('.')} {tail}."
 
 
 def checkbox_evidence(name: str, price: str, index: int) -> str:
-    open_, mid, end = _pick(index, _CHECK_OPEN, _CHECK_MID, _CHECK_END)
-    return f"{open_} {name} {mid} {price} {end}"
+    open_, mid, end, tail = _pick(index, *_slots(_CHECK_OPEN, _CHECK_MID, _CHECK_END, _LINK))
+    return f"{open_.rstrip('.')} {name} {mid.rstrip('.')} {price} {end.rstrip('.')} {tail}."
 
 
 def modal_evidence(name: str, price: str, index: int) -> str:
-    open_, _mid, end = _pick(index, _MODAL_OPEN, _CHECK_MID, _MODAL_END)
-    return f"{open_} {name} at {price} {end}"
+    open_, mid, end, tail = _pick(index, *_slots(_MODAL_OPEN, _CHECK_MID, _MODAL_END, _LINK))
+    return f"{open_.rstrip('.')} {name} {mid.rstrip('.')} {price} {end.rstrip('.')} {tail}."
 
 
 def one_click_evidence(name: str, price: str, index: int) -> str:
-    open_, _mid, end = _pick(index, _CLICK_OPEN, _CHECK_MID, _CLICK_END)
-    return f"{open_} {name} at {price} {end}"
+    open_, mid, end, tail = _pick(index, *_slots(_CLICK_OPEN, _CHECK_MID, _CLICK_END, _LINK))
+    return f"{open_.rstrip('.')} {name} {mid.rstrip('.')} {price} {end.rstrip('.')} {tail}."
 
 
 def subscribe_sentence(intro: str, renewal: str, index: int) -> str:
-    open_, mid, end = _pick(index, _SUB_OPEN, _SUB_MID, _SUB_END)
-    return f"{open_} — {intro} {mid} {renewal} {end}"
+    open_, mid, end, tail = _pick(index, *_slots(_SUB_OPEN, _SUB_MID, _SUB_END, _LINK))
+    return f"{open_.rstrip('.')} {intro} {mid.rstrip('.')} {renewal} {end.rstrip('.')} {tail}."
 
 
 def phish_sentence(index: int) -> str:
-    open_, mid, end = _pick(index, _PHISH_OPEN, _PHISH_MID, _PHISH_END)
-    if open_.endswith(","):
-        return f"{open_} {mid} {end}"
-    if open_.endswith("."):
-        return f"{open_} {mid[:1].upper()}{mid[1:]} {end}"
-    return f"{open_} {mid} {end}"
+    return _sentence(index, _PHISH_OPEN, _PHISH_MID, _PHISH_END, _LINK)
 
 
 def protect_label(index: int) -> str:
-    return _PROTECT[index % len(_PROTECT)]
+    return _line(index, _PROTECT_A, _PROTECT_B, _KEEP_B, _LINK)
 
 
 def quiet_label(index: int) -> str:
-    return _QUIET[index % len(_QUIET)]
+    return _line(index + 3, _QUIET_A, _QUIET_B, _KEEP_B, _LINK)
 
 
 def keep_label(index: int) -> str:
-    return _KEEP[index % len(_KEEP)]
+    return _line(index + 7, _KEEP_A, _KEEP_B, _PROTECT_B, _LINK)
 
 
 def chrome(index: int) -> dict[str, str]:
@@ -700,21 +794,90 @@ def chrome(index: int) -> dict[str, str]:
 
 
 def modal_offer(name: str, cents: int, index: int) -> str:
-    open_, _mid, end = _pick(index, _OFFER_OPEN, _CHECK_MID, _MODAL_END)
-    return f"{open_} {name} for {money(cents)}. {end}"
+    return _sentence(index, _OFFER_OPEN, _CHECK_MID, _MODAL_END, _LINK).replace(
+        "Name", name, 1
+    ) if False else f"{_line(index, _OFFER_OPEN, _CHECK_MID, _MODAL_END, _LINK)} {name} for {money(cents)}."
 
 
 def decline_label(index: int) -> str:
-    return _DECLINE[index % len(_DECLINE)]
+    """Visible decline. Never the frozen test chrome ``No thanks, keep my cart``."""
+    tail = _line(index, _DECLINE_TAIL, _QUIET_B, _OFFER_C, _LINK)
+    return f"No thanks, {tail}"
 
 
 def delivery_labels(index: int) -> tuple[str, str]:
-    return _GROUND[index % len(_GROUND)]
+    ground = _line(
+        index,
+        (
+            "Counter drop is included",
+            "Standard lane is included",
+            "Local handoff is included",
+            "Weekday route is included",
+            "Store pickup is included",
+        ),
+        _OFFER_B,
+        _OFFER_C,
+        _LINK,
+    )
+    express = _line(
+        index + 9,
+        (
+            "Rush courier is not chosen",
+            "Faster lane is left off",
+            "Priority runner is not chosen",
+            "Same-day sprint is left off",
+            "Evening courier is not chosen",
+        ),
+        _QUIET_B,
+        _OFFER_C,
+        _LINK,
+    )
+    return ground, express
+
+
+def paid_check_label(name: str, cents: int, index: int) -> str:
+    """One unticked add-on sentence. The lead rotates so the line is not copied page to page."""
+    lead = _line(index, _OFFER_A, _OFFER_B, _OFFER_C, _LINK)
+    return f"{lead} add {name} for {money(cents)}."
 
 
 def refill_label(price: str, index: int) -> str:
-    first, second = _pick(index, _REFILL_A, _REFILL_B)
-    return f"{first} — {price}, {second}"
+    first, second, third, tail = _pick(index, *_slots(_REFILL_A, _REFILL_B, _OFFER_C, _LINK))
+    return f"Monthly refill {first.rstrip('.')} {price}, {second.rstrip('.')} {third} {tail}"
+
+
+def lexicon_sentence(topic: str, index: int) -> str:
+    """Honest offer line that names ``topic`` and is not pre-selected.
+
+    ``topic`` is ``protection``, ``wrap``, or ``refill``. Four slots of five
+    paraphrases keep the sentence under the repeat cap.
+    """
+    heads = {
+        "protection": (
+            "Optional protection plan",
+            "A protection plan",
+            "Protection coverage",
+            "The protection option",
+            "Extra protection",
+        ),
+        "wrap": (
+            "Gift wrap",
+            "Optional gift wrap",
+            "Tissue wrap",
+            "Gift wrap service",
+            "The wrap option",
+        ),
+        "refill": (
+            "Monthly refill",
+            "A monthly refill",
+            "The monthly refill",
+            "Optional monthly refill",
+            "Monthly refill service",
+        ),
+    }
+    if topic not in heads:
+        raise ValueError(topic)
+    return _sentence(index, heads[topic], _OFFER_B, _OFFER_C, _LINK)
 
 
 def _sentences(text: str) -> list[str]:

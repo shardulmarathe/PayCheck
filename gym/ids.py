@@ -12,6 +12,13 @@ import re
 
 ANCHOR_ID = "offer-1"
 SELECTOR = "#offer-1"
+# One naming scheme for every checkbox and radio, on trick pages and clean pages.
+CHECKBOX_ID = "extra"
+CHECKBOX_NAME = "extra"
+RADIO_NAME = "plan"
+RADIO_IDS = ("plan-0", "plan-1")
+PASSWORD_ID = "secret"
+PASSWORD_NAME = "secret"
 
 _SLUG = re.compile(r"[^a-z0-9]+")
 

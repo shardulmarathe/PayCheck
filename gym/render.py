@@ -2,12 +2,22 @@
 
 from __future__ import annotations
 
+from contextvars import ContextVar
 from functools import lru_cache
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from gym.ids import ANCHOR_ID, product_slug
+from gym.ids import (
+    ANCHOR_ID,
+    CHECKBOX_ID,
+    CHECKBOX_NAME,
+    PASSWORD_ID,
+    PASSWORD_NAME,
+    RADIO_IDS,
+    RADIO_NAME,
+    product_slug,
+)
 from gym.money import money
 from gym.validate import selector_id, validate_spec
 
@@ -76,6 +86,18 @@ DEFAULT_SKIN = {
 }
 
 STEP_LABELS = ("Product", "Cart", "Checkout", "Payment")
+
+# page_id -> attribute values mirrored onto that page so a value is not label-private.
+_ECHO: ContextVar[dict[str, tuple[str, ...]] | None] = ContextVar("gym_echo", default=None)
+
+
+def bind_echo(mapping: dict[str, tuple[str, ...]]):
+    """Attach a batch's attribute mirrors for the next ``render_html`` calls."""
+    return _ECHO.set(mapping)
+
+
+def reset_echo(token) -> None:
+    _ECHO.reset(token)
 
 
 @lru_cache(maxsize=1)
@@ -263,9 +285,36 @@ def render_html(spec: dict, *, check: bool = True) -> str:
             "pay": runtime.get("pay_action", ""),
             "abort": runtime.get("abort_action", ""),
         },
+        "ctl": {
+            "checkbox_id": CHECKBOX_ID,
+            "checkbox_name": CHECKBOX_NAME,
+            "radio_name": RADIO_NAME,
+            "radio_ids": RADIO_IDS,
+            "password_id": PASSWORD_ID,
+            "password_name": PASSWORD_NAME,
+        },
+        "related": [
+            {**item, "price_text": money(item["price_cents"])}
+            for item in page.get("related") or []
+        ],
+        "echo": ( _ECHO.get() or {}).get(spec["page_id"], ()),
+        "has_checkbox": _has_checkbox(page, mode, live, offers, addon),
     }
     template_name = "reserved.html.j2" if spec.get("page_template") == "reserved" else "page.html.j2"
     return _environment().get_template(template_name).render(**context)
+
+
+def _has_checkbox(page: dict, mode: str, live: bool, offers: dict, addon: dict | None) -> bool:
+    """True when the template already draws a checkbox, so the fallback is not a second one."""
+    if offers.get("checkbox"):
+        return True
+    if mode == "checkbox":
+        return True
+    if addon and not addon.get("checked") and mode == "none":
+        return True
+    if live and mode == "fee":
+        return True
+    return False
 
 
 def _fee_rows(spec: dict, mode: str) -> list[dict]:

@@ -56,7 +56,7 @@ def test_reader_sees_checked_controls_prices_domain_and_hidden_text():
         browser.open_html(render_html(clean), page_url(clean))
         clean_text = browser.compact_text()
     assert checkbox["trick"]["evidence_text"] in checkbox_text
-    assert "checkbox checked | id=addon" in checkbox_text
+    assert "checkbox checked | id=extra" in checkbox_text
     assert "total:" in checkbox_text
     assert hidden["trick"]["evidence_text"] in hidden_text
     assert "offscreen | #offer-1 |" in hidden_text

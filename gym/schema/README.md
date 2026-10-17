@@ -168,8 +168,8 @@ $11.49 | Powercell AA Alkaline Batteries, 12-pack
 total: $11.49
 
 controls:
-checkbox checked | id=addon | name=addon | Add the protection plan
-radio unchecked | id=purchase-once | name=purchase | One-time purchase — $12.00
+checkbox checked | id=extra | name=extra | Add the protection plan
+radio unchecked | id=plan-1 | name=plan | One-time purchase — $12.00
 button | id= | name= | Pay now
 
 modals:

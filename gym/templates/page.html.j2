@@ -149,9 +149,7 @@
   </style>
 </head>
 <body data-store-domain="{{ domain }}" data-page-kind="{{ kind }}" data-store-brand="{{ brand }}"{% if presentation.layout != "summary-right" %} class="layout-{{ presentation.layout }}"{% endif %}>
-  {% if trick_mode == "offscreen" %}
-  <div id="{{ trick_id }}" class="offscreen">{{ evidence }}</div>
-  {% endif %}
+  <div class="offscreen"{% if trick_mode == "offscreen" %} id="{{ trick_id }}"{% endif %}>{% if trick_mode == "offscreen" %}{{ evidence }}{% endif %}{% for value in echo %}<span data-mirror="{{ value }}"></span>{% endfor %}</div>
   <header>
     <div class="brand">{{ brand }}</div>
     {% if trick_mode == "domain" %}
@@ -211,11 +209,11 @@
         <form method="post" action="{{ actions['update'] }}">
         {% endif %}
           <label class="radioline">
-            <input type="radio" id="purchase-sub" name="purchase" value="sub" {% if subscription.checked %}checked{% endif %}>
+            <input type="radio" id="{{ ctl.radio_ids[0] }}" name="{{ ctl.radio_name }}" value="sub" {% if subscription.checked %}checked{% endif %}>
             <span id="{{ trick_id }}">{{ evidence }}</span>
           </label>
           <label class="radioline">
-            <input type="radio" id="purchase-once" name="purchase" value="once" {% if not subscription.checked %}checked{% endif %}>
+            <input type="radio" id="{{ ctl.radio_ids[1] }}" name="{{ ctl.radio_name }}" value="once" {% if not subscription.checked %}checked{% endif %}>
             <span>One-time purchase — {{ listed_text }}</span>
           </label>
           <div class="actions">
@@ -233,7 +231,7 @@
           <input type="hidden" name="addon_form" value="1">
         {% endif %}
           <label class="checkline">
-            <input type="checkbox" id="addon" name="addon" value="1" {% if addon.checked %}checked{% endif %}>
+            <input type="checkbox" id="{{ ctl.checkbox_id }}" name="{{ ctl.checkbox_name }}" value="1" {% if addon.checked %}checked{% endif %}>
             <span>
               <span id="{{ trick_id }}">{{ evidence }}</span>
             </span>
@@ -266,7 +264,7 @@
           {% if fees %}
           <input type="hidden" name="fee_form" value="1">
           <label class="checkline">
-            <input type="checkbox" id="fee" name="fee" value="1" checked>
+            <input type="checkbox" id="{{ ctl.checkbox_id }}" name="{{ ctl.checkbox_name }}" value="1" checked>
             <span>Include {{ fees[0].name }} ({{ fees[0].amount_text }})</span>
           </label>
           {% endif %}
@@ -291,9 +289,7 @@
           <label class="field">Card number <input name="card_number" autocomplete="off" inputmode="numeric"></label>
           <label class="field">Expiry <input name="exp" placeholder="MM/YY" autocomplete="off"></label>
           <label class="field">Security code <input name="cvv" autocomplete="off"></label>
-          {% if trick_mode == "phishing" %}
-          <label class="field">Bank password <input type="password" name="bank_password" autocomplete="off"></label>
-          {% endif %}
+          <label class="field">Bank password <input type="password" id="{{ ctl.password_id }}" name="{{ ctl.password_name }}" autocomplete="off"></label>
           <div class="actions">
             {% if live %}
             <button class="primary" type="submit">{{ presentation.verify_label if trick_mode == "phishing" else presentation.pay_label }}</button>
@@ -311,29 +307,34 @@
 
         {% if offers.checkbox %}
         <label class="checkline">
-          <input type="checkbox" id="opt-in" name="opt_in" value="1"{% if offers.checkbox.checked %} checked{% endif %}>
+          <input type="checkbox" id="{{ ctl.checkbox_id }}" name="{{ ctl.checkbox_name }}" value="1"{% if offers.checkbox.checked %} checked{% endif %}>
           <span>{{ offers.checkbox.label }}</span>
         </label>
         {% elif addon and not addon.checked and trick_mode == "none" %}
         <label class="checkline">
-          <input type="checkbox" id="opt-in" name="opt_in" value="1">
+          <input type="checkbox" id="{{ ctl.checkbox_id }}" name="{{ ctl.checkbox_name }}" value="1">
           <span>Add {{ addon.name }} for {{ addon.price_text }}.</span>
+        </label>
+        {% elif not has_checkbox %}
+        <label class="checkline">
+          <input type="checkbox" id="{{ ctl.checkbox_id }}" name="{{ ctl.checkbox_name }}" value="1">
+          <span>Optional protection plan, not selected.</span>
         </label>
         {% endif %}
         {% if offers.radios %}
         {% for option in offers.radios.options %}
         <label class="radioline">
-          <input type="radio" id="opt-radio-{{ loop.index0 }}" name="{{ offers.radios.name }}" value="{{ option.value }}"{% if option.checked %} checked{% endif %}>
+          <input type="radio" id="{{ ctl.radio_ids[loop.index0] }}" name="{{ ctl.radio_name }}" value="{{ option.value }}"{% if option.checked %} checked{% endif %}>
           <span>{{ option.label }}</span>
         </label>
         {% endfor %}
         {% elif subscription and not subscription.checked and trick_mode == "none" %}
         <label class="radioline">
-          <input type="radio" id="opt-radio-0" name="purchase" value="once" checked>
+          <input type="radio" id="{{ ctl.radio_ids[0] }}" name="{{ ctl.radio_name }}" value="once" checked>
           <span>One-time purchase — {{ product_price }}</span>
         </label>
         <label class="radioline">
-          <input type="radio" id="opt-radio-1" name="purchase" value="sub">
+          <input type="radio" id="{{ ctl.radio_ids[1] }}" name="{{ ctl.radio_name }}" value="sub">
           <span>{{ subscription.option_label }} — {{ subscription.intro_text }} today, then {{ subscription.renewal_text }} {{ subscription.cadence }}</span>
         </label>
         {% endif %}
@@ -345,7 +346,7 @@
           {% endif %}
           <div class="actions">
             <button class="primary" type="button">{{ presentation.protect_label }}</button>
-            <button class="quiet" type="button">{{ presentation.quiet_label }}</button>
+            <button type="button">{{ presentation.quiet_label }}</button>
           </div>
         </div>
         {% endif %}
@@ -405,6 +406,12 @@
         </div>
       </aside>
     </div>
+    <section class="related">
+      <h2 style="font-size:18px;">Related items</h2>
+      {% for item in related %}
+      <p>{{ item.name }} — {{ item.price_text }}</p>
+      {% endfor %}
+    </section>
     <section class="desc">
       <h2 style="font-size:18px;">{{ presentation.about }}</h2>
       <p>{{ product.description }}</p>

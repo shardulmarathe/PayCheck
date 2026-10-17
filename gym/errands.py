@@ -223,11 +223,12 @@ def remove_sku(state: ShopState, sku: str) -> None:
 
 def apply_checkout_form(state: ShopState, form: dict[str, str]) -> None:
     if "fee_form" in form:
-        state.fee_on = form.get("fee") == "1"
-    if "purchase" in form:
-        state.subscription = form["purchase"] != "once"
+        state.fee_on = form.get("extra") == "1" or form.get("fee") == "1"
+    if "plan" in form or "purchase" in form:
+        choice = form["plan"] if "plan" in form else form["purchase"]
+        state.subscription = choice != "once"
     if "addon_form" in form:
-        state.addon_on = form.get("addon") == "1"
+        state.addon_on = form.get("extra") == "1" or form.get("addon") == "1"
 
 
 def _runtime(errand_id: str) -> dict:

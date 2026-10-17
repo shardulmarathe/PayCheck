@@ -39,5 +39,13 @@ def replacements_path() -> Path:
     return ROOT / "gym" / "testset" / "clean_replacements.json"
 
 
+def shortcut_report_path() -> Path:
+    return ROOT / "gym" / "audit" / "shortcut_report.json"
+
+
+def round_dir(round_n: int = 1) -> Path:
+    return ROOT / "gym" / "rounds" / f"r{round_n}"
+
+
 def schema_dir() -> Path:
     return ROOT / "gym" / "schema"

@@ -15,7 +15,7 @@ from gym.dataset import (
     rows_for_ids,
     test_pile_keys,
 )
-from gym.ids import SELECTOR, public_page_id
+from gym.ids import RADIO_NAME, SELECTOR, public_page_id
 from gym.leaks import reject_description
 from gym.money import money
 from gym.taxonomy import TRAIN_WEIGHTS, family_of, verdict_of
@@ -402,6 +402,7 @@ def build_specs(
     prefix = id_prefix or split
     specs: list[dict] = []
     counters: Counter[str] = Counter()
+    sentence_counts: Counter[str] = Counter()
     # Seed only rotates which catalog row we start on. String pools stay inside ``rows``.
     start = seed % 997
     ordinal = 0
@@ -411,20 +412,19 @@ def build_specs(
             counters[attack] += 1
             legacy = f"{prefix}-{attack}-{page_index:03d}"
             page_id = public_page_id(legacy)
-            specs.append(
-                _one(
-                    page_id=page_id,
-                    legacy_page_id=legacy,
-                    split=split,
-                    attack=attack,
-                    variant=variant,
-                    kind=kind,
-                    slot=start + ordinal,
-                    copy_index=ordinal,
-                    pools=pools,
-                    catalog=catalog,
-                )
+            kwargs = dict(
+                page_id=page_id,
+                legacy_page_id=legacy,
+                split=split,
+                attack=attack,
+                variant=variant,
+                kind=kind,
+                slot=start + ordinal,
+                copy_index=ordinal,
+                pools=pools,
+                catalog=catalog,
             )
+            specs.append(_fit_copy(split, kwargs, sentence_counts))
             ordinal += 1
     seen: dict[str, str] = {}
     for spec in specs:
@@ -436,8 +436,44 @@ def build_specs(
         seen[spec["page_id"]] = spec["legacy_page_id"]
     if assign_honest:
         _apply_honest_offers(specs, catalog)
+    from gym.polish import polish_specs
+
+    pools.replacements.extend(polish_specs(specs, catalog))
     build_specs.last_replacements = list(pools.replacements)
     return specs
+
+
+def _fit_copy(split: str, kwargs: dict, sentence_counts: Counter[str]) -> dict:
+    """Train pages retry the paraphrase index so a sentence is not used more than 4 times."""
+    if split != "train":
+        return _one(**kwargs)
+    from gym.wording import generated_sentences
+
+    base = int(kwargs["copy_index"])
+    best = None
+    best_over: int | None = None
+    for salt in range(48):
+        trial = dict(kwargs)
+        trial["copy_index"] = base + salt * 9973
+        spec = _one(**trial)
+        sentences = generated_sentences(spec)
+        counts = Counter(sentences)
+        over = 0
+        for sentence, seen in counts.items():
+            total = sentence_counts[sentence] + seen
+            if total > 4:
+                over += total
+        if over == 0:
+            best = spec
+            best_over = 0
+            break
+        if best_over is None or over < best_over:
+            best = spec
+            best_over = over
+    assert best is not None
+    for sentence in generated_sentences(best):
+        sentence_counts[sentence] += 1
+    return best
 
 
 def _one(
@@ -743,11 +779,17 @@ def _attach_honest(spec: dict, feature: str, catalog, ordinal: int, checkbox_ind
             }
         else:
             name, cents = honest["checkboxes"][ordinal % len(honest["checkboxes"])]
+            if catalog.kind == "train":
+                from gym.wording import paid_check_label
+
+                label = paid_check_label(name, int(cents), ordinal)
+            else:
+                label = f"Add {name} for {money(int(cents))}."
             offers["checkbox"] = {
                 "name": name,
                 "price_cents": int(cents),
                 "checked": False,
-                "label": f"Add {name} for {money(int(cents))}.",
+                "label": label,
             }
     elif feature == "popup":
         name, cents = honest["modals"][ordinal % len(honest["modals"])]
@@ -782,7 +824,7 @@ def _attach_honest(spec: dict, feature: str, catalog, ordinal: int, checkbox_ind
                 {"value": "ground", "label": ground, "checked": True},
                 {"value": "express", "label": express, "checked": False},
             ]
-            group = "delivery"
+            group = RADIO_NAME
         else:
             options = [
                 {
@@ -796,7 +838,7 @@ def _attach_honest(spec: dict, feature: str, catalog, ordinal: int, checkbox_ind
                     "checked": False,
                 },
             ]
-            group = "purchase"
+            group = RADIO_NAME
         offers["radios"] = {"name": group, "options": options}
     else:
         raise ValueError(feature)

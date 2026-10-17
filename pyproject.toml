@@ -9,6 +9,7 @@ dependencies = [
   "jsonschema==4.26.0",
   "playwright==1.64.0",
   "rapidfuzz==3.14.6",
+  "scikit-learn==1.9.1",
 ]
 
 [project.optional-dependencies]

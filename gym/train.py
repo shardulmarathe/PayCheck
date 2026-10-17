@@ -52,6 +52,9 @@ def training_specs(count: int, seed: int, *, round_n: int = 1) -> list[dict]:
         round_n=round_n,
         catalog=catalog,
     )
+    from gym.polish import balance_lengths
+
+    balance_lengths(specs)
     assert_rows_allowed(specs, set(train_ids))
     for spec in specs:
         validate_spec(spec)
