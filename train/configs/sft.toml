@@ -1,0 +1,30 @@
+# Reference shape. `python -m guardtrain round` rewrites the real file
+# under runs/training/configs/ and sizes max_steps to the wall-clock budget
+# (28 steps at 60 minutes). Do not add a reward or a deployment here.
+kind = "train"
+
+[job]
+output_model = "guard-qwen3-round0"
+
+[model]
+base = "Qwen/Qwen3-4B-Instruct-2507"
+
+[dataset]
+id = "SET_AFTER_UPLOAD"
+
+[method]
+type = "sft_text"
+learning_rate = 0.0001
+max_steps = 200
+max_seq_length = 4096
+lora_rank = 16
+lora_alpha = 32
+load_in_4bit = true
+packing = false
+micro_batch_size = 1
+gradient_accumulation_steps = 8
+gradient_checkpointing = true
+
+[resources]
+gpu_type = "L4-24GB"
+gpu_count = 1

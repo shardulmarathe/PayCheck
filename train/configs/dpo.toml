@@ -1,0 +1,29 @@
+# Optional single DPO round. Same QLoRA limits as SFT. No reward file.
+kind = "train"
+
+[job]
+output_model = "guard-qwen3-dpo"
+
+[model]
+base = "Qwen/Qwen3-4B-Instruct-2507"
+
+[dataset]
+id = "SET_AFTER_UPLOAD"
+
+[method]
+type = "dpo"
+learning_rate = 0.00001
+beta = 0.1
+max_steps = 100
+max_length = 4096
+max_prompt_length = 3584
+lora_rank = 16
+lora_alpha = 32
+load_in_4bit = true
+micro_batch_size = 1
+gradient_accumulation_steps = 8
+gradient_checkpointing = true
+
+[resources]
+gpu_type = "L4-24GB"
+gpu_count = 1

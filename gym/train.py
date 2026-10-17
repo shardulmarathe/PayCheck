@@ -15,6 +15,9 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
+import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -280,6 +283,16 @@ def write_training(
             print(f"no attacker specs at {default_dir} (round {round_n} template pages only)")
             attacker_note = "missing"
     train_specs, dev_specs = split_train_dev(specs, dev_percent, n_dev=n_dev)
+    if count >= 100:
+        from gym.structure import assert_structural_parity
+
+        sides: list[tuple[str, list[dict]]] = []
+        if len(train_specs) >= 20:
+            sides.append(("train", train_specs))
+        if len(dev_specs) >= 20:
+            sides.append(("dev", dev_specs))
+        if sides:
+            assert_structural_parity(*sides)
     labels = materialize(train_specs, out_dir)
     digest = content_hash(out_dir, slice_file=None)
     dev_digest = None
@@ -374,6 +387,62 @@ def _catalog_summary(catalog) -> dict:
     }
 
 
+def launch_sweep(
+    round_index: int,
+    sweep: Path,
+    out_dir: Path,
+    *,
+    dry_run: bool = True,
+    runs_dir: Path | None = None,
+) -> None:
+    """Hand the fresh round to ``python -m guardtrain sweep``.
+
+    Paid jobs are not submitted unless the caller passes a live launch.
+    The default is a dry run.
+    """
+    if not sweep.is_file():
+        raise SystemExit(f"Sweep config not found: {sweep}")
+    out_dir = out_dir.resolve()
+    dev_labels = out_dir / "dev" / "labels.jsonl"
+    if not dev_labels.is_file():
+        raise SystemExit(
+            f"Round {round_index} has no dev split at {dev_labels}. "
+            "Refusing to launch a sweep that cannot be scored on held-out groups."
+        )
+    train_dir = Path(__file__).resolve().parents[1] / "train"
+    cmd = [
+        sys.executable,
+        "-m",
+        "guardtrain",
+        "sweep",
+        "--round",
+        str(round_index),
+        "--sweep",
+        str(sweep),
+        "--labels",
+        str(out_dir / "labels.jsonl"),
+        "--dev",
+        str(dev_labels),
+        "--pages-dir",
+        str(out_dir / "text"),
+    ]
+    root = Path(__file__).resolve().parents[1]
+    attacker = root / "data" / "attacker" / f"round{round_index}" / "labels.jsonl"
+    if attacker.is_file():
+        cmd.extend(["--attacker", str(attacker)])
+    if runs_dir is not None:
+        cmd.extend(["--runs-dir", str(runs_dir)])
+    if dry_run:
+        cmd.append("--dry-run")
+    else:
+        cmd.append("--submit")
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(train_dir) + os.pathsep + env.get("PYTHONPATH", "")
+    completed = subprocess.run(cmd, cwd=str(train_dir), env=env)
+    if completed.returncode != 0:
+        raise SystemExit(completed.returncode)
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Generate one training round. The seed defaults to SPLIT_SEED + round * 1000003."
@@ -396,9 +465,24 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Attacker spec directory. Rounds 2+ also read data/attacker-roundN when it exists.",
     )
     parser.add_argument("--dev-percent", type=int, default=15)
+    parser.add_argument(
+        "--sweep",
+        type=Path,
+        default=None,
+        help="After writing the round, plan the Veri sweep in this YAML config.",
+    )
+    parser.add_argument(
+        "--submit",
+        action="store_true",
+        help="Submit the sweep as paid Veri jobs. Without this flag the sweep is a dry run.",
+    )
+    parser.add_argument("--dry-run", action="store_true", help="Force the sweep to stay a dry run.")
+    parser.add_argument("--runs-dir", type=Path, default=None)
     args = parser.parse_args(argv)
     if args.round < 1:
         raise SystemExit("--round starts at 1")
+    if args.submit and args.dry_run:
+        raise SystemExit("--submit and --dry-run cannot be combined.")
     if args.n is None:
         if args.n_train < 1 or args.n_dev < 0:
             raise SystemExit("--n-train must be at least 1 and --n-dev must be at least 0")
@@ -428,6 +512,14 @@ def main(argv: list[str] | None = None) -> None:
         dev_percent=args.dev_percent,
         n_dev=args.exact_dev,
     )
+    if args.sweep is not None:
+        launch_sweep(
+            args.round,
+            args.sweep,
+            args.out,
+            dry_run=not args.submit,
+            runs_dir=args.runs_dir,
+        )
 
 
 if __name__ == "__main__":
