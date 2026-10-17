@@ -1,0 +1,85 @@
+{
+  "spec_version": "1",
+  "page_id": "p-6e63fdf5",
+  "legacy_page_id": "r1-window-07",
+  "group_id": "g-51007",
+  "store": {
+    "id": "oakloom",
+    "brand": "Oak and Loom",
+    "skin": "oakloom",
+    "domain": "www.oakloom.example",
+    "category": "linen"
+  },
+  "page": {
+    "kind": "checkout",
+    "title": "Confirm Linen tea towel",
+    "product": {
+      "name": "Linen tea towel",
+      "sku": "TWEL1",
+      "price_cents": 4018,
+      "description": "A paper band holds almost nothing after drying in, which is what a hemmer on the day shift wanted for batch brass bin twenty seven.",
+      "rating": "3.7",
+      "review_count": 99,
+      "image_label": "TWL"
+    },
+    "cart": [
+      {
+        "name": "Linen tea towel",
+        "sku": "TWEL1",
+        "qty": 1,
+        "price_cents": 4018,
+        "trick_item": false
+      },
+      {
+        "name": "Cork grip",
+        "sku": "CORK1",
+        "qty": 1,
+        "price_cents": 366,
+        "trick_item": true
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 4018,
+    "checkout_price_cents": 4018,
+    "blocks": [
+      {
+        "id": "noteB",
+        "text": "Hand hemming on Tuesday is how a hemmer on the day shift still finishes these, batch maple nook fifty three."
+      },
+      {
+        "id": "noteA",
+        "text": "Give it a short afternoon at a wash house, and batch copper hook forty stays with a flat mailer."
+      }
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Sack notes",
+      "about": "Maker notes",
+      "continue_label": "Ready for the digits",
+      "add_label": "Sack this",
+      "pay_label": "Finish with the plastic",
+      "verify_label": "Check the digits",
+      "review_line": "Read the rows, then pay if they still fit.",
+      "protect_label": "Attach the side item",
+      "quiet_label": "Just the main item",
+      "keep_label": "Keep this extra row"
+    },
+    "addon": {
+      "name": "Cork grip",
+      "sku": "CORK1",
+      "price_cents": 366,
+      "checked": false
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#offer-1",
+    "evidence_text": "Cork grip, $3.66, sits beside the main item.",
+    "instruction": "Take Cork grip out before you pay. The dialog is offering to keep it.",
+    "variant": "modal"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

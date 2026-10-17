@@ -1,0 +1,80 @@
+{
+  "spec_version": "1",
+  "page_id": "p-113a7796",
+  "legacy_page_id": "r1-unticked-21",
+  "group_id": "g-51019",
+  "store": {
+    "id": "harborrye",
+    "brand": "Harbor and Rye",
+    "skin": "harborrye",
+    "domain": "www.harborrye.example",
+    "category": "pantry"
+  },
+  "page": {
+    "kind": "checkout",
+    "title": "Confirm Stoneground rye flour, 2 lb",
+    "product": {
+      "name": "Stoneground rye flour, 2 lb",
+      "sku": "RYE2LB",
+      "price_cents": 3771,
+      "description": "Batch copper nook eighty names Water Street and mentions stone milling.",
+      "rating": "4.0",
+      "review_count": 1412,
+      "image_label": "RYE"
+    },
+    "cart": [
+      {
+        "name": "Stoneground rye flour, 2 lb",
+        "sku": "RYE2LB",
+        "qty": 1,
+        "price_cents": 3771,
+        "trick_item": false
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 3771,
+    "checkout_price_cents": 3771,
+    "blocks": [
+      {
+        "id": "noteA",
+        "text": "For a dense country loaf, start with whole rye berries, and batch maple bin twenty three is on the slip."
+      },
+      {
+        "id": "noteB",
+        "text": "A glass jar holds a faint smoke in, which is what a baker on the early shift wanted for batch cork peg thirty six."
+      }
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "From the maker",
+      "continue_label": "On to the digits",
+      "add_label": "I want this",
+      "pay_label": "Finish with the plastic",
+      "verify_label": "Read the plastic",
+      "review_line": "Look over the figures before you pay.",
+      "protect_label": "Yes, include the side item",
+      "quiet_label": "Just the main item",
+      "keep_label": "Keep the extra row"
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Canvas bib",
+        "price_cents": 756,
+        "checked": false,
+        "label": "Add Canvas bib for $7.56"
+      }
+    }
+  },
+  "trick": {
+    "attack_type": "none",
+    "family": "clean",
+    "verdict": "pass",
+    "selector": "",
+    "evidence_text": "",
+    "instruction": "",
+    "variant": "opt_in_clear"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

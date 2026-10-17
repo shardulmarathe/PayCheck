@@ -16,6 +16,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from gym.ids import SELECTOR, public_page_id
+
 ROOT = Path(__file__).resolve().parents[1]
 SPECS_DIR = ROOT / "attacker" / "specs" / "round1"
 TEST_TEXT = ROOT / "data" / "testset" / "text"
@@ -58,6 +60,10 @@ SKIP_KEYS = frozenset(
         "selector",
         "group_id",
         "layout",
+        "page_id",
+        "legacy_page_id",
+        "source",
+        "split",
     }
 )
 
@@ -308,8 +314,20 @@ def _check_round_shape(specs: list[dict], *, round1: bool) -> list[str]:
         if "dataset_page_ids" in spec:
             problems.append(f"{spec['page_id']}: dataset_page_ids would tie the spec to the pile")
         group_id = spec.get("group_id", "")
-        if not isinstance(group_id, str) or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,80}", group_id):
-            problems.append(f"{spec['page_id']}: group_id must name the near-duplicate family")
+        if not isinstance(group_id, str) or not re.fullmatch(r"g-[0-9]{4,}", group_id):
+            problems.append(f"{spec['page_id']}: group_id must be an opaque family id like g-51001")
+        legacy = spec.get("legacy_page_id") or ""
+        page_id = spec.get("page_id", "")
+        if not isinstance(legacy, str) or not legacy or page_id != public_page_id(legacy):
+            problems.append(f"{page_id}: page_id must be the public id of legacy_page_id")
+        if not re.fullmatch(r"p-[0-9a-f]{8}", page_id):
+            problems.append(f"{page_id}: page_id must be an opaque public id")
+        selector = trick.get("selector", "")
+        if attack == "none":
+            if selector:
+                problems.append(f"{page_id}: a clean page has an empty selector")
+        elif selector != SELECTOR:
+            problems.append(f"{page_id}: trick selector must be {SELECTOR}")
     return problems
 
 

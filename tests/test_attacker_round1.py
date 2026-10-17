@@ -1,6 +1,7 @@
 """Round-1 attacker specs stay off the frozen test set, including short lines."""
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -13,7 +14,10 @@ from attacker.check_near_duplicates import (
     prose_strings,
 )
 from attacker.copy_lint import banned_hits, diversity_stats, lint_specs, skewed_tokens
-from gym.render import render_html, structural_features
+from gym.ids import SELECTOR, public_page_id
+from gym.leaks import leak_report
+from gym.money import money
+from gym.render import page_url, render_html, structural_features
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECS = ROOT / "attacker" / "specs" / "round1"
@@ -119,16 +123,33 @@ def test_round1_batch_is_clear_of_the_test_set():
 
 def test_clean_pages_draw_the_same_controls_as_the_attacks():
     specs = _round1()
+    seen_ids = set()
+    groups: dict[str, set[str]] = {}
     for spec in specs:
         html = render_html(spec)
+        url = page_url(spec)
         features = structural_features(html)
         variant = spec["trick"]["variant"]
         page = spec["page"]
-        if spec["trick"]["attack_type"] == "none":
+        attack = spec["trick"]["attack_type"]
+        legacy = spec["legacy_page_id"]
+        assert spec["page_id"] == public_page_id(legacy)
+        assert spec["page_id"] not in seen_ids
+        seen_ids.add(spec["page_id"])
+        assert re.fullmatch(r"g-[0-9]{4,}", spec["group_id"])
+        groups.setdefault(spec["group_id"], set()).add(variant)
+        leaked = leak_report(html, url)
+        assert leaked == [], f"{legacy} leaks {leaked}"
+        assert legacy not in html and legacy not in url
+        assert 'id="trick"' not in html
+        assert html.count('id="offer-1"') == 1
+        if attack == "none":
             assert page["listed_price_cents"] == page["checkout_price_cents"]
-            assert 'id="trick"' not in html
+            assert spec["trick"]["selector"] == ""
         else:
-            assert spec["trick"]["evidence_text"] in html
+            assert spec["trick"]["selector"] == SELECTOR
+            if variant != "drip":
+                assert spec["trick"]["evidence_text"] in html
         if variant == "opt_in_clear":
             assert features["checkbox"]
             assert "checked" not in html.split('id="opt-in"', 1)[1][:80]
@@ -145,13 +166,34 @@ def test_clean_pages_draw_the_same_controls_as_the_attacks():
         elif variant == "real_drop":
             assert features["strike"]
             assert page["offers"]["was_cents"] > page["checkout_price_cents"]
-        elif variant == "disclosed_fee":
-            assert features["fee"]
-            assert page["fees"][0]["name"] in html
         elif variant == "legit_card":
             assert "bank_password" not in html
         elif variant == "drip":
             assert features["fee"]
+            fee = page["fees"][0]
+            amount = money(fee["amount_cents"])
+            evidence = spec["trick"]["evidence_text"]
+            assert evidence.count(amount) == 1
+            match = re.search(
+                r'id="offer-1">(?P<lead>.*?)<span data-price="(?P<cents>\d+)" '
+                r'data-price-label="(?P<label>[^"]+)">(?P<shown>[^<]+)</span>(?P<trail>.*?)</span>',
+                html,
+            )
+            assert match, html
+            assert match.group("shown") == amount
+            assert match.group("label") == fee["name"]
+            assert match.group("cents") == str(fee["amount_cents"])
+            assert match.group("lead") + match.group("shown") + match.group("trail") == evidence
+            assert amount not in match.group("lead") + match.group("trail")
+        elif variant == "disclosed_fee":
+            assert features["fee"]
+            fee = page["fees"][0]
+            amount = money(fee["amount_cents"])
+            assert page["fees"][0]["name"] in html
+            assert (
+                f'id="offer-1">{fee["name"]} <span data-price="{fee["amount_cents"]}" '
+                f'data-price-label="{fee["name"]}">{amount}</span>'
+            ) in html
         elif variant == "drift":
             assert features["strike"]
         elif variant == "checkbox":
@@ -166,3 +208,4 @@ def test_clean_pages_draw_the_same_controls_as_the_attacks():
         elif variant == "one_click":
             assert features["popup"]
             assert not any(item.get("trick_item") for item in page["cart"])
+    assert all(len(variants) == 1 for variants in groups.values())
