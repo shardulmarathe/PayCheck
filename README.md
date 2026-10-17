@@ -1,24 +1,67 @@
 # Checkout guard
 
-Hackathon monorepo for a checkout guard that blocks shopping-agent payment when a page hides a fee, a pre-checked add-on, a price change, a subscription trap, or a scam.
+A checkout guard for a shopping agent. Before the agent pays, it sends the page to a small model. The model returns block or pass, the trick type, the exact quoted evidence, and a short instruction for how to steer around the trick.
+
+This repository is private.
 
 | Path | What it is |
 | --- | --- |
-| `gym/` | Fake stores, trick specs, labels, frozen test set, local shop server |
-| `train/` | Training and eval (separate agent) |
-| `shopper/` | Browser Use shopper |
+| `gym/` | Fake stores, trick specs, labels, the frozen test set, and the local shop server |
+| `train/` | Training and eval (another agent) |
+| `shopper/` | Browser Use shopper, with and without the guard |
 | `web/` | Showcase site |
 | `runs/` | JSON run data the showcase site reads |
-| `data/` | Dataset, frozen test pages, generated train pages |
+| `data/` | Yada dark-pattern strings and the frozen test pages |
 
-This repository is private.
+Python 3.11 or newer. Generation was checked with 3.12, Playwright 1.64.0, and Liberation Sans.
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 python -m playwright install chromium
+# Debian/Ubuntu: sudo apt-get install -y fonts-liberation
+```
+
+## Commands
+
+```bash
+python -m gym.dataset --check          # frozen page-id split still matches the seed
+make testset                           # rebuild the 300-page test set and require the same hash
 make test
-make testset
+python -m gym.train --n 50 --out data/trainset
+python -m gym.render_specs --specs-dir DIR --out data/attacker-round1 --source attacker-round1
 python -m gym.serve --port 8765
 ```
+
+`make testset` does not rewrite the committed files. `python -m gym.testset --write` does, and should be a no-op diff when the font and browser match.
+
+The shop server is at [Checkout guard gym](http://127.0.0.1:8765) once `python -m gym.serve --port 8765` is running. Give the agent the errand instruction and the start URL only. Trick type and the correct cart are on `/errands.json` for the harness. Card fields are discarded and not stored.
+
+## Frozen test set
+
+300 pages, half clean. Built from fixed templates plus the test pile of [yamanalab/ec-darkpattern](https://github.com/yamanalab/ec-darkpattern) (Apache-2.0). No model writes these pages. `copycat_domain` and `listing_injection` are only in this set.
+
+| attack_type | family | pages |
+| --- | --- | ---: |
+| `hidden_fees` | upsell | 24 |
+| `preselected_addon` | upsell | 30 |
+| `price_change` | upsell | 24 |
+| `subscription_trap` | upsell | 24 |
+| `copycat_domain` | scam | 16 |
+| `fake_card_verification` | scam | 16 |
+| `listing_injection` | scam | 16 |
+| `none` | clean | 150 |
+| **total** | | **300** |
+
+`preselected_addon` is 10 pre-checked add-ons, 10 popups that sneak an item into the cart, and 10 one-click offers.
+
+Content hash (SHA-256, see `gym/schema/README.md`):
+
+```
+b87e4b91327a50505c51a2bcdfa3ad35449f39bd0fe5d0f8a518e24ad9a82abd
+```
+
+`gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).
+
+Schemas, the label row, and the guard output contract are in `gym/schema/README.md`.

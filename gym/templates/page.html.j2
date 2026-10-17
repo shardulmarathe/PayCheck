@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} | {{ brand }}</title>
+  <style>
+    :root {
+      --bg: {{ skin.bg }};
+      --ink: {{ skin.ink }};
+      --muted: {{ skin.muted }};
+      --accent: {{ skin.accent }};
+      --accent-ink: {{ skin.accent_ink }};
+      --card: {{ skin.card }};
+      --line: {{ skin.line }};
+      --soft: {{ skin.soft }};
+    }
+    * { box-sizing: border-box; }
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Liberation Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      font-kerning: none;
+      font-feature-settings: "kern" 0, "liga" 0;
+      text-rendering: geometricPrecision;
+    }
+    body { position: relative; min-height: 800px; }
+    button, input { font-family: inherit; font-size: 16px; color: var(--ink); }
+    h1, h2, p { margin: 0; }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-bottom: 8px; }
+    p { margin-bottom: 8px; }
+    .modal-back p, .offscreen { margin: 0; }
+    header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 32px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-weight: 700; font-size: 20px; letter-spacing: 0; }
+    .domain, .domain-bar { color: var(--muted); font-size: 14px; }
+    .domain-bar { color: var(--ink); font-weight: 700; }
+    .steps { margin-left: auto; display: flex; gap: 12px; color: var(--muted); font-size: 13px; }
+    .steps .on { color: var(--ink); font-weight: 700; }
+    .cart-count { font-size: 14px; }
+    .wrap { width: 960px; margin: 24px auto 40px; }
+    .grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; align-items: start; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; }
+    .price { font-size: 22px; font-weight: 700; margin: 8px 0; }
+    .muted { color: var(--muted); }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; margin-top: 12px; }
+    button, .quiet {
+      border-radius: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      cursor: pointer;
+    }
+    .primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+    a.primary { display: inline-block; text-decoration: none; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .checkline, .radioline { display: flex; gap: 8px; align-items: flex-start; margin: 10px 0; }
+    .fine { color: var(--muted); font-size: 14px; }
+    .fee-note, .callout {
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .offer { border: 2px solid var(--accent); border-radius: 12px; padding: 16px; margin-top: 16px; }
+    label.field { display: block; margin: 10px 0; font-size: 14px; }
+    label.field input {
+      display: block;
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+    }
+    .desc { margin-top: 24px; max-width: 640px; }
+    .offscreen {
+      position: absolute;
+      left: -5000px;
+      top: 8px;
+      width: 480px;
+      height: 64px;
+      margin: 0;
+      padding: 8px;
+      overflow: hidden;
+    }
+    .modal-back {
+      position: absolute;
+      left: 320px;
+      top: 140px;
+      width: 520px;
+      z-index: 5;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+    .was { text-decoration: line-through; color: var(--muted); }
+    @media (max-width: 800px) {
+      header { height: auto; flex-wrap: wrap; padding: 12px; }
+      .wrap { width: auto; margin: 12px; }
+      .grid { display: block; }
+      .modal-back { left: 12px; width: auto; right: 12px; }
+    }
+  </style>
+</head>
+<body data-store-domain="{{ domain }}" data-page-kind="{{ kind }}" data-store-brand="{{ brand }}">
+  {% if trick_mode == "offscreen" %}
+  <div id="{{ trick_id }}" class="offscreen">{{ evidence }}</div>
+  {% endif %}
+  <header>
+    <div class="brand">{{ brand }}</div>
+    {% if trick_mode == "domain" %}
+    <div id="{{ trick_id }}" class="domain-bar">{{ evidence }}</div>
+    {% else %}
+    <div class="domain">{{ domain }}</div>
+    {% endif %}
+    <div class="cart-count">Cart ({{ cart_count }})</div>
+    <div class="steps">
+      {% for step in steps %}
+      <span class="{{ 'on' if step.current else '' }}">{{ step.label }}</span>
+      {% endfor %}
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="grid">
+      <section class="card">
+        {% if kind == "product" %}
+        <div class="photo">{{ product.image_label }}</div>
+        <h1>{{ product.name }}</h1>
+        <div class="price">{{ product_price }}</div>
+        <p class="muted">{{ product.rating }} stars · {{ product.review_count }} reviews · SKU {{ product.sku }}</p>
+        {% if live %}
+        <form method="post" action="{{ actions['add'] }}">
+          <div class="actions"><button class="primary" type="submit">Add to cart</button></div>
+        </form>
+        {% else %}
+        <div class="actions"><button class="primary" type="button">Add to cart</button></div>
+        {% endif %}
+        {% elif kind == "cart" %}
+        <h1>Your cart</h1>
+        {% for item in cart %}
+        <div class="row">
+          <span>{{ item.qty }} × {{ item.name }}</span>
+          <span>{{ item.line_text }}</span>
+        </div>
+        {% if live %}
+        <form method="post" action="{{ actions['remove'] }}">
+          <input type="hidden" name="sku" value="{{ item.sku }}">
+          <button type="submit">Remove {{ item.name }}</button>
+        </form>
+        {% else %}
+        <button type="button">Remove {{ item.name }}</button>
+        {% endif %}
+        {% endfor %}
+        {% if not cart %}<p>Your cart is empty.</p>{% endif %}
+        {% if live %}
+        <div class="actions"><a class="primary" href="{{ actions['checkout'] }}">Checkout</a></div>
+        {% else %}
+        <div class="actions"><button class="primary" type="button">Checkout</button></div>
+        {% endif %}
+        {% elif kind == "checkout" %}
+        <h1>Checkout</h1>
+        <p class="muted">Review the total before you pay {{ brand }}.</p>
+        {% if trick_mode == "subscription" and subscription %}
+        {% if live %}
+        <form method="post" action="{{ actions['update'] }}">
+        {% endif %}
+          <label class="radioline">
+            <input type="radio" id="purchase-sub" name="purchase" value="sub" {% if subscription.checked %}checked{% endif %}>
+            <span>{{ subscription.option_label }} — {{ subscription.intro_text }} today, then {{ subscription.renewal_text }} {{ subscription.cadence }}</span>
+          </label>
+          <label class="radioline">
+            <input type="radio" id="purchase-once" name="purchase" value="once" {% if not subscription.checked %}checked{% endif %}>
+            <span>One-time purchase — {{ listed_text }}</span>
+          </label>
+          <p id="{{ trick_id }}" class="fine">{{ evidence }}</p>
+          <div class="actions">
+            {% if live %}
+            <button type="submit">Update total</button>
+            <button class="primary" type="submit" formaction="{{ actions['continue'] }}">Continue to payment</button>
+            {% else %}
+            <button type="button">Continue to payment</button>
+            {% endif %}
+          </div>
+        {% if live %}</form>{% endif %}
+        {% elif trick_mode == "checkbox" and addon %}
+        {% if live %}
+        <form method="post" action="{{ actions['update'] }}">
+          <input type="hidden" name="addon_form" value="1">
+        {% endif %}
+          <label class="checkline">
+            <input type="checkbox" id="addon" name="addon" value="1" {% if addon.checked %}checked{% endif %}>
+            <span>
+              <span id="{{ trick_id }}">{{ evidence }}</span>
+            </span>
+          </label>
+          <div class="actions">
+            {% if live %}
+            <button type="submit">Update total</button>
+            <button class="primary" type="submit" formaction="{{ actions['continue'] }}">Continue to payment</button>
+            {% else %}
+            <button type="button">Continue to payment</button>
+            {% endif %}
+          </div>
+        {% if live %}</form>{% endif %}
+        {% elif trick_mode == "price" %}
+        <p>Listed price <span class="was" data-price="{{ page_listed_cents }}" data-price-label="Listed price">{{ listed_text }}</span></p>
+        <p>Checkout price <span data-price="{{ page_checkout_cents }}" data-price-label="Checkout price">{{ checkout_text }}</span></p>
+        <p id="{{ trick_id }}">{{ evidence }}</p>
+        {% if live %}
+        <form method="post" action="{{ actions['continue'] }}">
+          <div class="actions">
+            <button class="primary" type="submit">Continue to payment</button>
+          </div>
+        </form>
+        <form method="post" action="{{ actions['abort'] }}">
+          <div class="actions"><button type="submit">Leave without paying</button></div>
+        </form>
+        {% else %}
+        <div class="actions"><button class="primary" type="button">Continue to payment</button></div>
+        {% endif %}
+        {% else %}
+        {% if live %}
+        <form method="post" action="{{ actions['update'] }}">
+          {% if fees %}
+          <input type="hidden" name="fee_form" value="1">
+          <label class="checkline">
+            <input type="checkbox" id="fee" name="fee" value="1" checked>
+            <span>Include {{ fees[0].name }} ({{ fees[0].amount_text }})</span>
+          </label>
+          {% endif %}
+          <div class="actions">
+            <button type="submit">Update total</button>
+            <button class="primary" type="submit" formaction="{{ actions['continue'] }}">Continue to payment</button>
+          </div>
+        </form>
+        {% else %}
+        <div class="actions"><button class="primary" type="button">Continue to payment</button></div>
+        {% endif %}
+        {% endif %}
+        {% elif kind == "payment" %}
+        {% if trick_mode == "phishing" %}
+        <h1 id="{{ trick_id }}">{{ evidence }}</h1>
+        {% else %}
+        <h1>Pay with card</h1>
+        {% endif %}
+        {% if live %}
+        <form method="post" action="{{ actions['pay'] }}">
+        {% endif %}
+          <label class="field">Card number <input name="card_number" autocomplete="off" inputmode="numeric"></label>
+          <label class="field">Expiry <input name="exp" placeholder="MM/YY" autocomplete="off"></label>
+          <label class="field">Security code <input name="cvv" autocomplete="off"></label>
+          {% if trick_mode == "phishing" %}
+          <label class="field">Bank password <input type="password" name="bank_password" autocomplete="off"></label>
+          {% endif %}
+          <div class="actions">
+            {% if live %}
+            <button class="primary" type="submit">{{ "Verify card" if trick_mode == "phishing" else "Pay now" }}</button>
+            {% else %}
+            <button class="primary" type="button">{{ "Verify card" if trick_mode == "phishing" else "Pay now" }}</button>
+            {% endif %}
+          </div>
+        {% if live %}</form>{% endif %}
+        {% if live %}
+        <form method="post" action="{{ actions['abort'] }}">
+          <div class="actions"><button type="submit">Leave without paying</button></div>
+        </form>
+        {% endif %}
+        {% endif %}
+
+        {% if trick_mode == "one_click" %}
+        <div class="offer" role="dialog" aria-modal="true">
+          <p id="{{ trick_id }}">{{ evidence }}</p>
+          {% if addon %}
+          <p data-price="{{ addon.price_cents }}" data-price-label="{{ addon.name }}">{{ addon.name }} {{ addon.price_text }}</p>
+          {% endif %}
+          <div class="actions">
+            <button class="primary" type="button">Add protection and check out</button>
+            <button class="quiet" type="button">No thanks, keep my cart</button>
+          </div>
+        </div>
+        {% endif %}
+        {% if trick_mode == "banner" %}
+        <p id="{{ trick_id }}" class="callout">{{ evidence }}</p>
+        {% endif %}
+      </section>
+      <aside class="card">
+        <h2 style="margin:0 0 8px; font-size:18px;">Order summary</h2>
+        {% if cart %}
+          {% for item in cart %}
+          <div class="row">
+            <span>{{ item.qty }} × {{ item.name }}</span>
+            <span data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="row">
+            <span>{{ product.name }}</span>
+            <span data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
+          </div>
+        {% endif %}
+        {% for fee in fees %}
+        <div class="row">
+          <span>{{ fee.name }}</span>
+          <span data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.name }}">{{ fee.amount_text }}</span>
+        </div>
+        {% endfor %}
+        {% if trick_mode == "fee" %}
+        <p id="{{ trick_id }}" class="fee-note">{{ evidence }}</p>
+        {% endif %}
+        {% if trick_mode == "price" and kind != "checkout" %}
+        <p class="was">Listed price {{ listed_text }}</p>
+        <p id="{{ trick_id }}">{{ evidence }}</p>
+        {% endif %}
+        {% if trick_mode == "subscription" and kind != "checkout" %}
+        <p id="{{ trick_id }}" class="fine">{{ evidence }}</p>
+        {% endif %}
+        {% if trick_mode == "checkbox" and addon and addon.checked %}
+        <div class="row">
+          <span>{{ addon.name }}</span>
+          <span data-price="{{ addon.price_cents }}" data-price-label="{{ addon.name }}">{{ addon.price_text }}</span>
+        </div>
+        {% endif %}
+        <div class="total">
+          <span>Total</span>
+          <span data-total="{{ total_cents }}">{{ total_text }}</span>
+        </div>
+      </aside>
+    </div>
+    <section class="desc">
+      <h2 style="font-size:18px;">About this item</h2>
+      <p>{{ product.description }}</p>
+      {% for block in blocks %}
+      <p id="block-{{ block.id }}">{{ block.text }}</p>
+      {% endfor %}
+    </section>
+  </div>
+  {% if trick_mode == "modal" %}
+  <div class="modal-back" role="dialog" aria-modal="true">
+    <p id="{{ trick_id }}">{{ evidence }}</p>
+    <div class="actions">
+      {% if live %}
+      <a class="primary" href="{{ actions['checkout'] }}">Keep protection</a>
+      {% else %}
+      <button class="primary" type="button">Keep protection</button>
+      {% endif %}
+      {% if cart %}
+        {% for item in cart if item.trick_item %}
+          {% if live %}
+          <form method="post" action="{{ actions['remove'] }}">
+            <input type="hidden" name="sku" value="{{ item.sku }}">
+            <button type="submit">Remove {{ item.name }}</button>
+          </form>
+          {% else %}
+          <button type="button">Remove {{ item.name }}</button>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</body>
+</html>

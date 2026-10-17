@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://checkoutguard.local/schema/trick_spec.json",
+  "title": "TrickSpec",
+  "description": "One rendered store page and the single trick it carries, if any. The renderer accepts every document this schema accepts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["spec_version", "page_id", "store", "page", "trick", "source", "split"],
+  "properties": {
+    "spec_version": {"const": "1"},
+    "page_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{0,80}$"
+    },
+    "store": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "brand", "skin", "domain", "category"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "brand": {"type": "string", "minLength": 1},
+        "skin": {"type": "string", "minLength": 1},
+        "domain": {
+          "type": "string",
+          "pattern": "^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?)+$"
+        },
+        "category": {"type": "string", "minLength": 1}
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "title",
+        "product",
+        "cart",
+        "fees",
+        "listed_price_cents",
+        "checkout_price_cents",
+        "blocks"
+      ],
+      "properties": {
+        "kind": {"enum": ["product", "cart", "checkout", "payment"]},
+        "title": {"type": "string", "minLength": 1},
+        "product": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "sku", "price_cents", "description", "rating", "review_count", "image_label"],
+          "properties": {
+            "name": {"type": "string", "minLength": 1},
+            "sku": {"type": "string", "minLength": 1},
+            "price_cents": {"type": "integer", "minimum": 0},
+            "description": {"type": "string"},
+            "rating": {"type": "string"},
+            "review_count": {"type": "integer", "minimum": 0},
+            "image_label": {"type": "string"}
+          }
+        },
+        "cart": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "sku", "qty", "price_cents", "trick_item"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "sku": {"type": "string", "minLength": 1},
+              "qty": {"type": "integer", "minimum": 1},
+              "price_cents": {"type": "integer", "minimum": 0},
+              "trick_item": {"type": "boolean"}
+            }
+          }
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "amount_cents"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "amount_cents": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
+        "listed_price_cents": {"type": "integer", "minimum": 0},
+        "checkout_price_cents": {"type": "integer", "minimum": 0},
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "text"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"},
+              "text": {"type": "string"}
+            }
+          }
+        },
+        "addon": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "sku", "price_cents", "checked"],
+          "properties": {
+            "name": {"type": "string", "minLength": 1},
+            "sku": {"type": "string", "minLength": 1},
+            "price_cents": {"type": "integer", "minimum": 0},
+            "checked": {"type": "boolean"}
+          }
+        },
+        "subscription": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["checked", "cadence", "intro_price_cents", "renewal_price_cents", "option_label"],
+          "properties": {
+            "checked": {"type": "boolean"},
+            "cadence": {"type": "string", "minLength": 1},
+            "intro_price_cents": {"type": "integer", "minimum": 0},
+            "renewal_price_cents": {"type": "integer", "minimum": 0},
+            "option_label": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "trick": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attack_type", "family", "verdict", "selector", "evidence_text", "instruction", "variant"],
+      "properties": {
+        "attack_type": {
+          "enum": [
+            "none",
+            "hidden_fees",
+            "preselected_addon",
+            "price_change",
+            "subscription_trap",
+            "copycat_domain",
+            "fake_card_verification",
+            "listing_injection"
+          ]
+        },
+        "family": {"enum": ["upsell", "scam", "clean"]},
+        "verdict": {"enum": ["block", "pass"]},
+        "selector": {"type": "string"},
+        "evidence_text": {"type": "string"},
+        "instruction": {"type": "string"},
+        "variant": {"type": "string", "minLength": 1}
+      }
+    },
+    "source": {
+      "type": "string",
+      "pattern": "^(template|ec-darkpattern|attacker-round[0-9]+)$"
+    },
+    "split": {"enum": ["train", "test"]},
+    "dataset_page_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[0-9]+$"}
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {"enum": ["static", "live"]},
+        "add_action": {"type": "string"},
+        "remove_action": {"type": "string"},
+        "checkout_action": {"type": "string"},
+        "update_action": {"type": "string"},
+        "continue_action": {"type": "string"},
+        "pay_action": {"type": "string"},
+        "abort_action": {"type": "string"}
+      }
+    }
+  }
+}
