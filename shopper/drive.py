@@ -12,13 +12,14 @@ from pathlib import Path
 
 from shopper.browser import ShopChrome
 from shopper.cost import CostCapExceeded, CostLedger
+from shopper.gate import PurchaseGate
 from shopper.guard import GuardClient
 from shopper.page_text import read_compact
 from shopper.policy import Action, choose
 from shopper.prompt import TEST_CARD_CVV, TEST_CARD_EXPIRY, TEST_CARD_NUMBER
 from shopper.replay import RunLog, assemble, guard_record, now_iso, relpath, target_from, write_json
-from shopper.score import empty_score, score_result
-from shopper.snapshot import Control, read_controls
+from shopper.score import empty_score, guard_actually_blocked, score_result
+from shopper.snapshot import Control, read_controls, read_geometry
 
 # Filled only when the payment page itself shows the field. Not part of the prompt.
 _BANK_PASSWORD = "hunter2"
@@ -45,9 +46,31 @@ def _action_label(action: Action) -> str:
     return f"{action.kind} {action.text}".strip()
 
 
+def _evidence(guard: dict | None) -> str:
+    if not guard:
+        return ""
+    return str((guard.get("response") or {}).get("evidence") or "")
+
+
 async def _record(log: RunLog, page, *, url: str, action: str, page_text: str, target: dict | None, guard: dict | None, blocked: bool) -> None:
+    viewport, evidence_bbox = await read_geometry(page, _evidence(guard))
     shot = await log.screenshot(page)
-    log.add(url=url, action=action, page_text=page_text, screenshot=shot, target=target, guard=guard, blocked=blocked)
+    log.add(
+        url=url,
+        action=action,
+        page_text=page_text,
+        screenshot=shot,
+        target=target,
+        guard=guard,
+        blocked=blocked,
+        viewport=viewport,
+        evidence_bbox=evidence_bbox,
+    )
+
+
+def _approve(chrome: ShopChrome, action: Action) -> None:
+    if action.risky and chrome.gate is not None:
+        chrome.gate.approve(action.risky, action.text)
 
 
 async def _fill_payment(chrome: ShopChrome, log: RunLog, controls: list[Control]) -> None:
@@ -141,6 +164,7 @@ async def drive_mock(
         if action.kind == "pay":
             await _fill_payment(chrome, log, controls)
             page = await chrome.page()
+            _approve(chrome, action)
             await _record(
                 log,
                 page,
@@ -153,6 +177,7 @@ async def drive_mock(
             )
             await chrome.click(action.selector)
         else:
+            _approve(chrome, action)
             await _record(
                 log,
                 page,
@@ -185,6 +210,8 @@ async def run_errand(
     video: bool,
     max_steps: int,
     api_key: str | None,
+    run_id: str,
+    synthetic: bool,
 ) -> dict:
     """Drive one errand in one mode and write ``<errand>_<mode>.json``."""
     errand_id = errand["id"]
@@ -201,12 +228,13 @@ async def run_errand(
     video_rel: str | None = None
     chrome: ShopChrome | None = None
     try:
-        if ledger.exceeded:
+        if not mock and ledger.exceeded:
             ledger.tripped = True
             tripped = True
             raise CostCapExceeded(ledger.usd, ledger.max_usd)
         chrome = ShopChrome(record_video=video)
         await chrome.__aenter__()
+        await chrome.install_gate(PurchaseGate(armed=mode == "guarded"))
         try:
             if mock:
                 await drive_mock(chrome, log, start_url=start_url, mode=mode, guard=guard, max_steps=max_steps)
@@ -236,6 +264,23 @@ async def run_errand(
             except Exception as exc:
                 if error is None:
                     error = f"{type(exc).__name__}: {exc}"
+            if chrome.gate is not None and chrome.gate.refused:
+                try:
+                    page = await chrome.page()
+                    text = await read_compact(page)
+                    for refusal in list(chrome.gate.refused):
+                        await _record(
+                            log,
+                            page,
+                            url=refusal["url"],
+                            action=f"refused {refusal['kind']}",
+                            page_text=text,
+                            target=None,
+                            guard=None,
+                            blocked=False,
+                        )
+                except Exception:
+                    pass
     except CostCapExceeded as exc:
         tripped = True
         error = str(exc)
@@ -257,7 +302,13 @@ async def run_errand(
         if error and not tripped:
             result = dict(result)
             result["error"] = error
-        scored = score_result(result, mode=mode, attack_type=attack_type, tripped=tripped)
+        scored = score_result(
+            result,
+            mode=mode,
+            attack_type=attack_type,
+            tripped=tripped,
+            guard_blocked=guard_actually_blocked(log.steps),
+        )
     else:
         scored = empty_score(mode=mode, tripped=tripped, error=error)
     if tripped and scored["outcome"] != "stopped":
@@ -267,6 +318,8 @@ async def run_errand(
         errand_id=errand_id,
         mode=mode,
         mock=mock,
+        synthetic=synthetic,
+        run_id=run_id,
         model="mock" if mock else model,
         instruction=instruction,
         start_url=start_url,

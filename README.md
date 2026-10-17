@@ -36,6 +36,8 @@ python -m gym.serve --port 8765
 python -m shopper.run --errand all --mode both --mock --guard-backend mock
 ```
 
+Mock shopper runs are written to `runs/shopper/synthetic/` and are not site data. Real runs (a live model and, when guarded, an HTTP guard) go to `runs/shopper/`.
+
 `make testset` does not rewrite the committed files. `python -m gym.testset --write` does, and should be a no-op diff when the font and browser match.
 
 The shop server is at [Checkout guard gym](http://127.0.0.1:8765) once `python -m gym.serve --port 8765` is running. Give the agent the errand instruction and the start URL only. Trick type and the correct cart are on `/errands.json` for the harness. Card fields are discarded and not stored.

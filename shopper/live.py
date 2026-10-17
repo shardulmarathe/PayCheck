@@ -10,11 +10,13 @@ from __future__ import annotations
 
 from shopper.browser import ShopChrome
 from shopper.cost import BudgetedLLM, CostLedger
+from shopper.gate import action_risk
 from shopper.guard import GuardClient
 from shopper.page_text import read_compact
 from shopper.prompt import SYSTEM_LINE, task_text
 from shopper.replay import RunLog, guard_record, redact, target_from
 from shopper.risky import classify_click
+from shopper.snapshot import read_geometry
 
 
 def _node_text(node) -> str:
@@ -94,7 +96,20 @@ class _StepTape:
         self.blocked = False
 
 
-def install_guard(tools, tape: _StepTape, *, mode: str, guard: GuardClient | None) -> None:
+def harden_tools(tools) -> None:
+    """Drop actions that can buy something without passing the click guard."""
+    from browser_use.agent.views import ActionResult
+
+    tools.exclude_action("evaluate")
+
+    async def _refuse_coordinate(params, browser_session):
+        return ActionResult(error="Coordinate clicks are disabled. Click by element index.")
+
+    tools._click_by_coordinate = _refuse_coordinate
+    tools.set_coordinate_clicking(False)
+
+
+def install_guard(tools, tape: _StepTape, *, mode: str, guard: GuardClient | None, gate) -> None:
     """Wrap Browser Use's click so a block never reaches the page."""
     original = tools._click_by_index
 
@@ -105,7 +120,11 @@ def install_guard(tools, tape: _StepTape, *, mode: str, guard: GuardClient | Non
         except Exception:
             node = None
         risky = _risky_node(node) if mode == "guarded" else None
-        if risky and guard is not None:
+        if risky:
+            if guard is None:
+                from browser_use.agent.views import ActionResult
+
+                return ActionResult(error="guarded mode requires a guard client")
             page = await browser_session.must_get_current_page()
             text = await read_compact(page)
             url = await page.get_url()
@@ -127,14 +146,64 @@ def install_guard(tools, tape: _StepTape, *, mode: str, guard: GuardClient | Non
                         "A checkout guard blocked that click. Follow this instruction: " + instruction
                     )
                 )
+            if gate is not None:
+                gate.approve(risky, _node_text(node))
         return await original(params, browser_session)
 
     tools._click_by_index = _click_by_index
     tools._register_click_action()
 
 
-def install_recorder(tools, tape: _StepTape, log: RunLog) -> None:
-    """Record every Browser Use action with a screenshot and the page text."""
+def _action_parts(action) -> tuple[str, dict]:
+    data = action.model_dump(exclude_unset=True)
+    if not data:
+        return "action", {}
+    name = next(iter(data))
+    params = data[name]
+    if not isinstance(params, dict):
+        return name, {"value": params}
+    return name, params
+
+
+async def _preflight(action, *, url: str, text: str, mode: str, guard: GuardClient | None, gate, tape: _StepTape):
+    """Block a bypass, or approve a purchase navigation, before the action runs."""
+    from browser_use.agent.views import ActionResult
+
+    name, params = _action_parts(action)
+    risk = action_risk(name, params, url)
+    if risk == "disabled":
+        return ActionResult(error=f"{name} is disabled so it cannot bypass the checkout guard")
+    if risk is None or mode != "guarded":
+        return None
+    if guard is None:
+        return ActionResult(error="guarded mode requires a guard client")
+    target = str(params.get("url") or params.get("keys") or name)
+    response, latency = await guard.check(text, url=url, action=risk, target=target)
+    tape.guard = guard_record(
+        endpoint=guard.endpoint,
+        backend=guard.backend,
+        latency_ms=latency,
+        action=risk,
+        response=response,
+    )
+    if response["verdict"] == "block":
+        tape.blocked = True
+        instruction = response.get("instruction") or "Do not take that action."
+        return ActionResult(
+            long_term_memory=("A checkout guard blocked that action. Follow this instruction: " + instruction)
+        )
+    if gate is not None:
+        if name == "navigate":
+            gate.approve_navigation(str(params.get("url") or ""))
+        elif risk == "checkout":
+            gate.approve(risk, "Continue to payment")
+        else:
+            gate.approve(risk, "")
+    return None
+
+
+def install_recorder(tools, tape: _StepTape, log: RunLog, *, mode: str, guard: GuardClient | None, gate) -> None:
+    """Record every Browser Use action with a screenshot, the viewport, and the page text."""
     original = tools.act
 
     async def act(action, browser_session, *args, **kwargs):
@@ -150,8 +219,26 @@ def install_recorder(tools, tape: _StepTape, log: RunLog) -> None:
             text = await read_compact(page)
         except Exception:
             text = ""
-        shot = await log.screenshot(page)
         described, target = await _describe(action, browser_session)
+        refusal = await _preflight(action, url=url, text=text, mode=mode, guard=guard, gate=gate, tape=tape)
+        evidence = ""
+        if tape.guard is not None:
+            evidence = str((tape.guard.get("response") or {}).get("evidence") or "")
+        viewport, evidence_bbox = await read_geometry(page, evidence)
+        shot = await log.screenshot(page)
+        if refusal is not None:
+            log.add(
+                url=url,
+                action=described,
+                page_text=text,
+                screenshot=shot,
+                target=target,
+                guard=tape.guard,
+                blocked=tape.blocked,
+                viewport=viewport,
+                evidence_bbox=evidence_bbox,
+            )
+            return refusal
         result = await original(action, browser_session, *args, **kwargs)
         log.add(
             url=url,
@@ -161,6 +248,8 @@ def install_recorder(tools, tape: _StepTape, log: RunLog) -> None:
             target=target,
             guard=tape.guard,
             blocked=tape.blocked,
+            viewport=viewport,
+            evidence_bbox=evidence_bbox,
         )
         return result
 
@@ -192,6 +281,10 @@ async def _describe(action, browser_session) -> tuple[str, dict | None]:
         return f"click {text}".strip(), target_from(_selector(node), text, _bbox(node))
     if name == "click":
         return "click", None
+    if name == "navigate":
+        return f"navigate {params.get('url') or ''}".strip(), None
+    if name == "send_keys":
+        return f"send_keys {params.get('keys') or ''}".strip(), None
     return name, None
 
 
@@ -216,10 +309,11 @@ async def drive_live(
 
     quiet_library_logs()
 
-    tools = Tools()
+    tools = Tools(exclude_actions=["evaluate"])
+    harden_tools(tools)
     tape = _StepTape()
-    install_guard(tools, tape, mode=mode, guard=guard)
-    install_recorder(tools, tape, log)
+    install_guard(tools, tape, mode=mode, guard=guard, gate=chrome.gate)
+    install_recorder(tools, tape, log, mode=mode, guard=guard, gate=chrome.gate)
     llm = BudgetedLLM(
         ChatAnthropic(model=model, api_key=api_key, max_tokens=4096),
         ledger,
@@ -248,4 +342,7 @@ async def drive_live(
         max_actions_per_step=3,
         register_should_stop_callback=should_stop,
     )
+    # Agent enables coordinate clicks for some model ids after tools are built.
+    harden_tools(tools)
+    agent._setup_action_models()
     await agent.run(max_steps=max_steps)

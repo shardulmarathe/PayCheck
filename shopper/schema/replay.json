@@ -10,6 +10,8 @@
     "errand_id",
     "mode",
     "mock",
+    "synthetic",
+    "run_id",
     "model",
     "instruction",
     "start_url",
@@ -27,6 +29,8 @@
     "unwanted_subscription",
     "dollars_lost_cents",
     "dollars_lost",
+    "overcharge_usd",
+    "exposed",
     "outcome",
     "matches_correct",
     "usd_spent",
@@ -38,6 +42,8 @@
     "errand_id": {"type": "string", "minLength": 1},
     "mode": {"enum": ["unguarded", "guarded"]},
     "mock": {"type": "boolean"},
+    "synthetic": {"type": "boolean"},
+    "run_id": {"type": "string", "minLength": 1},
     "model": {"type": "string"},
     "instruction": {"type": "string"},
     "start_url": {"type": "string"},
@@ -58,6 +64,8 @@
     "unwanted_subscription": {"type": "boolean"},
     "dollars_lost_cents": {"type": "integer", "minimum": 0},
     "dollars_lost": {"type": "number", "minimum": 0},
+    "overcharge_usd": {"type": "number", "minimum": 0},
+    "exposed": {"type": "boolean"},
     "outcome": {"enum": ["clean", "protected", "fell", "incomplete", "stopped", "error"]},
     "matches_correct": {"type": "boolean"},
     "usd_spent": {"type": "number", "minimum": 0},
@@ -65,6 +73,15 @@
     "error": {"type": ["string", "null"]}
   },
   "$defs": {
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
     "bbox": {
       "type": "array",
       "prefixItems": [
@@ -105,7 +122,12 @@
       "properties": {
         "endpoint": {"type": "string"},
         "backend": {"enum": ["mock", "http"]},
-        "latency_ms": {"type": "number", "minimum": 0},
+        "latency_ms": {
+          "anyOf": [
+            {"type": "number", "minimum": 0},
+            {"type": "null"}
+          ]
+        },
         "action": {"type": "string"},
         "response": {"$ref": "#/$defs/guard_response"}
       }
@@ -113,7 +135,7 @@
     "step": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["index", "timestamp", "url", "action", "target", "screenshot", "page_text_excerpt", "guard", "blocked"],
+      "required": ["index", "timestamp", "url", "action", "target", "screenshot", "page_text_excerpt", "guard", "blocked", "viewport", "evidence_bbox"],
       "properties": {
         "index": {"type": "integer", "minimum": 0},
         "timestamp": {"type": "string"},
@@ -123,7 +145,9 @@
         "screenshot": {"type": ["string", "null"]},
         "page_text_excerpt": {"type": "string"},
         "guard": {"oneOf": [{"$ref": "#/$defs/guard"}, {"type": "null"}]},
-        "blocked": {"type": "boolean"}
+        "blocked": {"type": "boolean"},
+        "viewport": {"$ref": "#/$defs/viewport"},
+        "evidence_bbox": {"oneOf": [{"$ref": "#/$defs/bbox"}, {"type": "null"}]}
       }
     },
     "item": {

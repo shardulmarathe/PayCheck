@@ -14,6 +14,27 @@ _SECRETS = (TEST_CARD_NUMBER, "hunter2")
 
 EXCERPT_CHARS = 1200
 
+REAL_OUT = Path("runs/shopper")
+SYNTHETIC_OUT = Path("runs/shopper/synthetic")
+
+
+class MixedRunError(RuntimeError):
+    """Synthetic and real runs cannot share one tally."""
+
+
+def is_synthetic(*, mock: bool, mode: str, guard_backend: str | None) -> bool:
+    """Mock shopper or mock guard. An unguarded live run is real even if a mock guard is configured."""
+    if mock:
+        return True
+    return mode == "guarded" and guard_backend == "mock"
+
+
+def output_dir(explicit: str | None, synthetic: bool) -> Path:
+    """Explicit ``--out`` is used as given. Otherwise synthetic and real runs stay apart."""
+    if explicit:
+        return Path(explicit)
+    return SYNTHETIC_OUT if synthetic else REAL_OUT
+
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
@@ -109,6 +130,8 @@ class RunLog:
         target: dict | None = None,
         guard: dict | None = None,
         blocked: bool = False,
+        viewport: dict | None = None,
+        evidence_bbox: list[int] | None = None,
     ) -> None:
         safe_target = None
         if target is not None:
@@ -128,6 +151,11 @@ class RunLog:
                 "page_text_excerpt": excerpt(page_text),
                 "guard": guard,
                 "blocked": blocked,
+                "viewport": {
+                    "width": int((viewport or {}).get("width") or 1280),
+                    "height": int((viewport or {}).get("height") or 800),
+                },
+                "evidence_bbox": evidence_bbox,
             }
         )
 
@@ -136,11 +164,13 @@ def target_from(selector: str, text: str, bbox: list[int] | None) -> dict:
     return {"selector": selector, "text": text, "bbox": bbox}
 
 
-def guard_record(*, endpoint: str, backend: str, latency_ms: float, action: str, response: dict) -> dict:
+def guard_record(*, endpoint: str, backend: str, latency_ms: float | None, action: str, response: dict) -> dict:
+    # A mock check is not a measured round trip. Leave latency_ms null.
+    recorded = None if backend == "mock" else latency_ms
     return {
         "endpoint": endpoint,
         "backend": backend,
-        "latency_ms": latency_ms,
+        "latency_ms": recorded,
         "action": action,
         "response": {
             "verdict": response["verdict"],
@@ -156,6 +186,8 @@ def assemble(
     errand_id: str,
     mode: str,
     mock: bool,
+    synthetic: bool,
+    run_id: str,
     model: str,
     instruction: str,
     start_url: str,
@@ -173,6 +205,8 @@ def assemble(
         "errand_id": errand_id,
         "mode": mode,
         "mock": mock,
+        "synthetic": synthetic,
+        "run_id": run_id,
         "model": model,
         "instruction": instruction,
         "start_url": start_url,
@@ -190,6 +224,8 @@ def assemble(
         "unwanted_subscription": scored["unwanted_subscription"],
         "dollars_lost_cents": scored["dollars_lost_cents"],
         "dollars_lost": scored["dollars_lost"],
+        "overcharge_usd": scored["overcharge_usd"],
+        "exposed": scored["exposed"],
         "outcome": scored["outcome"],
         "matches_correct": scored["matches_correct"],
         "usd_spent": round(usd_spent, 6),
@@ -237,9 +273,11 @@ def _empty_summary() -> dict:
         "errors": 0,
         "dollars_lost_cents": 0,
         "dollars_lost": 0.0,
+        "overcharge_usd": 0.0,
         "amount_charged_cents": 0,
         "scams_fallen_for": 0,
         "unwanted_items": 0,
+        "exposed": 0,
     }
 
 
@@ -260,10 +298,13 @@ def _add_run(summary: dict, run: dict) -> None:
     summary["amount_charged_cents"] += int(run.get("amount_charged_cents") or 0)
     summary["scams_fallen_for"] += len(run.get("scams_fallen_for") or [])
     summary["unwanted_items"] += len(run.get("unwanted_items") or [])
+    if run.get("exposed"):
+        summary["exposed"] += 1
     summary["dollars_lost"] = round(summary["dollars_lost_cents"] / 100, 2)
+    summary["overcharge_usd"] = summary["dollars_lost"]
 
 
-def build_tally(runs: list[dict]) -> dict:
+def build_tally(runs: list[dict], *, synthetic: bool, run_id: str) -> dict:
     without = _empty_summary()
     with_guard = _empty_summary()
     by_errand: dict[str, dict] = {}
@@ -280,6 +321,8 @@ def build_tally(runs: list[dict]) -> dict:
             "correct_total_cents": run.get("correct_total_cents"),
             "dollars_lost_cents": run.get("dollars_lost_cents"),
             "dollars_lost": run.get("dollars_lost"),
+            "overcharge_usd": run.get("overcharge_usd"),
+            "exposed": bool(run.get("exposed")),
             "scams_fallen_for": run.get("scams_fallen_for"),
             "unwanted_items": run.get("unwanted_items"),
             "matches_correct": run.get("matches_correct"),
@@ -290,6 +333,8 @@ def build_tally(runs: list[dict]) -> dict:
                 "mode": run.get("mode"),
                 "outcome": run.get("outcome"),
                 "dollars_lost": run.get("dollars_lost"),
+                "overcharge_usd": run.get("overcharge_usd"),
+                "exposed": bool(run.get("exposed")),
                 "amount_charged_cents": run.get("amount_charged_cents"),
                 "scams_fallen_for": run.get("scams_fallen_for"),
             }
@@ -297,6 +342,8 @@ def build_tally(runs: list[dict]) -> dict:
     document = {
         "schema_version": "1",
         "generated_at": now_iso(),
+        "synthetic": synthetic,
+        "run_id": run_id,
         "without_guard": without,
         "with_guard": with_guard,
         "by_errand": by_errand,
@@ -308,7 +355,13 @@ def build_tally(runs: list[dict]) -> dict:
     return document
 
 
-def write_tally(out_dir: Path) -> dict:
-    document = build_tally(load_replays(out_dir))
+def write_tally(out_dir: Path, run_id: str) -> dict:
+    """Sum only this invocation. Stale files with another run_id are ignored."""
+    runs = [doc for doc in load_replays(out_dir) if doc.get("run_id") == run_id]
+    flags = {bool(doc.get("synthetic")) for doc in runs}
+    if len(flags) > 1:
+        raise MixedRunError("tally refuses to mix synthetic and real runs")
+    synthetic = flags.pop() if flags else False
+    document = build_tally(runs, synthetic=synthetic, run_id=run_id)
     write_json(out_dir / "tally.json", document)
     return document

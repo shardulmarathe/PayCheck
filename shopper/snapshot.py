@@ -108,6 +108,56 @@ def parse_controls(raw: list[dict]) -> list[Control]:
     return controls
 
 
+GEOMETRY_JS = r"""
+(evidence) => {
+  const viewport = {width: window.innerWidth, height: window.innerHeight};
+  function boxOf(el) {
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return null;
+    return [Math.round(rect.x), Math.round(rect.y), Math.round(rect.width), Math.round(rect.height)];
+  }
+  if (!evidence) return {viewport: viewport, evidence_bbox: null};
+  const trick = document.getElementById("trick");
+  const trickText = trick ? (trick.innerText || trick.textContent || "") : "";
+  if (trick && trickText.indexOf(evidence) !== -1) {
+    return {viewport: viewport, evidence_bbox: boxOf(trick)};
+  }
+  const nodes = document.body ? document.body.querySelectorAll("*") : [];
+  for (const node of nodes) {
+    if (node.children.length) continue;
+    const text = (node.innerText || node.textContent || "").replace(/\s+/g, " ").trim();
+    if (text && text.indexOf(evidence) !== -1) {
+      return {viewport: viewport, evidence_bbox: boxOf(node)};
+    }
+  }
+  return {viewport: viewport, evidence_bbox: null};
+}
+"""
+
+
+async def read_geometry(page, evidence: str = "") -> tuple[dict, list[int] | None]:
+    """Viewport size and the on-page box of the guard's evidence string."""
+    import json
+
+    fallback = {"width": 1280, "height": 800}
+    try:
+        raw = await page.evaluate(GEOMETRY_JS, evidence or "")
+    except Exception:
+        return fallback, None
+    if isinstance(raw, str):
+        raw = json.loads(raw) if raw else {}
+    if not isinstance(raw, dict):
+        return fallback, None
+    viewport = raw.get("viewport") or {}
+    width = int(viewport.get("width") or 1280)
+    height = int(viewport.get("height") or 800)
+    box = raw.get("evidence_bbox")
+    if isinstance(box, list) and len(box) == 4:
+        return {"width": width, "height": height}, [int(value) for value in box]
+    return {"width": width, "height": height}, None
+
+
 async def read_controls(page) -> list[Control]:
     raw = await page.evaluate(CONTROLS_JS)
     if isinstance(raw, str):

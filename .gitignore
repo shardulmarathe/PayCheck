@@ -15,5 +15,6 @@ data/trainset/
 data/attacker/
 data/attacker-round*/
 *.log
-runs/shopper/*
-!runs/shopper/.gitkeep
+runs/shopper/synthetic/
+runs/shopper/ledger.json
+runs/shopper/ledger.json.tmp

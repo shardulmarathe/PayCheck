@@ -13,11 +13,12 @@ import logging
 import os
 import sys
 import urllib.request
+import uuid
 from pathlib import Path
 
 from shopper.cost import CostLedger
 from shopper.guard import GuardClient, load_catalog
-from shopper.replay import write_tally
+from shopper.replay import is_synthetic, output_dir, write_tally
 
 DEFAULT_MODEL = "claude-haiku-5-5"
 _OK_OUTCOMES = {"clean", "protected", "fell", "incomplete", "stopped"}
@@ -30,9 +31,11 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--guard-url", default=os.environ.get("GUARD_URL") or "", help="guard origin; /check is appended")
     parser.add_argument("--guard-backend", choices=("mock", "http"), default="http")
     parser.add_argument("--mock", action="store_true", help="offline shopper; no Anthropic key and no Browser Use cloud")
-    parser.add_argument("--max-usd", type=float, default=3.0, help="stop when Anthropic spend reaches this many dollars")
+    parser.add_argument("--max-usd", type=float, default=3.0, help="stop when cumulative Anthropic spend reaches this many dollars")
+    parser.add_argument("--ledger", default="runs/shopper/ledger.json", help="cumulative spend file checked by --max-usd")
+    parser.add_argument("--reset-ledger", action="store_true", help="zero the ledger before this invocation")
     parser.add_argument("--base-url", default="http://127.0.0.1:8765", help="gym server, from python -m gym.serve")
-    parser.add_argument("--out", default="runs/shopper", help="replay directory")
+    parser.add_argument("--out", default=None, help="replay directory; default splits real and synthetic runs")
     parser.add_argument("--video", action="store_true", help="save a Playwright webm per run under shots/")
     parser.add_argument("--max-steps", type=int, default=18)
     parser.add_argument("--model", default=os.environ.get("SHOPPER_MODEL") or DEFAULT_MODEL)
@@ -75,19 +78,28 @@ async def _run(args: argparse.Namespace) -> int:
     guard = None
     if "guarded" in modes:
         guard = GuardClient(backend=args.guard_backend, guard_url=args.guard_url or None, catalog=catalog)
-    out_dir = Path(args.out)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    ledger = CostLedger(args.max_usd)
+    ledger_path = Path(args.ledger) if args.ledger else None
+    ledger = CostLedger(args.max_usd, ledger_path)
+    if args.reset_ledger:
+        ledger.reset()
     api_key = os.environ.get("ANTHROPIC_API_KEY")
+    run_id = uuid.uuid4().hex
     exit_code = 0
+    written: list[Path] = []
     for errand in errands:
         for mode in modes:
+            synthetic = is_synthetic(
+                mock=args.mock,
+                mode=mode,
+                guard_backend=args.guard_backend if mode == "guarded" else None,
+            )
+            dest = output_dir(args.out, synthetic)
             try:
                 document = await run_errand(
                     errand=errand,
                     mode=mode,
                     base_url=base_url,
-                    out_dir=out_dir,
+                    out_dir=dest,
                     guard=guard if mode == "guarded" else None,
                     mock=args.mock,
                     model=args.model,
@@ -95,25 +107,32 @@ async def _run(args: argparse.Namespace) -> int:
                     video=args.video,
                     max_steps=args.max_steps,
                     api_key=api_key,
+                    run_id=run_id,
+                    synthetic=synthetic,
                 )
             except Exception as exc:
                 print(f"{errand.get('id')} {mode} error {type(exc).__name__}: {exc}", file=sys.stderr)
                 exit_code = 1
                 continue
+            written.append(dest)
             print(
                 f"{document['errand_id']} {document['mode']} {document['outcome']} "
                 f"charged={document['amount_charged_cents']} "
-                f"lost={document['dollars_lost_cents']} "
+                f"overcharge={document['overcharge_usd']} "
+                f"exposed={document['exposed']} "
                 f"usd={document['usd_spent']}"
             )
             if document["outcome"] not in _OK_OUTCOMES:
                 exit_code = 1
-    tally = write_tally(out_dir)
-    print(
-        f"tally without_guard lost={tally['without_guard']['dollars_lost']} "
-        f"with_guard lost={tally['with_guard']['dollars_lost']} "
-        f"spent={ledger.usd:.4f}"
-    )
+    for dest in dict.fromkeys(written):
+        tally = write_tally(dest, run_id)
+        print(
+            f"tally {dest} synthetic={tally['synthetic']} "
+            f"without_guard overcharge={tally['without_guard']['overcharge_usd']} "
+            f"exposed={tally['without_guard']['exposed']} "
+            f"with_guard overcharge={tally['with_guard']['overcharge_usd']} "
+            f"spent={ledger.usd:.4f}"
+        )
     return exit_code
 
 
@@ -121,6 +140,13 @@ def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     if args.max_usd < 0:
         print("--max-usd must be >= 0", file=sys.stderr)
+        return 1
+    flags = {
+        is_synthetic(mock=args.mock, mode=mode, guard_backend=args.guard_backend if mode == "guarded" else None)
+        for mode in _modes(args.mode)
+    }
+    if args.out and len(flags) > 1:
+        print("refusing to mix synthetic and real runs in one --out directory", file=sys.stderr)
         return 1
     if args.max_steps < 1:
         print("--max-steps must be >= 1", file=sys.stderr)

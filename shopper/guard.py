@@ -114,7 +114,12 @@ class MockGuard:
         hits = []
         for rule in pool:
             evidence = normalize(rule.evidence)
-            if len(evidence) < 12 or evidence not in folded:
+            # Short strings false-positive across the frozen set, so they only
+            # count for the errand whose URL is on the page. "$12.49" is the
+            # whole price-change evidence and has to match there.
+            if len(evidence) < 12 and not (errand_id and rule.source == "errand" and rule.errand_id == errand_id):
+                continue
+            if not evidence or evidence not in folded:
                 continue
             if not _armed(rule.attack_type, folded):
                 continue

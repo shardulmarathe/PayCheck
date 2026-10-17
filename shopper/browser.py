@@ -15,6 +15,7 @@ import tempfile
 import time
 from pathlib import Path
 
+from shopper.gate import PurchaseGate, classify_purchase
 from shopper.policy import Action
 
 VIEWPORT = {"width": 1280, "height": 800}
@@ -65,6 +66,7 @@ class ShopChrome:
         self._context = None
         self._pw_page = None
         self._port = 0
+        self.gate: PurchaseGate | None = None
 
     async def __aenter__(self) -> "ShopChrome":
         try:
@@ -169,6 +171,37 @@ class ShopChrome:
                 shutil.rmtree(self._video_dir, ignore_errors=True)
                 self._video_dir = None
         return moved
+
+    async def install_gate(self, gate: PurchaseGate) -> None:
+        """Refuse gym purchase requests unless ``gate`` already approved that step."""
+        if self._context is None:
+            raise RuntimeError("browser is not started")
+        self.gate = gate
+        await self._context.route("**/*", self._on_route)
+
+    async def _on_route(self, route) -> None:
+        gate = self.gate
+        try:
+            if gate is None or not gate.armed:
+                await route.continue_()
+                return
+            kind = classify_purchase(route.request.url, route.request.method)
+            if kind is None or gate.consume(kind):
+                await route.continue_()
+                return
+            gate.note_refusal(route.request.url, kind)
+            await route.abort()
+        except Exception:
+            if gate is not None and gate.armed:
+                try:
+                    await route.abort()
+                except Exception:
+                    pass
+            else:
+                try:
+                    await route.continue_()
+                except Exception:
+                    pass
 
     async def page(self):
         if self.session is None:
