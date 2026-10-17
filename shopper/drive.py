@@ -157,9 +157,14 @@ async def drive_mock(
                 guard=guard_payload,
                 blocked=True,
             )
-            instruction = (guard_payload or {}).get("response", {}).get("instruction") or ""
-            if instruction and (not instructions or instructions[-1] != instruction):
-                instructions.append(instruction)
+            response = (guard_payload or {}).get("response") or {}
+            instruction = response.get("instruction") or ""
+            evidence = response.get("evidence") or ""
+            # Evidence is part of the note so a renamed control id still matches
+            # the visible label (the fee name, the add-on sentence).
+            note = instruction if not evidence else f"{instruction}\n{evidence}"
+            if note and (not instructions or instructions[-1] != note):
+                instructions.append(note)
             continue
         if action.kind == "pay":
             await _fill_payment(chrome, log, controls)

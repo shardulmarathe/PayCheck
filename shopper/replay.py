@@ -181,6 +181,28 @@ def guard_record(*, endpoint: str, backend: str, latency_ms: float | None, actio
     }
 
 
+def browser_use_version() -> str:
+    """Installed open-source browser-use version, recorded on real runs."""
+    from importlib.metadata import PackageNotFoundError, version
+
+    try:
+        return version("browser-use")
+    except PackageNotFoundError as exc:
+        raise RuntimeError("browser-use is not installed") from exc
+
+
+def provenance_for(*, mock: bool, model: str, timestamp: str) -> str | dict:
+    """``scripted`` for the mock policy. A Browser Use + LLM run records the model."""
+    if mock:
+        return "scripted"
+    return {
+        "kind": "real",
+        "model": model,
+        "timestamp": timestamp,
+        "browser_use_version": browser_use_version(),
+    }
+
+
 def assemble(
     *,
     errand_id: str,
@@ -207,6 +229,7 @@ def assemble(
         "mode": mode,
         "mock": mock,
         "synthetic": synthetic,
+        "provenance": provenance_for(mock=mock, model=model, timestamp=started_at),
         "run_id": run_id,
         "model": model,
         "instruction": instruction,

@@ -70,10 +70,42 @@ def _click(control: Control, risky: str | None, *, corrective: bool = False) -> 
     )
 
 
-def _by_id(controls: list[Control], element_id: str) -> Control | None:
+def _words(value: str) -> set[str]:
+    return {word for word in _WORD.findall(value.lower()) if word not in _REMOVE_STOP and not word.isdigit()}
+
+
+def _one_time_radio(controls: list[Control]) -> Control | None:
+    """The visible one-time option, whatever id the page gave the input."""
     for control in controls:
-        if control.id == element_id:
+        if control.type != "radio":
+            continue
+        label = control.label.lower()
+        if "one-time" in label or "one time" in label:
             return control
+    return None
+
+
+def _checked_checkbox(controls: list[Control], text: str) -> Control | None:
+    """A checked box whose visible label matches the guard text.
+
+    Ids such as ``addon`` or ``fee`` are not consulted. One checked box is
+    enough when the label shares no words with the text.
+    """
+    boxes = [control for control in controls if control.type == "checkbox" and control.checked]
+    if not boxes:
+        return None
+    wanted = _words(text)
+    best: Control | None = None
+    best_score = 0
+    for box in boxes:
+        score = len(wanted & _words(box.label))
+        if score > best_score:
+            best = box
+            best_score = score
+    if best is not None and best_score > 0:
+        return best
+    if len(boxes) == 1:
+        return boxes[0]
     return None
 
 
@@ -103,12 +135,7 @@ def follow_instruction(instruction: str, controls: list[Control]) -> Action | No
     """Turn one guard instruction into a single corrective action, if the page can do it."""
     low = instruction.lower()
     if any(phrase in low for phrase in ("one-time", "auto-renew", "autorenew", "subscription")):
-        radio = _by_id(controls, "purchase-once")
-        if radio is None:
-            for control in controls:
-                if control.type == "radio" and "one-time" in control.label.lower():
-                    radio = control
-                    break
+        radio = _one_time_radio(controls)
         if radio is not None and radio.checked is not True:
             return Action(
                 kind="check",
@@ -118,16 +145,15 @@ def follow_instruction(instruction: str, controls: list[Control]) -> Action | No
                 corrective=True,
             )
     if any(phrase in low for phrase in ("fee", "uncheck", "add-on", "addon")):
-        for element_id in ("fee", "addon"):
-            box = _by_id(controls, element_id)
-            if box is not None and box.type == "checkbox" and box.checked:
-                return Action(
-                    kind="uncheck",
-                    selector=box.selector,
-                    text=box.label,
-                    bbox=list(box.bbox),
-                    corrective=True,
-                )
+        box = _checked_checkbox(controls, instruction)
+        if box is not None:
+            return Action(
+                kind="uncheck",
+                selector=box.selector,
+                text=box.label,
+                bbox=list(box.bbox),
+                corrective=True,
+            )
     if "remove" in low:
         button = _best_remove(controls, instruction)
         if button is not None:

@@ -11,6 +11,7 @@
     "mode",
     "mock",
     "synthetic",
+    "provenance",
     "run_id",
     "model",
     "instruction",
@@ -43,6 +44,23 @@
     "mode": {"enum": ["unguarded", "guarded"]},
     "mock": {"type": "boolean"},
     "synthetic": {"type": "boolean"},
+    "provenance": {
+      "description": "scripted means the mock policy drove the browser. A real Browser Use plus LLM run is an object the site should show with its model, timestamp, and browser-use version.",
+      "oneOf": [
+        {"const": "scripted"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "model", "timestamp", "browser_use_version"],
+          "properties": {
+            "kind": {"const": "real"},
+            "model": {"type": "string", "minLength": 1},
+            "timestamp": {"type": "string", "minLength": 1},
+            "browser_use_version": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
     "run_id": {"type": "string", "minLength": 1},
     "model": {"type": "string"},
     "instruction": {"type": "string"},

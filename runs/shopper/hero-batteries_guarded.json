@@ -4,6 +4,7 @@
   "mode": "guarded",
   "mock": true,
   "synthetic": true,
+  "provenance": "scripted",
   "run_id": "925dd6ffeed84ecfb04d05de0ad50f3e",
   "model": "mock",
   "instruction": "Buy one 12-pack of AA batteries.",
