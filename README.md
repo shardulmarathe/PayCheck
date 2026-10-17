@@ -40,7 +40,9 @@ The shop server is at [Checkout guard gym](http://127.0.0.1:8765) once `python -
 
 ## Frozen test set
 
-300 pages, half clean. Built from fixed templates plus the test pile of [yamanalab/ec-darkpattern](https://github.com/yamanalab/ec-darkpattern) (Apache-2.0). No model writes these pages. `copycat_domain` and `listing_injection` are only in this set.
+300 pages, half clean. Built from fixed templates plus the test pile of [yamanalab/ec-darkpattern](https://github.com/yamanalab/ec-darkpattern) (Apache-2.0). No model writes these pages. `copycat_domain` and `listing_injection` are only in this set. Round-0 training does include `fake_card_verification`.
+
+A fee is a checkout summary line. A price change is a higher price next to the struck shelf price. A checked add-on is labeled with the add-on it selects. A subscription quote is the pre-selected option on that page.
 
 | attack_type | family | pages |
 | --- | --- | ---: |
@@ -59,7 +61,7 @@ The shop server is at [Checkout guard gym](http://127.0.0.1:8765) once `python -
 Content hash (SHA-256, see `gym/schema/README.md`):
 
 ```
-b87e4b91327a50505c51a2bcdfa3ad35449f39bd0fe5d0f8a518e24ad9a82abd
+9e9a2a522724626d63f7a7063a16546909e25c2fe838c8e20c27419c0e002037
 ```
 
 `gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).

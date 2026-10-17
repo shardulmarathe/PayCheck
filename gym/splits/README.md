@@ -11,4 +11,6 @@
 
 `python -m gym.dataset --check` exits non-zero if the files disagree with that algorithm.
 
-`copycat_domain` and `listing_injection` are not in this dataset. They are template-only and appear only in the frozen test set.
+`copycat_domain` and `listing_injection` are not in this dataset. They are template-only and appear only in the frozen test set. `fake_card_verification` is a training attack; its test-set sentences are not reused for round 0.
+
+The same wording often sits under more than one `page_id`. Train generation also drops a row when its normalized text (lowercase, punctuation stripped, whitespace collapsed) matches any test-pile string, at any length. A test-pile string of four or more words is dropped even when it is only part of a longer train string.

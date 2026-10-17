@@ -134,7 +134,7 @@
       padding: 20px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
     }
-    .was { text-decoration: line-through; color: var(--muted); }
+    .was { text-decoration: line-through; color: var(--muted); margin-right: 8px; }
     @media (max-width: 800px) {
       header { height: auto; flex-wrap: wrap; padding: 12px; }
       .wrap { width: auto; margin: 12px; }
@@ -150,7 +150,7 @@
   <header>
     <div class="brand">{{ brand }}</div>
     {% if trick_mode == "domain" %}
-    <div id="{{ trick_id }}" class="domain-bar">{{ evidence }}</div>
+    <div id="{{ trick_id }}" class="domain">{{ evidence }}</div>
     {% else %}
     <div class="domain">{{ domain }}</div>
     {% endif %}
@@ -207,13 +207,12 @@
         {% endif %}
           <label class="radioline">
             <input type="radio" id="purchase-sub" name="purchase" value="sub" {% if subscription.checked %}checked{% endif %}>
-            <span>{{ subscription.option_label }} — {{ subscription.intro_text }} today, then {{ subscription.renewal_text }} {{ subscription.cadence }}</span>
+            <span id="{{ trick_id }}">{{ evidence }}</span>
           </label>
           <label class="radioline">
             <input type="radio" id="purchase-once" name="purchase" value="once" {% if not subscription.checked %}checked{% endif %}>
             <span>One-time purchase — {{ listed_text }}</span>
           </label>
-          <p id="{{ trick_id }}" class="fine">{{ evidence }}</p>
           <div class="actions">
             {% if live %}
             <button type="submit">Update total</button>
@@ -244,9 +243,6 @@
           </div>
         {% if live %}</form>{% endif %}
         {% elif trick_mode == "price" %}
-        <p>Listed price <span class="was" data-price="{{ page_listed_cents }}" data-price-label="Listed price">{{ listed_text }}</span></p>
-        <p>Checkout price <span data-price="{{ page_checkout_cents }}" data-price-label="Checkout price">{{ checkout_text }}</span></p>
-        <p id="{{ trick_id }}">{{ evidence }}</p>
         {% if live %}
         <form method="post" action="{{ actions['continue'] }}">
           <div class="actions">
@@ -330,7 +326,14 @@
           {% for item in cart %}
           <div class="row">
             <span>{{ item.qty }} × {{ item.name }}</span>
-            <span data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+            <span>
+              {% if trick_mode == "price" and loop.first %}
+              <span class="was" data-price="{{ page_listed_cents }}" data-price-label="{{ item.name }}">{{ listed_text }}</span>
+              <span id="{{ trick_id }}" data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ evidence }}</span>
+              {% else %}
+              <span data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+              {% endif %}
+            </span>
           </div>
           {% endfor %}
         {% else %}
@@ -341,17 +344,14 @@
         {% endif %}
         {% for fee in fees %}
         <div class="row">
+          {% if trick_mode == "fee" and loop.first %}
+          <span id="{{ trick_id }}" data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.name }}">{{ evidence }}</span>
+          {% else %}
           <span>{{ fee.name }}</span>
           <span data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.name }}">{{ fee.amount_text }}</span>
+          {% endif %}
         </div>
         {% endfor %}
-        {% if trick_mode == "fee" %}
-        <p id="{{ trick_id }}" class="fee-note">{{ evidence }}</p>
-        {% endif %}
-        {% if trick_mode == "price" and kind != "checkout" %}
-        <p class="was">Listed price {{ listed_text }}</p>
-        <p id="{{ trick_id }}">{{ evidence }}</p>
-        {% endif %}
         {% if trick_mode == "subscription" and kind != "checkout" %}
         <p id="{{ trick_id }}" class="fine">{{ evidence }}</p>
         {% endif %}

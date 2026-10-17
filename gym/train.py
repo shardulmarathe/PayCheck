@@ -1,7 +1,8 @@
 """Round-0 training pages from the train split and fixed templates.
 
 Held-out attacks (``copycat_domain``, ``listing_injection``) are not generated.
-Dataset strings are taken only from ``gym/splits/train_page_ids.txt``.
+``fake_card_verification`` is generated. Dataset strings are taken only from
+the train page ids, and any normalized test-pile string is dropped.
 """
 
 from __future__ import annotations
@@ -12,21 +13,12 @@ from collections import Counter
 from pathlib import Path
 
 from gym.build import allocate, assert_rows_allowed, build_specs
-from gym.dataset import load_rows, load_split, norm_ws, rows_for_ids
+from gym.dataset import conflicts_with_test_pile, load_rows, load_split, rows_for_ids, test_pile_keys
+from gym.render import render_html
+from gym.render_specs import walk_strings
 from gym.hashing import content_hash
 from gym.materialize import materialize
 from gym.taxonomy import HELD_OUT, SPLIT_SEED
-
-
-def _banned_test_strings() -> list[str]:
-    rows = load_rows()
-    _train_ids, test_ids = load_split()
-    banned = []
-    for row in rows_for_ids(rows, test_ids):
-        text = norm_ws(row["text"])
-        if len(text) >= 40:
-            banned.append(text)
-    return banned
 
 
 def training_specs(count: int, seed: int) -> list[dict]:
@@ -46,14 +38,15 @@ def training_specs(count: int, seed: int) -> list[dict]:
         id_prefix=f"train-s{seed}",
     )
     assert_rows_allowed(specs, set(train_ids))
-    banned = _banned_test_strings()
+    banned = test_pile_keys()
     for spec in specs:
         if spec["trick"]["attack_type"] in HELD_OUT:
             raise SystemExit(f"held-out attack in {spec['page_id']}")
-        blob = json.dumps(spec, ensure_ascii=False)
-        for text in banned:
-            if text in blob:
+        for text in walk_strings(spec):
+            if conflicts_with_test_pile(text, banned):
                 raise SystemExit(f"{spec['page_id']} contains a test-pile string")
+        if conflicts_with_test_pile(render_html(spec), banned):
+            raise SystemExit(f"{spec['page_id']} renders a test-pile string")
     return specs
 
 

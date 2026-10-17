@@ -1,6 +1,6 @@
 from collections import Counter
 
-from gym.build import allocate, build_specs
+from gym.build import allocate, build_specs, fee_line, subscribe_line
 from gym.money import money
 from gym.dataset import load_rows, load_split, rows_for_ids
 from gym.errands import ERRANDS, evidence_price_ok, spec_for, ShopState, add_to_cart, quote_cents
@@ -15,6 +15,15 @@ def test_plan_counts():
     assert sum(SLICE_COUNTS.values()) == 100
     assert sum(weight for *_rest, weight in TRAIN_WEIGHTS) == 100
     assert HELD_OUT.isdisjoint(item[0] for item in TRAIN_WEIGHTS)
+    trained = {item[0] for item in TRAIN_WEIGHTS}
+    assert "fake_card_verification" in trained
+    assert trained - {"none"} == {
+        "hidden_fees",
+        "preselected_addon",
+        "price_change",
+        "subscription_trap",
+        "fake_card_verification",
+    }
     attacks = {item[0] for item in TEST_PLAN}
     assert attacks == {
         "none",
@@ -67,11 +76,23 @@ def test_frozen_specs_use_only_the_test_pile_and_cover_variants():
         attack = spec["trick"]["attack_type"]
         evidence = spec["trick"]["evidence_text"]
         variant = spec["trick"]["variant"]
+        lowered = evidence.lower()
         assert "!N" not in evidence and "!I" not in evidence
+        assert "no thanks" not in lowered
+        assert "ketolent" not in lowered and "savage" not in lowered
+        assert "was not in the listed price" not in lowered
+        assert "listed at" not in lowered
+        assert "fee fee" not in lowered
         if attack == "hidden_fees":
             fee = spec["page"]["fees"][0]
-            assert money(fee["amount_cents"]) in evidence
-            assert "was not in the listed price" in evidence
+            assert evidence == fee_line(fee["name"], fee["amount_cents"])
+        if attack == "price_change":
+            assert evidence == money(spec["page"]["checkout_price_cents"])
+            assert spec["page"]["listed_price_cents"] != spec["page"]["checkout_price_cents"]
+        if attack == "preselected_addon" and variant == "checkbox":
+            addon = spec["page"]["addon"]
+            assert evidence == f"Add {addon['name']} for {money(addon['price_cents'])}."
+            assert addon["checked"] is True
         if attack == "preselected_addon" and variant == "modal":
             addon = spec["page"]["addon"]
             assert addon["name"] in evidence
@@ -79,13 +100,18 @@ def test_frozen_specs_use_only_the_test_pile_and_cover_variants():
             assert "to your cart" in evidence
             assert addon["name"] in spec["trick"]["instruction"]
         if attack == "preselected_addon" and variant == "one_click":
-            assert not evidence.lower().startswith("no")
+            addon = spec["page"]["addon"]
+            assert addon["name"] in evidence
+            assert "one click" in lowered
         if attack == "subscription_trap":
-            assert "." in evidence
-            if "$" in evidence:
-                renewal = money(spec["page"]["subscription"]["renewal_price_cents"])
-                intro = money(spec["page"]["subscription"]["intro_price_cents"])
-                assert renewal in evidence or intro in evidence
+            sub = spec["page"]["subscription"]
+            assert sub["checked"] is True
+            assert evidence == subscribe_line(
+                sub["intro_price_cents"], sub["renewal_price_cents"], sub["cadence"]
+            )
+        if attack == "copycat_domain":
+            assert evidence == spec["store"]["domain"]
+            assert "checking out" not in lowered
 
 
 def test_allocate_respects_n_and_drops_held_out_types():

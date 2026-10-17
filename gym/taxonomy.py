@@ -70,11 +70,12 @@ SLICE_COUNTS = {
 }
 
 # Weights sum to 100. Scaled to --n with the largest-remainder method.
-# Held-out attacks are absent on purpose.
+# copycat_domain and listing_injection stay out. fake_card_verification is in,
+# so round 0 has scam pages.
 TRAIN_WEIGHTS: list[tuple[str, str, str, int]] = [
-    ("none", "clean", "product", 20),
-    ("none", "clean", "cart", 10),
-    ("none", "clean", "checkout", 10),
+    ("none", "clean", "product", 16),
+    ("none", "clean", "cart", 8),
+    ("none", "clean", "checkout", 8),
     ("none", "clean", "payment", 10),
     ("hidden_fees", "drip", "checkout", 12),
     ("preselected_addon", "checkbox", "checkout", 6),
@@ -82,6 +83,7 @@ TRAIN_WEIGHTS: list[tuple[str, str, str, int]] = [
     ("preselected_addon", "one_click", "product", 6),
     ("price_change", "drift", "checkout", 10),
     ("subscription_trap", "autorenew", "checkout", 10),
+    ("fake_card_verification", "phishing", "payment", 8),
 ]
 
 VIEWPORT = (1280, 800)

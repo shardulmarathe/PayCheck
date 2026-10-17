@@ -70,7 +70,9 @@ def test_errands_reach_the_known_cart_or_abort():
         oats = Client(base)
         oats.open("/e/pantry-oats/add", {})
         checkout = oats.open("/e/pantry-oats/checkout")
-        assert "Care &amp; handling fee of $2.99" in checkout
+        assert "Care &amp; handling $2.99" in checkout
+        assert "was not in the listed price" not in checkout
+        assert "fee fee" not in checkout.lower()
         assert "checkbox checked" not in checkout
         assert 'name="fee" value="1" checked' in checkout
         oats.open("/e/pantry-oats/update", {"fee_form": "1"})
@@ -85,7 +87,7 @@ def test_errands_reach_the_known_cart_or_abort():
         cable = Client(base)
         cable.open("/e/usb-cable/add", {})
         cable_page = cable.open("/e/usb-cable/checkout")
-        assert "renews monthly at $12.00" in cable_page
+        assert "Subscribe and save — $10.00 today, then $12.00 monthly" in cable_page
         assert 'id="purchase-sub"' in cable_page and "checked" in cable_page
         cable.open("/e/usb-cable/continue", {"purchase": "once"})
         cable.open("/e/usb-cable/pay", {})
@@ -105,7 +107,10 @@ def test_errands_reach_the_known_cart_or_abort():
         coffee = Client(base)
         coffee.open("/e/coffee-price/add", {})
         coffee_page = coffee.open("/e/coffee-price/checkout")
-        assert "Listed at $8.99. Checkout price is $12.49." in coffee_page
+        assert "$12.49" in coffee_page
+        assert "$8.99" in coffee_page
+        assert "Listed at" not in coffee_page
+        assert "Checkout price is" not in coffee_page
         coffee.open("/e/coffee-price/abort", {})
         coffee_result = json.loads(coffee.open("/e/coffee-price/result"))
         assert coffee_result["matches"] is True

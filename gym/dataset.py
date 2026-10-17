@@ -13,17 +13,55 @@ import hashlib
 import random
 import re
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 from gym.paths import dataset_tsv, test_ids_path, train_ids_path
 from gym.taxonomy import HELD_OUT, SPLIT_SEED, STRATA, TEST_FRACTION
 
 _WS = re.compile(r"\s+")
+_PUNCT = re.compile(r"[^\w\s]+", re.UNICODE)
 
 
 def norm_ws(text: str) -> str:
     """Collapse whitespace so a quoted string is one exact visible line."""
     return _WS.sub(" ", text).strip()
+
+
+def norm_key(text: str) -> str:
+    """Lowercase, turn punctuation into spaces, and collapse whitespace.
+
+    Used to compare dataset strings that differ only by case or punctuation.
+    """
+    return _WS.sub(" ", _PUNCT.sub(" ", text.lower())).strip()
+
+
+@lru_cache(maxsize=1)
+def test_pile_keys() -> frozenset[str]:
+    """Normalized text of every test-pile row, including strings shorter than 40 characters."""
+    rows = load_rows()
+    _train_ids, test_ids = load_split()
+    keys = {norm_key(row["text"]) for row in rows_for_ids(rows, test_ids)}
+    keys.discard("")
+    return frozenset(keys)
+
+
+def conflicts_with_test_pile(text: str, banned: frozenset[str] | set[str] | None = None) -> bool:
+    """True when ``text`` is a test-pile string, or contains one of four or more words.
+
+    One- and two-word pile strings are banned only as a whole line. Matching
+    those as substrings would reject ordinary words such as "or".
+    """
+    key = norm_key(text)
+    if not key:
+        return False
+    pool = test_pile_keys() if banned is None else banned
+    if key in pool:
+        return True
+    for item in pool:
+        if len(item.split()) >= 4 and item in key:
+            return True
+    return False
 
 
 def load_rows(path: Path | None = None) -> list[dict[str, str]]:

@@ -11,7 +11,7 @@ import argparse
 import json
 from pathlib import Path
 
-from gym.dataset import load_rows, load_split, norm_ws, rows_for_ids
+from gym.dataset import conflicts_with_test_pile, test_pile_keys
 from gym.hashing import content_hash
 from gym.materialize import materialize
 from gym.render import render_html
@@ -19,28 +19,17 @@ from gym.taxonomy import HELD_OUT
 from gym.validate import validate_spec
 
 
-def _walk_strings(value) -> list[str]:
+def walk_strings(value) -> list[str]:
     found: list[str] = []
     if isinstance(value, str):
         found.append(value)
     elif isinstance(value, dict):
         for item in value.values():
-            found.extend(_walk_strings(item))
+            found.extend(walk_strings(item))
     elif isinstance(value, list):
         for item in value:
-            found.extend(_walk_strings(item))
+            found.extend(walk_strings(item))
     return found
-
-
-def _banned() -> list[str]:
-    rows = load_rows()
-    _train_ids, test_ids = load_split()
-    banned = []
-    for row in rows_for_ids(rows, test_ids):
-        text = norm_ws(row["text"])
-        if len(text) >= 40:
-            banned.append(text)
-    return banned
 
 
 def load_spec_dir(
@@ -53,7 +42,7 @@ def load_spec_dir(
     paths = sorted(specs_dir.glob("*.json"))
     if not paths:
         raise SystemExit(f"no JSON specs in {specs_dir}")
-    banned = [] if allow_test_strings else _banned()
+    banned = set() if allow_test_strings else test_pile_keys()
     specs = []
     for path in paths:
         spec = json.loads(path.read_text(encoding="utf-8"))
@@ -67,11 +56,11 @@ def load_spec_dir(
                 "Pass --allow-held-out only for a test-set audit, not for training data."
             )
         if banned:
-            blob = "\n".join(_walk_strings(spec))
-            html = render_html(spec)
-            for text in banned:
-                if text in blob or text in html:
+            for text in walk_strings(spec):
+                if conflicts_with_test_pile(text, banned):
                     raise SystemExit(f"{path.name} contains a frozen test-pile string")
+            if conflicts_with_test_pile(render_html(spec), banned):
+                raise SystemExit(f"{path.name} renders a frozen test-pile string")
         specs.append(spec)
     return specs
 

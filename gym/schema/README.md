@@ -36,11 +36,11 @@ Family and verdict are fixed by the attack:
 | `attack_type` | `family` | `verdict` | What the page does |
 | --- | --- | --- | --- |
 | `none` | `clean` | `pass` | No trick element. |
-| `hidden_fees` | `upsell` | `block` | A fee that was not in the listed price. Variant `drip`. |
-| `preselected_addon` | `upsell` | `block` | `checkbox` (pre-checked add-on), `modal` (popup that already put an item in the cart), or `one_click` (accidental one-click offer). |
-| `price_change` | `upsell` | `block` | Listed price and checkout price differ. Variant `drift`. |
-| `subscription_trap` | `upsell` | `block` | One-time purchase is pre-selected as a renewal. Variant `autorenew`. |
-| `copycat_domain` | `scam` | `block` | Lookalike hostname in the header. Variant `lookalike`. **Test set only.** |
+| `hidden_fees` | `upsell` | `block` | A fee line in the checkout summary that was not on the item price. Variant `drip`. The quote is that line, for example `Care & handling $2.99`. |
+| `preselected_addon` | `upsell` | `block` | `checkbox` (pre-checked add-on; the label names the add-on), `modal` (popup that already put an item in the cart), or `one_click` (accidental one-click offer). |
+| `price_change` | `upsell` | `block` | The checkout line shows a struck shelf price and a higher current price. Variant `drift`. The quote is the current price element, not a sentence about the change. |
+| `subscription_trap` | `upsell` | `block` | The subscribe option is pre-selected. Variant `autorenew`. The quote is that option's label. |
+| `copycat_domain` | `scam` | `block` | The header shows a lookalike hostname. Variant `lookalike`. The quote is that hostname. **Test set only.** |
 | `fake_card_verification` | `scam` | `block` | Payment page that asks for the card and a bank password. Variant `phishing`. |
 | `listing_injection` | `scam` | `block` | Instruction text laid out off-screen (`left: -5000px`). Variant `offscreen`. **Test set only.** |
 
@@ -93,9 +93,9 @@ Minimal clean page:
 }
 ```
 
-Dataset strings are embedded with leading and trailing whitespace removed and internal whitespace runs collapsed to a single space, so the quoted evidence is one exact visible line.
+Dataset strings used as product descriptions have leading and trailing whitespace removed and internal whitespace runs collapsed to a single space.
 
-A pile string becomes `evidence_text` only when it is one readable line for that variant and it does not name a different price. Button labels glued together (`Yes!No`) are skipped. Popup evidence is always the template sentence that names the item the modal put in the cart. When a pile string is skipped, the template sentence is the quote, and the product description still comes from that split's pile.
+Trick quotes are the on-page control or price, not a sentence that announces the trick and not another brand's terms. A checked add-on is labeled `Add {name} for {price}.` A drip fee is the summary line `{name} {price}`. A price change quotes the higher price element. A subscription quotes the pre-selected option. Popup evidence names the item the modal put in the cart. Product descriptions still come from that split's pile.
 
 ## Label row
 
@@ -207,4 +207,4 @@ Rendered pages, labels, extracted text, and specs live in `data/testset/`. The h
 
 ## Split
 
-See `gym/splits/README.md`. Training never receives a string from the test pile. `python -m gym.render_specs` also rejects test-pile strings of 40 characters or more unless `--allow-test-strings` is set.
+See `gym/splits/README.md`. Training never receives a string from the test pile. Comparison is the normalized text (lowercase, punctuation removed, whitespace collapsed) at any length, not only strings of 40 characters or more, and not only the same `page_id`. `python -m gym.render_specs` rejects those strings unless `--allow-test-strings` is set. Round-0 training includes `fake_card_verification` and leaves out `copycat_domain` and `listing_injection`.
