@@ -1,0 +1,43 @@
+url: http://www.trailmeter.example/checkout/r1-gap-12
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Review Cotton paper envelopes, 20 | Trailmeter
+kind: checkout
+
+prices:
+$18.23 | Cotton paper envelopes, 20
+Billed $22.64, above the tag. | Cotton paper envelopes, 20
+total: $22.64
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Trailmeter.
+Continue to payment
+Order summary
+1 × Cotton paper envelopes, 20
+$18.23
+Billed $22.64, above the tag.
+Total
+$22.64
+About this item
+The envelopes are cotton paper, twenty in a wrap.
+Fragile glass leaves the stockroom in a double mailer.
+The tag on Cotton paper envelopes, 20 was eighteen dollars and twenty three cents.
+The amount to be billed is $22.64.
+No packing line is added. Maple spoon at fourteen dollars and one cent is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+
+hidden_flagged:
+(none)

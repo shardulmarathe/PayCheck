@@ -1,0 +1,45 @@
+url: http://www.fieldbasket.example/product/r1-lower-21
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Slate pocket speaker | Fieldbasket
+kind: product
+
+prices:
+$43.57 | Slate pocket speaker
+total: $43.57
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+SPK
+Slate pocket speaker
+$43.57
+3.5 stars · 1300 reviews · SKU SPKR1
+Add to cart
+Order summary
+Slate pocket speaker
+$43.57
+Total
+$43.57
+About this item
+The speaker is slate colored and runs on a replaceable cell.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+Sales tax is collected where the state requires it.
+Last week's tag on Slate pocket speaker was $49.50.
+Today's tag is forty three dollars and fifty seven cents, and that is what will be billed.
+The card step will not raise it.
+Ink refill is available for $11.29 and is not ticked.
+
+hidden_flagged:
+(none)

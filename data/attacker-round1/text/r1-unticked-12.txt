@@ -1,0 +1,44 @@
+url: http://www.redlane.example/product/r1-unticked-12
+domain: www.redlane.example
+storefront_domain: www.redlane.example
+title: Oak picture ledge, 24 in | Redlane
+kind: product
+
+prices:
+$19.03 | Oak picture ledge, 24 in
+total: $19.03
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Redlane
+www.redlane.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+LDG
+Oak picture ledge, 24 in
+$19.03
+3.3 stars · 923 reviews · SKU LEDG24
+Add to cart
+Order summary
+Oak picture ledge, 24 in
+$19.03
+Total
+$19.03
+About this item
+The ledge is oak, twenty four inches, with a low lip.
+Leave the offer alone if you only want Oak picture ledge, 24 in.
+Last week's tag was twenty five dollars and seventy nine cents. Today's tag $19.03 is the figure that will be billed.
+Returns are accepted within 30 days when the seal is still intact.
+Wool washer can be included for $4.95.
+The box is empty and Wool washer is outside the amount due.
+
+hidden_flagged:
+(none)

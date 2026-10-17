@@ -1,0 +1,46 @@
+url: http://www.fieldbasket.example/cart/r1-gap-21
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Bag holding Loom woven placemat, set of 2 | Fieldbasket
+kind: cart
+
+prices:
+$34.86 | Loom woven placemat, set of 2
+Charged figure fifty four dollars and eighty five cents. | Loom woven placemat, set of 2
+total: $54.85
+
+controls:
+button | id= | name= | Remove Loom woven placemat, set of 2
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Loom woven placemat, set of 2
+$54.85
+Remove Loom woven placemat, set of 2
+Checkout
+Order summary
+1 × Loom woven placemat, set of 2
+$34.86
+Charged figure fifty four dollars and eighty five cents.
+Total
+$54.85
+About this item
+The placemats are loom woven and sold as a pair.
+The tag on Loom woven placemat, set of 2 was $34.86.
+The amount to be billed is fifty four dollars and eighty five cents.
+No packing line is added. Rubber foot at $13.25 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Fragile glass leaves the stockroom in a double mailer.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,46 @@
+url: http://www.oakloom.example/cart/r1-lane-21
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Bag holding Merino hiking sock, pair | Oak and Loom
+kind: cart
+
+prices:
+$84.20 | Merino hiking sock, pair
+seven dollars and seventy one cents named Porter gratuity | Porter gratuity
+total: $91.91
+
+controls:
+button | id= | name= | Remove Merino hiking sock, pair
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Merino hiking sock, pair
+$84.20
+Remove Merino hiking sock, pair
+Checkout
+Order summary
+1 × Merino hiking sock, pair
+$84.20
+seven dollars and seventy one cents named Porter gratuity
+Total
+$91.91
+About this item
+The socks are merino and cushioned at the heel.
+Last week's tag on Merino hiking sock, pair was $95.60. Today's item figure $84.20 matches the tag. That drop is real.
+Canvas bib is offered at eleven dollars and twenty cents and is not ticked, so it stays off the amount due.
+Aisle staff can match this sku to the shelf tag.
+You do not meet Porter gratuity on the item page.
+
+hidden_flagged:
+(none)

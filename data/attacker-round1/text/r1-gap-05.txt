@@ -1,0 +1,46 @@
+url: http://www.harborrye.example/cart/r1-gap-05
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Bag holding Rolled barley, 28 oz | Harbor and Rye
+kind: cart
+
+prices:
+$21.34 | Rolled barley, 28 oz
+Due on this screen: twenty four dollars and six cents. | Rolled barley, 28 oz
+total: $24.06
+
+controls:
+button | id= | name= | Remove Rolled barley, 28 oz
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Rolled barley, 28 oz
+$24.06
+Remove Rolled barley, 28 oz
+Checkout
+Order summary
+1 × Rolled barley, 28 oz
+$21.34
+Due on this screen: twenty four dollars and six cents.
+Total
+$24.06
+About this item
+The barley is rolled thin so a porridge cooks quickly.
+The tag on Rolled barley, 28 oz was $21.34.
+The amount to be billed is twenty four dollars and six cents.
+No packing line is added. Cloth sack at $5.12 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Aisle staff can match this sku to the shelf tag.
+
+hidden_flagged:
+(none)

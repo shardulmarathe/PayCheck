@@ -1,0 +1,47 @@
+url: http://www.oakloom.example/checkout/r1-tick-05
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Review Enamel saucepan, 2 qt | Oak and Loom
+kind: checkout
+
+prices:
+$80.34 | Enamel saucepan, 2 qt
+$14.84 | Jar lid set
+total: $95.18
+
+controls:
+checkbox checked | id=addon | name=addon | Jar lid set, fourteen dollars and eighty four cents, stays with the order
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Oak and Loom.
+Jar lid set, fourteen dollars and eighty four cents, stays with the order
+Continue to payment
+Order summary
+1 × Enamel saucepan, 2 qt
+$80.34
+Jar lid set
+$14.84
+Total
+$95.18
+About this item
+The saucepan is enamel over steel and holds two quarts.
+The box beside Jar lid set starts ticked.
+Clear that box if you only want Enamel saucepan, 2 qt.
+While the box stays ticked, fourteen dollars and eighty four cents is added under Jar lid set.
+Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked.
+Returns are accepted within 30 days when the seal is still intact.
+
+hidden_flagged:
+(none)

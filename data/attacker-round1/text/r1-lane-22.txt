@@ -1,0 +1,48 @@
+url: http://www.kindlingco.example/payment/r1-lane-22
+domain: www.kindlingco.example
+storefront_domain: www.kindlingco.example
+title: Card step for Aluminum flask, 700 ml | Kindling Co
+kind: payment
+
+prices:
+$13.51 | Aluminum flask, 700 ml
+Bag seal line $2.38 | Bag seal
+total: $15.89
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Kindling Co
+www.kindlingco.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Aluminum flask, 700 ml
+$13.51
+Bag seal line $2.38
+Total
+$15.89
+About this item
+The flask is aluminum, seven hundred milliliters, with a screw cap.
+Stone rest is offered at $17.31 and is not ticked, so it stays off the amount due.
+Sales tax is collected where the state requires it.
+Bag seal sits outside the tag.
+Last week's tag on Aluminum flask, 700 ml was thirty dollars and twenty nine cents. Today's item figure thirteen dollars and fifty one cents matches the tag. That drop is real.
+
+hidden_flagged:
+(none)

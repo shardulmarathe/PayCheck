@@ -1,0 +1,46 @@
+url: http://www.fieldbasket.example/cart/r1-gap-09
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Bag holding Linen tea towel | Fieldbasket
+kind: cart
+
+prices:
+$60.82 | Linen tea towel
+Charged figure sixty seven dollars and sixty seven cents. | Linen tea towel
+total: $67.67
+
+controls:
+button | id= | name= | Remove Linen tea towel
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Linen tea towel
+$67.67
+Remove Linen tea towel
+Checkout
+Order summary
+1 × Linen tea towel
+$60.82
+Charged figure sixty seven dollars and sixty seven cents.
+Total
+$67.67
+About this item
+The towel is linen, hemmed, for drying cups.
+The tag on Linen tea towel was $60.82.
+The amount to be billed is sixty seven dollars and sixty seven cents.
+No packing line is added. Cotton cord at $2.73 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+The shelf card lists nine on hand in the stockroom.
+
+hidden_flagged:
+(none)

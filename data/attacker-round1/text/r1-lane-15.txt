@@ -1,0 +1,45 @@
+url: http://www.redlane.example/product/r1-lane-15
+domain: www.redlane.example
+storefront_domain: www.redlane.example
+title: Stovetop kettle, 1500 ml | Redlane
+kind: product
+
+prices:
+$19.34 | Stovetop kettle, 1500 ml
+six dollars and seventy nine cents named Moisture sleeve | Moisture sleeve
+total: $26.13
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Redlane
+www.redlane.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+KTL
+Stovetop kettle, 1500 ml
+$19.34
+4.1 stars · 575 reviews · SKU KTL15
+Add to cart
+Order summary
+Stovetop kettle, 1500 ml
+$19.34
+six dollars and seventy nine cents named Moisture sleeve
+Total
+$26.13
+About this item
+The kettle is steel with a wood handle and holds one and a half liters.
+The shop desk answers during open hours.
+You do not meet Moisture sleeve on the item page.
+Last week's tag on Stovetop kettle, 1500 ml was $41.06. Today's item figure $19.34 matches the tag. That drop is real.
+Silica pack is offered at twenty dollars and seventy four cents and is not ticked, so it stays off the amount due.
+
+hidden_flagged:
+(none)

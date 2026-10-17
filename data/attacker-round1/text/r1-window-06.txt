@@ -1,0 +1,56 @@
+url: http://www.marigold.example/cart/r1-window-06
+domain: www.marigold.example
+storefront_domain: www.marigold.example
+title: Bag holding Buckwheat groats, 24 oz | Marigold
+kind: cart
+
+prices:
+$5.81 | Buckwheat groats, 24 oz
+$12.87 | Tin clasp
+total: $18.68
+
+controls:
+button | id= | name= | Remove Buckwheat groats, 24 oz
+button | id= | name= | Remove Tin clasp
+button | id= | name= | Checkout
+button | id= | name= | Keep protection
+button | id= | name= | Remove Tin clasp
+
+modals:
+open | id= | Tin clasp is in the bag beside Buckwheat groats, 24 oz. Keep protection Remove Tin clasp
+
+visible:
+Marigold
+www.marigold.example
+Cart (2)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Buckwheat groats, 24 oz
+$5.81
+Remove Buckwheat groats, 24 oz
+1 × Tin clasp
+$12.87
+Remove Tin clasp
+Checkout
+Order summary
+1 × Buckwheat groats, 24 oz
+$5.81
+1 × Tin clasp
+$12.87
+Total
+$18.68
+About this item
+The groats are toasted buckwheat for a savory bowl.
+Buckwheat groats, 24 oz still matches the tag. No packing line is added on this screen.
+Ordinary ground carrier cost is already inside the tag.
+The window placed Tin clasp there. You did not choose it on the item page.
+The separate line for Tin clasp is twelve dollars and eighty seven cents.
+Tin clasp is in the bag beside Buckwheat groats, 24 oz.
+Keep protection
+Remove Tin clasp
+
+hidden_flagged:
+(none)

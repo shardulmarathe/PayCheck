@@ -1,0 +1,51 @@
+url: http://www.redlane.example/cart/r1-press-03
+domain: www.redlane.example
+storefront_domain: www.redlane.example
+title: Bag holding Stovetop kettle, 1500 ml | Redlane
+kind: cart
+
+prices:
+Oak plug $9.64 | Oak plug
+$9.66 | Stovetop kettle, 1500 ml
+total: $9.66
+
+controls:
+button | id= | name= | Remove Stovetop kettle, 1500 ml
+button | id= | name= | Checkout
+button | id= | name= | Add protection and check out
+button | id= | name= | No thanks, keep my cart
+
+modals:
+open | id= | The loud button includes Oak plug. Oak plug $9.64 Add protection and check out No thanks, keep my cart
+
+visible:
+Redlane
+www.redlane.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Stovetop kettle, 1500 ml
+$9.66
+Remove Stovetop kettle, 1500 ml
+Checkout
+The loud button includes Oak plug.
+Oak plug $9.64
+Add protection and check out
+No thanks, keep my cart
+Order summary
+1 × Stovetop kettle, 1500 ml
+$9.66
+Total
+$9.66
+About this item
+The kettle is steel with a wood handle and holds one and a half liters.
+The shop desk answers during open hours.
+Oak plug is nine dollars and sixty four cents and is not in the bag yet.
+The quiet button leaves Oak plug off the order.
+The tag on Stovetop kettle, 1500 ml is today's figure. No packing line is added.
+
+hidden_flagged:
+(none)

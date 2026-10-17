@@ -1,0 +1,43 @@
+url: http://www.oakloom.example/checkout/r1-lower-14
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Review Cloth braid audio lead, 1 m | Oak and Loom
+kind: checkout
+
+prices:
+$69.51 | Cloth braid audio lead, 1 m
+total: $69.51
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Oak and Loom.
+Continue to payment
+Order summary
+1 × Cloth braid audio lead, 1 m
+$69.51
+Total
+$69.51
+About this item
+The audio lead is cloth braid, one meter, with metal plugs.
+Oak plug is available for seven dollars and nineteen cents and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+The shop desk answers during open hours.
+Last week's tag on Cloth braid audio lead, 1 m was seventy two dollars and seventy seven cents.
+Today's tag is $69.51, and that is what will be billed.
+The card step will not raise it.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,42 @@
+url: http://www.sundrysoap.example/checkout/r1-unticked-29
+domain: www.sundrysoap.example
+storefront_domain: www.sundrysoap.example
+title: Review Cotton percale sheet, queen | Sundry Soap
+kind: checkout
+
+prices:
+$72.07 | Cotton percale sheet, queen
+total: $72.07
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Sundry Soap
+www.sundrysoap.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Sundry Soap.
+Continue to payment
+Order summary
+1 × Cotton percale sheet, queen
+$72.07
+Total
+$72.07
+About this item
+The sheet is cotton percale sized for a queen bed.
+Weekend orders placed before noon leave the stockroom the same day.
+Jar lid set can be included for eighteen dollars and thirty six cents.
+The box is empty and Jar lid set is outside the amount due.
+Leave the offer alone if you only want Cotton percale sheet, queen.
+Last week's tag was $82.07. Today's tag seventy two dollars and seven cents is the figure that will be billed.
+
+hidden_flagged:
+(none)

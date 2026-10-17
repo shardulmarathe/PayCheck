@@ -1,0 +1,49 @@
+url: http://www.trailmeter.example/payment/r1-shown-08
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Card step for Cotton paper envelopes, 20 | Trailmeter
+kind: payment
+
+prices:
+$72.87 | Cotton paper envelopes, 20
+$13.56 | Twilight run
+total: $86.43
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Cotton paper envelopes, 20
+$72.87
+Twilight run
+$13.56
+Total
+$86.43
+About this item
+The envelopes are cotton paper, twenty in a wrap.
+Fragile glass leaves the stockroom in a double mailer.
+Twilight run, $13.56, was printed under the tag on the item page for Cotton paper envelopes, 20.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Cork grip at four dollars and forty five cents is offered and the box is empty, so it stays off the amount due.
+
+hidden_flagged:
+(none)

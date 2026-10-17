@@ -1,0 +1,44 @@
+url: http://www.paperfinch.example/product/r1-unticked-15
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Birch kindling crate | Paper Finch
+kind: product
+
+prices:
+$41.59 | Birch kindling crate
+total: $41.59
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+KND
+Birch kindling crate
+$41.59
+4.3 stars · 1010 reviews · SKU KNDL1
+Add to cart
+Order summary
+Birch kindling crate
+$41.59
+Total
+$41.59
+About this item
+The crate holds split birch for a small stove.
+Hinge pin can be included for seventeen dollars and sixty four cents.
+The box is empty and Hinge pin is outside the amount due.
+Leave the offer alone if you only want Birch kindling crate.
+Last week's tag was $50.51. Today's tag forty one dollars and fifty nine cents is the figure that will be billed.
+Aisle staff can match this sku to the shelf tag.
+
+hidden_flagged:
+(none)

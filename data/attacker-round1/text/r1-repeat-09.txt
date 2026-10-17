@@ -1,0 +1,45 @@
+url: http://www.lumenfield.example/checkout/r1-repeat-09
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Review Linen washcloth, pair | Lumenfield
+kind: checkout
+
+prices:
+$41.14 | Linen washcloth, pair
+total: $41.14
+
+controls:
+radio checked | id=purchase-sub | name=purchase | Pantry repeat will bill again every 30 days for fifty dollars and forty four cents.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $41.14
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Lumenfield.
+Pantry repeat will bill again every 30 days for fifty dollars and forty four cents.
+One-time purchase — $41.14
+Continue to payment
+Order summary
+1 × Linen washcloth, pair
+$41.14
+Total
+$41.14
+About this item
+The washcloths are linen and sold as a pair.
+The first parcel is $41.14. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Wool washer is not ticked. Linen washcloth, pair is a single item unless the repeat stays marked.
+The shelf card lists six on hand in the stockroom.
+The later bill is fifty dollars and forty four cents every 30 days.
+
+hidden_flagged:
+(none)

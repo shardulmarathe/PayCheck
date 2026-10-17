@@ -1,0 +1,49 @@
+url: http://www.fieldbasket.example/payment/r1-shown-05
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Card step for Linen tea towel | Fieldbasket
+kind: payment
+
+prices:
+$47.49 | Linen tea towel
+$3.69 | Picking labor
+total: $51.18
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Linen tea towel
+$47.49
+Picking labor
+$3.69
+Total
+$51.18
+About this item
+The towel is linen, hemmed, for drying cups.
+Picking labor, three dollars and sixty nine cents, was printed under the tag on the item page for Linen tea towel.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Felt pads at $11.29 is offered and the box is empty, so it stays off the amount due.
+The shelf card lists nine on hand in the stockroom.
+
+hidden_flagged:
+(none)

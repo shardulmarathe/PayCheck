@@ -1,0 +1,48 @@
+url: http://www.copperkettle.example/payment/r1-gap-10
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Card step for Stoneware mug, pair | Copper Kettle
+kind: payment
+
+prices:
+$70.69 | Stoneware mug, pair
+$72.66 has taken the place of the tag. | Stoneware mug, pair
+total: $72.66
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Stoneware mug, pair
+$70.69
+$72.66 has taken the place of the tag.
+Total
+$72.66
+About this item
+The mugs are speckled stoneware and sold as a pair.
+The amount to be billed is $72.66.
+No packing line is added. Glass coaster at six dollars and forty nine cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Weekend orders placed before noon leave the stockroom the same day.
+The tag on Stoneware mug, pair was seventy dollars and sixty nine cents.
+
+hidden_flagged:
+(none)

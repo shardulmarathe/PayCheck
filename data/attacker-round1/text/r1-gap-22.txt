@@ -1,0 +1,48 @@
+url: http://www.copperkettle.example/payment/r1-gap-22
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Card step for Brass curtain ring, set of 8 | Copper Kettle
+kind: payment
+
+prices:
+$44.73 | Brass curtain ring, set of 8
+$59.84 has taken the place of the tag. | Brass curtain ring, set of 8
+total: $59.84
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Brass curtain ring, set of 8
+$44.73
+$59.84 has taken the place of the tag.
+Total
+$59.84
+About this item
+The rings are brass and sold in a set of eight.
+The amount to be billed is $59.84.
+No packing line is added. Canvas bib at seventeen dollars and one cent is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+The label count is the amount you receive.
+The tag on Brass curtain ring, set of 8 was forty four dollars and seventy three cents.
+
+hidden_flagged:
+(none)

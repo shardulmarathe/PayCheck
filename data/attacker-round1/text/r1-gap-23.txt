@@ -1,0 +1,45 @@
+url: http://www.paperfinch.example/product/r1-gap-23
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Birch kindling crate | Paper Finch
+kind: product
+
+prices:
+$54.60 | Birch kindling crate
+Due on this screen: sixty four dollars and eighty three cents. | Birch kindling crate
+total: $64.83
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+KND
+Birch kindling crate
+$54.60
+4.3 stars · 1010 reviews · SKU KNDL1
+Add to cart
+Order summary
+1 × Birch kindling crate
+$54.60
+Due on this screen: sixty four dollars and eighty three cents.
+Total
+$64.83
+About this item
+The crate holds split birch for a small stove.
+No packing line is added. Stone rest at $3.47 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Aisle staff can match this sku to the shelf tag.
+The tag on Birch kindling crate was $54.60.
+The amount to be billed is sixty four dollars and eighty three cents.
+
+hidden_flagged:
+(none)

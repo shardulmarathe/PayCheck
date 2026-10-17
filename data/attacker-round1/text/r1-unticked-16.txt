@@ -1,0 +1,45 @@
+url: http://www.trailmeter.example/cart/r1-unticked-16
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Bag holding Long match box | Trailmeter
+kind: cart
+
+prices:
+$49.11 | Long match box
+total: $49.11
+
+controls:
+button | id= | name= | Remove Long match box
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Long match box
+$49.11
+Remove Long match box
+Checkout
+Order summary
+1 × Long match box
+$49.11
+Total
+$49.11
+About this item
+The matches are long and packed in a slide box.
+The box is empty and Oak plug is outside the amount due.
+Leave the offer alone if you only want Long match box.
+Last week's tag was fifty eight dollars and seventy five cents. Today's tag $49.11 is the figure that will be billed.
+Sales tax is collected where the state requires it.
+Oak plug can be included for $2.37.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,45 @@
+url: http://www.fieldbasket.example/checkout/r1-repeat-00
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Review Linen tea towel | Fieldbasket
+kind: checkout
+
+prices:
+$14.39 | Linen tea towel
+total: $14.39
+
+controls:
+radio checked | id=purchase-sub | name=purchase | Refill club is already marked. A later parcel bills $14.39 every 4 weeks.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $14.39
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Fieldbasket.
+Refill club is already marked. A later parcel bills $14.39 every 4 weeks.
+One-time purchase — $14.39
+Continue to payment
+Order summary
+1 × Linen tea towel
+$14.39
+Total
+$14.39
+About this item
+The towel is linen, hemmed, for drying cups.
+The later bill is $14.39 every 4 weeks.
+The first parcel is fourteen dollars and thirty nine cents. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Cloth sack is not ticked. Linen tea towel is a single item unless the repeat stays marked.
+The shelf card lists thirteen on hand in the stockroom.
+
+hidden_flagged:
+(none)

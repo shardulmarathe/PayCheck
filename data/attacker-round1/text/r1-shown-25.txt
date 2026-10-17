@@ -1,0 +1,47 @@
+url: http://www.harborrye.example/cart/r1-shown-25
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Bag holding Stoneground rye flour, 2 lb | Harbor and Rye
+kind: cart
+
+prices:
+$61.69 | Stoneground rye flour, 2 lb
+$12.49 | Club sorting
+total: $74.18
+
+controls:
+button | id= | name= | Remove Stoneground rye flour, 2 lb
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Stoneground rye flour, 2 lb
+$61.69
+Remove Stoneground rye flour, 2 lb
+Checkout
+Order summary
+1 × Stoneground rye flour, 2 lb
+$61.69
+Club sorting
+$12.49
+Total
+$74.18
+About this item
+The flour is milled from whole rye berries and packed in a paper sack.
+Club sorting, twelve dollars and forty nine cents, was printed under the tag on the item page for Stoneground rye flour, 2 lb.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Stone rest at $6.49 is offered and the box is empty, so it stays off the amount due.
+Returns are accepted within 30 days when the seal is still intact.
+
+hidden_flagged:
+(none)

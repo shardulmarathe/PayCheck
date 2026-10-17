@@ -1,0 +1,48 @@
+url: http://www.oakloom.example/payment/r1-gap-26
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Card step for Cloth braid audio lead, 1 m | Oak and Loom
+kind: payment
+
+prices:
+$12.01 | Cloth braid audio lead, 1 m
+This screen bills $19.80. | Cloth braid audio lead, 1 m
+total: $19.80
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Cloth braid audio lead, 1 m
+$12.01
+This screen bills $19.80.
+Total
+$19.80
+About this item
+The audio lead is cloth braid, one meter, with metal plugs.
+The amount to be billed is $19.80.
+No packing line is added. Kiln dry wrap at fourteen dollars and seventy five cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+The shop desk answers during open hours.
+The tag on Cloth braid audio lead, 1 m was twelve dollars and one cent.
+
+hidden_flagged:
+(none)

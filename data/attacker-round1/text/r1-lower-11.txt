@@ -1,0 +1,43 @@
+url: http://www.paperfinch.example/checkout/r1-lower-11
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Review Birch kindling crate | Paper Finch
+kind: checkout
+
+prices:
+$49.77 | Birch kindling crate
+total: $49.77
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Paper Finch.
+Continue to payment
+Order summary
+1 × Birch kindling crate
+$49.77
+Total
+$49.77
+About this item
+The crate holds split birch for a small stove.
+Last week's tag on Birch kindling crate was $53.00.
+Today's tag is forty nine dollars and seventy seven cents, and that is what will be billed.
+The card step will not raise it.
+Beeswax puck is available for $7.62 and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+Aisle staff can match this sku to the shelf tag.
+
+hidden_flagged:
+(none)

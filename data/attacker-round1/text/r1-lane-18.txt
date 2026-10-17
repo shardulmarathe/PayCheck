@@ -1,0 +1,48 @@
+url: http://www.paperfinch.example/payment/r1-lane-18
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Card step for Lay flat notebook, ruled | Paper Finch
+kind: payment
+
+prices:
+$51.77 | Lay flat notebook, ruled
+Crate deposit $5.29 | Crate deposit
+total: $57.06
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Lay flat notebook, ruled
+$51.77
+Crate deposit $5.29
+Total
+$57.06
+About this item
+The notebook lies flat and the paper is ruled.
+Copper rivet is offered at $15.97 and is not ticked, so it stays off the amount due.
+Returns are accepted within 30 days when the seal is still intact.
+Crate deposit was not part of the tag. The item page showed fifty one dollars and seventy seven cents and stopped there.
+Last week's tag on Lay flat notebook, ruled was sixty eight dollars and thirty three cents. Today's item figure fifty one dollars and seventy seven cents matches the tag. That drop is real.
+
+hidden_flagged:
+(none)

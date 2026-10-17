@@ -1,0 +1,45 @@
+url: http://www.kindlingco.example/product/r1-gap-03
+domain: www.kindlingco.example
+storefront_domain: www.kindlingco.example
+title: Beech cutting board | Kindling Co
+kind: product
+
+prices:
+$73.80 | Beech cutting board
+Charged figure ninety seven dollars and seventy three cents. | Beech cutting board
+total: $97.73
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Kindling Co
+www.kindlingco.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+BRD
+Beech cutting board
+$73.80
+3.1 stars · 430 reviews · SKU BRD1
+Add to cart
+Order summary
+1 × Beech cutting board
+$73.80
+Charged figure ninety seven dollars and seventy three cents.
+Total
+$97.73
+About this item
+The board is beech, edge grain, with a juice groove.
+No packing line is added. Felt pads at $14.77 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Fragile glass leaves the stockroom in a double mailer.
+The tag on Beech cutting board was $73.80.
+The amount to be billed is ninety seven dollars and seventy three cents.
+
+hidden_flagged:
+(none)

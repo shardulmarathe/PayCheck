@@ -1,0 +1,44 @@
+url: http://www.paperfinch.example/product/r1-unticked-03
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Lay flat notebook, ruled | Paper Finch
+kind: product
+
+prices:
+$26.15 | Lay flat notebook, ruled
+total: $26.15
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+NTB
+Lay flat notebook, ruled
+$26.15
+5.0 stars · 662 reviews · SKU NOTE1
+Add to cart
+Order summary
+Lay flat notebook, ruled
+$26.15
+Total
+$26.15
+About this item
+The notebook lies flat and the paper is ruled.
+Last week's tag was $35.43. Today's tag twenty six dollars and fifteen cents is the figure that will be billed.
+Returns are accepted within 30 days when the seal is still intact.
+Cloth sack can be included for five dollars and eighty eight cents.
+The box is empty and Cloth sack is outside the amount due.
+Leave the offer alone if you only want Lay flat notebook, ruled.
+
+hidden_flagged:
+(none)

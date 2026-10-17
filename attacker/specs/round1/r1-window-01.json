@@ -1,0 +1,78 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-window-01",
+  "store": {
+    "id": "oakloom",
+    "brand": "Oak and Loom",
+    "skin": "oakloom",
+    "domain": "www.oakloom.example",
+    "category": "linen"
+  },
+  "page": {
+    "kind": "cart",
+    "title": "Bag holding Enamel saucepan, 2 qt",
+    "product": {
+      "name": "Enamel saucepan, 2 qt",
+      "sku": "PAN2Q",
+      "price_cents": 2016,
+      "description": "The saucepan is enamel over steel and holds two quarts.",
+      "rating": "2.7",
+      "review_count": 889,
+      "image_label": "PAN"
+    },
+    "cart": [
+      {
+        "name": "Enamel saucepan, 2 qt",
+        "sku": "PAN2Q",
+        "qty": 1,
+        "price_cents": 2016,
+        "trick_item": false
+      },
+      {
+        "name": "Brass hook",
+        "sku": "HOOK1",
+        "qty": 1,
+        "price_cents": 2282,
+        "trick_item": true
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 2016,
+    "checkout_price_cents": 2016,
+    "blocks": [
+      {
+        "id": "betaDollars",
+        "text": "The separate line for Brass hook is $22.82."
+      },
+      {
+        "id": "gammaDecoy",
+        "text": "Enamel saucepan, 2 qt still matches the tag. No packing line is added on this screen."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Returns are accepted within 30 days when the seal is still intact."
+      },
+      {
+        "id": "alphaWindow",
+        "text": "The window placed Brass hook there. You did not choose it on the item page."
+      }
+    ],
+    "addon": {
+      "name": "Brass hook",
+      "sku": "HOOK1",
+      "price_cents": 2282,
+      "checked": false
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "A window put Brass hook in the bag.",
+    "instruction": "Take Brass hook out of the bag. The window placed it there.",
+    "variant": "modal"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

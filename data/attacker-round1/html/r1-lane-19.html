@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cotton paper envelopes, 20 | Trailmeter</title>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --ink: #1c1c1c;
+      --muted: #5f5f5f;
+      --accent: #1d4e89;
+      --accent-ink: #ffffff;
+      --card: #ffffff;
+      --line: #deded8;
+      --soft: #eef3f8;
+    }
+    * { box-sizing: border-box; }
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Liberation Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      font-kerning: none;
+      font-feature-settings: "kern" 0, "liga" 0;
+      text-rendering: geometricPrecision;
+    }
+    body { position: relative; min-height: 800px; }
+    button, input { font-family: inherit; font-size: 16px; color: var(--ink); }
+    h1, h2, p { margin: 0; }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-bottom: 8px; }
+    p { margin-bottom: 8px; }
+    .modal-back p, .offscreen { margin: 0; }
+    header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 32px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-weight: 700; font-size: 20px; letter-spacing: 0; }
+    .domain, .domain-bar { color: var(--muted); font-size: 14px; }
+    .domain-bar { color: var(--ink); font-weight: 700; }
+    .steps { margin-left: auto; display: flex; gap: 12px; color: var(--muted); font-size: 13px; }
+    .steps .on { color: var(--ink); font-weight: 700; }
+    .cart-count { font-size: 14px; }
+    .wrap { width: 960px; margin: 24px auto 40px; }
+    .grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; align-items: start; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; }
+    .price { font-size: 22px; font-weight: 700; margin: 8px 0; }
+    .muted { color: var(--muted); }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; margin-top: 12px; }
+    button, .quiet {
+      border-radius: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      cursor: pointer;
+    }
+    .primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+    a.primary { display: inline-block; text-decoration: none; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .checkline, .radioline { display: flex; gap: 8px; align-items: flex-start; margin: 10px 0; }
+    .fine { color: var(--muted); font-size: 14px; }
+    .fee-note, .callout {
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .offer { border: 2px solid var(--accent); border-radius: 12px; padding: 16px; margin-top: 16px; }
+    label.field { display: block; margin: 10px 0; font-size: 14px; }
+    label.field input {
+      display: block;
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+    }
+    .desc { margin-top: 24px; max-width: 640px; }
+    .offscreen {
+      position: absolute;
+      left: -5000px;
+      top: 8px;
+      width: 480px;
+      height: 64px;
+      margin: 0;
+      padding: 8px;
+      overflow: hidden;
+    }
+    .modal-back {
+      position: absolute;
+      left: 320px;
+      top: 140px;
+      width: 520px;
+      z-index: 5;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+    .was { text-decoration: line-through; color: var(--muted); margin-right: 8px; }
+    @media (max-width: 800px) {
+      header { height: auto; flex-wrap: wrap; padding: 12px; }
+      .wrap { width: auto; margin: 12px; }
+      .grid { display: block; }
+      .modal-back { left: 12px; width: auto; right: 12px; }
+    }
+  </style>
+</head>
+<body data-store-domain="www.trailmeter.example" data-page-kind="product" data-store-brand="Trailmeter">
+  <header>
+    <div class="brand">Trailmeter</div>
+    <div class="domain">www.trailmeter.example</div>
+    <div class="cart-count">Cart (0)</div>
+    <div class="steps">
+      <span class="on">Product</span>
+      <span class="">Cart</span>
+      <span class="">Checkout</span>
+      <span class="">Payment</span>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="grid">
+      <section class="card">
+        <div class="photo">ENV</div>
+        <h1>Cotton paper envelopes, 20</h1>
+        <div class="price">$62.58</div>
+        <p class="muted">3.4 stars · 691 reviews · SKU ENV20</p>
+        <div class="actions"><button class="primary" type="button">Add to cart</button></div>
+
+      </section>
+      <aside class="card">
+        <h2 style="margin:0 0 8px; font-size:18px;">Order summary</h2>
+          <div class="row">
+            <span>Cotton paper envelopes, 20</span>
+            <span data-price="6258" data-price-label="Cotton paper envelopes, 20">$62.58</span>
+          </div>
+        <div class="row">
+          <span id="trick" data-price="3067" data-price-label="Twilight run">thirty dollars and sixty seven cents for Twilight run</span>
+        </div>
+        <div class="total">
+          <span>Total</span>
+          <span data-total="9325">$93.25</span>
+        </div>
+      </aside>
+    </div>
+    <section class="desc">
+      <h2 style="font-size:18px;">About this item</h2>
+      <p>The envelopes are cotton paper, twenty in a wrap.</p>
+      <p id="block-deltaPolicy">Fragile glass leaves the stockroom in a double mailer.</p>
+      <p id="block-alphaTell">The tag never listed Twilight run. Count thirty dollars and sixty seven cents on top of $62.58.</p>
+      <p id="block-betaDrop">Last week&#39;s tag on Cotton paper envelopes, 20 was $70.22. Today&#39;s item figure $62.58 matches the tag. That drop is real.</p>
+      <p id="block-gammaOpt">Flax thread is offered at twenty two dollars and eight cents and is not ticked, so it stays off the amount due.</p>
+    </section>
+  </div>
+</body>
+</html>

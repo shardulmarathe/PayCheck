@@ -1,0 +1,45 @@
+url: http://www.marigold.example/product/r1-gap-19
+domain: www.marigold.example
+storefront_domain: www.marigold.example
+title: Tin of balm, 1 oz | Marigold
+kind: product
+
+prices:
+$15.12 | Tin of balm, 1 oz
+twenty one dollars and twenty two cents replaced the lower tag. | Tin of balm, 1 oz
+total: $21.22
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Marigold
+www.marigold.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+BAL
+Tin of balm, 1 oz
+$15.12
+3.5 stars · 894 reviews · SKU BALM1
+Add to cart
+Order summary
+1 × Tin of balm, 1 oz
+$15.12
+twenty one dollars and twenty two cents replaced the lower tag.
+Total
+$21.22
+About this item
+The balm sits in a small tin, one ounce.
+No packing line is added. Copper rivet at $5.73 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Weekend orders placed before noon leave the stockroom the same day.
+The tag on Tin of balm, 1 oz was $15.12.
+The amount to be billed is twenty one dollars and twenty two cents.
+
+hidden_flagged:
+(none)

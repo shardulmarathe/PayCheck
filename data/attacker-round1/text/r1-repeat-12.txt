@@ -1,0 +1,45 @@
+url: http://www.fieldbasket.example/checkout/r1-repeat-12
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Review Loom woven placemat, set of 2 | Fieldbasket
+kind: checkout
+
+prices:
+$76.39 | Loom woven placemat, set of 2
+total: $76.39
+
+controls:
+radio checked | id=purchase-sub | name=purchase | Auto replenish is already marked. A later parcel bills $76.39 every 4 weeks.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $76.39
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Fieldbasket.
+Auto replenish is already marked. A later parcel bills $76.39 every 4 weeks.
+One-time purchase — $76.39
+Continue to payment
+Order summary
+1 × Loom woven placemat, set of 2
+$76.39
+Total
+$76.39
+About this item
+The placemats are loom woven and sold as a pair.
+The later bill is $76.39 every 4 weeks.
+The first parcel is seventy six dollars and thirty nine cents. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Hinge pin is not ticked. Loom woven placemat, set of 2 is a single item unless the repeat stays marked.
+Fragile glass leaves the stockroom in a double mailer.
+
+hidden_flagged:
+(none)

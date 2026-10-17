@@ -1,0 +1,46 @@
+url: http://www.harborrye.example/cart/r1-gap-29
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Bag holding Stoneground rye flour, 2 lb | Harbor and Rye
+kind: cart
+
+prices:
+$41.62 | Stoneground rye flour, 2 lb
+Due on this screen: fifty eight dollars and forty two cents. | Stoneground rye flour, 2 lb
+total: $58.42
+
+controls:
+button | id= | name= | Remove Stoneground rye flour, 2 lb
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Stoneground rye flour, 2 lb
+$58.42
+Remove Stoneground rye flour, 2 lb
+Checkout
+Order summary
+1 × Stoneground rye flour, 2 lb
+$41.62
+Due on this screen: fifty eight dollars and forty two cents.
+Total
+$58.42
+About this item
+The flour is milled from whole rye berries and packed in a paper sack.
+The tag on Stoneground rye flour, 2 lb was $41.62.
+The amount to be billed is fifty eight dollars and forty two cents.
+No packing line is added. Heel cap at $8.73 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Returns are accepted within 30 days when the seal is still intact.
+
+hidden_flagged:
+(none)

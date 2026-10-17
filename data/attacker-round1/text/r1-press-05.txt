@@ -1,0 +1,50 @@
+url: http://www.copperkettle.example/product/r1-press-05
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Stoneware mug, pair | Copper Kettle
+kind: product
+
+prices:
+Flax thread $23.74 | Flax thread
+$35.04 | Stoneware mug, pair
+total: $35.04
+
+controls:
+button | id= | name= | Add to cart
+button | id= | name= | Add protection and check out
+button | id= | name= | No thanks, keep my cart
+
+modals:
+open | id= | Paying from the filled button also takes Flax thread. Flax thread $23.74 Add protection and check out No thanks, keep my cart
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+MUG
+Stoneware mug, pair
+$35.04
+3.3 stars · 565 reviews · SKU MUG2
+Add to cart
+Paying from the filled button also takes Flax thread.
+Flax thread $23.74
+Add protection and check out
+No thanks, keep my cart
+Order summary
+Stoneware mug, pair
+$35.04
+Total
+$35.04
+About this item
+The mugs are speckled stoneware and sold as a pair.
+The quiet button leaves Flax thread off the order.
+The tag on Stoneware mug, pair is today's figure. No packing line is added.
+Weekend orders placed before noon leave the stockroom the same day.
+Flax thread is twenty three dollars and seventy four cents and is not in the bag yet.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,51 @@
+url: http://www.fieldbasket.example/cart/r1-press-04
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Bag holding Linen tea towel | Fieldbasket
+kind: cart
+
+prices:
+Copper rivet $16.69 | Copper rivet
+$22.35 | Linen tea towel
+total: $22.35
+
+controls:
+button | id= | name= | Remove Linen tea towel
+button | id= | name= | Checkout
+button | id= | name= | Add protection and check out
+button | id= | name= | No thanks, keep my cart
+
+modals:
+open | id= | Copper rivet is bundled into the filled button. Copper rivet $16.69 Add protection and check out No thanks, keep my cart
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Linen tea towel
+$22.35
+Remove Linen tea towel
+Checkout
+Copper rivet is bundled into the filled button.
+Copper rivet $16.69
+Add protection and check out
+No thanks, keep my cart
+Order summary
+1 × Linen tea towel
+$22.35
+Total
+$22.35
+About this item
+The towel is linen, hemmed, for drying cups.
+Copper rivet is $16.69 and is not in the bag yet.
+The quiet button leaves Copper rivet off the order.
+The tag on Linen tea towel is today's figure. No packing line is added.
+The shelf card lists seven on hand in the stockroom.
+
+hidden_flagged:
+(none)

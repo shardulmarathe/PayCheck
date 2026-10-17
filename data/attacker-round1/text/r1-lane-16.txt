@@ -1,0 +1,43 @@
+url: http://www.fieldbasket.example/checkout/r1-lane-16
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Review Linen tea towel | Fieldbasket
+kind: checkout
+
+prices:
+$30.15 | Linen tea towel
+Picking labor line $6.52 | Picking labor
+total: $36.67
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Fieldbasket.
+Continue to payment
+Order summary
+1 × Linen tea towel
+$30.15
+Picking labor line $6.52
+Total
+$36.67
+About this item
+The towel is linen, hemmed, for drying cups.
+Picking labor sits outside the tag.
+Last week's tag on Linen tea towel was forty two dollars and ninety five cents. Today's item figure thirty dollars and fifteen cents matches the tag. That drop is real.
+Hinge pin is offered at $3.75 and is not ticked, so it stays off the amount due.
+The shelf card lists nine on hand in the stockroom.
+
+hidden_flagged:
+(none)

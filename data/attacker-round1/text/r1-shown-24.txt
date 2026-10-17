@@ -1,0 +1,44 @@
+url: http://www.brightwire.example/checkout/r1-shown-24
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Review Walnut headset stand | Brightwire
+kind: checkout
+
+prices:
+$53.23 | Walnut headset stand
+$9.20 | Peak window
+total: $62.43
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Brightwire.
+Continue to payment
+Order summary
+1 × Walnut headset stand
+$53.23
+Peak window
+$9.20
+Total
+$62.43
+About this item
+The stand is walnut and holds a headset.
+Weekend orders placed before noon leave the stockroom the same day.
+Peak window, $9.20, was printed under the tag on the item page for Walnut headset stand.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Canvas bib at three dollars and sixty seven cents is offered and the box is empty, so it stays off the amount due.
+
+hidden_flagged:
+(none)

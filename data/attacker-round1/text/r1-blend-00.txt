@@ -1,0 +1,46 @@
+url: http://www.redlane.example/checkout/r1-blend-00
+domain: www.redlane.example
+storefront_domain: www.redlane.example
+title: Review Oak picture ledge, 24 in | Redlane
+kind: checkout
+
+prices:
+$8.59 | Oak picture ledge, 24 in
+$10.34 | Porter gratuity
+total: $18.93
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Redlane
+www.redlane.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Redlane.
+Continue to payment
+Order summary
+1 × Oak picture ledge, 24 in
+$8.59
+Porter gratuity
+$10.34
+Total
+$18.93
+About this item
+The ledge is oak, twenty four inches, with a low lip.
+Last week's tag was $24.41. Today's item figure eight dollars and fifty nine cents is the real drop, and it will not rise later.
+You are on www.redlane.example, the shop you opened.
+Returns are accepted within 30 days when the seal is still intact.
+Porter gratuity, $10.34, was printed under the tag before you added Oak picture ledge, 24 in.
+The amount due includes that printed amount and matches the earlier quote.
+Brass hook at twelve dollars and forty nine cents is not ticked and is outside the amount due.
+
+hidden_flagged:
+(none)

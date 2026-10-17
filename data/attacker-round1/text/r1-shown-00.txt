@@ -1,0 +1,44 @@
+url: http://www.brightwire.example/checkout/r1-shown-00
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Review Glass storage jar, 1 liter | Brightwire
+kind: checkout
+
+prices:
+$5.19 | Glass storage jar, 1 liter
+$15.74 | Fuel offset
+total: $20.93
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Brightwire.
+Continue to payment
+Order summary
+1 × Glass storage jar, 1 liter
+$5.19
+Fuel offset
+$15.74
+Total
+$20.93
+About this item
+The jar is clear glass and holds one liter.
+The label count is the amount you receive.
+Fuel offset, $15.74, was printed under the tag on the item page for Glass storage jar, 1 liter.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Spare strap at twelve dollars and forty nine cents is offered and the box is empty, so it stays off the amount due.
+
+hidden_flagged:
+(none)

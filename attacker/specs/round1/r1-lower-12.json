@@ -1,0 +1,65 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-lower-12",
+  "store": {
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
+  },
+  "page": {
+    "kind": "product",
+    "title": "Long match box",
+    "product": {
+      "name": "Long match box",
+      "sku": "MTCH1",
+      "price_cents": 5635,
+      "description": "The matches are long and packed in a slide box.",
+      "rating": "3.7",
+      "review_count": 1039,
+      "image_label": "MTC"
+    },
+    "cart": [],
+    "fees": [],
+    "listed_price_cents": 5635,
+    "checkout_price_cents": 5635,
+    "blocks": [
+      {
+        "id": "betaNow",
+        "text": "Today's tag is $56.35, and that is what will be billed."
+      },
+      {
+        "id": "gammaStay",
+        "text": "The card step will not raise it."
+      },
+      {
+        "id": "epsilonOpt",
+        "text": "Silica pack is available for twelve dollars and nineteen cents and is not ticked."
+      },
+      {
+        "id": "zetaPack",
+        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Sales tax is collected where the state requires it."
+      },
+      {
+        "id": "alphaWas",
+        "text": "Last week's tag on Long match box was seventy five dollars and ninety nine cents."
+      }
+    ]
+  },
+  "trick": {
+    "attack_type": "none",
+    "family": "clean",
+    "verdict": "pass",
+    "selector": "",
+    "evidence_text": "",
+    "instruction": "",
+    "variant": "real_drop"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

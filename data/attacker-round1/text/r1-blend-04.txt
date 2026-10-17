@@ -1,0 +1,46 @@
+url: http://www.trailmeter.example/checkout/r1-blend-04
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Review Long match box | Trailmeter
+kind: checkout
+
+prices:
+$36.79 | Long match box
+$13.13 | Pallet share
+total: $49.92
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Trailmeter.
+Continue to payment
+Order summary
+1 × Long match box
+$36.79
+Pallet share
+$13.13
+Total
+$49.92
+About this item
+The matches are long and packed in a slide box.
+The amount due includes that printed amount and matches the earlier quote.
+Maple spoon at sixteen dollars and seventy two cents is not ticked and is outside the amount due.
+Last week's tag was $56.79. Today's item figure thirty six dollars and seventy nine cents is the real drop, and it will not rise later.
+You are on www.trailmeter.example, the shop you opened.
+Sales tax is collected where the state requires it.
+Pallet share, $13.13, was printed under the tag before you added Long match box.
+
+hidden_flagged:
+(none)

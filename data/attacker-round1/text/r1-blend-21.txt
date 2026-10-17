@@ -1,0 +1,49 @@
+url: http://www.harborrye.example/cart/r1-blend-21
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Bag holding Rolled barley, 28 oz | Harbor and Rye
+kind: cart
+
+prices:
+$73.44 | Rolled barley, 28 oz
+$3.55 | Weekend dispatch
+total: $76.99
+
+controls:
+button | id= | name= | Remove Rolled barley, 28 oz
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Rolled barley, 28 oz
+$73.44
+Remove Rolled barley, 28 oz
+Checkout
+Order summary
+1 × Rolled barley, 28 oz
+$73.44
+Weekend dispatch
+$3.55
+Total
+$76.99
+About this item
+The barley is rolled thin so a porridge cooks quickly.
+Weekend dispatch, three dollars and fifty five cents, was printed under the tag before you added Rolled barley, 28 oz.
+The amount due includes that printed amount and matches the earlier quote.
+Heel cap at $5.91 is not ticked and is outside the amount due.
+Last week's tag was eighty dollars and forty three cents. Today's item figure $73.44 is the real drop, and it will not rise later.
+You are on www.harborrye.example, the shop you opened.
+Aisle staff can match this sku to the shelf tag.
+
+hidden_flagged:
+(none)

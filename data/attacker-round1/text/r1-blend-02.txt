@@ -1,0 +1,48 @@
+url: http://www.copperkettle.example/product/r1-blend-02
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Brass curtain ring, set of 8 | Copper Kettle
+kind: product
+
+prices:
+$22.69 | Brass curtain ring, set of 8
+$5.61 | Chill insert
+total: $28.30
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+RNG
+Brass curtain ring, set of 8
+$22.69
+4.1 stars · 981 reviews · SKU RING8
+Add to cart
+Order summary
+Brass curtain ring, set of 8
+$22.69
+Chill insert
+$5.61
+Total
+$28.30
+About this item
+The rings are brass and sold in a set of eight.
+The label count is the amount you receive.
+Chill insert, $5.61, was printed under the tag before you added Brass curtain ring, set of 8.
+The amount due includes that printed amount and matches the earlier quote.
+Glass coaster at six dollars and thirty eight cents is not ticked and is outside the amount due.
+Last week's tag was $30.35. Today's item figure twenty two dollars and sixty nine cents is the real drop, and it will not rise later.
+You are on www.copperkettle.example, the shop you opened.
+
+hidden_flagged:
+(none)

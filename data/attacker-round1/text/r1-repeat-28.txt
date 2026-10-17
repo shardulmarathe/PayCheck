@@ -1,0 +1,45 @@
+url: http://www.sundrysoap.example/checkout/r1-repeat-28
+domain: www.sundrysoap.example
+storefront_domain: www.sundrysoap.example
+title: Review Cotton percale sheet, queen | Sundry Soap
+kind: checkout
+
+prices:
+$27.39 | Cotton percale sheet, queen
+total: $5.31
+
+controls:
+radio checked | id=purchase-sub | name=purchase | The lower figure is only the first parcel. Later bills are $27.39 every month.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $27.39
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Sundry Soap
+www.sundrysoap.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Sundry Soap.
+The lower figure is only the first parcel. Later bills are $27.39 every month.
+One-time purchase — $27.39
+Continue to payment
+Order summary
+1 × Cotton percale sheet, queen
+$27.39
+Total
+$5.31
+About this item
+The sheet is cotton percale sized for a queen bed.
+The later bill is $27.39 every month.
+The first parcel is five dollars and thirty one cents. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Felt pads is not ticked. Cotton percale sheet, queen is a single item unless the repeat stays marked.
+Weekend orders placed before noon leave the stockroom the same day.
+
+hidden_flagged:
+(none)

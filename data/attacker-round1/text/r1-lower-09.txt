@@ -1,0 +1,45 @@
+url: http://www.fieldbasket.example/product/r1-lower-09
+domain: www.fieldbasket.example
+storefront_domain: www.fieldbasket.example
+title: Loom woven placemat, set of 2 | Fieldbasket
+kind: product
+
+prices:
+$36.61 | Loom woven placemat, set of 2
+total: $36.61
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Fieldbasket
+www.fieldbasket.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+PLC
+Loom woven placemat, set of 2
+$36.61
+3.8 stars · 952 reviews · SKU PLAC2
+Add to cart
+Order summary
+Loom woven placemat, set of 2
+$36.61
+Total
+$36.61
+About this item
+The placemats are loom woven and sold as a pair.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+Fragile glass leaves the stockroom in a double mailer.
+Last week's tag on Loom woven placemat, set of 2 was $56.22.
+Today's tag is thirty six dollars and sixty one cents, and that is what will be billed.
+The card step will not raise it.
+Tin clasp is available for $12.49 and is not ticked.
+
+hidden_flagged:
+(none)

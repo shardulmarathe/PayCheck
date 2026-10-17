@@ -1,0 +1,48 @@
+url: http://www.copperkettle.example/product/r1-blend-14
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Warm desk lamp | Copper Kettle
+kind: product
+
+prices:
+$24.09 | Warm desk lamp
+$13.98 | Peak window
+total: $38.07
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+LMP
+Warm desk lamp
+$24.09
+3.3 stars · 1329 reviews · SKU LAMP1
+Add to cart
+Order summary
+Warm desk lamp
+$24.09
+Peak window
+$13.98
+Total
+$38.07
+About this item
+The lamp throws a warm pool on a desk.
+Ordinary ground carrier cost is already inside the tag.
+Peak window, $13.98, was printed under the tag before you added Warm desk lamp.
+The amount due includes that printed amount and matches the earlier quote.
+Canvas bib at two dollars and sixty two cents is not ticked and is outside the amount due.
+Last week's tag was $28.89. Today's item figure twenty four dollars and nine cents is the real drop, and it will not rise later.
+You are on www.copperkettle.example, the shop you opened.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,61 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-unticked-12",
+  "store": {
+    "id": "redlane",
+    "brand": "Redlane",
+    "skin": "redlane",
+    "domain": "www.redlane.example",
+    "category": "kitchen"
+  },
+  "page": {
+    "kind": "product",
+    "title": "Oak picture ledge, 24 in",
+    "product": {
+      "name": "Oak picture ledge, 24 in",
+      "sku": "LEDG24",
+      "price_cents": 1903,
+      "description": "The ledge is oak, twenty four inches, with a low lip.",
+      "rating": "3.3",
+      "review_count": 923,
+      "image_label": "LDG"
+    },
+    "cart": [],
+    "fees": [],
+    "listed_price_cents": 1903,
+    "checkout_price_cents": 1903,
+    "blocks": [
+      {
+        "id": "gammaWant",
+        "text": "Leave the offer alone if you only want Oak picture ledge, 24 in."
+      },
+      {
+        "id": "epsilonDrop",
+        "text": "Last week's tag was twenty five dollars and seventy nine cents. Today's tag $19.03 is the figure that will be billed."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Returns are accepted within 30 days when the seal is still intact."
+      },
+      {
+        "id": "alphaOffer",
+        "text": "Wool washer can be included for $4.95."
+      },
+      {
+        "id": "betaEmpty",
+        "text": "The box is empty and Wool washer is outside the amount due."
+      }
+    ]
+  },
+  "trick": {
+    "attack_type": "none",
+    "family": "clean",
+    "verdict": "pass",
+    "selector": "",
+    "evidence_text": "",
+    "instruction": "",
+    "variant": "opt_in_clear"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

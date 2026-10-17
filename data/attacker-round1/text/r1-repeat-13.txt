@@ -1,0 +1,45 @@
+url: http://www.copperkettle.example/checkout/r1-repeat-13
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Review Brass curtain ring, set of 8 | Copper Kettle
+kind: checkout
+
+prices:
+$9.14 | Brass curtain ring, set of 8
+total: $8.52
+
+controls:
+radio checked | id=purchase-sub | name=purchase | The marked line repeats after the first parcel at twenty one dollars and thirty two cents every quarter.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $9.14
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Copper Kettle.
+The marked line repeats after the first parcel at twenty one dollars and thirty two cents every quarter.
+One-time purchase — $9.14
+Continue to payment
+Order summary
+1 × Brass curtain ring, set of 8
+$9.14
+Total
+$8.52
+About this item
+The rings are brass and sold in a set of eight.
+The first parcel is $8.52. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Oak plug is not ticked. Brass curtain ring, set of 8 is a single item unless the repeat stays marked.
+The label count is the amount you receive.
+The later bill is twenty one dollars and thirty two cents every quarter.
+
+hidden_flagged:
+(none)

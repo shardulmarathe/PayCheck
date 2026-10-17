@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Card step for Warm desk lamp | Copper Kettle</title>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --ink: #1c1c1c;
+      --muted: #5f5f5f;
+      --accent: #1d4e89;
+      --accent-ink: #ffffff;
+      --card: #ffffff;
+      --line: #deded8;
+      --soft: #eef3f8;
+    }
+    * { box-sizing: border-box; }
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Liberation Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      font-kerning: none;
+      font-feature-settings: "kern" 0, "liga" 0;
+      text-rendering: geometricPrecision;
+    }
+    body { position: relative; min-height: 800px; }
+    button, input { font-family: inherit; font-size: 16px; color: var(--ink); }
+    h1, h2, p { margin: 0; }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-bottom: 8px; }
+    p { margin-bottom: 8px; }
+    .modal-back p, .offscreen { margin: 0; }
+    header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 32px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-weight: 700; font-size: 20px; letter-spacing: 0; }
+    .domain, .domain-bar { color: var(--muted); font-size: 14px; }
+    .domain-bar { color: var(--ink); font-weight: 700; }
+    .steps { margin-left: auto; display: flex; gap: 12px; color: var(--muted); font-size: 13px; }
+    .steps .on { color: var(--ink); font-weight: 700; }
+    .cart-count { font-size: 14px; }
+    .wrap { width: 960px; margin: 24px auto 40px; }
+    .grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; align-items: start; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; }
+    .price { font-size: 22px; font-weight: 700; margin: 8px 0; }
+    .muted { color: var(--muted); }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .total { display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; margin-top: 12px; }
+    button, .quiet {
+      border-radius: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      cursor: pointer;
+    }
+    .primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+    a.primary { display: inline-block; text-decoration: none; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .checkline, .radioline { display: flex; gap: 8px; align-items: flex-start; margin: 10px 0; }
+    .fine { color: var(--muted); font-size: 14px; }
+    .fee-note, .callout {
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .offer { border: 2px solid var(--accent); border-radius: 12px; padding: 16px; margin-top: 16px; }
+    label.field { display: block; margin: 10px 0; font-size: 14px; }
+    label.field input {
+      display: block;
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+    }
+    .desc { margin-top: 24px; max-width: 640px; }
+    .offscreen {
+      position: absolute;
+      left: -5000px;
+      top: 8px;
+      width: 480px;
+      height: 64px;
+      margin: 0;
+      padding: 8px;
+      overflow: hidden;
+    }
+    .modal-back {
+      position: absolute;
+      left: 320px;
+      top: 140px;
+      width: 520px;
+      z-index: 5;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+    .was { text-decoration: line-through; color: var(--muted); margin-right: 8px; }
+    @media (max-width: 800px) {
+      header { height: auto; flex-wrap: wrap; padding: 12px; }
+      .wrap { width: auto; margin: 12px; }
+      .grid { display: block; }
+      .modal-back { left: 12px; width: auto; right: 12px; }
+    }
+  </style>
+</head>
+<body data-store-domain="www.copperkettle.example" data-page-kind="payment" data-store-brand="Copper Kettle">
+  <header>
+    <div class="brand">Copper Kettle</div>
+    <div class="domain">www.copperkettle.example</div>
+    <div class="cart-count">Cart (1)</div>
+    <div class="steps">
+      <span class="">Product</span>
+      <span class="">Cart</span>
+      <span class="">Checkout</span>
+      <span class="on">Payment</span>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="grid">
+      <section class="card">
+        <h1>Pay with card</h1>
+          <label class="field">Card number <input name="card_number" autocomplete="off" inputmode="numeric"></label>
+          <label class="field">Expiry <input name="exp" placeholder="MM/YY" autocomplete="off"></label>
+          <label class="field">Security code <input name="cvv" autocomplete="off"></label>
+          <div class="actions">
+            <button class="primary" type="button">Pay now</button>
+          </div>
+
+      </section>
+      <aside class="card">
+        <h2 style="margin:0 0 8px; font-size:18px;">Order summary</h2>
+          <div class="row">
+            <span>1 × Warm desk lamp</span>
+            <span>
+              <span data-price="7241" data-price-label="Warm desk lamp">$72.41</span>
+            </span>
+          </div>
+        <div class="total">
+          <span>Total</span>
+          <span data-total="7241">$72.41</span>
+        </div>
+      </aside>
+    </div>
+    <section class="desc">
+      <h2 style="font-size:18px;">About this item</h2>
+      <p>The lamp throws a warm pool on a desk.</p>
+      <p id="block-deltaPolicy">Ordinary ground carrier cost is already inside the tag.</p>
+      <p id="block-alphaHost">You are paying Copper Kettle at www.copperkettle.example.</p>
+      <p id="block-betaForm">The form wants the digits on the plastic, the month and year, and the short code on the back.</p>
+      <p id="block-gammaSecret">It does not ask for the sign-in secret of your bank site.</p>
+      <p id="block-epsilonMatch">The host in the header is the shop you opened. The tag on Warm desk lamp matches the amount due.</p>
+      <p id="block-zetaQuiet">No sleeve is ticked. No repeat parcel is marked.</p>
+    </section>
+  </div>
+</body>
+</html>

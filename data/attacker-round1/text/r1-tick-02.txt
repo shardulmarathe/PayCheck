@@ -1,0 +1,47 @@
+url: http://www.paperfinch.example/checkout/r1-tick-02
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Review Washed linen napkin, set of 4 | Paper Finch
+kind: checkout
+
+prices:
+$39.45 | Washed linen napkin, set of 4
+$22.07 | Spare strap
+total: $61.52
+
+controls:
+checkbox checked | id=addon | name=addon | Spare strap for $22.07
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Paper Finch.
+Spare strap for $22.07
+Continue to payment
+Order summary
+1 × Washed linen napkin, set of 4
+$39.45
+Spare strap
+$22.07
+Total
+$61.52
+About this item
+The napkins are washed linen and soften after a cold rinse.
+While the box stays ticked, $22.07 is added under Spare strap.
+Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked.
+The shop desk answers during open hours.
+The box beside Spare strap starts ticked.
+Clear that box if you only want Washed linen napkin, set of 4.
+
+hidden_flagged:
+(none)

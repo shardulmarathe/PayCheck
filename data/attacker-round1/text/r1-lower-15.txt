@@ -1,0 +1,45 @@
+url: http://www.kindlingco.example/product/r1-lower-15
+domain: www.kindlingco.example
+storefront_domain: www.kindlingco.example
+title: Foam headset cushion, pair | Kindling Co
+kind: product
+
+prices:
+$4.09 | Foam headset cushion, pair
+total: $4.09
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Kindling Co
+www.kindlingco.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+CUS
+Foam headset cushion, pair
+$4.09
+3.9 stars · 1126 reviews · SKU CUSH2
+Add to cart
+Order summary
+Foam headset cushion, pair
+$4.09
+Total
+$4.09
+About this item
+The cushions are foam and sold as a pair for a headset.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+The shelf card lists thirteen on hand in the stockroom.
+Last week's tag on Foam headset cushion, pair was $9.96.
+Today's tag is four dollars and nine cents, and that is what will be billed.
+The card step will not raise it.
+Copper rivet is available for $11.89 and is not ticked.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,78 @@
+{
+  "page": {
+    "addon": {
+      "checked": false,
+      "name": "Cotton cord",
+      "price_cents": 445,
+      "sku": "CORD1"
+    },
+    "blocks": [
+      {
+        "id": "gammaDecoy",
+        "text": "Beech cutting board still matches the tag. No packing line is added on this screen."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Fragile glass leaves the stockroom in a double mailer."
+      },
+      {
+        "id": "alphaWindow",
+        "text": "The window placed Cotton cord there. You did not choose it on the item page."
+      },
+      {
+        "id": "betaDollars",
+        "text": "The separate line for Cotton cord is four dollars and forty five cents."
+      }
+    ],
+    "cart": [
+      {
+        "name": "Beech cutting board",
+        "price_cents": 3473,
+        "qty": 1,
+        "sku": "BRD1",
+        "trick_item": false
+      },
+      {
+        "name": "Cotton cord",
+        "price_cents": 445,
+        "qty": 1,
+        "sku": "CORD1",
+        "trick_item": true
+      }
+    ],
+    "checkout_price_cents": 3473,
+    "fees": [],
+    "kind": "cart",
+    "listed_price_cents": 3473,
+    "product": {
+      "description": "The board is beech, edge grain, with a juice groove.",
+      "image_label": "BRD",
+      "name": "Beech cutting board",
+      "price_cents": 3473,
+      "rating": "3.5",
+      "review_count": 918,
+      "sku": "BRD1"
+    },
+    "title": "Bag holding Beech cutting board"
+  },
+  "page_id": "r1-window-02",
+  "source": "attacker-round1",
+  "spec_version": "1",
+  "split": "train",
+  "store": {
+    "brand": "Kindling Co",
+    "category": "pantry",
+    "domain": "www.kindlingco.example",
+    "id": "kindlingco",
+    "skin": "kindlingco"
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "evidence_text": "Cotton cord rode in with the window.",
+    "family": "upsell",
+    "instruction": "Take Cotton cord out of the bag. The window placed it there.",
+    "selector": "#trick",
+    "variant": "modal",
+    "verdict": "block"
+  }
+}

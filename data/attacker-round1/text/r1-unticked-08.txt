@@ -1,0 +1,42 @@
+url: http://www.brightwire.example/checkout/r1-unticked-08
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Review Compact binocular | Brightwire
+kind: checkout
+
+prices:
+$63.75 | Compact binocular
+total: $63.75
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Brightwire.
+Continue to payment
+Order summary
+1 × Compact binocular
+$63.75
+Total
+$63.75
+About this item
+The binocular is compact and fits a coat pocket.
+Last week's tag was seventy six dollars and sixty three cents. Today's tag $63.75 is the figure that will be billed.
+Ordinary ground carrier cost is already inside the tag.
+Glass coaster can be included for $7.53.
+The box is empty and Glass coaster is outside the amount due.
+Leave the offer alone if you only want Compact binocular.
+
+hidden_flagged:
+(none)

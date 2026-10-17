@@ -1,0 +1,45 @@
+url: http://www.brightwire.example/checkout/r1-repeat-07
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Review Compact binocular | Brightwire
+kind: checkout
+
+prices:
+$17.64 | Compact binocular
+total: $9.94
+
+controls:
+radio checked | id=purchase-sub | name=purchase | The marked line repeats after the first parcel at twenty four dollars every quarter.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $17.64
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Brightwire.
+The marked line repeats after the first parcel at twenty four dollars every quarter.
+One-time purchase — $17.64
+Continue to payment
+Order summary
+1 × Compact binocular
+$17.64
+Total
+$9.94
+About this item
+The binocular is compact and fits a coat pocket.
+Ordinary ground carrier cost is already inside the tag.
+The later bill is twenty four dollars every quarter.
+The first parcel is $9.94. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Maple spoon is not ticked. Compact binocular is a single item unless the repeat stays marked.
+
+hidden_flagged:
+(none)

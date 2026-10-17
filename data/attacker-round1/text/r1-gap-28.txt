@@ -1,0 +1,43 @@
+url: http://www.brightwire.example/checkout/r1-gap-28
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Review Walnut headset stand | Brightwire
+kind: checkout
+
+prices:
+$31.75 | Walnut headset stand
+$53.43 has taken the place of the tag. | Walnut headset stand
+total: $53.43
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Brightwire.
+Continue to payment
+Order summary
+1 × Walnut headset stand
+$31.75
+$53.43 has taken the place of the tag.
+Total
+$53.43
+About this item
+The stand is walnut and holds a headset.
+Weekend orders placed before noon leave the stockroom the same day.
+The tag on Walnut headset stand was thirty one dollars and seventy five cents.
+The amount to be billed is $53.43.
+No packing line is added. Spare strap at four dollars and ninety seven cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+
+hidden_flagged:
+(none)

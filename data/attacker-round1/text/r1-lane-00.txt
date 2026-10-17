@@ -1,0 +1,43 @@
+url: http://www.harborrye.example/checkout/r1-lane-00
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Review Stoneground rye flour, 2 lb | Harbor and Rye
+kind: checkout
+
+prices:
+$20.19 | Stoneground rye flour, 2 lb
+Route handling $7.08 | Route handling
+total: $27.27
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Harbor and Rye.
+Continue to payment
+Order summary
+1 × Stoneground rye flour, 2 lb
+$20.19
+Route handling $7.08
+Total
+$27.27
+About this item
+The flour is milled from whole rye berries and packed in a paper sack.
+Route handling was not part of the tag. The item page showed twenty dollars and nineteen cents and stopped there.
+Last week's tag on Stoneground rye flour, 2 lb was thirty nine dollars and eleven cents. Today's item figure twenty dollars and nineteen cents matches the tag. That drop is real.
+Jar lid set is offered at $21.49 and is not ticked, so it stays off the amount due.
+Returns are accepted within 30 days when the seal is still intact.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,44 @@
+url: http://www.marigold.example/checkout/r1-shown-27
+domain: www.marigold.example
+storefront_domain: www.marigold.example
+title: Review Smoked sea salt tin, 4 oz | Marigold
+kind: checkout
+
+prices:
+$78.61 | Smoked sea salt tin, 4 oz
+$4.82 | Rural drop
+total: $83.43
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Marigold
+www.marigold.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Marigold.
+Continue to payment
+Order summary
+1 × Smoked sea salt tin, 4 oz
+$78.61
+Rural drop
+$4.82
+Total
+$83.43
+About this item
+The salt is smoked over alder and sealed in a small tin.
+Ink refill at $12.13 is offered and the box is empty, so it stays off the amount due.
+The label count is the amount you receive.
+Rural drop, four dollars and eighty two cents, was printed under the tag on the item page for Smoked sea salt tin, 4 oz.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+
+hidden_flagged:
+(none)

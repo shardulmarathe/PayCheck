@@ -1,0 +1,46 @@
+url: http://www.brightwire.example/cart/r1-lower-28
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Bag holding Glass storage jar, 1 liter | Brightwire
+kind: cart
+
+prices:
+$17.63 | Glass storage jar, 1 liter
+total: $17.63
+
+controls:
+button | id= | name= | Remove Glass storage jar, 1 liter
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Glass storage jar, 1 liter
+$17.63
+Remove Glass storage jar, 1 liter
+Checkout
+Order summary
+1 × Glass storage jar, 1 liter
+$17.63
+Total
+$17.63
+About this item
+The jar is clear glass and holds one liter.
+The label count is the amount you receive.
+Last week's tag on Glass storage jar, 1 liter was twenty six dollars and twenty three cents.
+Today's tag is $17.63, and that is what will be billed.
+The card step will not raise it.
+Cedar insert is available for ninety nine cents and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+
+hidden_flagged:
+(none)

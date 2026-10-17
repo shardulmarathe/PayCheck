@@ -1,0 +1,43 @@
+url: http://www.trailmeter.example/checkout/r1-gap-24
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Review Long match box | Trailmeter
+kind: checkout
+
+prices:
+$64.47 | Long match box
+Billed $69.82, above the tag. | Long match box
+total: $69.82
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Trailmeter.
+Continue to payment
+Order summary
+1 × Long match box
+$64.47
+Billed $69.82, above the tag.
+Total
+$69.82
+About this item
+The matches are long and packed in a slide box.
+Sales tax is collected where the state requires it.
+The tag on Long match box was sixty four dollars and forty seven cents.
+The amount to be billed is $69.82.
+No packing line is added. Pine wedge at seven dollars and twenty three cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+
+hidden_flagged:
+(none)

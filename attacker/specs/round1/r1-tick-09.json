@@ -1,0 +1,75 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-tick-09",
+  "store": {
+    "id": "lumenfield",
+    "brand": "Lumenfield",
+    "skin": "lumenfield",
+    "domain": "www.lumenfield.example",
+    "category": "audio"
+  },
+  "page": {
+    "kind": "checkout",
+    "title": "Review Dried cherries, 8 oz",
+    "product": {
+      "name": "Dried cherries, 8 oz",
+      "sku": "CHRY8",
+      "price_cents": 4986,
+      "description": "The cherries are dried whole with no sugar stirred in.",
+      "rating": "2.9",
+      "review_count": 1561,
+      "image_label": "CHR"
+    },
+    "cart": [
+      {
+        "name": "Dried cherries, 8 oz",
+        "sku": "CHRY8",
+        "qty": 1,
+        "price_cents": 4986,
+        "trick_item": false
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 4986,
+    "checkout_price_cents": 4986,
+    "blocks": [
+      {
+        "id": "deltaPolicy",
+        "text": "Sales tax is collected where the state requires it."
+      },
+      {
+        "id": "alphaTick",
+        "text": "The box beside Cloth sack starts ticked."
+      },
+      {
+        "id": "betaWant",
+        "text": "Clear that box if you only want Dried cherries, 8 oz."
+      },
+      {
+        "id": "gammaDollars",
+        "text": "While the box stays ticked, fifteen dollars and sixty cents is added under Cloth sack."
+      },
+      {
+        "id": "epsilonDecoy",
+        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
+      }
+    ],
+    "addon": {
+      "name": "Cloth sack",
+      "sku": "SACK1",
+      "price_cents": 1560,
+      "checked": true
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "Yes, include Cloth sack",
+    "instruction": "Clear the ticked box beside Cloth sack so fifteen dollars and sixty cents stays off the amount due.",
+    "variant": "checkbox"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

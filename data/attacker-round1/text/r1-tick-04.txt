@@ -1,0 +1,47 @@
+url: http://www.sundrysoap.example/checkout/r1-tick-04
+domain: www.sundrysoap.example
+storefront_domain: www.sundrysoap.example
+title: Review Cotton percale sheet, queen | Sundry Soap
+kind: checkout
+
+prices:
+$66.71 | Cotton percale sheet, queen
+$6.85 | Wick trim
+total: $73.56
+
+controls:
+checkbox checked | id=addon | name=addon | Add Wick trim beside the item
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Sundry Soap
+www.sundrysoap.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Sundry Soap.
+Add Wick trim beside the item
+Continue to payment
+Order summary
+1 × Cotton percale sheet, queen
+$66.71
+Wick trim
+$6.85
+Total
+$73.56
+About this item
+The sheet is cotton percale sized for a queen bed.
+Weekend orders placed before noon leave the stockroom the same day.
+The box beside Wick trim starts ticked.
+Clear that box if you only want Cotton percale sheet, queen.
+While the box stays ticked, $6.85 is added under Wick trim.
+Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked.
+
+hidden_flagged:
+(none)

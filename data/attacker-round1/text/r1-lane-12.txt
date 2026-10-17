@@ -1,0 +1,43 @@
+url: http://www.harborrye.example/checkout/r1-lane-12
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Review Rolled barley, 28 oz | Harbor and Rye
+kind: checkout
+
+prices:
+$68.41 | Rolled barley, 28 oz
+Weekend dispatch $20.68 | Weekend dispatch
+total: $89.09
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Harbor and Rye.
+Continue to payment
+Order summary
+1 × Rolled barley, 28 oz
+$68.41
+Weekend dispatch $20.68
+Total
+$89.09
+About this item
+The barley is rolled thin so a porridge cooks quickly.
+Weekend dispatch was not part of the tag. The item page showed sixty eight dollars and forty one cents and stopped there.
+Last week's tag on Rolled barley, 28 oz was eighty dollars and ninety nine cents. Today's item figure sixty eight dollars and forty one cents matches the tag. That drop is real.
+Tin clasp is offered at $2.41 and is not ticked, so it stays off the amount due.
+Aisle staff can match this sku to the shelf tag.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,48 @@
+url: http://www.oakloom.example/product/r1-blend-18
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Enamel saucepan, 2 qt | Oak and Loom
+kind: product
+
+prices:
+$52.29 | Enamel saucepan, 2 qt
+$4.52 | Bottle crate
+total: $56.81
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+PAN
+Enamel saucepan, 2 qt
+$52.29
+3.7 stars · 1445 reviews · SKU PAN2Q
+Add to cart
+Order summary
+Enamel saucepan, 2 qt
+$52.29
+Bottle crate
+$4.52
+Total
+$56.81
+About this item
+The saucepan is enamel over steel and holds two quarts.
+Last week's tag was $61.27. Today's item figure fifty two dollars and twenty nine cents is the real drop, and it will not rise later.
+You are on www.oakloom.example, the shop you opened.
+Returns are accepted within 30 days when the seal is still intact.
+Bottle crate, $4.52, was printed under the tag before you added Enamel saucepan, 2 qt.
+The amount due includes that printed amount and matches the earlier quote.
+Kiln dry wrap at six dollars and eighty five cents is not ticked and is outside the amount due.
+
+hidden_flagged:
+(none)

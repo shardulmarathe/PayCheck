@@ -1,0 +1,46 @@
+url: http://www.sundrysoap.example/cart/r1-lower-13
+domain: www.sundrysoap.example
+storefront_domain: www.sundrysoap.example
+title: Bag holding Firestarter puck, 8 count | Sundry Soap
+kind: cart
+
+prices:
+$62.93 | Firestarter puck, 8 count
+total: $62.93
+
+controls:
+button | id= | name= | Remove Firestarter puck, 8 count
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Sundry Soap
+www.sundrysoap.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Firestarter puck, 8 count
+$62.93
+Remove Firestarter puck, 8 count
+Checkout
+Order summary
+1 × Firestarter puck, 8 count
+$62.93
+Total
+$62.93
+About this item
+The pucks light kindling and come eight to a tin.
+The card step will not raise it.
+Hinge pin is available for $2.49 and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+Ordinary ground carrier cost is already inside the tag.
+Last week's tag on Firestarter puck, 8 count was $74.38.
+Today's tag is sixty two dollars and ninety three cents, and that is what will be billed.
+
+hidden_flagged:
+(none)

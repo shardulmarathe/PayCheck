@@ -1,0 +1,44 @@
+url: http://www.copperkettle.example/checkout/r1-shown-06
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Review Stoneware mug, pair | Copper Kettle
+kind: checkout
+
+prices:
+$55.95 | Stoneware mug, pair
+$6.98 | Dock slot
+total: $62.93
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Copper Kettle.
+Continue to payment
+Order summary
+1 × Stoneware mug, pair
+$55.95
+Dock slot
+$6.98
+Total
+$62.93
+About this item
+The mugs are speckled stoneware and sold as a pair.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Extra bulb at fourteen dollars and eleven cents is offered and the box is empty, so it stays off the amount due.
+Weekend orders placed before noon leave the stockroom the same day.
+Dock slot, $6.98, was printed under the tag on the item page for Stoneware mug, pair.
+
+hidden_flagged:
+(none)

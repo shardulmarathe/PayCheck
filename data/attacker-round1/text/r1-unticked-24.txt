@@ -1,0 +1,44 @@
+url: http://www.redlane.example/product/r1-unticked-24
+domain: www.redlane.example
+storefront_domain: www.redlane.example
+title: Braided linen lead, 2 m | Redlane
+kind: product
+
+prices:
+$34.47 | Braided linen lead, 2 m
+total: $34.47
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Redlane
+www.redlane.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+CBL
+Braided linen lead, 2 m
+$34.47
+2.7 stars · 1271 reviews · SKU LEAD2M
+Add to cart
+Order summary
+Braided linen lead, 2 m
+$34.47
+Total
+$34.47
+About this item
+The lead is braided cloth, two meters end to end, with metal plugs.
+Aisle staff can match this sku to the shelf tag.
+Kiln dry wrap can be included for $16.71.
+The box is empty and Kiln dry wrap is outside the amount due.
+Leave the offer alone if you only want Braided linen lead, 2 m.
+Last week's tag was forty dollars and eighty seven cents. Today's tag $34.47 is the figure that will be billed.
+
+hidden_flagged:
+(none)

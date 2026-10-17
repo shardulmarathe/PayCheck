@@ -1,0 +1,46 @@
+url: http://www.sundrysoap.example/cart/r1-gap-13
+domain: www.sundrysoap.example
+storefront_domain: www.sundrysoap.example
+title: Bag holding Graphite pencil, dozen | Sundry Soap
+kind: cart
+
+prices:
+$28.10 | Graphite pencil, dozen
+fifty one dollars and twenty eight cents replaced the lower tag. | Graphite pencil, dozen
+total: $51.28
+
+controls:
+button | id= | name= | Remove Graphite pencil, dozen
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Sundry Soap
+www.sundrysoap.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Graphite pencil, dozen
+$51.28
+Remove Graphite pencil, dozen
+Checkout
+Order summary
+1 × Graphite pencil, dozen
+$28.10
+fifty one dollars and twenty eight cents replaced the lower tag.
+Total
+$51.28
+About this item
+The pencils are graphite, a dozen in a sleeve.
+The tag on Graphite pencil, dozen was $28.10.
+The amount to be billed is fifty one dollars and twenty eight cents.
+No packing line is added. Tin clasp at $17.77 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+The label count is the amount you receive.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,48 @@
+url: http://www.lumenfield.example/payment/r1-gap-06
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Card step for Dried cherries, 8 oz | Lumenfield
+kind: payment
+
+prices:
+$31.21 | Dried cherries, 8 oz
+Billed $52.70, above the tag. | Dried cherries, 8 oz
+total: $52.70
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Dried cherries, 8 oz
+$31.21
+Billed $52.70, above the tag.
+Total
+$52.70
+About this item
+The cherries are dried whole with no sugar stirred in.
+The amount to be billed is $52.70.
+No packing line is added. Cork grip at eight dollars and eighty eight cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Sales tax is collected where the state requires it.
+The tag on Dried cherries, 8 oz was thirty one dollars and twenty one cents.
+
+hidden_flagged:
+(none)

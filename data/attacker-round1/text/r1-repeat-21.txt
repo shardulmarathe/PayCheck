@@ -1,0 +1,45 @@
+url: http://www.lumenfield.example/checkout/r1-repeat-21
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Review Wildflower honey jar, 12 oz | Lumenfield
+kind: checkout
+
+prices:
+$24.14 | Wildflower honey jar, 12 oz
+total: $24.14
+
+controls:
+radio checked | id=purchase-sub | name=purchase | Seasonal refill will bill again every 30 days for twenty seven dollars and fifty eight cents.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $24.14
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Lumenfield.
+Seasonal refill will bill again every 30 days for twenty seven dollars and fifty eight cents.
+One-time purchase — $24.14
+Continue to payment
+Order summary
+1 × Wildflower honey jar, 12 oz
+$24.14
+Total
+$24.14
+About this item
+The honey is raw and set in a glass jar with a metal lid.
+The first parcel is $24.14. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Kiln dry wrap is not ticked. Wildflower honey jar, 12 oz is a single item unless the repeat stays marked.
+Fragile glass leaves the stockroom in a double mailer.
+The later bill is twenty seven dollars and fifty eight cents every 30 days.
+
+hidden_flagged:
+(none)

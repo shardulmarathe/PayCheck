@@ -1,0 +1,78 @@
+{
+  "page": {
+    "addon": {
+      "checked": false,
+      "name": "Beeswax puck",
+      "price_cents": 343,
+      "sku": "WAXP1"
+    },
+    "blocks": [
+      {
+        "id": "alphaWindow",
+        "text": "The window placed Beeswax puck there. You did not choose it on the item page."
+      },
+      {
+        "id": "betaDollars",
+        "text": "The separate line for Beeswax puck is three dollars and forty three cents."
+      },
+      {
+        "id": "gammaDecoy",
+        "text": "Linen tea towel still matches the tag. No packing line is added on this screen."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "The shelf card lists fourteen on hand in the stockroom."
+      }
+    ],
+    "cart": [
+      {
+        "name": "Linen tea towel",
+        "price_cents": 3495,
+        "qty": 1,
+        "sku": "TWEL1",
+        "trick_item": false
+      },
+      {
+        "name": "Beeswax puck",
+        "price_cents": 343,
+        "qty": 1,
+        "sku": "WAXP1",
+        "trick_item": true
+      }
+    ],
+    "checkout_price_cents": 3495,
+    "fees": [],
+    "kind": "checkout",
+    "listed_price_cents": 3495,
+    "product": {
+      "description": "The towel is linen, hemmed, for drying cups.",
+      "image_label": "TWL",
+      "name": "Linen tea towel",
+      "price_cents": 3495,
+      "rating": "5.0",
+      "review_count": 1092,
+      "sku": "TWEL1"
+    },
+    "title": "Review Linen tea towel"
+  },
+  "page_id": "r1-window-08",
+  "source": "attacker-round1",
+  "spec_version": "1",
+  "split": "train",
+  "store": {
+    "brand": "Fieldbasket",
+    "category": "pantry",
+    "domain": "www.fieldbasket.example",
+    "id": "fieldbasket",
+    "skin": "fieldbasket"
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "evidence_text": "Beeswax puck rode in with the window.",
+    "family": "upsell",
+    "instruction": "Take Beeswax puck out of the bag. The window placed it there.",
+    "selector": "#trick",
+    "variant": "modal",
+    "verdict": "block"
+  }
+}

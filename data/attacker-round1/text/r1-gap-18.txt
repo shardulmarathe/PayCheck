@@ -1,0 +1,48 @@
+url: http://www.lumenfield.example/payment/r1-gap-18
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Card step for Linen washcloth, pair | Lumenfield
+kind: payment
+
+prices:
+$5.25 | Linen washcloth, pair
+Billed $16.23, above the tag. | Linen washcloth, pair
+total: $16.23
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Linen washcloth, pair
+$5.25
+Billed $16.23, above the tag.
+Total
+$16.23
+About this item
+The washcloths are linen and sold as a pair.
+The amount to be billed is $16.23.
+No packing line is added. Oak plug at one dollar and ninety seven cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+The shelf card lists fourteen on hand in the stockroom.
+The tag on Linen washcloth, pair was five dollars and twenty five cents.
+
+hidden_flagged:
+(none)

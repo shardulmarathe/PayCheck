@@ -1,0 +1,45 @@
+url: http://www.trailmeter.example/checkout/r1-repeat-15
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Review Long match box | Trailmeter
+kind: checkout
+
+prices:
+$32.64 | Long match box
+total: $32.64
+
+controls:
+radio checked | id=purchase-sub | name=purchase | Parcel cadence will bill again every 30 days for forty seven dollars and seventy six cents.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $32.64
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Trailmeter.
+Parcel cadence will bill again every 30 days for forty seven dollars and seventy six cents.
+One-time purchase — $32.64
+Continue to payment
+Order summary
+1 × Long match box
+$32.64
+Total
+$32.64
+About this item
+The matches are long and packed in a slide box.
+Sales tax is collected where the state requires it.
+The later bill is forty seven dollars and seventy six cents every 30 days.
+The first parcel is $32.64. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Flax thread is not ticked. Long match box is a single item unless the repeat stays marked.
+
+hidden_flagged:
+(none)

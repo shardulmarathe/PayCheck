@@ -1,0 +1,48 @@
+url: http://www.marigold.example/payment/r1-lane-02
+domain: www.marigold.example
+storefront_domain: www.marigold.example
+title: Card step for Smoked sea salt tin, 4 oz | Marigold
+kind: payment
+
+prices:
+$41.81 | Smoked sea salt tin, 4 oz
+Market tote adds $13.38 | Market tote
+total: $55.19
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Marigold
+www.marigold.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Smoked sea salt tin, 4 oz
+$41.81
+Market tote adds $13.38
+Total
+$55.19
+About this item
+The salt is smoked over alder and sealed in a small tin.
+Felt pads is offered at $10.61 and is not ticked, so it stays off the amount due.
+The label count is the amount you receive.
+Market tote is new once you reach this screen.
+Last week's tag on Smoked sea salt tin, 4 oz was forty two dollars and eighty nine cents. Today's item figure forty one dollars and eighty one cents matches the tag. That drop is real.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,45 @@
+url: http://www.copperkettle.example/checkout/r1-repeat-01
+domain: www.copperkettle.example
+storefront_domain: www.copperkettle.example
+title: Review Stoneware mug, pair | Copper Kettle
+kind: checkout
+
+prices:
+$26.14 | Stoneware mug, pair
+total: $8.48
+
+controls:
+radio checked | id=purchase-sub | name=purchase | The marked line repeats after the first parcel at twenty six dollars and sixty eight cents every quarter.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $26.14
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Copper Kettle
+www.copperkettle.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Copper Kettle.
+The marked line repeats after the first parcel at twenty six dollars and sixty eight cents every quarter.
+One-time purchase — $26.14
+Continue to payment
+Order summary
+1 × Stoneware mug, pair
+$26.14
+Total
+$8.48
+About this item
+The mugs are speckled stoneware and sold as a pair.
+The first parcel is $8.48. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Cork grip is not ticked. Stoneware mug, pair is a single item unless the repeat stays marked.
+Weekend orders placed before noon leave the stockroom the same day.
+The later bill is twenty six dollars and sixty eight cents every quarter.
+
+hidden_flagged:
+(none)

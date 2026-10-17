@@ -1,0 +1,49 @@
+url: http://www.trailmeter.example/payment/r1-shown-20
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Card step for Long match box | Trailmeter
+kind: payment
+
+prices:
+$19.39 | Long match box
+$10.29 | Cold pack liner
+total: $29.68
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Long match box
+$19.39
+Cold pack liner
+$10.29
+Total
+$29.68
+About this item
+The matches are long and packed in a slide box.
+Sales tax is collected where the state requires it.
+Cold pack liner, $10.29, was printed under the tag on the item page for Long match box.
+The amount due on this screen is that same quote. Nothing further is introduced here.
+Oak plug at seven dollars and sixty nine cents is offered and the box is empty, so it stays off the amount due.
+
+hidden_flagged:
+(none)

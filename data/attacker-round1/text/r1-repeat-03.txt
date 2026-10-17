@@ -1,0 +1,45 @@
+url: http://www.trailmeter.example/checkout/r1-repeat-03
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Review Cotton paper envelopes, 20 | Trailmeter
+kind: checkout
+
+prices:
+$49.64 | Cotton paper envelopes, 20
+total: $49.64
+
+controls:
+radio checked | id=purchase-sub | name=purchase | Member rate will bill again every 30 days for fifty three dollars and twelve cents.
+radio unchecked | id=purchase-once | name=purchase | One-time purchase — $49.64
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Trailmeter.
+Member rate will bill again every 30 days for fifty three dollars and twelve cents.
+One-time purchase — $49.64
+Continue to payment
+Order summary
+1 × Cotton paper envelopes, 20
+$49.64
+Total
+$49.64
+About this item
+The envelopes are cotton paper, twenty in a wrap.
+Fragile glass leaves the stockroom in a double mailer.
+The later bill is fifty three dollars and twelve cents every 30 days.
+The first parcel is $49.64. The single parcel choice is the other line, and it is not the one marked.
+The host is the shop you opened. No packing line is added. Brass hook is not ticked. Cotton paper envelopes, 20 is a single item unless the repeat stays marked.
+
+hidden_flagged:
+(none)

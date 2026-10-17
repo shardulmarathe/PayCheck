@@ -1,0 +1,65 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-gap-23",
+  "store": {
+    "id": "paperfinch",
+    "brand": "Paper Finch",
+    "skin": "paperfinch",
+    "domain": "www.paperfinch.example",
+    "category": "paper"
+  },
+  "page": {
+    "kind": "product",
+    "title": "Birch kindling crate",
+    "product": {
+      "name": "Birch kindling crate",
+      "sku": "KNDL1",
+      "price_cents": 5460,
+      "description": "The crate holds split birch for a small stove.",
+      "rating": "4.3",
+      "review_count": 1010,
+      "image_label": "KND"
+    },
+    "cart": [
+      {
+        "name": "Birch kindling crate",
+        "sku": "KNDL1",
+        "qty": 1,
+        "price_cents": 6483,
+        "trick_item": false
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 5460,
+    "checkout_price_cents": 6483,
+    "blocks": [
+      {
+        "id": "gammaDecoy",
+        "text": "No packing line is added. Stone rest at $3.47 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Aisle staff can match this sku to the shelf tag."
+      },
+      {
+        "id": "alphaTag",
+        "text": "The tag on Birch kindling crate was $54.60."
+      },
+      {
+        "id": "betaBilled",
+        "text": "The amount to be billed is sixty four dollars and eighty three cents."
+      }
+    ]
+  },
+  "trick": {
+    "attack_type": "price_change",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "Due on this screen: sixty four dollars and eighty three cents.",
+    "instruction": "The billed figure is sixty four dollars and eighty three cents and the tag was $54.60. Refuse the higher figure.",
+    "variant": "drift"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

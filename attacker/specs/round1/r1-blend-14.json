@@ -1,0 +1,70 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-blend-14",
+  "store": {
+    "id": "copperkettle",
+    "brand": "Copper Kettle",
+    "skin": "copperkettle",
+    "domain": "www.copperkettle.example",
+    "category": "kitchen"
+  },
+  "page": {
+    "kind": "product",
+    "title": "Warm desk lamp",
+    "product": {
+      "name": "Warm desk lamp",
+      "sku": "LAMP1",
+      "price_cents": 2409,
+      "description": "The lamp throws a warm pool on a desk.",
+      "rating": "3.3",
+      "review_count": 1329,
+      "image_label": "LMP"
+    },
+    "cart": [],
+    "fees": [
+      {
+        "name": "Peak window",
+        "amount_cents": 1398
+      }
+    ],
+    "listed_price_cents": 2409,
+    "checkout_price_cents": 2409,
+    "blocks": [
+      {
+        "id": "deltaPolicy",
+        "text": "Ordinary ground carrier cost is already inside the tag."
+      },
+      {
+        "id": "alphaShown",
+        "text": "Peak window, $13.98, was printed under the tag before you added Warm desk lamp."
+      },
+      {
+        "id": "betaQuote",
+        "text": "The amount due includes that printed amount and matches the earlier quote."
+      },
+      {
+        "id": "gammaOpt",
+        "text": "Canvas bib at two dollars and sixty two cents is not ticked and is outside the amount due."
+      },
+      {
+        "id": "epsilonDrop",
+        "text": "Last week's tag was $28.89. Today's item figure twenty four dollars and nine cents is the real drop, and it will not rise later."
+      },
+      {
+        "id": "zetaHost",
+        "text": "You are on www.copperkettle.example, the shop you opened."
+      }
+    ]
+  },
+  "trick": {
+    "attack_type": "none",
+    "family": "clean",
+    "verdict": "pass",
+    "selector": "",
+    "evidence_text": "",
+    "instruction": "",
+    "variant": "mixed_honest"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

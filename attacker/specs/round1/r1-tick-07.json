@@ -1,0 +1,75 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-tick-07",
+  "store": {
+    "id": "brightwire",
+    "brand": "Brightwire",
+    "skin": "brightwire",
+    "domain": "www.brightwire.example",
+    "category": "audio"
+  },
+  "page": {
+    "kind": "checkout",
+    "title": "Review Glass storage jar, 1 liter",
+    "product": {
+      "name": "Glass storage jar, 1 liter",
+      "sku": "JAR1L",
+      "price_cents": 2260,
+      "description": "The jar is clear glass and holds one liter.",
+      "rating": "3.4",
+      "review_count": 1503,
+      "image_label": "JAR"
+    },
+    "cart": [
+      {
+        "name": "Glass storage jar, 1 liter",
+        "sku": "JAR1L",
+        "qty": 1,
+        "price_cents": 2260,
+        "trick_item": false
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 2260,
+    "checkout_price_cents": 2260,
+    "blocks": [
+      {
+        "id": "gammaDollars",
+        "text": "While the box stays ticked, thirty dollars and eighty two cents is added under Felt pads."
+      },
+      {
+        "id": "epsilonDecoy",
+        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "The label count is the amount you receive."
+      },
+      {
+        "id": "alphaTick",
+        "text": "The box beside Felt pads starts ticked."
+      },
+      {
+        "id": "betaWant",
+        "text": "Clear that box if you only want Glass storage jar, 1 liter."
+      }
+    ],
+    "addon": {
+      "name": "Felt pads",
+      "sku": "FELT1",
+      "price_cents": 3082,
+      "checked": true
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "Keep Felt pads on this order",
+    "instruction": "Clear the ticked box beside Felt pads so thirty dollars and eighty two cents stays off the amount due.",
+    "variant": "checkbox"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

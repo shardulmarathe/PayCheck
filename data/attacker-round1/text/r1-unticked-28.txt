@@ -1,0 +1,45 @@
+url: http://www.trailmeter.example/cart/r1-unticked-28
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Bag holding Heather wool throw | Trailmeter
+kind: cart
+
+prices:
+$64.55 | Heather wool throw
+total: $64.55
+
+controls:
+button | id= | name= | Remove Heather wool throw
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Heather wool throw
+$64.55
+Remove Heather wool throw
+Checkout
+Order summary
+1 × Heather wool throw
+$64.55
+Total
+$64.55
+About this item
+The throw is heather wool and measures about fifty by sixty inches.
+Last week's tag was seventy three dollars and eighty three cents. Today's tag $64.55 is the figure that will be billed.
+The shelf card lists six on hand in the stockroom.
+Wick trim can be included for $14.13.
+The box is empty and Wick trim is outside the amount due.
+Leave the offer alone if you only want Heather wool throw.
+
+hidden_flagged:
+(none)

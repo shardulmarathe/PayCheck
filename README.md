@@ -7,6 +7,7 @@ This repository is private.
 | Path | What it is |
 | --- | --- |
 | `gym/` | Fake stores, trick specs, labels, the frozen test set, and the local shop server |
+| `attacker/` | Training-round trick specs, the near-duplicate check, and notes for the next round |
 | `train/` | Training and eval (another agent) |
 | `shopper/` | Browser Use shopper, with and without the guard |
 | `web/` | Showcase site |
@@ -31,6 +32,8 @@ make testset                           # rebuild the 300-page test set and requi
 make test
 python -m gym.train --round 1 --n-train 1500 --n-dev 300
 python -m gym.train --round 2 --n-train 1500 --n-dev 300
+python attacker/check_near_duplicates.py
+python -m gym.render_specs --specs-dir attacker/specs/round1 --out data/attacker-round1 --source attacker-round1
 python -m gym.render_specs --specs-dir DIR --out data/attacker-round2 --source attacker-round2
 python -m gym.serve --port 8765
 ```

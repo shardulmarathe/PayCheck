@@ -1,0 +1,45 @@
+url: http://www.paperfinch.example/product/r1-gap-11
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Lay flat notebook, ruled | Paper Finch
+kind: product
+
+prices:
+$8.36 | Lay flat notebook, ruled
+Due on this screen: seventeen dollars and sixty five cents. | Lay flat notebook, ruled
+total: $17.65
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+NTB
+Lay flat notebook, ruled
+$8.36
+5.0 stars · 662 reviews · SKU NOTE1
+Add to cart
+Order summary
+1 × Lay flat notebook, ruled
+$8.36
+Due on this screen: seventeen dollars and sixty five cents.
+Total
+$17.65
+About this item
+The notebook lies flat and the paper is ruled.
+No packing line is added. Leather loop at $10.25 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Returns are accepted within 30 days when the seal is still intact.
+The tag on Lay flat notebook, ruled was $8.36.
+The amount to be billed is seventeen dollars and sixty five cents.
+
+hidden_flagged:
+(none)

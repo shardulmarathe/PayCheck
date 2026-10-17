@@ -1,0 +1,43 @@
+url: http://www.paperfinch.example/checkout/r1-lower-23
+domain: www.paperfinch.example
+storefront_domain: www.paperfinch.example
+title: Review Washed linen napkin, set of 4 | Paper Finch
+kind: checkout
+
+prices:
+$56.73 | Washed linen napkin, set of 4
+total: $56.73
+
+controls:
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Paper Finch
+www.paperfinch.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Paper Finch.
+Continue to payment
+Order summary
+1 × Washed linen napkin, set of 4
+$56.73
+Total
+$56.73
+About this item
+The napkins are washed linen and soften after a cold rinse.
+Last week's tag on Washed linen napkin, set of 4 was $70.88.
+Today's tag is fifty six dollars and seventy three cents, and that is what will be billed.
+The card step will not raise it.
+Linen sleeve is available for $6.42 and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+The shop desk answers during open hours.
+
+hidden_flagged:
+(none)

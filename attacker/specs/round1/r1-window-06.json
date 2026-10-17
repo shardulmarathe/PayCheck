@@ -1,0 +1,78 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-window-06",
+  "store": {
+    "id": "marigold",
+    "brand": "Marigold",
+    "skin": "marigold",
+    "domain": "www.marigold.example",
+    "category": "linen"
+  },
+  "page": {
+    "kind": "cart",
+    "title": "Bag holding Buckwheat groats, 24 oz",
+    "product": {
+      "name": "Buckwheat groats, 24 oz",
+      "sku": "BWHT24",
+      "price_cents": 581,
+      "description": "The groats are toasted buckwheat for a savory bowl.",
+      "rating": "4.3",
+      "review_count": 1034,
+      "image_label": "BWH"
+    },
+    "cart": [
+      {
+        "name": "Buckwheat groats, 24 oz",
+        "sku": "BWHT24",
+        "qty": 1,
+        "price_cents": 581,
+        "trick_item": false
+      },
+      {
+        "name": "Tin clasp",
+        "sku": "CLSP1",
+        "qty": 1,
+        "price_cents": 1287,
+        "trick_item": true
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 581,
+    "checkout_price_cents": 581,
+    "blocks": [
+      {
+        "id": "gammaDecoy",
+        "text": "Buckwheat groats, 24 oz still matches the tag. No packing line is added on this screen."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Ordinary ground carrier cost is already inside the tag."
+      },
+      {
+        "id": "alphaWindow",
+        "text": "The window placed Tin clasp there. You did not choose it on the item page."
+      },
+      {
+        "id": "betaDollars",
+        "text": "The separate line for Tin clasp is twelve dollars and eighty seven cents."
+      }
+    ],
+    "addon": {
+      "name": "Tin clasp",
+      "sku": "CLSP1",
+      "price_cents": 1287,
+      "checked": false
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "Tin clasp is in the bag beside Buckwheat groats, 24 oz.",
+    "instruction": "Take Tin clasp out of the bag. The window placed it there.",
+    "variant": "modal"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

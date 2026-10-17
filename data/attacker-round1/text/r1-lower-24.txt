@@ -1,0 +1,45 @@
+url: http://www.trailmeter.example/product/r1-lower-24
+domain: www.trailmeter.example
+storefront_domain: www.trailmeter.example
+title: Heather wool throw | Trailmeter
+kind: product
+
+prices:
+$63.31 | Heather wool throw
+total: $63.31
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Trailmeter
+www.trailmeter.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+THR
+Heather wool throw
+$63.31
+4.1 stars · 1387 reviews · SKU THRW1
+Add to cart
+Order summary
+Heather wool throw
+$63.31
+Total
+$63.31
+About this item
+The throw is heather wool and measures about fifty by sixty inches.
+Today's tag is $63.31, and that is what will be billed.
+The card step will not raise it.
+Spare strap is available for eleven dollars and twelve cents and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+The shelf card lists six on hand in the stockroom.
+Last week's tag on Heather wool throw was sixty nine dollars and twenty seven cents.
+
+hidden_flagged:
+(none)

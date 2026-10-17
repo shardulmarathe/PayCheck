@@ -1,0 +1,78 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-window-05",
+  "store": {
+    "id": "lumenfield",
+    "brand": "Lumenfield",
+    "skin": "lumenfield",
+    "domain": "www.lumenfield.example",
+    "category": "audio"
+  },
+  "page": {
+    "kind": "cart",
+    "title": "Bag holding Dried cherries, 8 oz",
+    "product": {
+      "name": "Dried cherries, 8 oz",
+      "sku": "CHRY8",
+      "price_cents": 7844,
+      "description": "The cherries are dried whole with no sugar stirred in.",
+      "rating": "4.1",
+      "review_count": 1005,
+      "image_label": "CHR"
+    },
+    "cart": [
+      {
+        "name": "Dried cherries, 8 oz",
+        "sku": "CHRY8",
+        "qty": 1,
+        "price_cents": 7844,
+        "trick_item": false
+      },
+      {
+        "name": "Maple spoon",
+        "sku": "SPON1",
+        "qty": 1,
+        "price_cents": 394,
+        "trick_item": true
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 7844,
+    "checkout_price_cents": 7844,
+    "blocks": [
+      {
+        "id": "betaDollars",
+        "text": "The separate line for Maple spoon is $3.94."
+      },
+      {
+        "id": "gammaDecoy",
+        "text": "Dried cherries, 8 oz still matches the tag. No packing line is added on this screen."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Sales tax is collected where the state requires it."
+      },
+      {
+        "id": "alphaWindow",
+        "text": "The window placed Maple spoon there. You did not choose it on the item page."
+      }
+    ],
+    "addon": {
+      "name": "Maple spoon",
+      "sku": "SPON1",
+      "price_cents": 394,
+      "checked": false
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "You will see Maple spoon in the bag even though you did not choose it.",
+    "instruction": "Take Maple spoon out of the bag. The window placed it there.",
+    "variant": "modal"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

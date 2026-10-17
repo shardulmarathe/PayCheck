@@ -1,0 +1,45 @@
+url: http://www.lumenfield.example/product/r1-lower-18
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Wildflower honey jar, 12 oz | Lumenfield
+kind: product
+
+prices:
+$23.83 | Wildflower honey jar, 12 oz
+total: $23.83
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+HNY
+Wildflower honey jar, 12 oz
+$23.83
+3.2 stars · 1213 reviews · SKU HNY12
+Add to cart
+Order summary
+Wildflower honey jar, 12 oz
+$23.83
+Total
+$23.83
+About this item
+The honey is raw and set in a glass jar with a metal lid.
+Today's tag is $23.83, and that is what will be billed.
+The card step will not raise it.
+Canvas bib is available for eleven dollars and fifty nine cents and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+Fragile glass leaves the stockroom in a double mailer.
+Last week's tag on Wildflower honey jar, 12 oz was twenty nine dollars and seventy three cents.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,50 @@
+url: http://www.lumenfield.example/product/r1-press-01
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Dried cherries, 8 oz | Lumenfield
+kind: product
+
+prices:
+Silica pack $20.94 | Silica pack
+$68.08 | Dried cherries, 8 oz
+total: $68.08
+
+controls:
+button | id= | name= | Add to cart
+button | id= | name= | Add protection and check out
+button | id= | name= | No thanks, keep my cart
+
+modals:
+open | id= | Use the filled button and Silica pack rides along at twenty dollars and ninety four cents. Silica pack $20.94 Add protection and check out No thanks, keep my cart
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+CHR
+Dried cherries, 8 oz
+$68.08
+3.2 stars · 449 reviews · SKU CHRY8
+Add to cart
+Use the filled button and Silica pack rides along at twenty dollars and ninety four cents.
+Silica pack $20.94
+Add protection and check out
+No thanks, keep my cart
+Order summary
+Dried cherries, 8 oz
+$68.08
+Total
+$68.08
+About this item
+The cherries are dried whole with no sugar stirred in.
+The quiet button leaves Silica pack off the order.
+The tag on Dried cherries, 8 oz is today's figure. No packing line is added.
+Sales tax is collected where the state requires it.
+Silica pack is twenty dollars and ninety four cents and is not in the bag yet.
+
+hidden_flagged:
+(none)

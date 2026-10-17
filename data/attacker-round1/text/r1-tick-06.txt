@@ -1,0 +1,47 @@
+url: http://www.kindlingco.example/checkout/r1-tick-06
+domain: www.kindlingco.example
+storefront_domain: www.kindlingco.example
+title: Review Beech cutting board | Kindling Co
+kind: checkout
+
+prices:
+$8.97 | Beech cutting board
+$22.83 | Cedar insert
+total: $31.80
+
+controls:
+checkbox checked | id=addon | name=addon | Include Cedar insert
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Kindling Co
+www.kindlingco.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Kindling Co.
+Include Cedar insert
+Continue to payment
+Order summary
+1 × Beech cutting board
+$8.97
+Cedar insert
+$22.83
+Total
+$31.80
+About this item
+The board is beech, edge grain, with a juice groove.
+Clear that box if you only want Beech cutting board.
+While the box stays ticked, $22.83 is added under Cedar insert.
+Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked.
+Fragile glass leaves the stockroom in a double mailer.
+The box beside Cedar insert starts ticked.
+
+hidden_flagged:
+(none)

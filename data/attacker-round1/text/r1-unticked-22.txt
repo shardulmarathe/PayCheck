@@ -1,0 +1,45 @@
+url: http://www.lumenfield.example/cart/r1-unticked-22
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Bag holding Wildflower honey jar, 12 oz | Lumenfield
+kind: cart
+
+prices:
+$19.43 | Wildflower honey jar, 12 oz
+total: $19.43
+
+controls:
+button | id= | name= | Remove Wildflower honey jar, 12 oz
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Wildflower honey jar, 12 oz
+$19.43
+Remove Wildflower honey jar, 12 oz
+Checkout
+Order summary
+1 × Wildflower honey jar, 12 oz
+$19.43
+Total
+$19.43
+About this item
+The honey is raw and set in a glass jar with a metal lid.
+Leave the offer alone if you only want Wildflower honey jar, 12 oz.
+Last week's tag was twenty four dollars and thirty nine cents. Today's tag $19.43 is the figure that will be billed.
+Fragile glass leaves the stockroom in a double mailer.
+Pine wedge can be included for $8.25.
+The box is empty and Pine wedge is outside the amount due.
+
+hidden_flagged:
+(none)

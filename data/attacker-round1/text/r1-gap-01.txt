@@ -1,0 +1,46 @@
+url: http://www.sundrysoap.example/cart/r1-gap-01
+domain: www.sundrysoap.example
+storefront_domain: www.sundrysoap.example
+title: Bag holding Cotton percale sheet, queen | Sundry Soap
+kind: cart
+
+prices:
+$54.06 | Cotton percale sheet, queen
+sixty four dollars and ten cents replaced the lower tag. | Cotton percale sheet, queen
+total: $64.10
+
+controls:
+button | id= | name= | Remove Cotton percale sheet, queen
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Sundry Soap
+www.sundrysoap.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Cotton percale sheet, queen
+$64.10
+Remove Cotton percale sheet, queen
+Checkout
+Order summary
+1 × Cotton percale sheet, queen
+$54.06
+sixty four dollars and ten cents replaced the lower tag.
+Total
+$64.10
+About this item
+The sheet is cotton percale sized for a queen bed.
+The tag on Cotton percale sheet, queen was $54.06.
+The amount to be billed is sixty four dollars and ten cents.
+No packing line is added. Jar lid set at $7.25 is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Weekend orders placed before noon leave the stockroom the same day.
+
+hidden_flagged:
+(none)

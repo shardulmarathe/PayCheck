@@ -1,0 +1,47 @@
+url: http://www.brightwire.example/checkout/r1-tick-07
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Review Glass storage jar, 1 liter | Brightwire
+kind: checkout
+
+prices:
+$22.60 | Glass storage jar, 1 liter
+$30.82 | Felt pads
+total: $53.42
+
+controls:
+checkbox checked | id=addon | name=addon | Keep Felt pads on this order
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Brightwire.
+Keep Felt pads on this order
+Continue to payment
+Order summary
+1 × Glass storage jar, 1 liter
+$22.60
+Felt pads
+$30.82
+Total
+$53.42
+About this item
+The jar is clear glass and holds one liter.
+While the box stays ticked, thirty dollars and eighty two cents is added under Felt pads.
+Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked.
+The label count is the amount you receive.
+The box beside Felt pads starts ticked.
+Clear that box if you only want Glass storage jar, 1 liter.
+
+hidden_flagged:
+(none)

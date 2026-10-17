@@ -1,0 +1,44 @@
+url: http://www.oakloom.example/product/r1-unticked-18
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Cloth braid audio lead, 1 m | Oak and Loom
+kind: product
+
+prices:
+$64.15 | Cloth braid audio lead, 1 m
+total: $64.15
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+AUD
+Cloth braid audio lead, 1 m
+$64.15
+3.4 stars · 1097 reviews · SKU AUD1M
+Add to cart
+Order summary
+Cloth braid audio lead, 1 m
+$64.15
+Total
+$64.15
+About this item
+The audio lead is cloth braid, one meter, with metal plugs.
+Last week's tag was seventy five dollars and twenty three cents. Today's tag $64.15 is the figure that will be billed.
+The shop desk answers during open hours.
+Flax thread can be included for $10.83.
+The box is empty and Flax thread is outside the amount due.
+Leave the offer alone if you only want Cloth braid audio lead, 1 m.
+
+hidden_flagged:
+(none)

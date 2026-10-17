@@ -1,0 +1,44 @@
+url: http://www.harborrye.example/product/r1-unticked-09
+domain: www.harborrye.example
+storefront_domain: www.harborrye.example
+title: Cedarwood bar soap | Harbor and Rye
+kind: product
+
+prices:
+$71.27 | Cedarwood bar soap
+total: $71.27
+
+controls:
+button | id= | name= | Add to cart
+
+modals:
+(none)
+
+visible:
+Harbor and Rye
+www.harborrye.example
+Cart (0)
+Product
+Cart
+Checkout
+Payment
+SOP
+Cedarwood bar soap
+$71.27
+3.1 stars · 836 reviews · SKU SOAP1
+Add to cart
+Order summary
+Cedarwood bar soap
+$71.27
+Total
+$71.27
+About this item
+The soap is a cedarwood bar, wrapped in paper.
+The shop desk answers during open hours.
+Leather loop can be included for eleven dollars and seventy six cents.
+The box is empty and Leather loop is outside the amount due.
+Leave the offer alone if you only want Cedarwood bar soap.
+Last week's tag was $84.87. Today's tag seventy one dollars and twenty seven cents is the figure that will be billed.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,46 @@
+url: http://www.brightwire.example/cart/r1-lower-04
+domain: www.brightwire.example
+storefront_domain: www.brightwire.example
+title: Bag holding Compact binocular | Brightwire
+kind: cart
+
+prices:
+$3.71 | Compact binocular
+total: $3.71
+
+controls:
+button | id= | name= | Remove Compact binocular
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Brightwire
+www.brightwire.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Compact binocular
+$3.71
+Remove Compact binocular
+Checkout
+Order summary
+1 × Compact binocular
+$3.71
+Total
+$3.71
+About this item
+The binocular is compact and fits a coat pocket.
+Ordinary ground carrier cost is already inside the tag.
+Last week's tag on Compact binocular was fifteen dollars and seven cents.
+Today's tag is $3.71, and that is what will be billed.
+The card step will not raise it.
+Brass hook is available for three dollars and thirty nine cents and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+
+hidden_flagged:
+(none)

@@ -1,0 +1,46 @@
+url: http://www.marigold.example/cart/r1-lower-07
+domain: www.marigold.example
+storefront_domain: www.marigold.example
+title: Bag holding Tin of balm, 1 oz | Marigold
+kind: cart
+
+prices:
+$23.45 | Tin of balm, 1 oz
+total: $23.45
+
+controls:
+button | id= | name= | Remove Tin of balm, 1 oz
+button | id= | name= | Checkout
+
+modals:
+(none)
+
+visible:
+Marigold
+www.marigold.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Your cart
+1 × Tin of balm, 1 oz
+$23.45
+Remove Tin of balm, 1 oz
+Checkout
+Order summary
+1 × Tin of balm, 1 oz
+$23.45
+Total
+$23.45
+About this item
+The balm sits in a small tin, one ounce.
+The card step will not raise it.
+Leather loop is available for $3.09 and is not ticked.
+Ordinary carrier cost is already inside today's tag. No packing line is added.
+Weekend orders placed before noon leave the stockroom the same day.
+Last week's tag on Tin of balm, 1 oz was $34.84.
+Today's tag is twenty three dollars and forty five cents, and that is what will be billed.
+
+hidden_flagged:
+(none)

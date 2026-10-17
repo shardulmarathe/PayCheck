@@ -1,0 +1,69 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-unticked-07",
+  "store": {
+    "id": "kindlingco",
+    "brand": "Kindling Co",
+    "skin": "kindlingco",
+    "domain": "www.kindlingco.example",
+    "category": "pantry"
+  },
+  "page": {
+    "kind": "cart",
+    "title": "Bag holding Aluminum flask, 700 ml",
+    "product": {
+      "name": "Aluminum flask, 700 ml",
+      "sku": "FLSK7",
+      "price_cents": 5623,
+      "description": "The flask is aluminum, seven hundred milliliters, with a screw cap.",
+      "rating": "4.0",
+      "review_count": 778,
+      "image_label": "FLS"
+    },
+    "cart": [
+      {
+        "name": "Aluminum flask, 700 ml",
+        "sku": "FLSK7",
+        "qty": 1,
+        "price_cents": 5623,
+        "trick_item": false
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 5623,
+    "checkout_price_cents": 5623,
+    "blocks": [
+      {
+        "id": "gammaWant",
+        "text": "Leave the offer alone if you only want Aluminum flask, 700 ml."
+      },
+      {
+        "id": "epsilonDrop",
+        "text": "Last week's tag was $68.39. Today's tag fifty six dollars and twenty three cents is the figure that will be billed."
+      },
+      {
+        "id": "deltaPolicy",
+        "text": "Sales tax is collected where the state requires it."
+      },
+      {
+        "id": "alphaOffer",
+        "text": "Cotton cord can be included for three dollars and thirty cents."
+      },
+      {
+        "id": "betaEmpty",
+        "text": "The box is empty and Cotton cord is outside the amount due."
+      }
+    ]
+  },
+  "trick": {
+    "attack_type": "none",
+    "family": "clean",
+    "verdict": "pass",
+    "selector": "",
+    "evidence_text": "",
+    "instruction": "",
+    "variant": "opt_in_clear"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}

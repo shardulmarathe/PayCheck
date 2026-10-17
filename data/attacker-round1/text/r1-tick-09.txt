@@ -1,0 +1,47 @@
+url: http://www.lumenfield.example/checkout/r1-tick-09
+domain: www.lumenfield.example
+storefront_domain: www.lumenfield.example
+title: Review Dried cherries, 8 oz | Lumenfield
+kind: checkout
+
+prices:
+$49.86 | Dried cherries, 8 oz
+$15.60 | Cloth sack
+total: $65.46
+
+controls:
+checkbox checked | id=addon | name=addon | Yes, include Cloth sack
+button | id= | name= | Continue to payment
+
+modals:
+(none)
+
+visible:
+Lumenfield
+www.lumenfield.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Checkout
+Review the total before you pay Lumenfield.
+Yes, include Cloth sack
+Continue to payment
+Order summary
+1 × Dried cherries, 8 oz
+$49.86
+Cloth sack
+$15.60
+Total
+$65.46
+About this item
+The cherries are dried whole with no sugar stirred in.
+Sales tax is collected where the state requires it.
+The box beside Cloth sack starts ticked.
+Clear that box if you only want Dried cherries, 8 oz.
+While the box stays ticked, fifteen dollars and sixty cents is added under Cloth sack.
+Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked.
+
+hidden_flagged:
+(none)

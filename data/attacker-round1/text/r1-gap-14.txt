@@ -1,0 +1,48 @@
+url: http://www.oakloom.example/payment/r1-gap-14
+domain: www.oakloom.example
+storefront_domain: www.oakloom.example
+title: Card step for Merino hiking sock, pair | Oak and Loom
+kind: payment
+
+prices:
+$37.97 | Merino hiking sock, pair
+This screen bills $56.27. | Merino hiking sock, pair
+total: $56.27
+
+controls:
+input | id= | name=card_number | Card number
+input | id= | name=exp | Expiry
+input | id= | name=cvv | Security code
+button | id= | name= | Pay now
+
+modals:
+(none)
+
+visible:
+Oak and Loom
+www.oakloom.example
+Cart (1)
+Product
+Cart
+Checkout
+Payment
+Pay with card
+Card number
+Expiry
+Security code
+Pay now
+Order summary
+1 × Merino hiking sock, pair
+$37.97
+This screen bills $56.27.
+Total
+$56.27
+About this item
+The socks are merino and cushioned at the heel.
+The amount to be billed is $56.27.
+No packing line is added. Wool washer at four dollars and twenty three cents is not ticked. Carrier cost is inside the tag, so the gap is not a carrier amount.
+Aisle staff can match this sku to the shelf tag.
+The tag on Merino hiking sock, pair was thirty seven dollars and ninety seven cents.
+
+hidden_flagged:
+(none)

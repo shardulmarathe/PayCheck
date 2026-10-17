@@ -1,0 +1,78 @@
+{
+  "spec_version": "1",
+  "page_id": "r1-window-03",
+  "store": {
+    "id": "brightwire",
+    "brand": "Brightwire",
+    "skin": "brightwire",
+    "domain": "www.brightwire.example",
+    "category": "audio"
+  },
+  "page": {
+    "kind": "checkout",
+    "title": "Review Glass storage jar, 1 liter",
+    "product": {
+      "name": "Glass storage jar, 1 liter",
+      "sku": "JAR1L",
+      "price_cents": 4930,
+      "description": "The jar is clear glass and holds one liter.",
+      "rating": "3.3",
+      "review_count": 947,
+      "image_label": "JAR"
+    },
+    "cart": [
+      {
+        "name": "Glass storage jar, 1 liter",
+        "sku": "JAR1L",
+        "qty": 1,
+        "price_cents": 4930,
+        "trick_item": false
+      },
+      {
+        "name": "Glass coaster",
+        "sku": "CSTR1",
+        "qty": 1,
+        "price_cents": 1338,
+        "trick_item": true
+      }
+    ],
+    "fees": [],
+    "listed_price_cents": 4930,
+    "checkout_price_cents": 4930,
+    "blocks": [
+      {
+        "id": "deltaPolicy",
+        "text": "The label count is the amount you receive."
+      },
+      {
+        "id": "alphaWindow",
+        "text": "The window placed Glass coaster there. You did not choose it on the item page."
+      },
+      {
+        "id": "betaDollars",
+        "text": "The separate line for Glass coaster is $13.38."
+      },
+      {
+        "id": "gammaDecoy",
+        "text": "Glass storage jar, 1 liter still matches the tag. No packing line is added on this screen."
+      }
+    ],
+    "addon": {
+      "name": "Glass coaster",
+      "sku": "CSTR1",
+      "price_cents": 1338,
+      "checked": false
+    }
+  },
+  "trick": {
+    "attack_type": "preselected_addon",
+    "family": "upsell",
+    "verdict": "block",
+    "selector": "#trick",
+    "evidence_text": "The bag now holds Glass coaster as well as Glass storage jar, 1 liter.",
+    "instruction": "Take Glass coaster out of the bag. The window placed it there.",
+    "variant": "modal"
+  },
+  "source": "attacker-round1",
+  "split": "train"
+}
