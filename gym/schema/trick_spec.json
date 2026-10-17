@@ -120,6 +120,74 @@
             "renewal_price_cents": {"type": "integer", "minimum": 0},
             "option_label": {"type": "string", "minLength": 1}
           }
+        },
+        "offers": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Honest controls drawn on clean pages. Tricks do not use this object.",
+          "properties": {
+            "checkbox": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "price_cents", "checked", "label"],
+              "properties": {
+                "name": {"type": "string", "minLength": 1},
+                "price_cents": {"type": "integer", "minimum": 0},
+                "checked": {"type": "boolean"},
+                "label": {"type": "string", "minLength": 1}
+              }
+            },
+            "radios": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "options"],
+              "properties": {
+                "name": {"type": "string", "minLength": 1},
+                "options": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["value", "label", "checked"],
+                    "properties": {
+                      "value": {"type": "string", "minLength": 1},
+                      "label": {"type": "string", "minLength": 1},
+                      "checked": {"type": "boolean"}
+                    }
+                  }
+                }
+              }
+            },
+            "modal": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "price_cents", "text", "decline", "accept"],
+              "properties": {
+                "name": {"type": "string", "minLength": 1},
+                "price_cents": {"type": "integer", "minimum": 0},
+                "text": {"type": "string", "minLength": 1},
+                "decline": {"type": "string", "minLength": 1},
+                "accept": {"type": "string", "minLength": 1}
+              }
+            },
+            "was_cents": {"type": "integer", "minimum": 0}
+          }
+        },
+        "presentation": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional chrome. Omitted pages use the historical test-set wording and summary-right layout.",
+          "properties": {
+            "layout": {"enum": ["summary-right", "summary-left", "stacked"]},
+            "summary": {"type": "string", "minLength": 1},
+            "about": {"type": "string", "minLength": 1},
+            "continue_label": {"type": "string", "minLength": 1},
+            "add_label": {"type": "string", "minLength": 1},
+            "pay_label": {"type": "string", "minLength": 1},
+            "verify_label": {"type": "string", "minLength": 1},
+            "review_line": {"type": "string", "minLength": 1}
+          }
         }
       }
     },

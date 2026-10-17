@@ -79,3 +79,39 @@ def test_read_page_works_on_a_live_url():
     assert "Powercell AA Alkaline Batteries, 12-pack" in text
     assert "$11.49" in text
     assert "kind: product" in text
+
+
+def test_strike_through_text_is_prefixed_with_was():
+    html = """<!DOCTYPE html>
+<html><head><style>.was { text-decoration: line-through; }</style></head>
+<body>
+  <s>$6.99</s>
+  <del>$1.00</del>
+  <strike>$2.50</strike>
+  <span style="text-decoration: line-through">$2.00</span>
+  <span class="was" data-price="349" data-price-label="Soap">$3.49</span>
+  <span data-price="849" data-price-label="Soap">$8.49</span>
+  <p>was $5.00 already marked</p>
+</body></html>"""
+    with Browser() as browser:
+        browser.open_html(html, "http://shop.example/sale")
+        text = browser.compact_text()
+    assert "was $6.99" in text
+    assert "was $1.00" in text
+    assert "was $2.50" in text
+    assert "was $2.00" in text
+    assert "was $3.49 | Soap" in text
+    assert "$8.49 | Soap" in text
+    assert "was was" not in text
+    assert "was $5.00 already marked" in text
+
+    spec = _spec("price_change", "drift", "checkout")
+    with Browser() as browser:
+        browser.open_html(render_html(spec), page_url(spec))
+        page_text = browser.compact_text()
+    from gym.money import money
+
+    listed = money(spec["page"]["listed_price_cents"])
+    assert f"was {listed}" in page_text
+    assert spec["trick"]["evidence_text"] in page_text
+    assert f"was {spec['trick']['evidence_text']}" not in page_text

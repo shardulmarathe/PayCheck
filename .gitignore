@@ -13,4 +13,5 @@ node_modules/
 uploads/
 data/trainset/
 data/attacker/
+data/attacker-round*/
 *.log

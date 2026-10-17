@@ -90,6 +90,27 @@ EXTRACT_JS = r"""
     return String(value || "").replace(/\s+/g, " ").trim();
   }
 
+  function struck(el) {
+    let node = el;
+    while (node && node.nodeType === 1) {
+      const tag = node.tagName;
+      if (tag === "S" || tag === "DEL" || tag === "STRIKE") return true;
+      if (node.classList && node.classList.contains("was")) return true;
+      const style = getComputedStyle(node);
+      const line = String(style.textDecorationLine || "") + " " + String(style.textDecoration || "");
+      if (line.indexOf("line-through") !== -1) return true;
+      node = node.parentElement;
+    }
+    return false;
+  }
+
+  function markWas(el, value) {
+    const text = clean(value);
+    if (!text) return "";
+    if (struck(el) && !/^was\b/i.test(text)) return "was " + text;
+    return text;
+  }
+
   function selectorOf(el) {
     if (el.id) return "#" + el.id;
     const name = el.getAttribute("name");
@@ -125,7 +146,7 @@ EXTRACT_JS = r"""
       for (const node of el.childNodes) {
         if (node.nodeType === Node.TEXT_NODE) direct += node.textContent;
       }
-      direct = clean(direct);
+      direct = markWas(el, direct);
       if (direct) lines.push(direct);
       for (const child of el.children) walk(child);
     }
@@ -160,7 +181,7 @@ EXTRACT_JS = r"""
   const prices = [];
   for (const el of document.querySelectorAll("[data-price]")) {
     prices.push({
-      text: clean(el.innerText || el.textContent),
+      text: markWas(el, el.innerText || el.textContent),
       label: el.getAttribute("data-price-label") || "",
     });
   }

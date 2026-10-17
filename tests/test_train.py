@@ -127,3 +127,51 @@ def test_no_normalized_text_overlap_between_testset_and_train():
                     test_lines.add(key)
     overlap = sorted(test_lines & train_keys)
     assert overlap == []
+
+
+def test_rounds_are_distinct_and_dev_is_not_the_test_set(tmp_path: Path):
+    from gym.build import mentions_real_brand
+    from gym.catalog import seed_for_round
+    from gym.testset import frozen_specs
+    from gym.train import load_attacker_specs, split_train_dev
+
+    first = training_specs(30, seed_for_round(1), round_n=1)
+    second = training_specs(30, seed_for_round(2), round_n=2)
+    assert {spec["store"]["brand"] for spec in first}.isdisjoint(
+        {spec["store"]["brand"] for spec in second}
+    )
+    assert {spec["page"]["product"]["name"] for spec in first}.isdisjoint(
+        {spec["page"]["product"]["name"] for spec in second}
+    )
+    for spec in first + second:
+        for text in walk_strings(spec):
+            assert not mentions_real_brand(text)
+    train, dev = split_train_dev(first, 15)
+    assert train and dev
+    assert len(train) + len(dev) == len(first)
+    assert {spec["page_id"] for spec in train}.isdisjoint({spec["page_id"] for spec in dev})
+
+    out = tmp_path / "round1"
+    write_training(20, out, seed_for_round(1), round_n=1)
+    train_ids = {
+        json.loads(line)["page_id"]
+        for line in (out / "labels.jsonl").read_text(encoding="utf-8").splitlines()
+    }
+    dev_ids = {
+        json.loads(line)["page_id"]
+        for line in (out / "dev" / "labels.jsonl").read_text(encoding="utf-8").splitlines()
+    }
+    assert dev_ids and train_ids.isdisjoint(dev_ids)
+    manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["overlap_check"] == "pass"
+    assert manifest["round"] == 1
+
+    stolen = json.loads(json.dumps(frozen_specs()[0]))
+    stolen["page_id"] = "attacker-stolen"
+    stolen["split"] = "train"
+    stolen["source"] = "attacker-round2"
+    directory = tmp_path / "attacker"
+    directory.mkdir()
+    (directory / "stolen.json").write_text(json.dumps(stolen), encoding="utf-8")
+    with pytest.raises(SystemExit):
+        load_attacker_specs(directory)

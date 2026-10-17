@@ -29,8 +29,9 @@ python -m playwright install chromium
 python -m gym.dataset --check          # frozen page-id split still matches the seed
 make testset                           # rebuild the 300-page test set and require the same hash
 make test
-python -m gym.train --n 50 --out data/trainset
-python -m gym.render_specs --specs-dir DIR --out data/attacker-round1 --source attacker-round1
+python -m gym.train --round 1 --n 50
+python -m gym.train --round 2 --n 50
+python -m gym.render_specs --specs-dir DIR --out data/attacker-round2 --source attacker-round2
 python -m gym.serve --port 8765
 ```
 
@@ -40,7 +41,7 @@ The shop server is at [Checkout guard gym](http://127.0.0.1:8765) once `python -
 
 ## Frozen test set
 
-300 pages, half clean. Built from fixed templates plus the test pile of [yamanalab/ec-darkpattern](https://github.com/yamanalab/ec-darkpattern) (Apache-2.0). No model writes these pages. `copycat_domain` and `listing_injection` are only in this set. Round-0 training does include `fake_card_verification`.
+300 pages, half clean. Built from fixed templates plus the test pile of [yamanalab/ec-darkpattern](https://github.com/yamanalab/ec-darkpattern) (Apache-2.0). No model writes these pages. `copycat_domain` and `listing_injection` are only in this set. Training rounds do include `fake_card_verification`. Clean pages include honest look-alikes (an unticked checkbox, a popup whose default is "No thanks", a disclosed shipping or tax line, a real sale price, or a radio with the plain option selected) so page structure alone is not the label. See `gym/README.md`.
 
 A fee is a checkout summary line. A price change is a higher price next to the struck shelf price. A checked add-on is labeled with the add-on it selects. A subscription quote is the pre-selected option on that page.
 
@@ -61,7 +62,7 @@ A fee is a checkout summary line. A price change is a higher price next to the s
 Content hash (SHA-256, see `gym/schema/README.md`):
 
 ```
-9e9a2a522724626d63f7a7063a16546909e25c2fe838c8e20c27419c0e002037
+8f07b8479900cca750ab8768728e1a913656dbcf1add7cc724b686a817396f45
 ```
 
 `gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).

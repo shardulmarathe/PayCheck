@@ -145,6 +145,38 @@ def page_url(spec: dict) -> str:
     return f"http://{domain}/{kind}/{spec['page_id']}"
 
 
+def structural_features(html: str) -> dict[str, bool]:
+    """Which trick-shaped controls a rendered page actually contains.
+
+    Strike-through is an element (``class="was"``, ``<s>``, ``<del>``), not the
+    stylesheet rule that defines the decoration. Every page's CSS mentions
+    ``line-through``; that is not a sale price.
+    """
+    return {
+        "checkbox": 'type="checkbox"' in html,
+        "popup": 'role="dialog"' in html or 'aria-modal="true"' in html,
+        "fee": "data-fee=" in html,
+        "strike": 'class="was"' in html or "<s>" in html or "<s " in html or "<del>" in html or "<del " in html,
+        "radio": 'type="radio"' in html,
+    }
+
+
+def _presentation(spec: dict) -> dict[str, str]:
+    custom = spec["page"].get("presentation") or {}
+    brand = spec["store"]["brand"]
+    review = custom.get("review_line") or f"Review the total before you pay {brand}."
+    return {
+        "layout": custom.get("layout") or "summary-right",
+        "summary": custom.get("summary") or "Order summary",
+        "about": custom.get("about") or "About this item",
+        "continue_label": custom.get("continue_label") or "Continue to payment",
+        "add_label": custom.get("add_label") or "Add to cart",
+        "pay_label": custom.get("pay_label") or "Pay now",
+        "verify_label": custom.get("verify_label") or "Verify card",
+        "review_line": review,
+    }
+
+
 def render_html(spec: dict, *, check: bool = True) -> str:
     if check:
         validate_spec(spec)
@@ -159,6 +191,8 @@ def render_html(spec: dict, *, check: bool = True) -> str:
     steps = [{"label": label, "current": label == current} for label in STEP_LABELS]
     addon = page.get("addon")
     subscription = page.get("subscription")
+    offers = page.get("offers") or {}
+    was_cents = offers.get("was_cents")
     context = {
         "skin": skin,
         "brand": spec["store"]["brand"],
@@ -204,6 +238,14 @@ def render_html(spec: dict, *, check: bool = True) -> str:
         "evidence": trick["evidence_text"],
         "blocks": page["blocks"],
         "live": live,
+        "presentation": _presentation(spec),
+        "offers": {
+            "checkbox": offers.get("checkbox"),
+            "radios": offers.get("radios"),
+            "modal": offers.get("modal"),
+            "was_cents": was_cents,
+            "was_text": money(int(was_cents)) if was_cents is not None else "",
+        },
         "actions": {
             "add": runtime.get("add_action", ""),
             "remove": runtime.get("remove_action", ""),
