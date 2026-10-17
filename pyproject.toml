@@ -1,0 +1,27 @@
+[project]
+name = "checkout-guard"
+version = "0.1.0"
+description = "Checkout-guard gym: fake stores, trick specs, and labeled pages for a shopping-agent guard."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "jinja2>=3.1",
+  "jsonschema>=4.20",
+  "playwright>=1.48",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["gym*"]
+
+[tool.setuptools.package-data]
+gym = ["templates/*.html", "templates/*.j2", "schema/*.json", "schema/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

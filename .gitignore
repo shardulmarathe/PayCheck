@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+dist/
+build/
+.playwright/
+node_modules/
+.DS_Store
+uploads/
+data/trainset/
+data/attacker/
+*.log
