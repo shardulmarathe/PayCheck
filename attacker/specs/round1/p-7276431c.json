@@ -36,16 +36,20 @@
     "checkout_price_cents": 4095,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The cure crew signed the slip Wednesday because the balm stays smooth, batch oak nook seventy nine."
+      },
+      {
+        "id": "b2",
+        "text": "A small tin from the balm table suits dry hands, batch copper pail forty."
+      },
+      {
+        "id": "b3",
         "text": "Cedarwood shows up in this run, and cap the tin so the balm does not dry out, batch maple rack fifty three."
       },
       {
-        "id": "noteC",
-        "text": "Nothing in the pack beyond a one-ounce balm, filled at a curing rack on Wednesday, batch cork tray sixty six."
-      },
-      {
-        "id": "noteA",
-        "text": "A small tin from the balm table suits dry hands, batch copper pail forty."
+        "id": "b4",
+        "text": "Nothing in the pack beyond a one-ounce balm, filled at a curing rack on Wednesday, batch cork tray sixty six. The soap maker held it a short afternoon so the balm stays smooth, batch brass crate twenty seven. The soap maker held it a short afternoon so the balm stays smooth, batch brass crate twenty seven."
       }
     ],
     "presentation": {

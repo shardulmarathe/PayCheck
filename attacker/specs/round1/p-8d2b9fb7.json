@@ -36,12 +36,20 @@
     "checkout_price_cents": 6027,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The crew at the back bakery uses a slow toast for this, and this one is batch oak loft forty nine."
+      },
+      {
+        "id": "b2",
+        "text": "Give it a cool evening at Water Street, and batch copper nook eighty stays with a tin with a slip lid."
+      },
+      {
+        "id": "b3",
         "text": "Hand filling on Wednesday is how the miller still finishes these, batch maple bin twenty three."
       },
       {
-        "id": "noteA",
-        "text": "Give it a cool evening at Water Street, and batch copper nook eighty stays with a tin with a slip lid."
+        "id": "b4",
+        "text": "You will find thin-rolled barley and not much else, packed Thursday as batch cork peg thirty six. A cloth sack holds a toasty note in, which is what a baker on the early shift wanted for batch brass hook sixty seven. A cloth sack holds a toasty note in, which is what a baker on the early shift wanted for batch brass hook sixty seven."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Ink refill",
         "price_cents": 1138,
         "checked": false,
-        "label": "Add Ink refill for eleven dollars and thirty eight cents"
+        "label": "Add Ink refill for eleven dollars and thirty eight cents, with parcel protection and a paper wrap"
       }
     }
   },

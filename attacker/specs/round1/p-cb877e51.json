@@ -41,20 +41,20 @@
     "checkout_price_cents": 6881,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "Keep the lid on so the smoke stays in the tin, which is the right habit for a roast vegetable, batch pine rack forty eight."
+      },
+      {
+        "id": "b2",
         "text": "It rested one night at Water Street, then went into a cloth sack, batch ash tray sixty one."
       },
       {
-        "id": "noteD",
-        "text": "Sunday evening at Water Street was for hand filling, and the slip reads linen pail seventy four."
+        "id": "b3",
+        "text": "A paper wrap and parcel protection are on the slip for batch tin crock eighteen."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "What you notice is a warm grain smell, and alder-smoked salt is the main thing in the pack, batch slate crock thirty five."
-      },
-      {
-        "id": "noteB",
-        "text": "Keep the lid on so the smoke stays in the tin, which is the right habit for a roast vegetable, batch pine rack forty eight."
       }
     ],
     "presentation": {

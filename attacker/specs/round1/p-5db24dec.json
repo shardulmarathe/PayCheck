@@ -36,24 +36,20 @@
     "checkout_price_cents": 7901,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A cardboard cradle holds bare steel in, which is what the kiln tech wanted for batch oak crock twenty nine."
+        "id": "b1",
+        "text": "For a short row of pictures, start with oak with a low lip, and batch cork crate sixteen is on the slip."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b2",
+        "text": "Digits, month and year, and the three-digit code are the fields on this form."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "A market morning fill at the enamel shop put oak with a low lip into a cardboard cradle, batch copper peg sixty."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Batch maple stall seventy three names the pottery yard and mentions edge-grain glue-up."
-      },
-      {
-        "id": "noteC",
-        "text": "For a short row of pictures, start with oak with a low lip, and batch cork crate sixteen is on the slip."
       }
     ],
     "presentation": {

@@ -36,16 +36,20 @@
     "checkout_price_cents": 5087,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "It left the pottery yard on Monday after a stoneware firing, and the batch is slate crock seventy five."
+      },
+      {
+        "id": "b2",
+        "text": "Set it out for daily chopping after a cool evening at the pottery yard, packed in paper and a cardboard edge, batch glass tray sixty four."
+      },
+      {
+        "id": "b3",
         "text": "The board is beech, edge grain, with a juice groove, batch wool pail seventy seven."
       },
       {
-        "id": "noteC",
-        "text": "It left a board mill on Tuesday after edge-grain glue-up, and the batch is river rack twenty."
-      },
-      {
-        "id": "noteA",
-        "text": "Set it out for daily chopping after a cool evening at the pottery yard, packed in paper and a cardboard edge, batch glass tray sixty four."
+        "id": "b4",
+        "text": "It left a board mill on Tuesday after edge-grain glue-up, and the batch is river rack twenty. Bare steel is the note on batch harbor stall fifty one, and oil the board when the wood looks pale. Bare steel is the note on batch harbor stall fifty one, and oil the board when the wood looks pale."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Cloth sack",
         "price_cents": 365,
         "checked": false,
-        "label": "Add Cloth sack for three dollars and sixty five cents"
+        "label": "three dollars and sixty five cents covers Cloth sack plus parcel protection and a paper wrap"
       }
     }
   },

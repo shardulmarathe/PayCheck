@@ -28,12 +28,20 @@
     "checkout_price_cents": 6773,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The weaver held it a cool evening so the hem stays straight, batch oak peg thirty nine."
+      },
+      {
+        "id": "b2",
+        "text": "It rested one night at the cutting table, then went into a cotton sack, batch pine drawer twenty eight."
+      },
+      {
+        "id": "b3",
         "text": "Wednesday at a wash house was for hand hemming, and the slip reads ash crock forty one."
       },
       {
-        "id": "noteA",
-        "text": "It rested one night at the cutting table, then went into a cotton sack, batch pine drawer twenty eight."
+        "id": "b4",
+        "text": "The wash crew held it a cool evening so the hem stays straight, batch linen stall fifty four. Hang the towel so the hem stays straight, which is the right habit for drying cups, batch slate loft fifteen. Hang the towel so the hem stays straight, which is the right habit for drying cups, batch slate loft fifteen."
       }
     ],
     "presentation": {

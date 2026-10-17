@@ -36,24 +36,20 @@
     "checkout_price_cents": 7023,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "A dry-rack cure on Sunday evening is how a splitter still finishes these, batch copper bin sixty."
-      },
-      {
-        "id": "noteB",
-        "text": "You will find firestarter pucks and not much else, packed Sunday evening as batch maple hook seventy three."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "The crew at a splitting bench uses a strike check for this, and this one is batch cork loft sixteen."
       },
       {
-        "id": "noteD",
-        "text": "A splitter likes it for damp kindling and wrote batch oak drawer twenty nine on the slip."
+        "id": "b2",
+        "text": "every ninety days at eighty dollars and seventy nine cents."
       },
       {
-        "id": "factA",
-        "text": "every ninety days at eighty dollars and seventy nine cents."
+        "id": "b3",
+        "text": "A dry-rack cure on Sunday evening is how a splitter still finishes these, batch copper bin sixty."
+      },
+      {
+        "id": "b4",
+        "text": "You will find firestarter pucks and not much else, packed Sunday evening as batch maple hook seventy three. Give it two nights at the match room, and batch brass nook forty seven stays with a tin of eight."
       }
     ],
     "presentation": {

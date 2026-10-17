@@ -36,20 +36,20 @@
     "checkout_price_cents": 3301,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
         "text": "A slim box from the press room suits a sketch, batch hemp rack fifty five."
       },
       {
-        "id": "noteD",
-        "text": "Fresh paper shows up in this run, and sharpen with a blade if you want a long point, batch tin tray sixty eight."
+        "id": "b2",
+        "text": "A slim box from the pencil bench suits a sketch, batch river crock forty."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "Sunday evening at a cutting bench was for a graphite check, and the slip reads oak crate twenty nine."
       },
       {
-        "id": "noteB",
-        "text": "The printer held it a cool evening so the point stays even, batch cedar pail forty two."
+        "id": "b4",
+        "text": "The printer held it a cool evening so the point stays even, batch cedar pail forty two. It rested one night at the pencil bench, then went into a slim box, batch cork stall sixteen. It rested one night at the pencil bench, then went into a slim box, batch cork stall sixteen."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Maple spoon",
         "price_cents": 667,
         "checked": false,
-        "label": "Add Maple spoon for $6.67"
+        "label": "Include Maple spoon at $6.67 for parcel protection in a paper wrap"
       }
     }
   },

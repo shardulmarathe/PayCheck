@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 5177,
         "trick_item": false
+      },
+      {
+        "name": "Walnut headset stand",
+        "sku": "STAND1",
+        "qty": 1,
+        "price_cents": 1229,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,15 +43,19 @@
     "checkout_price_cents": 5177,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The crew at Two Harbors uses a slow toast for this, and this one is batch slate stall fifty five."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "A baker on the early shift likes it for tea and toast and wrote batch pine tray sixty eight on the slip."
       },
       {
-        "id": "noteA",
+        "id": "b3",
+        "text": "You will find raw wildflower honey and not much else, packed Sunday evening as batch wool tray sixty seven."
+      },
+      {
+        "id": "b4",
         "text": "You will find raw wildflower honey and not much else, packed Thursday as batch clay crock forty two."
       }
     ],

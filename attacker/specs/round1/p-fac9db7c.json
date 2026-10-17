@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 4320,
         "trick_item": false
+      },
+      {
+        "name": "Cedarwood bar soap",
+        "sku": "SOAP1",
+        "qty": 1,
+        "price_cents": 1465,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,11 +48,19 @@
     "checkout_price_cents": 4320,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Set it out for a morning boil after one night at the enamel shop, packed in paper and a cardboard edge, batch iron crock seventy three."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "The kettle is steel with a wood handle and holds one and a half liters, batch birch rack sixteen."
+      },
+      {
+        "id": "b3",
+        "text": "It left the pottery yard on Wednesday after edge-grain glue-up, and the batch is amber tray twenty nine."
+      },
+      {
+        "id": "b4",
         "text": "Bare steel is the note on batch river crate sixty, and empty the kettle after the boil and leave the lid ajar."
       }
     ],

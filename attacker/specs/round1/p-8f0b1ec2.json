@@ -28,16 +28,20 @@
     "checkout_price_cents": 2216,
     "blocks": [
       {
-        "id": "noteB",
-        "text": "You will find long matches and not much else, packed a market morning as batch birch bin twenty six."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "The crew at the match room uses a dry-rack cure for this, and this one is batch amber hook thirty nine."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "Give it one night at a splitting bench, and batch river pail eighty stays with a tin of eight."
+      },
+      {
+        "id": "b3",
         "text": "Hand splitting on Friday is how the match packer still finishes these, batch iron nook thirteen."
+      },
+      {
+        "id": "b4",
+        "text": "You will find long matches and not much else, packed a market morning as batch birch bin twenty six."
       }
     ],
     "presentation": {

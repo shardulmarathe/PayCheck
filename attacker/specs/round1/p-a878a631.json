@@ -36,24 +36,20 @@
     "checkout_price_cents": 3815,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b1",
+        "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "A hint of walnut oil shows up in this run, and do not kink the braid, batch hemp hook twenty five."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Nothing in the pack beyond cloth-braid audio lead, filled at a quiet desk room on Monday, batch tin loft thirty eight."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "A cable maker signed the slip Monday because the braid lies flat, batch harbor drawer fifty one."
-      },
-      {
-        "id": "noteD",
-        "text": "A Tuesday fill at the solder bench put cloth-braid audio lead into a cotton sleeve, batch glass peg sixty four."
       }
     ],
     "presentation": {

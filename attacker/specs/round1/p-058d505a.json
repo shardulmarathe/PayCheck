@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 1343,
         "trick_item": false
+      },
+      {
+        "name": "Foam headset cushion, pair",
+        "sku": "CUSH2",
+        "qty": 1,
+        "price_cents": 430,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,12 +43,20 @@
     "checkout_price_cents": 1343,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Batch hemp tray sixty five names the back bakery and mentions a slow toast."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "For a dense country loaf, start with whole rye berries, and batch tin pail seventy eight is on the slip."
+      },
+      {
+        "id": "b3",
+        "text": "A tin with a slip lid holds a warm grain smell in, which is what the miller wanted for batch harbor bin twenty one."
+      },
+      {
+        "id": "b4",
+        "text": "Give it two nights at Two Harbors, and batch glass hook thirty four stays with a waxed wrap. A Tuesday fill at a dock room put whole rye berries into a glass jar, batch cedar rack fifty two. A Tuesday fill at a dock room put whole rye berries into a glass jar, batch cedar rack fifty two."
       }
     ],
     "presentation": {

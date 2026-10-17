@@ -36,12 +36,20 @@
     "checkout_price_cents": 2403,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Plain soap shows up in this run, and let the bar dry between washes, batch ash crate sixty one."
+      },
+      {
+        "id": "b2",
+        "text": "Nothing in the pack beyond a cedarwood bar, filled at a curing rack on Sunday evening, batch linen crock seventy four."
+      },
+      {
+        "id": "b3",
         "text": "The soap maker held it half a day so the bar lasts longer, batch slate peg thirty five."
       },
       {
-        "id": "noteB",
-        "text": "A small tin from the balm table suits a daily wash, batch pine loft forty eight."
+        "id": "b4",
+        "text": "A small tin from the balm table suits a daily wash, batch pine loft forty eight. A market morning at the soap bench was for a cedar mix, and the slip reads clay drawer twenty two. A market morning at the soap bench was for a cedar mix, and the slip reads clay drawer twenty two."
       }
     ],
     "presentation": {

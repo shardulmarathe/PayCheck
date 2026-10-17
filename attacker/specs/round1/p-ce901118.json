@@ -36,16 +36,20 @@
     "checkout_price_cents": 3564,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Set it out for a small room after a short afternoon at the solder bench, packed in a small cardboard tray, batch oak hook nineteen."
+      },
+      {
+        "id": "b2",
+        "text": "A cable maker likes it for a small room and wrote batch copper tray fifty on the slip."
+      },
+      {
+        "id": "b3",
         "text": "Bring it out for a small room, packed in a cotton sleeve from a quiet desk room, batch maple pail sixty three."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "A hint of walnut oil is the note on batch cork rack seventy six, and wipe the shell if the desk is dusty."
-      },
-      {
-        "id": "noteA",
-        "text": "A cable maker likes it for a small room and wrote batch copper tray fifty on the slip."
       }
     ],
     "presentation": {

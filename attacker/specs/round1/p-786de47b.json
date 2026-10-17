@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 944,
         "trick_item": false
+      },
+      {
+        "name": "Long match box",
+        "sku": "MTCH1",
+        "qty": 1,
+        "price_cents": 941,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,15 +48,19 @@
     "checkout_price_cents": 944,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "What you notice is cotton fiber, and cotton paper is the main thing in the pack, batch iron drawer twenty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Keep the stack under a light weight, which is the right habit for a short letter, batch birch peg thirty six."
       },
       {
-        "id": "noteA",
+        "id": "b3",
+        "text": "It rested half a day at the press room, then went into a slim box, batch amber stall forty nine."
+      },
+      {
+        "id": "b4",
         "text": "A folder packed it in a slim box because the flap seals cleanly, batch river loft eighty."
       }
     ],

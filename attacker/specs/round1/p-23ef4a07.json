@@ -43,12 +43,20 @@
     "checkout_price_cents": 8147,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Batch hemp rack twenty five names the cutting table and mentions hand hemming."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "For a weeknight supper, start with washed linen, and batch tin tray thirty eight is on the slip."
+      },
+      {
+        "id": "b3",
+        "text": "A paper band holds wet linen in, which is what the weaver wanted for batch harbor nook fifty one."
+      },
+      {
+        "id": "b4",
+        "text": "Give it half a day at a wash house, and batch glass bin sixty four stays with a flat mailer."
       }
     ],
     "presentation": {

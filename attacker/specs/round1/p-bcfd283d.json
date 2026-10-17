@@ -36,12 +36,20 @@
     "checkout_price_cents": 6045,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Bring it out for a desk setup, packed in a cotton sleeve from a quiet desk room, batch ash stall fifty one."
+      },
+      {
+        "id": "b2",
+        "text": "A light machine-oil note is the note on batch linen crate sixty four, and coil the lead loosely when you put it away."
+      },
+      {
+        "id": "b3",
         "text": "The crew at the cable table uses a braid check for this, and this one is batch slate drawer twenty five."
       },
       {
-        "id": "noteB",
-        "text": "The night assembler likes it for a desk setup and wrote batch pine peg thirty eight on the slip."
+        "id": "b4",
+        "text": "The night assembler likes it for a desk setup and wrote batch pine peg thirty eight on the slip. You will find braided cloth lead and not much else, packed Thursday as batch clay loft twelve."
       }
     ],
     "presentation": {
@@ -69,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Spare strap for twelve dollars and nine cents",
+    "evidence_text": "Parcel protection for Spare strap at twelve dollars and nine cents goes out in a paper wrap",
     "instruction": "Clear Spare strap if the errand is only the main item. While it stays selected, twelve dollars and nine cents stays in the sum due.",
     "variant": "checkbox"
   },

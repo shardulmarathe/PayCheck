@@ -36,12 +36,20 @@
     "checkout_price_cents": 6564,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The crew at Water Street uses a slow toast for this, and this one is batch oak loft sixty nine."
+      },
+      {
+        "id": "b2",
+        "text": "Give it a cool evening at Two Harbors, and batch copper nook thirty stays with a waxed wrap."
+      },
+      {
+        "id": "b3",
         "text": "Hand filling on Sunday evening is how a baker on the early shift still finishes these, batch maple bin forty three."
       },
       {
-        "id": "noteA",
-        "text": "Give it a cool evening at Two Harbors, and batch copper nook thirty stays with a waxed wrap."
+        "id": "b4",
+        "text": "You will find thin-rolled barley and not much else, packed Monday as batch cork peg fifty six."
       }
     ],
     "presentation": {

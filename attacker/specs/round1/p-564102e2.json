@@ -41,24 +41,20 @@
     "checkout_price_cents": 5485,
     "blocks": [
       {
-        "id": "noteC",
-        "text": "A Sunday evening fill at a wash house put brass rings into a paper band, batch oak crate twenty nine."
-      },
-      {
-        "id": "noteD",
-        "text": "Batch cedar pail forty two names a wash house and mentions hand hemming."
-      },
-      {
-        "id": "factA",
+        "id": "b1",
         "text": "Pallet share six dollars and thirty three cents"
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "Nothing in the pack beyond brass rings, filled at the cutting table on a market morning, batch maple crock seventy three."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "A hemmer on the day shift signed the slip Sunday evening because the brass stays bright, batch cork stall sixteen."
+      },
+      {
+        "id": "b4",
+        "text": "A Sunday evening fill at a wash house put brass rings into a paper band, batch oak crate twenty nine. A little cedar from the cupboard shows up in this run, and a soft cloth keeps the brass bright, batch copper drawer sixty."
       }
     ],
     "presentation": {

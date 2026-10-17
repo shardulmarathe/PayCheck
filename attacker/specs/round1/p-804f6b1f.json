@@ -36,20 +36,20 @@
     "checkout_price_cents": 5331,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "A paper wrap holds a soft balm smell in, which is what the soap maker wanted for batch cork crate sixty six."
+      },
+      {
+        "id": "b2",
         "text": "every forty five days at fifty seven dollars."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "Batch copper peg forty names a curing rack and mentions a hand pour."
       },
       {
-        "id": "noteB",
-        "text": "For dry hands, start with a one-ounce balm, and batch maple stall fifty three is on the slip."
-      },
-      {
-        "id": "noteC",
-        "text": "A paper wrap holds a soft balm smell in, which is what the soap maker wanted for batch cork crate sixty six."
+        "id": "b4",
+        "text": "For dry hands, start with a one-ounce balm, and batch maple stall fifty three is on the slip. A Tuesday fill at a curing rack put a one-ounce balm into a paper wrap, batch brass drawer twenty seven."
       }
     ],
     "presentation": {

@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 3467,
         "trick_item": false
+      },
+      {
+        "name": "Cloth braid audio lead, 1 m",
+        "sku": "AUD1M",
+        "qty": 1,
+        "price_cents": 1491,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 3467,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "A crate holds split birch in, which is what a splitter wanted for batch glass peg seventy four."
-      },
-      {
-        "id": "noteB",
-        "text": "Give it a short afternoon at the match room, and batch wool stall seventeen stays with a tin of eight."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "Hand splitting on Thursday is how a splitter still finishes these, batch river crate thirty."
       },
       {
-        "id": "noteD",
-        "text": "You will find firestarter pucks and not much else, packed Thursday as batch iron crock forty three."
+        "id": "b2",
+        "text": "Previous thirty nine dollars and four cents. Current $34.67."
       },
       {
-        "id": "factA",
-        "text": "Previous thirty nine dollars and four cents. Current $34.67."
+        "id": "b3",
+        "text": "A crate holds split birch in, which is what a splitter wanted for batch glass peg seventy four."
+      },
+      {
+        "id": "b4",
+        "text": "Give it a short afternoon at the match room, and batch wool stall seventeen stays with a tin of eight. For damp kindling, start with firestarter pucks, and batch harbor drawer sixty one is on the slip. For damp kindling, start with firestarter pucks, and batch harbor drawer sixty one is on the slip."
       }
     ],
     "presentation": {

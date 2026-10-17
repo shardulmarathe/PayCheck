@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 2625,
         "trick_item": false
+      },
+      {
+        "name": "Cotton percale sheet, queen",
+        "sku": "SHETQ",
+        "qty": 1,
+        "price_cents": 705,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,19 +43,19 @@
     "checkout_price_cents": 2625,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Set it out for a savory bowl after one night at a dock room, packed in a waxed wrap, batch slate peg seventy five."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The groats are toasted buckwheat for a savory bowl, batch pine loft eighteen."
       },
       {
-        "id": "noteD",
-        "text": "It left the back bakery on Monday after a cool rest, and the batch is ash crate thirty one."
+        "id": "b3",
+        "text": "A faint smoke is the note on batch wool stall seventeen, and store the groats in a dry cupboard."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "Plain grain is the note on batch clay drawer sixty two, and store the groats in a dry cupboard."
       }
     ],

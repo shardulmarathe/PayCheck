@@ -43,11 +43,19 @@
     "checkout_price_cents": 3776,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The bench tech signed the slip Sunday evening because the foam keeps its shape, batch iron stall twenty three."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "A Sunday evening fill at the solder bench put foam cushions into a cotton sleeve, batch birch tray thirty six."
+      },
+      {
+        "id": "b3",
+        "text": "Batch amber pail forty nine names the cable table and mentions a fit check on a real desk."
+      },
+      {
+        "id": "b4",
         "text": "Nothing in the pack beyond foam cushions, filled at a quiet desk room on Sunday evening, batch river crock eighty."
       }
     ],

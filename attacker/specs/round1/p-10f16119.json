@@ -36,20 +36,20 @@
     "checkout_price_cents": 4660,
     "blocks": [
       {
-        "id": "noteD",
+        "id": "b1",
         "text": "What you notice is a hint of walnut oil, and a warm lamp is the main thing in the pack, batch oak stall nineteen."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "The lamp throws a warm pool on a desk, batch copper loft fifty."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "It left the cable table on Thursday after a fit check on a real desk, and the batch is maple crate sixty three."
       },
       {
-        "id": "noteC",
-        "text": "The night assembler packed it in a small cardboard tray because the shade sits level, batch cork crock seventy six."
+        "id": "b4",
+        "text": "The night assembler packed it in a small cardboard tray because the shade sits level, batch cork crock seventy six. Set it out for a reading desk after a short afternoon at the solder bench, packed in a small cardboard tray, batch brass peg thirty seven."
       }
     ],
     "presentation": {
@@ -77,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Felt pads for $3.86",
+    "evidence_text": "Felt pads at $3.86 includes parcel protection in a paper wrap",
     "instruction": "Clear Felt pads if the errand is only the main item. While it stays selected, $3.86 stays in the sum due.",
     "variant": "checkbox"
   },

@@ -36,24 +36,20 @@
     "checkout_price_cents": 4799,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "The form asks for the digits, the month and year, and the short code on the back."
+      },
+      {
+        "id": "b2",
         "text": "Bare steel shows up in this run, and wash the glass and dry the lid, batch hemp bin forty five."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Nothing in the pack beyond clear glass, filled at a board mill on Friday, batch tin peg fifty eight."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "The kiln tech signed the slip Friday because the lid seats square, batch harbor loft seventy one."
-      },
-      {
-        "id": "noteD",
-        "text": "A market morning fill at the enamel shop put clear glass into a cardboard cradle, batch glass drawer fourteen."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
       }
     ],
     "presentation": {

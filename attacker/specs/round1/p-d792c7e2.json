@@ -36,23 +36,19 @@
     "checkout_price_cents": 2403,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Give it the next morning at a cutting bench, and batch pine tray eighteen stays with a glassine sleeve."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Hand folding on Monday is how the printer still finishes these, batch ash pail thirty one."
       },
       {
-        "id": "noteD",
-        "text": "You will find graphite pencils and not much else, packed Monday as batch linen rack forty four."
+        "id": "b3",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
+        "id": "b4",
         "text": "A paper wrap holds fresh paper in, which is what the printer wanted for batch slate stall seventy five."
       }
     ],

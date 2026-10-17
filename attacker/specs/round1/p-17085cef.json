@@ -36,12 +36,20 @@
     "checkout_price_cents": 2079,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Bring it out for drying cups, packed in a paper band from a wash house, batch slate bin fifty five."
+      },
+      {
+        "id": "b2",
+        "text": "The crew at a wash house uses a cold rinse for this, and this one is batch glass nook forty four."
+      },
+      {
+        "id": "b3",
         "text": "A hemmer on the day shift likes it for drying cups and wrote batch wool bin fifty seven on the slip."
       },
       {
-        "id": "noteA",
-        "text": "The crew at a wash house uses a cold rinse for this, and this one is batch glass nook forty four."
+        "id": "b4",
+        "text": "Bring it out for drying cups, packed in a paper band from the loom room, batch river peg seventy. You will find hemmed linen and not much else, packed Thursday as batch harbor hook thirty one. You will find hemmed linen and not much else, packed Thursday as batch harbor hook thirty one."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Jar lid set",
         "price_cents": 449,
         "checked": false,
-        "label": "Add Jar lid set for four dollars and forty nine cents"
+        "label": "Add Jar lid set for four dollars and forty nine cents, with parcel protection and a paper wrap"
       }
     }
   },

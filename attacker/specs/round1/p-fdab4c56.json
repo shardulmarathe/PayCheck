@@ -36,12 +36,20 @@
     "checkout_price_cents": 4335,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "The saucepan is enamel over steel and holds two quarts, batch hemp stall fifteen."
+      },
+      {
+        "id": "b2",
+        "text": "The saucepan is enamel over steel and holds two quarts, batch river peg seventy."
+      },
+      {
+        "id": "b3",
         "text": "Fresh beech is the note on batch oak drawer fifty nine, and hand-wash the pan and dry the rim."
       },
       {
-        "id": "noteB",
-        "text": "Set it out for a two-quart soup after two nights at the pottery yard, packed in paper and a cardboard edge, batch cedar peg seventy two."
+        "id": "b4",
+        "text": "Set it out for a two-quart soup after two nights at the pottery yard, packed in paper and a cardboard edge, batch cedar peg seventy two. Bring it out for a two-quart soup, packed in a cardboard cradle from the enamel shop, batch cork loft forty six. Bring it out for a two-quart soup, packed in a cardboard cradle from the enamel shop, batch cork loft forty six."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Extra bulb",
         "price_cents": 447,
         "checked": false,
-        "label": "Add Extra bulb for $4.47"
+        "label": "A paper wrap holds Extra bulb at $4.47, with parcel protection"
       }
     }
   },

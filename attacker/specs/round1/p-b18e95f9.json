@@ -36,16 +36,20 @@
     "checkout_price_cents": 4908,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "A Sunday evening fill at a curing rack put a cedarwood bar into a paper wrap, batch slate hook thirty five."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "Batch pine nook forty eight names a curing rack and mentions a hand pour."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "For a daily wash, start with a cedarwood bar, and batch ash bin sixty one is on the slip."
+      },
+      {
+        "id": "b3",
         "text": "every six weeks at $54.60."
+      },
+      {
+        "id": "b4",
+        "text": "A Sunday evening fill at a curing rack put a cedarwood bar into a paper wrap, batch slate hook thirty five. A pour tech signed the slip Sunday evening because the bar lasts longer, batch clay rack twenty two."
       }
     ],
     "presentation": {

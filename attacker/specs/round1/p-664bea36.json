@@ -36,20 +36,20 @@
     "checkout_price_cents": 1638,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "every quarter at $17.91."
+      },
+      {
+        "id": "b2",
         "text": "The miller likes it for a jar of yogurt and wrote batch amber crate twenty nine on the slip."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Bring it out for a jar of yogurt, packed in a cloth sack from the back bakery, batch clay crock forty two."
       },
       {
-        "id": "noteC",
-        "text": "Plain grain is the note on batch slate stall fifty five, and keep the sack sealed so the cherries stay soft."
-      },
-      {
-        "id": "factA",
-        "text": "every quarter at $17.91."
+        "id": "b4",
+        "text": "Plain grain is the note on batch slate stall fifty five, and keep the sack sealed so the cherries stay soft. The crew at a dock room uses stone milling for this, and this one is batch birch loft sixteen."
       }
     ],
     "presentation": {

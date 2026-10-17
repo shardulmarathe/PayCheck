@@ -41,24 +41,20 @@
     "checkout_price_cents": 723,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "Batch pine rack eighteen names a splitting bench and mentions a strike check."
-      },
-      {
-        "id": "noteB",
-        "text": "For damp kindling, start with firestarter pucks, and batch ash tray thirty one is on the slip."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "A crate holds a little sulfur on the match tip in, which is what a splitter wanted for batch linen pail forty four."
       },
       {
-        "id": "noteD",
-        "text": "Give it the next morning at the match room, and batch brass bin fifty seven stays with a tin of eight."
+        "id": "b2",
+        "text": "Queue jump $1.79"
       },
       {
-        "id": "factA",
-        "text": "Queue jump $1.79"
+        "id": "b3",
+        "text": "Batch pine rack eighteen names a splitting bench and mentions a strike check."
+      },
+      {
+        "id": "b4",
+        "text": "For damp kindling, start with firestarter pucks, and batch ash tray thirty one is on the slip. A Sunday evening fill at a splitting bench put firestarter pucks into a crate, batch slate crock seventy five."
       }
     ],
     "presentation": {

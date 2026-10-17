@@ -36,20 +36,20 @@
     "checkout_price_cents": 5839,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The jar is clear glass and holds one liter, batch amber hook sixty nine."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "It left a board mill on Friday after edge-grain glue-up, and the batch is clay loft twelve."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A board maker packed it in paper and a cardboard edge because the lid seats square, batch slate drawer twenty five."
       },
       {
-        "id": "noteD",
-        "text": "What you notice is fresh beech, and clear glass is the main thing in the pack, batch pine peg thirty eight."
+        "id": "b4",
+        "text": "The kiln tech packed it in paper and a cardboard edge because the lid seats square, batch copper nook eighty. Set it out for a liter of dry goods after two nights at the pottery yard, packed in paper and a cardboard edge, batch birch bin fifty six. Set it out for a liter of dry goods after two nights at the pottery yard, packed in paper and a cardboard edge, batch birch bin fifty six."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Cork grip",
         "price_cents": 538,
         "checked": false,
-        "label": "Add Cork grip for $5.38"
+        "label": "Include Cork grip at $5.38 for parcel protection in a paper wrap"
       }
     }
   },

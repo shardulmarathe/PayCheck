@@ -41,16 +41,20 @@
     "checkout_price_cents": 4187,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "It rested a short afternoon at the stitch room, then went into a small box with a pad, batch hemp crate twenty five."
+      },
+      {
+        "id": "b2",
         "text": "Monday at the stitch room was for a cap torque check, and the slip reads tin crock thirty eight."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "The seam lead held it half a day so the cap does not weep, batch harbor stall fifty one."
       },
       {
-        "id": "noteA",
-        "text": "It rested a short afternoon at the stitch room, then went into a small box with a pad, batch hemp crate twenty five."
+        "id": "b4",
+        "text": "A small box with a pad from the sock bench suits a long walk, batch glass tray sixty four."
       }
     ],
     "presentation": {

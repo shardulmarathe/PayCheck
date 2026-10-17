@@ -36,16 +36,20 @@
     "checkout_price_cents": 3319,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Stone milling on a market morning is how a baker on the early shift still finishes these, batch hemp stall fifteen."
+      },
+      {
+        "id": "b2",
         "text": "You will find unsweetened dried cherries and not much else, packed a market morning as batch tin crate twenty eight."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "The crew at a dock room uses a cool rest for this, and this one is batch harbor crock forty one."
       },
       {
-        "id": "noteA",
-        "text": "Stone milling on a market morning is how a baker on the early shift still finishes these, batch hemp stall fifteen."
+        "id": "b4",
+        "text": "A baker on the early shift likes it for a jar of yogurt and wrote batch glass rack fifty four on the slip. Give it two nights at the mill shed, and batch cedar peg seventy two stays with a paper sack."
       }
     ],
     "presentation": {
@@ -73,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Kiln dry wrap for five dollars and ninety eight cents",
+    "evidence_text": "Add Kiln dry wrap for five dollars and ninety eight cents, with parcel protection and a paper wrap",
     "instruction": "Clear Kiln dry wrap if the errand is only the main item. While it stays selected, five dollars and ninety eight cents stays in the sum due.",
     "variant": "checkbox"
   },

@@ -36,16 +36,20 @@
     "checkout_price_cents": 5833,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Nothing in the pack beyond a steel kettle, filled at a board mill on Monday, batch river crate fifty."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "The enamel crew signed the slip Monday because the handle stays tight, batch iron crock sixty three."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b3",
+        "text": "A Monday fill at the enamel shop put a steel kettle into a cardboard cradle, batch birch rack seventy six."
+      },
+      {
+        "id": "b4",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
       }
     ],
     "presentation": {

@@ -36,24 +36,20 @@
     "checkout_price_cents": 841,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The filling crew likes it for a savory bowl and wrote batch cork crock seventy six on the slip."
+      },
+      {
+        "id": "b2",
         "text": "Bring it out for a savory bowl, packed in a tin with a slip lid from Two Harbors, batch oak stall nineteen."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A faint smoke is the note on batch cedar tray thirty two, and store the groats in a dry cupboard."
       },
       {
-        "id": "noteD",
-        "text": "Set it out for a savory bowl after two nights at the mill shed, packed in a glass jar, batch hemp pail forty five."
-      },
-      {
-        "id": "factA",
+        "id": "b4",
         "text": "Digits, month and year, and the three-digit code are the fields on this form."
-      },
-      {
-        "id": "noteA",
-        "text": "The filling crew likes it for a savory bowl and wrote batch cork crock seventy six on the slip."
       }
     ],
     "presentation": {

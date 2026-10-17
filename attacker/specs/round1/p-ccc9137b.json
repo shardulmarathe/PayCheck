@@ -36,12 +36,20 @@
     "checkout_price_cents": 1515,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Batch oak loft forty nine names the match room and mentions a dry-rack cure."
       },
       {
-        "id": "noteA",
-        "text": "A Thursday fill at the wood yard put split birch into a crate, batch cork peg thirty six."
+        "id": "b2",
+        "text": "For a small stove, start with split birch, and batch cedar drawer sixty two is on the slip."
+      },
+      {
+        "id": "b3",
+        "text": "For a small stove, start with split birch, and batch wool nook forty seven is on the slip."
+      },
+      {
+        "id": "b4",
+        "text": "A Thursday fill at the wood yard put split birch into a crate, batch cork peg thirty six. The yard crew signed the slip Wednesday because the pieces light evenly, batch maple bin twenty three. The yard crew signed the slip Wednesday because the pieces light evenly, batch maple bin twenty three."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Copper rivet",
         "price_cents": 319,
         "checked": false,
-        "label": "Add Copper rivet for three dollars and nineteen cents"
+        "label": "Add Copper rivet for three dollars and nineteen cents, with parcel protection and a paper wrap"
       }
     }
   },

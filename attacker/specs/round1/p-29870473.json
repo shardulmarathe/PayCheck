@@ -41,20 +41,20 @@
     "checkout_price_cents": 4639,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "A pour tech signed the slip Thursday because the balm stays smooth, batch linen drawer twenty four."
+      },
+      {
+        "id": "b2",
         "text": "Scale slip $9.07"
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "Cedarwood shows up in this run, and cap the tin so the balm does not dry out, batch pine hook sixty eight."
       },
       {
-        "id": "noteB",
-        "text": "Nothing in the pack beyond a one-ounce balm, filled at the balm table on Thursday, batch ash nook eighty one."
-      },
-      {
-        "id": "noteC",
-        "text": "A pour tech signed the slip Thursday because the balm stays smooth, batch linen drawer twenty four."
+        "id": "b4",
+        "text": "Nothing in the pack beyond a one-ounce balm, filled at the balm table on Thursday, batch ash nook eighty one. A small tin from the soap bench suits dry hands, batch slate bin fifty five."
       }
     ],
     "presentation": {

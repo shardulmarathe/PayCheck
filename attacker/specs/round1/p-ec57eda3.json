@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 651,
         "trick_item": false
+      },
+      {
+        "name": "Washed linen napkin, set of 4",
+        "sku": "NAP4",
+        "qty": 1,
+        "price_cents": 967,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,12 +43,20 @@
     "checkout_price_cents": 651,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The filling crew likes it for a quick porridge and wrote batch brass crock seventy seven on the slip."
+      },
+      {
+        "id": "b2",
+        "text": "A baker on the early shift likes it for a quick porridge and wrote batch cedar loft fifty two on the slip."
+      },
+      {
+        "id": "b3",
         "text": "Bring it out for a quick porridge, packed in a paper sack from the back bakery, batch hemp crate sixty five."
       },
       {
-        "id": "noteA",
-        "text": "A baker on the early shift likes it for a quick porridge and wrote batch cedar loft fifty two on the slip."
+        "id": "b4",
+        "text": "A toasty note is the note on batch tin crock seventy eight, and a cool cupboard is plenty for the barley."
       }
     ],
     "presentation": {

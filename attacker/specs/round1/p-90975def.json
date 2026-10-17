@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 2047,
         "trick_item": false
+      },
+      {
+        "name": "Glass storage jar, 1 liter",
+        "sku": "JAR1L",
+        "qty": 1,
+        "price_cents": 1779,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,19 +43,19 @@
     "checkout_price_cents": 2047,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "Tuesday at a quiet desk room was for hand soldering, and the slip reads iron crate thirty three."
+        "id": "b1",
+        "text": "Let the bulb cool before you move the lamp, which is the right habit for a reading desk, batch brass nook forty seven."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "What you notice is a light machine-oil note, and a warm lamp is the main thing in the pack, batch glass drawer sixty four."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Let the bulb cool before you move the lamp, which is the right habit for a reading desk, batch wool crock seventy seven."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "It rested half a day at the cable table, then went into a small cardboard tray, batch river stall twenty."
       }
     ],

@@ -36,24 +36,20 @@
     "checkout_price_cents": 5157,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "Give it a short afternoon at a splitting bench, and batch cedar tray thirty two stays with a tin of eight."
-      },
-      {
-        "id": "noteB",
-        "text": "A strike check on Friday is how the match packer still finishes these, batch hemp pail forty five."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "You will find firestarter pucks and not much else, packed a market morning as batch tin rack fifty eight."
       },
       {
-        "id": "noteD",
-        "text": "The crew at the match room uses hand splitting for this, and this one is batch harbor hook seventy one."
+        "id": "b2",
+        "text": "Statement name on this charge is the shop in the header."
       },
       {
-        "id": "factA",
-        "text": "Statement name on this charge is the shop in the header."
+        "id": "b3",
+        "text": "Give it a short afternoon at a splitting bench, and batch cedar tray thirty two stays with a tin of eight."
+      },
+      {
+        "id": "b4",
+        "text": "A strike check on Friday is how the match packer still finishes these, batch hemp pail forty five."
       }
     ],
     "presentation": {

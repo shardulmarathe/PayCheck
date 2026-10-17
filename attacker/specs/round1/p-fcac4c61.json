@@ -36,16 +36,20 @@
     "checkout_price_cents": 2151,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Batch linen crate sixty four names a splitting bench and mentions hand splitting."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "For a small stove, start with split birch, and batch brass crock seventy seven is on the slip."
       },
       {
-        "id": "factA",
-        "text": "Last week twenty four dollars and forty nine cents. This week $21.51."
+        "id": "b3",
+        "text": "A crate holds split birch in, which is what the yard crew wanted for batch copper rack twenty."
+      },
+      {
+        "id": "b4",
+        "text": "Last week twenty four dollars and forty nine cents. This week $21.51. A Friday fill at a splitting bench put split birch into a crate, batch ash stall fifty one. A Friday fill at a splitting bench put split birch into a crate, batch ash stall fifty one."
       }
     ],
     "presentation": {

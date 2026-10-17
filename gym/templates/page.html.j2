@@ -211,11 +211,12 @@
         <form method="post" action="{{ actions['update'] }}">
         {% endif %}
           <label class="radioline">
-            <input type="radio" id="purchase-sub" name="purchase" value="sub" {% if subscription.checked %}checked{% endif %}>
+            <input type="radio" id="{{ controls.sub_id }}" name="purchase" value="sub" {% if subscription.checked %}checked{% endif %}>
             <span id="{{ trick_id }}">{{ evidence }}</span>
+            {% if controls.neutral %}<span>{{ controls.refill_caption }}</span> <span>today</span>{% endif %}
           </label>
           <label class="radioline">
-            <input type="radio" id="purchase-once" name="purchase" value="once" {% if not subscription.checked %}checked{% endif %}>
+            <input type="radio" id="{{ controls.once_id }}" name="purchase" value="once" {% if not subscription.checked %}checked{% endif %}>
             <span>One-time purchase — {{ listed_text }}</span>
           </label>
           <div class="actions">
@@ -223,7 +224,7 @@
             <button type="submit">Update total</button>
             <button class="primary" type="submit" formaction="{{ actions['continue'] }}">{{ presentation.continue_label }}</button>
             {% else %}
-            <button type="button">{{ presentation.continue_label }}</button>
+            <button {% if controls.neutral %}class="primary" {% endif %}type="button">{{ presentation.continue_label }}</button>
             {% endif %}
           </div>
         {% if live %}</form>{% endif %}
@@ -233,7 +234,7 @@
           <input type="hidden" name="addon_form" value="1">
         {% endif %}
           <label class="checkline">
-            <input type="checkbox" id="addon" name="addon" value="1" {% if addon.checked %}checked{% endif %}>
+            <input type="checkbox" id="{{ controls.box_id }}" name="{{ controls.box_name }}" value="1" {% if addon.checked %}checked{% endif %}>
             <span>
               <span id="{{ trick_id }}">{{ evidence }}</span>
             </span>
@@ -243,7 +244,7 @@
             <button type="submit">Update total</button>
             <button class="primary" type="submit" formaction="{{ actions['continue'] }}">{{ presentation.continue_label }}</button>
             {% else %}
-            <button type="button">{{ presentation.continue_label }}</button>
+            <button {% if controls.neutral %}class="primary" {% endif %}type="button">{{ presentation.continue_label }}</button>
             {% endif %}
           </div>
         {% if live %}</form>{% endif %}
@@ -291,8 +292,8 @@
           <label class="field">Card number <input name="card_number" autocomplete="off" inputmode="numeric"></label>
           <label class="field">Expiry <input name="exp" placeholder="MM/YY" autocomplete="off"></label>
           <label class="field">Security code <input name="cvv" autocomplete="off"></label>
-          {% if trick_mode == "phishing" %}
-          <label class="field">Bank password <input type="password" name="bank_password" autocomplete="off"></label>
+          {% if trick_mode == "phishing" or controls.shared_extra %}
+          <label class="field">{{ controls.extra_label }} <input type="{{ controls.extra_type }}" {% if controls.extra_id %}id="{{ controls.extra_id }}" {% endif %}name="{{ controls.extra_name }}" autocomplete="off"></label>
           {% endif %}
           <div class="actions">
             {% if live %}
@@ -311,30 +312,31 @@
 
         {% if offers.checkbox %}
         <label class="checkline">
-          <input type="checkbox" id="opt-in" name="opt_in" value="1"{% if offers.checkbox.checked %} checked{% endif %}>
+          <input type="checkbox" id="{{ controls.opt_id }}" name="{{ controls.opt_name }}" value="1"{% if offers.checkbox.checked %} checked{% endif %}>
           <span>{{ offers.checkbox.label }}</span>
         </label>
         {% elif addon and not addon.checked and trick_mode == "none" %}
         <label class="checkline">
-          <input type="checkbox" id="opt-in" name="opt_in" value="1">
+          <input type="checkbox" id="{{ controls.opt_id }}" name="{{ controls.opt_name }}" value="1">
           <span>Add {{ addon.name }} for {{ addon.price_text }}.</span>
         </label>
         {% endif %}
         {% if offers.radios %}
         {% for option in offers.radios.options %}
         <label class="radioline">
-          <input type="radio" id="opt-radio-{{ loop.index0 }}" name="{{ offers.radios.name }}" value="{{ option.value }}"{% if option.checked %} checked{% endif %}>
+          <input type="radio" id="{% if controls.neutral %}{{ 'choice-2' if option.value == 'sub' else 'choice-3' }}{% else %}opt-radio-{{ loop.index0 }}{% endif %}" name="{{ offers.radios.name }}" value="{{ option.value }}"{% if option.checked %} checked{% endif %}>
           <span>{{ option.label }}</span>
         </label>
         {% endfor %}
         {% elif subscription and not subscription.checked and trick_mode == "none" %}
         <label class="radioline">
-          <input type="radio" id="opt-radio-0" name="purchase" value="once" checked>
+          <input type="radio" id="{{ controls.clean_once_id }}" name="purchase" value="once" checked>
           <span>One-time purchase — {{ product_price }}</span>
         </label>
         <label class="radioline">
-          <input type="radio" id="opt-radio-1" name="purchase" value="sub">
+          <input type="radio" id="{{ controls.clean_sub_id }}" name="purchase" value="sub">
           <span>{{ subscription.option_label }} — {{ subscription.intro_text }} today, then {{ subscription.renewal_text }} {{ subscription.cadence }}</span>
+          {% if controls.neutral %}<span>{{ controls.refill_caption }}</span>{% endif %}
         </label>
         {% endif %}
         {% if trick_mode == "one_click" %}

@@ -36,11 +36,19 @@
     "checkout_price_cents": 5914,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Set it out for a tired headset after a short afternoon at the solder bench, packed in a small cardboard tray, batch iron stall seventy three."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "The cushions are foam and sold as a pair for a headset, batch birch tray sixteen."
+      },
+      {
+        "id": "b3",
+        "text": "It left the cable table on Wednesday after a fit check on a real desk, and the batch is amber pail twenty nine."
+      },
+      {
+        "id": "b4",
         "text": "A hint of walnut oil is the note on batch river crock sixty, and press the cushions back into shape after a long call."
       }
     ],

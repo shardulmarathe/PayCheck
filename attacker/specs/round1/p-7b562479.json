@@ -36,12 +36,20 @@
     "checkout_price_cents": 6309,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "The cure crew signed the slip Wednesday because the bar lasts longer, batch wool nook forty seven."
+      },
+      {
+        "id": "b2",
+        "text": "The soap maker signed the slip Tuesday because the bar lasts longer, batch clay tray thirty two."
+      },
+      {
+        "id": "b3",
         "text": "Cedarwood shows up in this run, and let the bar dry between washes, batch harbor bin twenty one."
       },
       {
-        "id": "noteB",
-        "text": "Nothing in the pack beyond a cedarwood bar, filled at a curing rack on Wednesday, batch glass hook thirty four."
+        "id": "b4",
+        "text": "Nothing in the pack beyond a cedarwood bar, filled at a curing rack on Wednesday, batch glass hook thirty four. A small tin from the balm table suits a daily wash, batch tin pail seventy eight. A small tin from the balm table suits a daily wash, batch tin pail seventy eight."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Silica pack",
         "price_cents": 865,
         "checked": false,
-        "label": "Add Silica pack for $8.65"
+        "label": "A paper wrap holds Silica pack at $8.65, with parcel protection"
       }
     }
   },

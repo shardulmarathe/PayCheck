@@ -36,20 +36,20 @@
     "checkout_price_cents": 5275,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
         "text": "Stone milling on Monday is how the miller still finishes these, batch ash tray thirty one."
       },
       {
-        "id": "noteD",
+        "id": "b2",
         "text": "You will find alder-smoked salt and not much else, packed Monday as batch linen pail forty four."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "A waxed wrap holds a toasty note in, which is what the miller wanted for batch slate crock seventy five."
       },
       {
-        "id": "noteB",
-        "text": "Give it two nights at a dock room, and batch pine rack eighteen stays with a glass jar."
+        "id": "b4",
+        "text": "Give it two nights at a dock room, and batch pine rack eighteen stays with a glass jar. For a roast vegetable, start with alder-smoked salt, and batch clay crate sixty two is on the slip. For a roast vegetable, start with alder-smoked salt, and batch clay crate sixty two is on the slip."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Pine wedge",
         "price_cents": 915,
         "checked": false,
-        "label": "Add Pine wedge for $9.15"
+        "label": "Include Pine wedge at $9.15 for parcel protection in a paper wrap"
       }
     }
   },

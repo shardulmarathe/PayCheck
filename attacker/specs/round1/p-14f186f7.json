@@ -43,15 +43,19 @@
     "checkout_price_cents": 1104,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A paper band holds almost nothing after drying in, which is what the weaver wanted for batch iron peg forty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Give it a short afternoon at a wash house, and batch birch loft fifty six stays with a flat mailer."
       },
       {
-        "id": "noteA",
+        "id": "b3",
+        "text": "Hand hemming on Thursday is how the weaver still finishes these, batch amber crate sixty nine."
+      },
+      {
+        "id": "b4",
         "text": "For a couch in a cool room, start with heather wool, and batch river drawer thirty is on the slip."
       }
     ],

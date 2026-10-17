@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 3479,
         "trick_item": false
+      },
+      {
+        "name": "Cedarwood bar soap",
+        "sku": "SOAP1",
+        "qty": 1,
+        "price_cents": 1465,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 3479,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The kettle is steel with a wood handle and holds one and a half liters, batch cork loft forty six."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "It left the pottery yard on a market morning after a stoneware firing, and the batch is oak drawer fifty nine."
       },
       {
-        "id": "factA",
-        "text": "Bin rental $8.53"
+        "id": "b3",
+        "text": "The enamel crew packed it in paper and a cardboard edge because the handle stays tight, batch cedar peg seventy two."
+      },
+      {
+        "id": "b4",
+        "text": "Bin rental $8.53. Set it out for a morning boil after half a day at the enamel shop, packed in paper and a cardboard edge, batch maple hook thirty three."
       }
     ],
     "presentation": {

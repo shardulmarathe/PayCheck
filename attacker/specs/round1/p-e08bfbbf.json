@@ -36,24 +36,20 @@
     "checkout_price_cents": 713,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Sunday evening at the mill shed was for stone milling, and the slip reads river rack eighty."
+      },
+      {
+        "id": "b2",
         "text": "A baker on the early shift held it one night so the toast stays even, batch iron hook twenty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A tin with a slip lid from Water Street suits a savory bowl, batch birch nook thirty six."
       },
       {
-        "id": "noteD",
-        "text": "A warm grain smell shows up in this run, and store the groats in a dry cupboard, batch amber bin forty nine."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
-        "text": "Sunday evening at the mill shed was for stone milling, and the slip reads river rack eighty."
+        "id": "b4",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
       }
     ],
     "presentation": {

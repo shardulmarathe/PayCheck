@@ -43,16 +43,20 @@
     "checkout_price_cents": 5475,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Hand hemming on Friday is how a hemmer on the day shift still finishes these, batch hemp crock forty five."
+      },
+      {
+        "id": "b2",
         "text": "You will find linen cloths and not much else, packed Friday as batch tin stall fifty eight."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "The crew at the cutting table uses a cold rinse for this, and this one is batch harbor crate seventy one."
       },
       {
-        "id": "noteA",
-        "text": "Hand hemming on Friday is how a hemmer on the day shift still finishes these, batch hemp crock forty five."
+        "id": "b4",
+        "text": "A hemmer on the day shift likes it for a sink and wrote batch glass pail fourteen on the slip."
       }
     ],
     "presentation": {

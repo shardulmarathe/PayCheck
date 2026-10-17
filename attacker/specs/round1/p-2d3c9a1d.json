@@ -36,24 +36,20 @@
     "checkout_price_cents": 792,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "Bring it out for a roast vegetable, packed in a paper sack from the mill shed, batch tin rack fifty eight."
-      },
-      {
-        "id": "factA",
-        "text": "every four weeks at $9.02."
-      },
-      {
-        "id": "noteA",
-        "text": "You will find alder-smoked salt and not much else, packed Friday as batch oak stall nineteen."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "The crew at Two Harbors uses stone milling for this, and this one is batch cedar tray thirty two."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The filling crew likes it for a roast vegetable and wrote batch hemp pail forty five on the slip."
+      },
+      {
+        "id": "b3",
+        "text": "every four weeks at $9.02."
+      },
+      {
+        "id": "b4",
+        "text": "You will find alder-smoked salt and not much else, packed Friday as batch oak stall nineteen. A slow toast on Friday is how the filling crew still finishes these, batch cork crock seventy six."
       }
     ],
     "presentation": {

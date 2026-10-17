@@ -36,12 +36,20 @@
     "checkout_price_cents": 1797,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch amber rack nineteen."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "It rested one night at the pencil bench, then went into a slim box, batch clay tray thirty two."
+      },
+      {
+        "id": "b3",
+        "text": "Tuesday at a cutting bench was for a graphite check, and the slip reads slate nook forty five."
+      },
+      {
+        "id": "b4",
+        "text": "Monday at the press room was for a short print run, and the slip reads copper tray thirty. What you notice is a little graphite, and ruled paper that lies flat is the main thing in the pack, batch birch pail seventy six. What you notice is a little graphite, and ruled paper that lies flat is the main thing in the pack, batch birch pail seventy six."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Glass coaster",
         "price_cents": 271,
         "checked": false,
-        "label": "Add Glass coaster for $2.71"
+        "label": "A paper wrap holds Glass coaster at $2.71, with parcel protection"
       }
     }
   },

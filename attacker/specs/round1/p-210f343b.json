@@ -36,19 +36,19 @@
     "checkout_price_cents": 1864,
     "blocks": [
       {
-        "id": "noteD",
+        "id": "b1",
         "text": "A crate holds dry wood in, which is what the yard crew wanted for batch oak crate forty nine."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "A Wednesday fill at the wood yard put firestarter pucks into a crate, batch copper drawer eighty."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Batch maple crock twenty three names the match room and mentions hand splitting."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "For damp kindling, start with firestarter pucks, and batch cork stall thirty six is on the slip."
       }
     ],

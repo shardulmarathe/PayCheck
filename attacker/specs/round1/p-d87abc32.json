@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 771,
         "trick_item": false
+      },
+      {
+        "name": "Compact binocular",
+        "sku": "BNCL1",
+        "qty": 1,
+        "price_cents": 1398,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,20 +43,20 @@
     "checkout_price_cents": 771,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Bare steel shows up in this run, and wash the glass and dry the lid, batch hemp bin thirty five."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Nothing in the pack beyond clear glass, filled at a board mill on Wednesday, batch tin peg forty eight."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "The enamel crew signed the slip Wednesday because the lid seats square, batch harbor loft sixty one."
       },
       {
-        "id": "noteD",
-        "text": "A Thursday fill at the enamel shop put clear glass into a cardboard cradle, batch glass drawer seventy four."
+        "id": "b4",
+        "text": "A Thursday fill at the enamel shop put clear glass into a cardboard cradle, batch glass drawer seventy four. Paper and a cardboard edge from the pottery yard suits a liter of dry goods, batch cedar nook twenty two. Paper and a cardboard edge from the pottery yard suits a liter of dry goods, batch cedar nook twenty two."
       }
     ],
     "presentation": {

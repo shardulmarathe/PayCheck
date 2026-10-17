@@ -36,16 +36,20 @@
     "checkout_price_cents": 4125,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Last week $47.26. This week forty one dollars and twenty five cents."
+      },
+      {
+        "id": "b2",
         "text": "A cloth sack holds a faint smoke in, which is what the miller wanted for batch ash stall fifty one."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Give it one night at Water Street, and batch linen crate sixty four stays with a tin with a slip lid."
       },
       {
-        "id": "factA",
-        "text": "Last week $47.26. This week forty one dollars and twenty five cents."
+        "id": "b4",
+        "text": "Hand filling on Friday is how the filling crew still finishes these, batch brass crock seventy seven. For a dense country loaf, start with whole rye berries, and batch pine peg thirty eight is on the slip. For a dense country loaf, start with whole rye berries, and batch pine peg thirty eight is on the slip."
       }
     ],
     "presentation": {

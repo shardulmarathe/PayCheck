@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 3203,
         "trick_item": false
+      },
+      {
+        "name": "Cloth braid audio lead, 1 m",
+        "sku": "AUD1M",
+        "qty": 1,
+        "price_cents": 1491,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,19 +43,19 @@
     "checkout_price_cents": 3203,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "Bring it out for damp kindling, packed in a crate from a splitting bench, batch brass stall fifty seven."
+        "id": "b1",
+        "text": "A dry-rack cure on Wednesday is how the match packer still finishes these, batch slate loft fifteen."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "You will find firestarter pucks and not much else, packed Monday as batch pine loft eighteen."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The crew at the match room uses a dry-rack cure for this, and this one is batch ash crate thirty one."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "The yard crew likes it for damp kindling and wrote batch linen crock forty four on the slip."
       }
     ],

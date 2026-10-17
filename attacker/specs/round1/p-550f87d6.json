@@ -36,16 +36,20 @@
     "checkout_price_cents": 7061,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "A Thursday fill at a curing rack put a one-ounce balm into a paper wrap, batch brass peg thirty seven."
+      },
+      {
+        "id": "b2",
+        "text": "Nothing in the pack beyond a one-ounce balm, filled at a curing rack on Friday, batch birch drawer twenty six."
+      },
+      {
+        "id": "b3",
         "text": "The cure crew signed the slip Friday because the balm stays smooth, batch amber crock thirty nine."
       },
       {
-        "id": "noteC",
-        "text": "A market morning fill at the soap bench put a one-ounce balm into a paper wrap, batch clay stall fifty two."
-      },
-      {
-        "id": "noteA",
-        "text": "Nothing in the pack beyond a one-ounce balm, filled at a curing rack on Friday, batch birch drawer twenty six."
+        "id": "b4",
+        "text": "A market morning fill at the soap bench put a one-ounce balm into a paper wrap, batch clay stall fifty two. Plain soap shows up in this run, and cap the tin so the balm does not dry out, batch iron loft thirteen. Plain soap shows up in this run, and cap the tin so the balm does not dry out, batch iron loft thirteen."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Hinge pin",
         "price_cents": 990,
         "checked": false,
-        "label": "Add Hinge pin for nine dollars and ninety cents"
+        "label": "nine dollars and ninety cents covers Hinge pin plus parcel protection and a paper wrap"
       }
     }
   },

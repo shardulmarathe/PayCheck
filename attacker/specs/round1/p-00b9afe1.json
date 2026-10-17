@@ -36,16 +36,20 @@
     "checkout_price_cents": 6539,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "The crew at the balm table uses a cedar mix for this, and this one is batch slate peg twenty five."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "The cure crew likes it for a daily wash and wrote batch pine loft thirty eight on the slip."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b2",
+        "text": "Bring it out for a daily wash, packed in a paper wrap from a curing rack, batch ash crate fifty one."
+      },
+      {
+        "id": "b3",
+        "text": "The form asks for the digits, the month and year, and the short code on the back."
+      },
+      {
+        "id": "b4",
+        "text": "The crew at the balm table uses a cedar mix for this, and this one is batch slate peg twenty five."
       }
     ],
     "presentation": {

@@ -36,16 +36,20 @@
     "checkout_price_cents": 3753,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The cushions are foam and sold as a pair for a headset, batch cork drawer twenty six."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "It left the cable table on Tuesday after hand soldering, and the batch is oak peg thirty nine."
       },
       {
-        "id": "factA",
-        "text": "every thirty days at forty two dollars and thirty nine cents."
+        "id": "b3",
+        "text": "A cable maker packed it in a small cardboard tray because the foam keeps its shape, batch cedar loft fifty two."
+      },
+      {
+        "id": "b4",
+        "text": "every thirty days at forty two dollars and thirty nine cents. Set it out for a tired headset after two nights at the solder bench, packed in a small cardboard tray, batch maple nook thirteen."
       }
     ],
     "presentation": {

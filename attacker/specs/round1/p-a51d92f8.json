@@ -36,16 +36,20 @@
     "checkout_price_cents": 5158,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The board is beech, edge grain, with a juice groove, batch brass loft forty seven."
+      },
+      {
+        "id": "b2",
+        "text": "Bring it out for daily chopping, packed in a cardboard cradle from the enamel shop, batch pine nook seventy eight."
+      },
+      {
+        "id": "b3",
         "text": "Fresh beech is the note on batch ash bin twenty one, and oil the board when the wood looks pale."
       },
       {
-        "id": "noteC",
-        "text": "Set it out for daily chopping after half a day at the pottery yard, packed in paper and a cardboard edge, batch linen peg thirty four."
-      },
-      {
-        "id": "noteA",
-        "text": "Bring it out for daily chopping, packed in a cardboard cradle from the enamel shop, batch pine nook seventy eight."
+        "id": "b4",
+        "text": "Set it out for daily chopping after half a day at the pottery yard, packed in paper and a cardboard edge, batch linen peg thirty four. The kiln tech likes it for daily chopping and wrote batch slate hook sixty five on the slip. The kiln tech likes it for daily chopping and wrote batch slate hook sixty five on the slip."
       }
     ],
     "presentation": {

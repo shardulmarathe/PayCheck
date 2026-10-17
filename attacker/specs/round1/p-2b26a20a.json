@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 9900,
         "trick_item": false
+      },
+      {
+        "name": "Loom woven placemat, set of 2",
+        "sku": "PLAC2",
+        "qty": 1,
+        "price_cents": 378,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,20 +43,20 @@
     "checkout_price_cents": 9900,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Nothing in the pack beyond cloth-braid audio lead, filled at the cable table on Wednesday, batch maple crate twenty three."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "The night assembler signed the slip Thursday because the braid lies flat, batch cork crock thirty six."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A Thursday fill at a quiet desk room put cloth-braid audio lead into a cotton sleeve, batch oak stall forty nine."
       },
       {
-        "id": "noteD",
-        "text": "Batch cedar tray sixty two names a quiet desk room and mentions a braid check."
+        "id": "b4",
+        "text": "A Wednesday fill at the solder bench put cloth-braid audio lead into a cotton sleeve, batch glass peg thirty four. Almost no smell shows up in this run, and do not kink the braid, batch copper loft eighty. Almost no smell shows up in this run, and do not kink the braid, batch copper loft eighty."
       }
     ],
     "presentation": {

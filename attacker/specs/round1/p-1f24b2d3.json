@@ -33,12 +33,20 @@
     "checkout_price_cents": 5534,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The crew at the cutting table uses a cold rinse for this, and this one is batch oak peg sixty nine."
+      },
+      {
+        "id": "b2",
+        "text": "Give it a short afternoon at a wash house, and batch copper hook thirty stays with a flat mailer."
+      },
+      {
+        "id": "b3",
         "text": "Hand hemming on Sunday evening is how a hemmer on the day shift still finishes these, batch maple nook forty three."
       },
       {
-        "id": "noteA",
-        "text": "Give it a short afternoon at a wash house, and batch copper hook thirty stays with a flat mailer."
+        "id": "b4",
+        "text": "You will find hemmed linen and not much else, packed Monday as batch cork drawer fifty six."
       }
     ],
     "presentation": {

@@ -41,20 +41,20 @@
     "checkout_price_cents": 6863,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Keep the stack under a light weight, which is the right habit for a short letter, batch cork tray sixty six."
+      },
+      {
+        "id": "b2",
         "text": "It rested a cool evening at the press room, then went into a slim box, batch oak nook seventy nine."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Wednesday at the press room was for a short print run, and the slip reads cedar bin twenty two."
       },
       {
-        "id": "factA",
-        "text": "Crate deposit $17.16"
-      },
-      {
-        "id": "noteA",
-        "text": "Keep the stack under a light weight, which is the right habit for a short letter, batch cork tray sixty six."
+        "id": "b4",
+        "text": "Crate deposit $17.16. What you notice is fresh paper, and cotton paper is the main thing in the pack, batch maple rack fifty three."
       }
     ],
     "presentation": {

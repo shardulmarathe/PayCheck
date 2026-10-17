@@ -36,20 +36,20 @@
     "checkout_price_cents": 4593,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "Give it half a day at a splitting bench, and batch copper peg forty stays with a tin of eight."
+      },
+      {
+        "id": "b2",
         "text": "A strike check on Wednesday is how the match packer still finishes these, batch maple stall fifty three."
       },
       {
-        "id": "factA",
+        "id": "b3",
         "text": "Have the plastic handy: digits, month and year, and the short code."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "A crate holds split birch in, which is what the yard crew wanted for batch brass drawer twenty seven."
-      },
-      {
-        "id": "noteB",
-        "text": "Give it half a day at a splitting bench, and batch copper peg forty stays with a tin of eight."
       }
     ],
     "presentation": {

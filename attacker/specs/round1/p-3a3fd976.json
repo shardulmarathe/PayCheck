@@ -36,20 +36,20 @@
     "checkout_price_cents": 3583,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Almost nothing after drying is the note on batch brass hook sixty seven, and shake crumbs off and wipe the mats with a damp cloth."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Set it out for a two-person table after a cool evening at the cutting table, packed in a cotton sack, batch copper nook eighty."
       },
       {
-        "id": "noteD",
-        "text": "The placemats are loom woven and sold as a pair, batch maple bin twenty three."
+        "id": "b3",
+        "text": "Set it out for a two-person table after half a day at the loom room, packed in a cotton sack, batch hemp tray sixty five."
       },
       {
-        "id": "noteA",
-        "text": "Bring it out for a two-person table, packed in a paper band from the loom room, batch linen rack fifty four."
+        "id": "b4",
+        "text": "Bring it out for a two-person table, packed in a paper band from the loom room, batch linen rack fifty four. The wash crew likes it for a two-person table and wrote batch ash pail forty one on the slip. The wash crew likes it for a two-person table and wrote batch ash pail forty one on the slip."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Felt pads",
         "price_cents": 786,
         "checked": false,
-        "label": "Add Felt pads for seven dollars and eighty six cents"
+        "label": "Parcel protection for Felt pads at seven dollars and eighty six cents goes out in a paper wrap"
       }
     }
   },

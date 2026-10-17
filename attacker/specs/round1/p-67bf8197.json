@@ -36,16 +36,20 @@
     "checkout_price_cents": 3029,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Last week $40.80. This week thirty dollars and twenty nine cents."
+      },
+      {
+        "id": "b2",
         "text": "It rested one night at the press room, then went into a slim box, batch wool nook forty seven."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Wednesday at the press room was for hand folding, and the slip reads river drawer sixty."
       },
       {
-        "id": "factA",
-        "text": "Last week $40.80. This week thirty dollars and twenty nine cents."
+        "id": "b4",
+        "text": "A folder held it the next morning so the sheet lies flat, batch iron peg seventy three. Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch glass hook thirty four. Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch glass hook thirty four."
       }
     ],
     "presentation": {

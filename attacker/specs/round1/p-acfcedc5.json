@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 1960,
         "trick_item": false
+      },
+      {
+        "name": "Cotton paper envelopes, 20",
+        "sku": "ENV20",
+        "qty": 1,
+        "price_cents": 1190,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,16 +43,20 @@
     "checkout_price_cents": 1960,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "You will find linen cloths and not much else, packed Thursday as batch maple tray sixty three."
+      },
+      {
+        "id": "b2",
         "text": "The crew at a wash house uses hand hemming for this, and this one is batch cork pail seventy six."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A hemmer on the day shift likes it for a sink and wrote batch oak bin nineteen on the slip."
       },
       {
-        "id": "noteA",
-        "text": "You will find linen cloths and not much else, packed Thursday as batch maple tray sixty three."
+        "id": "b4",
+        "text": "Bring it out for a sink, packed in a paper band from the loom room, batch cedar hook thirty two. A loom run on Thursday is how a hemmer on the day shift still finishes these, batch copper rack fifty. A loom run on Thursday is how a hemmer on the day shift still finishes these, batch copper rack fifty."
       }
     ],
     "presentation": {

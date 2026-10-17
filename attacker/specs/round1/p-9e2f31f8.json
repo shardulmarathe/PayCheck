@@ -36,20 +36,20 @@
     "checkout_price_cents": 8985,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "For a couch in a cool room, start with heather wool, and batch river drawer fifty is on the slip."
+      },
+      {
+        "id": "b2",
         "text": "A paper band holds almost nothing after drying in, which is what the wash crew wanted for batch iron peg sixty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Give it a short afternoon at a wash house, and batch birch loft seventy six stays with a flat mailer."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
-        "text": "For a couch in a cool room, start with heather wool, and batch river drawer fifty is on the slip."
+        "id": "b4",
+        "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
       }
     ],
     "presentation": {

@@ -36,16 +36,20 @@
     "checkout_price_cents": 7386,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "What you notice is almost nothing after drying, and heather wool is the main thing in the pack, batch iron peg seventy three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Air the throw on a dry day, which is the right habit for a couch in a cool room, batch birch loft sixteen."
       },
       {
-        "id": "noteA",
-        "text": "The weaver packed it in a cotton sack because the wool stays soft, batch river drawer sixty."
+        "id": "b3",
+        "text": "It rested two nights at the loom room, then went into a cotton sack, batch amber crate twenty nine."
+      },
+      {
+        "id": "b4",
+        "text": "The weaver packed it in a cotton sack because the wool stays soft, batch river drawer sixty. It left the cutting table on Tuesday after hand hemming, and the batch is wool nook forty seven."
       }
     ],
     "presentation": {
@@ -73,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Cloth sack for $12.73",
+    "evidence_text": "A paper wrap holds Cloth sack at $12.73, with parcel protection",
     "instruction": "Clear Cloth sack if the errand is only the main item. While it stays selected, $12.73 stays in the sum due.",
     "variant": "checkbox"
   },

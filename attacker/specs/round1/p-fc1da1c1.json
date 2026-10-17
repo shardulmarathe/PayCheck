@@ -36,20 +36,20 @@
     "checkout_price_cents": 763,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The weaver signed the slip Monday because the brass stays bright, batch ash tray thirty one."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A Monday fill at the loom room put brass rings into a paper band, batch linen pail forty four."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Batch brass bin fifty seven names the cutting table and mentions a loom run."
       },
       {
-        "id": "noteD",
-        "text": "For a light curtain, start with brass rings, and batch copper hook seventy is on the slip."
+        "id": "b4",
+        "text": "Batch cedar pail forty two names a wash house and mentions hand hemming. Nothing in the pack beyond brass rings, filled at a wash house on Monday, batch pine rack eighteen. Nothing in the pack beyond brass rings, filled at a wash house on Monday, batch pine rack eighteen."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Oak plug",
         "price_cents": 139,
         "checked": false,
-        "label": "Add Oak plug for $1.39"
+        "label": "Include Oak plug at $1.39 for parcel protection in a paper wrap"
       }
     }
   },

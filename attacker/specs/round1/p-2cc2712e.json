@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 3793,
         "trick_item": false
+      },
+      {
+        "name": "Rolled barley, 28 oz",
+        "sku": "BAR28",
+        "qty": 1,
+        "price_cents": 1216,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 3793,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "A small tin from the soap bench suits a daily wash, batch iron crate sixty three."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "A soft balm smell shows up in this run, and let the bar dry between washes, batch birch pail seventy six."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "Nothing in the pack beyond a cedarwood bar, filled at the balm table on Monday, batch amber rack nineteen."
+      },
+      {
+        "id": "b3",
         "text": "Chill insert seven dollars and seven cents"
+      },
+      {
+        "id": "b4",
+        "text": "A small tin from the soap bench suits a daily wash, batch iron crate sixty three. The cure crew held it half a day so the bar lasts longer, batch river stall fifty."
       }
     ],
     "presentation": {

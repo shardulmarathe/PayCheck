@@ -36,20 +36,20 @@
     "checkout_price_cents": 8771,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Bring it out for a short run across a desk, packed in a cotton sleeve from a quiet desk room, batch hemp hook thirty five."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A light machine-oil note is the note on batch tin loft forty eight, and do not kink the braid."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Set it out for a short run across a desk after half a day at the solder bench, packed in a small cardboard tray, batch harbor drawer sixty one."
       },
       {
-        "id": "noteD",
-        "text": "The audio lead is cloth braid, one meter, with metal plugs, batch glass peg seventy four."
+        "id": "b4",
+        "text": "The audio lead is cloth braid, one meter, with metal plugs, batch glass peg seventy four. The bench tech likes it for a short run across a desk and wrote batch cedar bin twenty two on the slip."
       }
     ],
     "presentation": {
@@ -77,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Wick trim for twenty dollars and thirty seven cents",
+    "evidence_text": "twenty dollars and thirty seven cents covers Wick trim plus parcel protection and a paper wrap",
     "instruction": "Clear Wick trim if the errand is only the main item. While it stays selected, twenty dollars and thirty seven cents stays in the sum due.",
     "variant": "checkbox"
   },

@@ -36,16 +36,20 @@
     "checkout_price_cents": 6977,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "Nothing in the pack beyond a cedarwood bar, filled at the balm table on Thursday, batch oak loft forty nine."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "A pour tech signed the slip Thursday because the bar lasts longer, batch cedar drawer sixty two."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "A Thursday fill at a curing rack put a cedarwood bar into a paper wrap, batch hemp crock seventy five."
+      },
+      {
+        "id": "b3",
         "text": "Last week $85.18. This week sixty nine dollars and seventy seven cents."
+      },
+      {
+        "id": "b4",
+        "text": "Nothing in the pack beyond a cedarwood bar, filled at the balm table on Thursday, batch oak loft forty nine. Cedarwood shows up in this run, and let the bar dry between washes, batch cork peg thirty six. Cedarwood shows up in this run, and let the bar dry between washes, batch cork peg thirty six."
       }
     ],
     "presentation": {

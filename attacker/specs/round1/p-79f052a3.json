@@ -36,16 +36,20 @@
     "checkout_price_cents": 5022,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "every six weeks at $53.54."
+      },
+      {
+        "id": "b2",
         "text": "A hemmer on the day shift packed it in a cotton sack because the hem stays even, batch maple nook thirteen."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "What you notice is wet linen, and washed linen is the main thing in the pack, batch cork drawer twenty six."
       },
       {
-        "id": "factA",
-        "text": "every six weeks at $53.54."
+        "id": "b4",
+        "text": "Wash the napkins cold and hang them straight, which is the right habit for a weeknight supper, batch oak peg thirty nine. It left a wash house on Monday after a loom run, and the batch is copper hook seventy."
       }
     ],
     "presentation": {

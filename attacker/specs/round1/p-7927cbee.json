@@ -41,20 +41,20 @@
     "checkout_price_cents": 4453,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "Give it half a day at a wash house, and batch pine pail thirty eight stays with a flat mailer."
+      },
+      {
+        "id": "b2",
         "text": "Hand hemming on Friday is how a hemmer on the day shift still finishes these, batch ash rack fifty one."
       },
       {
-        "id": "noteD",
-        "text": "You will find cotton percale and not much else, packed Friday as batch linen tray sixty four."
+        "id": "b3",
+        "text": "A paper wrap and parcel protection are on the slip for batch linen crock fifty four."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "A paper band holds wet linen in, which is what the wash crew wanted for batch slate crate twenty five."
-      },
-      {
-        "id": "noteB",
-        "text": "Give it half a day at a wash house, and batch pine pail thirty eight stays with a flat mailer."
       }
     ],
     "presentation": {

@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 2371,
         "trick_item": false
+      },
+      {
+        "name": "Brass curtain ring, set of 8",
+        "sku": "RING8",
+        "qty": 1,
+        "price_cents": 1203,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 2371,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A board maker held it one night so the lip stays low and even, batch harbor nook eighty one."
+        "id": "b1",
+        "text": "Monday at the enamel shop was for edge-grain glue-up, and the slip reads tin tray sixty eight."
       },
       {
-        "id": "factA",
+        "id": "b2",
         "text": "Previous twenty seven dollars and fifty six cents. Current $23.71."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "Wipe the oak with a barely damp cloth, which is the right habit for a short row of pictures, batch cedar pail forty two."
       },
       {
-        "id": "noteB",
-        "text": "It rested the next morning at the enamel shop, then went into paper and a cardboard edge, batch hemp rack fifty five."
-      },
-      {
-        "id": "noteC",
-        "text": "Monday at the enamel shop was for edge-grain glue-up, and the slip reads tin tray sixty eight."
+        "id": "b4",
+        "text": "It rested the next morning at the enamel shop, then went into paper and a cardboard edge, batch hemp rack fifty five. What you notice is bare steel, and oak with a low lip is the main thing in the pack, batch oak crate twenty nine. What you notice is bare steel, and oak with a low lip is the main thing in the pack, batch oak crate twenty nine."
       }
     ],
     "presentation": {

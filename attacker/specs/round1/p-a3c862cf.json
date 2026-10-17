@@ -36,16 +36,20 @@
     "checkout_price_cents": 645,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "The knitter signed the slip a market morning because the cushion stays put, batch cork pail forty six."
+      },
+      {
+        "id": "b2",
+        "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
+      },
+      {
+        "id": "b3",
         "text": "Plain wool shows up in this run, and air the socks after a long day, batch copper rack twenty."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Nothing in the pack beyond cushioned merino, filled at the sock bench on a market morning, batch maple tray thirty three."
-      },
-      {
-        "id": "factA",
-        "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
       }
     ],
     "presentation": {

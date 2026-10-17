@@ -36,16 +36,20 @@
     "checkout_price_cents": 4849,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Nothing in the pack beyond foam cushions, filled at a quiet desk room on Thursday, batch river crock thirty."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A cable maker signed the slip Thursday because the foam keeps its shape, batch iron stall forty three."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b3",
+        "text": "A Thursday fill at the solder bench put foam cushions into a cotton sleeve, batch birch tray fifty six."
+      },
+      {
+        "id": "b4",
+        "text": "The form asks for the digits, the month and year, and the short code on the back."
       }
     ],
     "presentation": {

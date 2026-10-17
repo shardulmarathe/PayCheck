@@ -36,16 +36,20 @@
     "checkout_price_cents": 7446,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "every six weeks at $83.87."
+      },
+      {
+        "id": "b2",
         "text": "Stone milling on Monday is how the miller still finishes these, batch wool hook thirty seven."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "You will find whole rye berries and not much else, packed Monday as batch river loft fifty."
       },
       {
-        "id": "factA",
-        "text": "every six weeks at $83.87."
+        "id": "b4",
+        "text": "The crew at the mill shed uses a cool rest for this, and this one is batch iron drawer sixty three. Give it half a day at the back bakery, and batch glass bin twenty four stays with a cloth sack."
       }
     ],
     "presentation": {

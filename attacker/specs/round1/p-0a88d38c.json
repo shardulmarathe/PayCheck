@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 2040,
         "trick_item": false
+      },
+      {
+        "name": "Cedarwood bar soap",
+        "sku": "SOAP1",
+        "qty": 1,
+        "price_cents": 337,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,12 +43,20 @@
     "checkout_price_cents": 2040,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A board maker signed the slip a market morning because the handle stays tight, batch iron crock fifty three."
       },
       {
-        "id": "noteA",
-        "text": "Nothing in the pack beyond a steel kettle, filled at a board mill on a market morning, batch river crate forty."
+        "id": "b2",
+        "text": "A market morning fill at the enamel shop put a steel kettle into a cardboard cradle, batch birch rack sixty six."
+      },
+      {
+        "id": "b3",
+        "text": "Batch amber tray seventy nine names the pottery yard and mentions edge-grain glue-up."
+      },
+      {
+        "id": "b4",
+        "text": "Nothing in the pack beyond a steel kettle, filled at a board mill on a market morning, batch river crate forty. A little warm clay shows up in this run, and empty the kettle after the boil and leave the lid ajar, batch wool stall twenty seven. A little warm clay shows up in this run, and empty the kettle after the boil and leave the lid ajar, batch wool stall twenty seven."
       }
     ],
     "presentation": {

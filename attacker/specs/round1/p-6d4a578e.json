@@ -28,20 +28,20 @@
     "checkout_price_cents": 3687,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "A market morning at the press room was for hand folding, and the slip reads clay stall fifty two."
+      },
+      {
+        "id": "b2",
         "text": "The pencil lead held it one night so the flap seals cleanly, batch slate crate sixty five."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A slim box from the pencil bench suits a short letter, batch pine pail seventy eight."
       },
       {
-        "id": "factA",
-        "text": "Earlier forty eight dollars and forty eight cents, selling $36.87."
-      },
-      {
-        "id": "noteA",
-        "text": "A market morning at the press room was for hand folding, and the slip reads clay stall fifty two."
+        "id": "b4",
+        "text": "Earlier forty eight dollars and forty eight cents, selling $36.87. It rested the next morning at the press room, then went into a slim box, batch amber crock thirty nine. It rested the next morning at the press room, then went into a slim box, batch amber crock thirty nine."
       }
     ],
     "presentation": {

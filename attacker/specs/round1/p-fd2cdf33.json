@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 3372,
         "trick_item": false
+      },
+      {
+        "name": "Stoneware mug, pair",
+        "sku": "MUG2",
+        "qty": 1,
+        "price_cents": 653,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 3372,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "For a couch in a cool room, start with heather wool, and batch river drawer twenty is on the slip."
+      },
+      {
+        "id": "b2",
         "text": "A paper band holds almost nothing after drying in, which is what a hemmer on the day shift wanted for batch iron peg thirty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Give it a short afternoon at a wash house, and batch birch loft forty six stays with a flat mailer."
       },
       {
-        "id": "noteA",
-        "text": "For a couch in a cool room, start with heather wool, and batch river drawer twenty is on the slip."
+        "id": "b4",
+        "text": "Batch harbor peg fifty one lists parcel protection with a paper wrap."
       }
     ],
     "presentation": {

@@ -41,12 +41,20 @@
     "checkout_price_cents": 7563,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "It left the pencil bench on Thursday after hand folding, and the batch is hemp pail seventy five."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A folder packed it in a slim box because the sheet lies flat, batch tin rack eighteen."
+      },
+      {
+        "id": "b3",
+        "text": "What you notice is fresh paper, and ruled paper that lies flat is the main thing in the pack, batch harbor hook thirty one."
+      },
+      {
+        "id": "b4",
+        "text": "Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch glass nook forty four."
       }
     ],
     "presentation": {

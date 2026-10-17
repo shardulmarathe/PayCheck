@@ -36,23 +36,19 @@
     "checkout_price_cents": 6917,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
         "text": "For a reading desk, start with a warm lamp, and batch cork crock sixty six is on the slip."
       },
       {
-        "id": "noteD",
-        "text": "A cotton sleeve holds a hint of walnut oil in, which is what a cable maker wanted for batch oak stall seventy nine."
+        "id": "b2",
+        "text": "Statement name on this charge is the shop in the header."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
+        "id": "b3",
         "text": "A Tuesday fill at the solder bench put a warm lamp into a cotton sleeve, batch copper loft forty."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Batch maple crate fifty three names the cable table and mentions a fit check on a real desk."
       }
     ],

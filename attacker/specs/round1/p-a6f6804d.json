@@ -36,20 +36,20 @@
     "checkout_price_cents": 4471,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Digits, month and year, and the three-digit code are the fields on this form."
+      },
+      {
+        "id": "b2",
         "text": "A seam check on a market morning is how a gear tech still finishes these, batch hemp crate fifteen."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "You will find an aluminum flask and not much else, packed a market morning as batch tin crock twenty eight."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "The crew at the sock bench uses a cap torque check for this, and this one is batch harbor stall forty one."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
       }
     ],
     "presentation": {

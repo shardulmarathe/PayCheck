@@ -36,20 +36,20 @@
     "checkout_price_cents": 1969,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "The speaker is slate colored and runs on a replaceable cell, batch clay crock forty two."
+      },
+      {
+        "id": "b2",
         "text": "The form asks for the digits, the month and year, and the short code on the back."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "A light machine-oil note is the note on batch birch loft sixteen, and wipe the shell if the desk is dusty."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Set it out for a small room after two nights at the solder bench, packed in a small cardboard tray, batch amber crate twenty nine."
-      },
-      {
-        "id": "noteC",
-        "text": "The speaker is slate colored and runs on a replaceable cell, batch clay crock forty two."
       }
     ],
     "presentation": {

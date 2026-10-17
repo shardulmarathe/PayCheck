@@ -36,16 +36,20 @@
     "checkout_price_cents": 7343,
     "blocks": [
       {
-        "id": "noteB",
-        "text": "What you notice is fresh beech, and speckled stoneware is the main thing in the pack, batch cedar bin twenty two."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "The glaze can take a hot pour, which is the right habit for two cups of tea, batch hemp hook thirty five."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "The glaze can take a hot pour, which is the right habit for two cups of tea, batch river rack twenty."
+      },
+      {
+        "id": "b3",
         "text": "The kiln tech packed it in paper and a cardboard edge because the glaze stays even, batch oak nook seventy nine."
+      },
+      {
+        "id": "b4",
+        "text": "What you notice is fresh beech, and speckled stoneware is the main thing in the pack, batch cedar bin twenty two. It left a board mill on Wednesday after edge-grain glue-up, and the batch is cork tray sixty six. It left a board mill on Wednesday after edge-grain glue-up, and the batch is cork tray sixty six."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Brass hook",
         "price_cents": 413,
         "checked": false,
-        "label": "Add Brass hook for $4.13"
+        "label": "Brass hook at $4.13 includes parcel protection in a paper wrap"
       }
     }
   },

@@ -36,12 +36,20 @@
     "checkout_price_cents": 3039,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Batch hemp tray fifteen names Water Street and mentions a slow toast."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "For a dense country loaf, start with whole rye berries, and batch tin pail twenty eight is on the slip."
+      },
+      {
+        "id": "b3",
+        "text": "A waxed wrap holds a warm grain smell in, which is what a baker on the early shift wanted for batch harbor bin forty one."
+      },
+      {
+        "id": "b4",
+        "text": "Give it two nights at a dock room, and batch glass hook fifty four stays with a glass jar."
       }
     ],
     "presentation": {

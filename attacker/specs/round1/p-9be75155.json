@@ -36,16 +36,20 @@
     "checkout_price_cents": 2831,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "A hemmer on the day shift likes it for a sink and wrote batch amber stall forty nine on the slip."
+      },
+      {
+        "id": "b2",
         "text": "Bring it out for a sink, packed in a paper band from the loom room, batch clay crate sixty two."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A little cedar from the cupboard is the note on batch slate crock seventy five, and wash the cloths with the towels."
       },
       {
-        "id": "noteA",
-        "text": "A hemmer on the day shift likes it for a sink and wrote batch amber stall forty nine on the slip."
+        "id": "b4",
+        "text": "Almost nothing after drying is the note on batch copper drawer sixty, and wash the cloths with the towels. The crew at a wash house uses a cold rinse for this, and this one is batch birch peg thirty six. The crew at a wash house uses a cold rinse for this, and this one is batch birch peg thirty six."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Cedar insert",
         "price_cents": 418,
         "checked": false,
-        "label": "Add Cedar insert for $4.18"
+        "label": "Cedar insert at $4.18 includes parcel protection in a paper wrap"
       }
     }
   },

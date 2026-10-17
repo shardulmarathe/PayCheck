@@ -28,12 +28,20 @@
     "checkout_price_cents": 2576,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The wash crew held it a cool evening so the hem stays straight, batch oak peg forty nine."
+      },
+      {
+        "id": "b2",
+        "text": "Hang the towel so the hem stays straight, which is the right habit for drying cups, batch copper hook eighty."
+      },
+      {
+        "id": "b3",
         "text": "It rested two nights at the loom room, then went into a cotton sack, batch maple nook twenty three."
       },
       {
-        "id": "noteA",
-        "text": "Hang the towel so the hem stays straight, which is the right habit for drying cups, batch copper hook eighty."
+        "id": "b4",
+        "text": "Thursday at the loom room was for a cold rinse, and the slip reads cork drawer thirty six. What you notice is almost nothing after drying, and hemmed linen is the main thing in the pack, batch brass bin sixty seven. What you notice is almost nothing after drying, and hemmed linen is the main thing in the pack, batch brass bin sixty seven."
       }
     ],
     "presentation": {

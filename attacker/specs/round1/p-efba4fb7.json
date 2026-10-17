@@ -36,20 +36,20 @@
     "checkout_price_cents": 5445,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "What you notice is a little cedar from the cupboard, and heather wool is the main thing in the pack, batch tin stall eighteen."
+      },
+      {
+        "id": "b2",
         "text": "Air the throw on a dry day, which is the right habit for a couch in a cool room, batch harbor crate thirty one."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "It rested one night at the cutting table, then went into a cotton sack, batch glass pail forty four."
       },
       {
-        "id": "factA",
-        "text": "every forty five days at sixty three dollars and ninety eight cents."
-      },
-      {
-        "id": "noteA",
-        "text": "What you notice is a little cedar from the cupboard, and heather wool is the main thing in the pack, batch tin stall eighteen."
+        "id": "b4",
+        "text": "every forty five days at sixty three dollars and ninety eight cents. A hemmer on the day shift packed it in a cotton sack because the wool stays soft, batch hemp crock seventy five."
       }
     ],
     "presentation": {

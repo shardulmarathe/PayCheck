@@ -33,20 +33,20 @@
     "checkout_price_cents": 1210,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A cotton sleeve holds a hint of walnut oil in, which is what the bench tech wanted for batch oak stall forty nine."
+        "id": "b1",
+        "text": "For a reading desk, start with a warm lamp, and batch cork crock thirty six is on the slip."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "A paper wrap and parcel protection are on the slip for batch hemp tray forty five."
+      },
+      {
+        "id": "b3",
         "text": "A Wednesday fill at the solder bench put a warm lamp into a cotton sleeve, batch copper loft eighty."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Batch maple crate twenty three names the cable table and mentions a fit check on a real desk."
-      },
-      {
-        "id": "noteC",
-        "text": "For a reading desk, start with a warm lamp, and batch cork crock thirty six is on the slip."
       }
     ],
     "presentation": {

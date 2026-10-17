@@ -41,20 +41,20 @@
     "checkout_price_cents": 1787,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "The board is beech, edge grain, with a juice groove, batch clay crate sixty two."
+      },
+      {
+        "id": "b2",
         "text": "Weekend dispatch $3.81"
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "A little warm clay is the note on batch birch peg thirty six, and oil the board when the wood looks pale."
       },
       {
-        "id": "noteB",
-        "text": "Set it out for daily chopping after half a day at the enamel shop, packed in paper and a cardboard edge, batch amber stall forty nine."
-      },
-      {
-        "id": "noteC",
-        "text": "The board is beech, edge grain, with a juice groove, batch clay crate sixty two."
+        "id": "b4",
+        "text": "Set it out for daily chopping after half a day at the enamel shop, packed in paper and a cardboard edge, batch amber stall forty nine. Bring it out for daily chopping, packed in a cardboard cradle from a board mill, batch iron drawer twenty three."
       }
     ],
     "presentation": {

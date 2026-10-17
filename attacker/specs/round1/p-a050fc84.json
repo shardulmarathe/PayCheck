@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 5441,
         "trick_item": false
+      },
+      {
+        "name": "Warm desk lamp",
+        "sku": "LAMP1",
+        "qty": 1,
+        "price_cents": 2028,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 5441,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "The crew at a dock room uses hand filling for this, and this one is batch clay peg seventy two."
-      },
-      {
-        "id": "factA",
-        "text": "Previous $66.60. Current fifty four dollars and forty one cents."
-      },
-      {
-        "id": "noteA",
-        "text": "Give it one night at Water Street, and batch iron hook thirty three stays with a cloth sack."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "A cool rest on Tuesday is how a baker on the early shift still finishes these, batch birch nook forty six."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "You will find alder-smoked salt and not much else, packed Tuesday as batch amber bin fifty nine."
+      },
+      {
+        "id": "b3",
+        "text": "Previous $66.60. Current fifty four dollars and forty one cents."
+      },
+      {
+        "id": "b4",
+        "text": "Give it one night at Water Street, and batch iron hook thirty three stays with a cloth sack. A paper sack holds a warm grain smell in, which is what the filling crew wanted for batch river rack twenty. A paper sack holds a warm grain smell in, which is what the filling crew wanted for batch river rack twenty."
       }
     ],
     "presentation": {

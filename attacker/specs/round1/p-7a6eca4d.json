@@ -36,24 +36,20 @@
     "checkout_price_cents": 2533,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
         "text": "Have the plastic handy: digits, month and year, and the short code."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "A hint of walnut oil is the note on batch maple crate sixty three, and do not kink the braid."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Set it out for a short run across a desk after a cool evening at the cable table, packed in a small cardboard tray, batch cork crock seventy six."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "The audio lead is cloth braid, one meter, with metal plugs, batch oak stall nineteen."
-      },
-      {
-        "id": "noteD",
-        "text": "It left a quiet desk room on Friday after a braid check, and the batch is cedar tray thirty two."
       }
     ],
     "presentation": {

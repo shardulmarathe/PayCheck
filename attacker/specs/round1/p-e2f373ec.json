@@ -36,16 +36,20 @@
     "checkout_price_cents": 5721,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Digits, month and year, and the three-digit code are the fields on this form."
+      },
+      {
+        "id": "b2",
         "text": "Give it half a day at the mill shed, and batch amber pail seventy nine stays with a glass jar."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "A slow toast on Sunday evening is how a baker on the early shift still finishes these, batch clay rack twenty two."
       },
       {
-        "id": "factA",
-        "text": "Digits, month and year, and the three-digit code are the fields on this form."
+        "id": "b4",
+        "text": "You will find whole rye berries and not much else, packed Sunday evening as batch slate hook thirty five."
       }
     ],
     "presentation": {

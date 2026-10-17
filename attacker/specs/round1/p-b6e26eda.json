@@ -36,20 +36,20 @@
     "checkout_price_cents": 7573,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b1",
+        "text": "Plain soap is the note on batch cork tray fifty six, and cap the tin so the balm does not dry out."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
+      },
+      {
+        "id": "b3",
         "text": "The cure crew likes it for dry hands and wrote batch copper pail thirty on the slip."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Bring it out for dry hands, packed in a paper wrap from a curing rack, batch maple rack forty three."
-      },
-      {
-        "id": "noteC",
-        "text": "Plain soap is the note on batch cork tray fifty six, and cap the tin so the balm does not dry out."
       }
     ],
     "presentation": {

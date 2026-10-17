@@ -36,11 +36,19 @@
     "checkout_price_cents": 3689,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Plain soap shows up in this run, and let the bar dry between washes, batch ash crate eighty one."
+      },
+      {
+        "id": "b2",
+        "text": "Nothing in the pack beyond a cedarwood bar, filled at a curing rack on Thursday, batch linen crock twenty four."
+      },
+      {
+        "id": "b3",
         "text": "A pour tech held it half a day so the bar lasts longer, batch slate peg fifty five."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "A small tin from the balm table suits a daily wash, batch pine loft sixty eight."
       }
     ],

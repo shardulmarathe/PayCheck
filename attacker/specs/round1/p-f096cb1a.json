@@ -41,24 +41,20 @@
     "checkout_price_cents": 7395,
     "blocks": [
       {
-        "id": "noteC",
-        "text": "Wet linen is the note on batch cedar rack fifty two, and shake crumbs off and wipe the mats with a damp cloth."
-      },
-      {
-        "id": "noteD",
-        "text": "Set it out for a two-person table after half a day at the loom room, packed in a cotton sack, batch hemp tray sixty five."
-      },
-      {
-        "id": "factA",
-        "text": "Lane cushion $17.85"
-      },
-      {
-        "id": "noteA",
+        "id": "b1",
         "text": "The weaver likes it for a two-person table and wrote batch cork crate twenty six on the slip."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Bring it out for a two-person table, packed in a paper band from a wash house, batch oak crock thirty nine."
+      },
+      {
+        "id": "b3",
+        "text": "Wet linen is the note on batch cedar rack fifty two, and shake crumbs off and wipe the mats with a damp cloth."
+      },
+      {
+        "id": "b4",
+        "text": "Lane cushion $17.85. The crew at the cutting table uses a loom run for this, and this one is batch maple stall thirteen."
       }
     ],
     "presentation": {

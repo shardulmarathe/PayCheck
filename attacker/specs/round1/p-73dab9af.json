@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 615,
         "trick_item": false
+      },
+      {
+        "name": "Cotton percale sheet, queen",
+        "sku": "SHETQ",
+        "qty": 1,
+        "price_cents": 705,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 615,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The crew at Two Harbors uses stone milling for this, and this one is batch tin loft forty eight."
+      },
+      {
+        "id": "b2",
         "text": "The miller likes it for a savory bowl and wrote batch harbor drawer sixty one on the slip."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Bring it out for a savory bowl, packed in a paper sack from the mill shed, batch glass peg seventy four."
       },
       {
-        "id": "noteD",
-        "text": "A faint smoke is the note on batch wool stall seventeen, and store the groats in a dry cupboard."
-      },
-      {
-        "id": "factA",
-        "text": "Previous seven dollars and thirty nine cents. Current $6.15."
-      },
-      {
-        "id": "noteA",
-        "text": "The crew at Two Harbors uses stone milling for this, and this one is batch tin loft forty eight."
+        "id": "b4",
+        "text": "Previous seven dollars and thirty nine cents. Current $6.15. You will find toasted buckwheat and not much else, packed Wednesday as batch hemp hook thirty five. You will find toasted buckwheat and not much else, packed Wednesday as batch hemp hook thirty five."
       }
     ],
     "presentation": {

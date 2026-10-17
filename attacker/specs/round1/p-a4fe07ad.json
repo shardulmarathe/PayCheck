@@ -36,16 +36,20 @@
     "checkout_price_cents": 1189,
     "blocks": [
       {
-        "id": "noteB",
-        "text": "It left a board mill on Sunday evening after an enamel fire, and the batch is birch peg thirty six."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "A board maker packed it in paper and a cardboard edge because the glaze stays even, batch amber stall forty nine."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "What you notice is a little warm clay, and speckled stoneware is the main thing in the pack, batch clay crate sixty two."
+      },
+      {
+        "id": "b3",
         "text": "The mugs are speckled stoneware and sold as a pair, batch iron drawer twenty three."
+      },
+      {
+        "id": "b4",
+        "text": "It left a board mill on Sunday evening after an enamel fire, and the batch is birch peg thirty six. Set it out for two cups of tea after a short afternoon at the pottery yard, packed in paper and a cardboard edge, batch river loft eighty. Set it out for two cups of tea after a short afternoon at the pottery yard, packed in paper and a cardboard edge, batch river loft eighty."
       }
     ],
     "presentation": {

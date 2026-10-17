@@ -36,16 +36,20 @@
     "checkout_price_cents": 1989,
     "blocks": [
       {
-        "id": "noteB",
-        "text": "The mugs are speckled stoneware and sold as a pair, batch pine nook twenty eight."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "It left the pottery yard on Wednesday after edge-grain glue-up, and the batch is ash bin forty one."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "A board maker packed it in paper and a cardboard edge because the glaze stays even, batch linen peg fifty four."
+      },
+      {
+        "id": "b3",
         "text": "Set it out for two cups of tea after the next morning at the enamel shop, packed in paper and a cardboard edge, batch slate hook fifteen."
+      },
+      {
+        "id": "b4",
+        "text": "The mugs are speckled stoneware and sold as a pair, batch pine nook twenty eight."
       }
     ],
     "presentation": {

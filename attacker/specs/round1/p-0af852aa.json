@@ -41,24 +41,20 @@
     "checkout_price_cents": 4857,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Counter packing twelve dollars and fifty five cents"
-      },
-      {
-        "id": "noteA",
-        "text": "A cold rinse on Sunday evening is how a hemmer on the day shift still finishes these, batch harbor loft eighty one."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "You will find cotton percale and not much else, packed Monday as batch glass drawer twenty four."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The crew at the cutting table uses a loom run for this, and this one is batch wool crock thirty seven."
       },
       {
-        "id": "noteD",
-        "text": "The wash crew likes it for a queen bed and wrote batch river stall fifty on the slip."
+        "id": "b3",
+        "text": "Counter packing twelve dollars and fifty five cents"
+      },
+      {
+        "id": "b4",
+        "text": "A cold rinse on Sunday evening is how a hemmer on the day shift still finishes these, batch harbor loft eighty one. Give it a cool evening at a wash house, and batch tin peg sixty eight stays with a flat mailer."
       }
     ],
     "presentation": {

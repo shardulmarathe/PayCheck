@@ -41,20 +41,20 @@
     "checkout_price_cents": 6549,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Bottle crate five dollars and twenty two cents"
+      },
+      {
+        "id": "b2",
         "text": "The crew at the cutting table uses a loom run for this, and this one is batch ash bin twenty one."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The weaver likes it for a sink and wrote batch linen peg thirty four on the slip."
       },
       {
-        "id": "noteC",
-        "text": "Bring it out for a sink, packed in a paper band from a wash house, batch brass loft forty seven."
-      },
-      {
-        "id": "factA",
-        "text": "Bottle crate five dollars and twenty two cents"
+        "id": "b4",
+        "text": "Bring it out for a sink, packed in a paper band from a wash house, batch brass loft forty seven. You will find linen cloths and not much else, packed a market morning as batch pine nook seventy eight."
       }
     ],
     "presentation": {

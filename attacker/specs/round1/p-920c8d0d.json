@@ -36,20 +36,20 @@
     "checkout_price_cents": 5177,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The miller packed it in a glass jar because the lid seats better after a rest, batch river peg sixty."
+      },
+      {
+        "id": "b2",
         "text": "What you notice is a toasty note, and raw wildflower honey is the main thing in the pack, batch iron loft seventy three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Keep the jar out of a sunny window, which is the right habit for tea and toast, batch birch drawer sixteen."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
-        "text": "The miller packed it in a glass jar because the lid seats better after a rest, batch river peg sixty."
+        "id": "b4",
+        "text": "Statement name on this charge is the shop in the header."
       }
     ],
     "presentation": {

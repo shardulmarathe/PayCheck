@@ -36,20 +36,20 @@
     "checkout_price_cents": 6600,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "A dry-rack cure on Thursday is how a splitter still finishes these, batch pine tray sixty eight."
+      },
+      {
+        "id": "b2",
         "text": "You will find long matches and not much else, packed Thursday as batch ash pail eighty one."
       },
       {
-        "id": "factA",
+        "id": "b3",
         "text": "every quarter at $77.72."
       },
       {
-        "id": "noteA",
-        "text": "Give it a cool evening at the match room, and batch slate stall fifty five stays with a tin of eight."
-      },
-      {
-        "id": "noteB",
-        "text": "A dry-rack cure on Thursday is how a splitter still finishes these, batch pine tray sixty eight."
+        "id": "b4",
+        "text": "Give it a cool evening at the match room, and batch slate stall fifty five stays with a tin of eight. A crate holds split birch in, which is what a splitter wanted for batch clay crock forty two."
       }
     ],
     "presentation": {

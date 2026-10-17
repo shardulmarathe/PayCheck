@@ -36,24 +36,20 @@
     "checkout_price_cents": 3465,
     "blocks": [
       {
-        "id": "noteC",
-        "text": "A paper band holds wet linen in, which is what the wash crew wanted for batch iron crock forty three."
-      },
-      {
-        "id": "noteD",
-        "text": "Give it half a day at a wash house, and batch birch rack fifty six stays with a flat mailer."
-      },
-      {
-        "id": "factA",
+        "id": "b1",
         "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "Batch wool stall seventeen names the cutting table and mentions hand hemming."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "For a light curtain, start with brass rings, and batch river crate thirty is on the slip."
+      },
+      {
+        "id": "b4",
+        "text": "A paper band holds wet linen in, which is what the wash crew wanted for batch iron crock forty three."
       }
     ],
     "presentation": {

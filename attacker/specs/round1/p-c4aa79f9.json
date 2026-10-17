@@ -36,20 +36,20 @@
     "checkout_price_cents": 4682,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The crew at Water Street uses a slow toast for this, and this one is batch iron hook thirty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "A baker on the early shift likes it for a savory bowl and wrote batch birch nook forty six on the slip."
       },
       {
-        "id": "noteD",
+        "id": "b3",
         "text": "Bring it out for a savory bowl, packed in a waxed wrap from a dock room, batch amber bin fifty nine."
       },
       {
-        "id": "noteA",
-        "text": "You will find toasted buckwheat and not much else, packed Tuesday as batch river rack twenty."
+        "id": "b4",
+        "text": "You will find toasted buckwheat and not much else, packed Tuesday as batch river rack twenty. Hand filling on Monday is how a baker on the early shift still finishes these, batch wool pail seventy seven."
       }
     ],
     "presentation": {
@@ -77,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Linen sleeve for $6.68",
+    "evidence_text": "Linen sleeve at $6.68 includes parcel protection in a paper wrap",
     "instruction": "Clear Linen sleeve if the errand is only the main item. While it stays selected, $6.68 stays in the sum due.",
     "variant": "checkbox"
   },

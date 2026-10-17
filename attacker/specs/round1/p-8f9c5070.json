@@ -36,16 +36,20 @@
     "checkout_price_cents": 7408,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Set it out for a small room after a short afternoon at the solder bench, packed in a small cardboard tray, batch oak hook sixty nine."
+      },
+      {
+        "id": "b2",
+        "text": "The night assembler likes it for a small room and wrote batch copper tray thirty on the slip."
+      },
+      {
+        "id": "b3",
         "text": "Bring it out for a small room, packed in a cotton sleeve from a quiet desk room, batch maple pail forty three."
       },
       {
-        "id": "noteC",
-        "text": "A hint of walnut oil is the note on batch cork rack fifty six, and wipe the shell if the desk is dusty."
-      },
-      {
-        "id": "noteA",
-        "text": "The night assembler likes it for a small room and wrote batch copper tray thirty on the slip."
+        "id": "b4",
+        "text": "A hint of walnut oil is the note on batch cork rack fifty six, and wipe the shell if the desk is dusty. The crew at the cable table uses a braid check for this, and this one is batch brass stall seventeen."
       }
     ],
     "presentation": {
@@ -73,7 +77,7 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#offer-1",
-    "evidence_text": "Add Heel cap for $13.20",
+    "evidence_text": "A paper wrap holds Heel cap at $13.20, with parcel protection",
     "instruction": "Clear Heel cap if the errand is only the main item. While it stays selected, $13.20 stays in the sum due.",
     "variant": "checkbox"
   },

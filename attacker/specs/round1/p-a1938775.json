@@ -36,24 +36,20 @@
     "checkout_price_cents": 3109,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "The pucks light kindling and come eight to a tin, batch copper drawer fifty."
-      },
-      {
-        "id": "noteB",
-        "text": "It left the match room on Thursday after hand splitting, and the batch is maple crock sixty three."
-      },
-      {
-        "id": "noteC",
+        "id": "b1",
         "text": "The match packer packed it in a slide box because the puck catches damp wood, batch cork stall seventy six."
       },
       {
-        "id": "noteD",
-        "text": "What you notice is dry wood, and firestarter pucks is the main thing in the pack, batch oak crate nineteen."
+        "id": "b2",
+        "text": "The form asks for the digits, the month and year, and the short code on the back."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b3",
+        "text": "The pucks light kindling and come eight to a tin, batch copper drawer fifty."
+      },
+      {
+        "id": "b4",
+        "text": "It left the match room on Thursday after hand splitting, and the batch is maple crock sixty three."
       }
     ],
     "presentation": {

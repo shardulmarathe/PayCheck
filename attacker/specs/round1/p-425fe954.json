@@ -36,16 +36,20 @@
     "checkout_price_cents": 6291,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Tuesday at the loom room was for a cold rinse, and the slip reads cork drawer twenty six."
+      },
+      {
+        "id": "b2",
+        "text": "every thirty days at seventy one dollars and seventy four cents."
+      },
+      {
+        "id": "b3",
         "text": "Hang the towel so the hem stays straight, which is the right habit for drying cups, batch copper hook seventy."
       },
       {
-        "id": "noteB",
-        "text": "It rested two nights at the loom room, then went into a cotton sack, batch maple nook thirteen."
-      },
-      {
-        "id": "factA",
-        "text": "every thirty days at seventy one dollars and seventy four cents."
+        "id": "b4",
+        "text": "It rested two nights at the loom room, then went into a cotton sack, batch maple nook thirteen. What you notice is almost nothing after drying, and hemmed linen is the main thing in the pack, batch brass bin fifty seven."
       }
     ],
     "presentation": {

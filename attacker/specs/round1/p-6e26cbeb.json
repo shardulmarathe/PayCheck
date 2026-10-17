@@ -28,20 +28,20 @@
     "checkout_price_cents": 5586,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The audio lead is cloth braid, one meter, with metal plugs, batch amber nook forty nine."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "It left a quiet desk room on Monday after a fit check on a real desk, and the batch is clay drawer sixty two."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "The bench tech packed it in a small cardboard tray because the braid lies flat, batch slate peg seventy five."
       },
       {
-        "id": "noteD",
-        "text": "What you notice is almost no smell, and cloth-braid audio lead is the main thing in the pack, batch pine loft eighteen."
+        "id": "b4",
+        "text": "It left a quiet desk room on Friday after a braid check, and the batch is cedar tray thirty two."
       }
     ],
     "presentation": {

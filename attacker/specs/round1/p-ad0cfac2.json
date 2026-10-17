@@ -41,19 +41,19 @@
     "checkout_price_cents": 3239,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Bring it out for a liter of dry goods, packed in a cardboard cradle from a board mill, batch hemp bin fifty five."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A little warm clay is the note on batch tin peg sixty eight, and wash the glass and dry the lid."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Set it out for a liter of dry goods after the next morning at the enamel shop, packed in paper and a cardboard edge, batch harbor loft eighty one."
       },
       {
-        "id": "noteD",
+        "id": "b4",
         "text": "The jar is clear glass and holds one liter, batch glass drawer twenty four."
       }
     ],

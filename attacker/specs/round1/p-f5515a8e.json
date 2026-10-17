@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 3223,
         "trick_item": false
+      },
+      {
+        "name": "Birch kindling crate",
+        "sku": "KNDL1",
+        "qty": 1,
+        "price_cents": 2002,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,12 +43,20 @@
     "checkout_price_cents": 3223,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The pencil lead packed it in a slim box because the sheet lies flat, batch maple hook thirty three."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "What you notice is fresh paper, and ruled paper that lies flat is the main thing in the pack, batch cork loft forty six."
+      },
+      {
+        "id": "b3",
+        "text": "Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch oak drawer fifty nine."
+      },
+      {
+        "id": "b4",
+        "text": "It rested two nights at the pencil bench, then went into a slim box, batch cedar peg seventy two. It left a cutting bench on Friday after a short print run, and the batch is copper bin twenty. It left a cutting bench on Friday after a short print run, and the batch is copper bin twenty."
       }
     ],
     "presentation": {

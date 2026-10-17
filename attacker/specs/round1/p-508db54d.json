@@ -36,16 +36,20 @@
     "checkout_price_cents": 2337,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "The cure crew signed the slip Friday because the bar lasts longer, batch brass crock seventy seven."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "A market morning fill at the soap bench put a cedarwood bar into a paper wrap, batch copper rack twenty."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "Batch maple tray thirty three names the balm table and mentions a cedar mix."
+      },
+      {
+        "id": "b3",
         "text": "Statement name on this charge is the shop in the header."
+      },
+      {
+        "id": "b4",
+        "text": "The cure crew signed the slip Friday because the bar lasts longer, batch brass crock seventy seven."
       }
     ],
     "presentation": {

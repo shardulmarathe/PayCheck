@@ -28,20 +28,20 @@
     "checkout_price_cents": 6539,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "The kiln tech packed it in paper and a cardboard edge because the wood does not cup, batch tin loft forty eight."
+      },
+      {
+        "id": "b2",
         "text": "Earlier seventy eight dollars and seventy nine cents, selling $65.39."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "The board is beech, edge grain, with a juice groove, batch cedar bin twenty two."
       },
       {
-        "id": "noteB",
-        "text": "It left the pottery yard on Wednesday after an enamel fire, and the batch is hemp hook thirty five."
-      },
-      {
-        "id": "noteC",
-        "text": "The kiln tech packed it in paper and a cardboard edge because the wood does not cup, batch tin loft forty eight."
+        "id": "b4",
+        "text": "It left the pottery yard on Wednesday after an enamel fire, and the batch is hemp hook thirty five. Set it out for daily chopping after a cool evening at the enamel shop, packed in paper and a cardboard edge, batch oak nook seventy nine. Set it out for daily chopping after a cool evening at the enamel shop, packed in paper and a cardboard edge, batch oak nook seventy nine."
       }
     ],
     "presentation": {

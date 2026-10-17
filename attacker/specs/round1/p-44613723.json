@@ -36,12 +36,20 @@
     "checkout_price_cents": 4420,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Bare steel is the note on batch amber tray twenty nine, and hand-wash the pan and dry the rim."
+      },
+      {
+        "id": "b2",
+        "text": "Set it out for a two-quart soup after a short afternoon at the pottery yard, packed in paper and a cardboard edge, batch clay pail forty two."
+      },
+      {
+        "id": "b3",
         "text": "The kiln tech likes it for a two-quart soup and wrote batch iron crock seventy three on the slip."
       },
       {
-        "id": "noteB",
-        "text": "Bring it out for a two-quart soup, packed in a cardboard cradle from the enamel shop, batch birch rack sixteen."
+        "id": "b4",
+        "text": "Bring it out for a two-quart soup, packed in a cardboard cradle from the enamel shop, batch birch rack sixteen. The crew at a board mill uses a stoneware firing for this, and this one is batch river crate sixty. The crew at a board mill uses a stoneware firing for this, and this one is batch river crate sixty."
       }
     ],
     "presentation": {

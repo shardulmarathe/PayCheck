@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 6017,
         "trick_item": false
+      },
+      {
+        "name": "Birch kindling crate",
+        "sku": "KNDL1",
+        "qty": 1,
+        "price_cents": 2002,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 6017,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Dock slot nine dollars and sixty two cents"
+      },
+      {
+        "id": "b2",
         "text": "What you notice is cotton fiber, and ruled paper that lies flat is the main thing in the pack, batch ash crate sixty one."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch linen crock seventy four."
       },
       {
-        "id": "factA",
-        "text": "Dock slot nine dollars and sixty two cents"
+        "id": "b4",
+        "text": "It rested two nights at the press room, then went into a slim box, batch brass stall seventeen. A folder packed it in a slim box because the sheet lies flat, batch pine loft forty eight."
       }
     ],
     "presentation": {

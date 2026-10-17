@@ -36,23 +36,19 @@
     "checkout_price_cents": 7781,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A little graphite shows up in this run, and sharpen with a blade if you want a long point, batch pine drawer twenty eight."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Nothing in the pack beyond graphite pencils, filled at the pencil bench on Wednesday, batch ash crock forty one."
       },
       {
-        "id": "noteD",
-        "text": "The pencil lead signed the slip Thursday because the point stays even, batch linen stall fifty four."
-      },
-      {
-        "id": "factA",
+        "id": "b3",
         "text": "Digits, month and year, and the three-digit code are the fields on this form."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "A slim box from the press room suits a sketch, batch slate loft fifteen."
       }
     ],

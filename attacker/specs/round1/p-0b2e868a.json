@@ -36,24 +36,20 @@
     "checkout_price_cents": 4485,
     "blocks": [
       {
-        "id": "factA",
-        "text": "every ninety days at forty nine dollars and twenty four cents."
-      },
-      {
-        "id": "noteA",
+        "id": "b1",
         "text": "A market morning fill at the stitch room put a compact binocular into a cotton stuff sack, batch tin rack fifty eight."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Batch harbor hook seventy one names the sock bench and mentions a merino knit."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "For a coat pocket, start with a compact binocular, and batch glass nook fourteen is on the slip."
       },
       {
-        "id": "noteD",
-        "text": "A cotton stuff sack holds plain wool in, which is what a gear tech wanted for batch wool bin twenty seven."
+        "id": "b4",
+        "text": "every ninety days at forty nine dollars and twenty four cents. The seam lead signed the slip Friday because the hinge stays tight, batch hemp pail forty five."
       }
     ],
     "presentation": {

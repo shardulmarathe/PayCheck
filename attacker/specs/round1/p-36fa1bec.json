@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 7652,
         "trick_item": false
+      },
+      {
+        "name": "Aluminum flask, 700 ml",
+        "sku": "FLSK7",
+        "qty": 1,
+        "price_cents": 599,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,16 +43,20 @@
     "checkout_price_cents": 7652,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The enamel crew signed the slip Monday because the wood does not cup, batch oak bin sixty nine."
+      },
+      {
+        "id": "b2",
+        "text": "Paper and a cardboard edge from the pottery yard suits daily chopping, batch copper rack thirty."
+      },
+      {
+        "id": "b3",
         "text": "A little warm clay shows up in this run, and oil the board when the wood looks pale, batch maple tray forty three."
       },
       {
-        "id": "noteC",
-        "text": "Nothing in the pack beyond edge-grain beech, filled at a board mill on Monday, batch cork pail fifty six."
-      },
-      {
-        "id": "noteA",
-        "text": "Paper and a cardboard edge from the pottery yard suits daily chopping, batch copper rack thirty."
+        "id": "b4",
+        "text": "Nothing in the pack beyond edge-grain beech, filled at a board mill on Monday, batch cork pail fifty six. A board maker held it a cool evening so the wood does not cup, batch brass crock seventeen. A board maker held it a cool evening so the wood does not cup, batch brass crock seventeen."
       }
     ],
     "presentation": {

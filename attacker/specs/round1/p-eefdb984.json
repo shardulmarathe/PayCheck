@@ -36,24 +36,20 @@
     "checkout_price_cents": 2061,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Bring it out for a savory bowl, packed in a glass jar from a dock room, batch linen tray thirty four."
+      },
+      {
+        "id": "b2",
         "text": "A faint smoke is the note on batch brass nook forty seven, and store the groats in a dry cupboard."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Set it out for a savory bowl after one night at the back bakery, packed in a cloth sack, batch copper bin sixty."
       },
       {
-        "id": "noteD",
-        "text": "The groats are toasted buckwheat for a savory bowl, batch maple hook seventy three."
-      },
-      {
-        "id": "factA",
-        "text": "every ninety days at twenty two dollars and thirty seven cents."
-      },
-      {
-        "id": "noteA",
-        "text": "Bring it out for a savory bowl, packed in a glass jar from a dock room, batch linen tray thirty four."
+        "id": "b4",
+        "text": "every ninety days at twenty two dollars and thirty seven cents. A baker on the early shift likes it for a savory bowl and wrote batch ash rack twenty one on the slip."
       }
     ],
     "presentation": {

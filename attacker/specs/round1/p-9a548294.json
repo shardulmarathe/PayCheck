@@ -36,16 +36,20 @@
     "checkout_price_cents": 4864,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The soap maker signed the slip Sunday evening because the balm stays smooth, batch oak nook twenty nine."
+      },
+      {
+        "id": "b2",
+        "text": "A small tin from the balm table suits dry hands, batch copper pail sixty."
+      },
+      {
+        "id": "b3",
         "text": "Cedarwood shows up in this run, and cap the tin so the balm does not dry out, batch maple rack seventy three."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "Nothing in the pack beyond a one-ounce balm, filled at a curing rack on Sunday evening, batch cork tray sixteen."
-      },
-      {
-        "id": "noteA",
-        "text": "A small tin from the balm table suits dry hands, batch copper pail sixty."
       }
     ],
     "presentation": {

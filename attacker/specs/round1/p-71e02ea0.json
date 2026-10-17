@@ -36,12 +36,20 @@
     "checkout_price_cents": 7864,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The knitter held it a short afternoon so the cushion stays put, batch oak drawer seventy nine."
+      },
+      {
+        "id": "b2",
+        "text": "Air the socks after a long day, which is the right habit for a day on foot, batch copper bin forty."
+      },
+      {
+        "id": "b3",
         "text": "It rested half a day at the stitch room, then went into a small box with a pad, batch maple hook fifty three."
       },
       {
-        "id": "noteA",
-        "text": "Air the socks after a long day, which is the right habit for a day on foot, batch copper bin forty."
+        "id": "b4",
+        "text": "Wednesday at the stitch room was for a cap torque check, and the slip reads cork loft sixty six."
       }
     ],
     "presentation": {

@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 4345,
         "trick_item": false
+      },
+      {
+        "name": "Firestarter puck, 8 count",
+        "sku": "FIRE8",
+        "qty": 1,
+        "price_cents": 1740,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 4345,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A slim box from the pencil bench suits a sketch, batch copper hook seventy."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Cotton fiber shows up in this run, and sharpen with a blade if you want a long point, batch maple nook thirteen."
       },
       {
-        "id": "noteD",
-        "text": "Nothing in the pack beyond graphite pencils, filled at a cutting bench on Tuesday, batch cork drawer twenty six."
-      },
-      {
-        "id": "factA",
+        "id": "b3",
         "text": "Previous $53.12. Current forty three dollars and forty five cents."
       },
       {
-        "id": "noteA",
-        "text": "The pencil lead held it the next morning so the point stays even, batch brass bin fifty seven."
+        "id": "b4",
+        "text": "The pencil lead held it the next morning so the point stays even, batch brass bin fifty seven. Monday at the press room was for hand folding, and the slip reads linen pail forty four. Monday at the press room was for hand folding, and the slip reads linen pail forty four."
       }
     ],
     "presentation": {

@@ -36,12 +36,20 @@
     "checkout_price_cents": 6591,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A board maker packed it in paper and a cardboard edge because the handle stays tight, batch brass stall seventeen."
       },
       {
-        "id": "noteA",
-        "text": "It left a board mill on Sunday evening after edge-grain glue-up, and the batch is linen crock seventy four."
+        "id": "b2",
+        "text": "What you notice is a little warm clay, and a steel kettle is the main thing in the pack, batch copper tray thirty."
+      },
+      {
+        "id": "b3",
+        "text": "What you notice is a little warm clay, and a steel kettle is the main thing in the pack, batch hemp stall fifteen."
+      },
+      {
+        "id": "b4",
+        "text": "It left a board mill on Sunday evening after edge-grain glue-up, and the batch is linen crock seventy four. The kettle is steel with a wood handle and holds one and a half liters, batch ash crate sixty one. The kettle is steel with a wood handle and holds one and a half liters, batch ash crate sixty one."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Mesh pouch",
         "price_cents": 968,
         "checked": false,
-        "label": "Add Mesh pouch for nine dollars and sixty eight cents"
+        "label": "Add Mesh pouch for nine dollars and sixty eight cents, with parcel protection and a paper wrap"
       }
     }
   },

@@ -36,20 +36,20 @@
     "checkout_price_cents": 2781,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b1",
+        "text": "Nothing in the pack beyond a slate-colored shell, filled at a quiet desk room on a market morning, batch cork rack forty six."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "Digits, month and year, and the three-digit code are the fields on this form."
+      },
+      {
+        "id": "b3",
         "text": "A small cardboard tray from the cable table suits a small room, batch copper tray twenty."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "A light machine-oil note shows up in this run, and wipe the shell if the desk is dusty, batch maple pail thirty three."
-      },
-      {
-        "id": "noteC",
-        "text": "Nothing in the pack beyond a slate-colored shell, filled at a quiet desk room on a market morning, batch cork rack forty six."
       }
     ],
     "presentation": {

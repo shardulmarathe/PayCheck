@@ -41,24 +41,20 @@
     "checkout_price_cents": 7709,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A market morning at the press room was for a short print run, and the slip reads glass loft fourteen."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The pencil lead held it a cool evening so the point stays even, batch wool crate twenty seven."
       },
       {
-        "id": "noteD",
-        "text": "A slim box from the pencil bench suits a sketch, batch river crock forty."
-      },
-      {
-        "id": "factA",
+        "id": "b3",
         "text": "Twilight run eleven dollars and sixty six cents"
       },
       {
-        "id": "noteA",
-        "text": "It rested two nights at the press room, then went into a slim box, batch harbor peg seventy one."
+        "id": "b4",
+        "text": "It rested two nights at the press room, then went into a slim box, batch harbor peg seventy one. Sharpen with a blade if you want a long point, which is the right habit for a sketch, batch tin drawer fifty eight."
       }
     ],
     "presentation": {

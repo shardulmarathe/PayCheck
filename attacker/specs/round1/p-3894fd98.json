@@ -41,20 +41,20 @@
     "checkout_price_cents": 4011,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Give it two nights at a wash house, and batch cork pail seventy six stays with a flat mailer."
+      },
+      {
+        "id": "b2",
         "text": "A cold rinse on Friday is how a hemmer on the day shift still finishes these, batch oak bin nineteen."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "You will find heather wool and not much else, packed Friday as batch cedar hook thirty two."
       },
       {
-        "id": "factA",
-        "text": "Club sorting $7.32"
-      },
-      {
-        "id": "noteA",
-        "text": "Give it two nights at a wash house, and batch cork pail seventy six stays with a flat mailer."
+        "id": "b4",
+        "text": "Club sorting $7.32. A paper band holds wet linen in, which is what the wash crew wanted for batch maple tray sixty three."
       }
     ],
     "presentation": {

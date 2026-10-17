@@ -36,16 +36,20 @@
     "checkout_price_cents": 5003,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Nothing in the pack beyond cushioned merino, filled at a gear bench on Friday, batch tin stall eighteen."
+      },
+      {
+        "id": "b2",
+        "text": "Last week fifty nine dollars and sixty one cents. This week $50.03."
+      },
+      {
+        "id": "b3",
         "text": "A small box with a pad from the sock bench suits a day on foot, batch cedar drawer sixty two."
       },
       {
-        "id": "noteB",
-        "text": "Plain wool shows up in this run, and air the socks after a long day, batch hemp crock seventy five."
-      },
-      {
-        "id": "factA",
-        "text": "Last week fifty nine dollars and sixty one cents. This week $50.03."
+        "id": "b4",
+        "text": "Plain wool shows up in this run, and air the socks after a long day, batch hemp crock seventy five. The seam lead held it one night so the cushion stays put, batch oak loft forty nine. The seam lead held it one night so the cushion stays put, batch oak loft forty nine."
       }
     ],
     "presentation": {

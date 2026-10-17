@@ -36,19 +36,19 @@
     "checkout_price_cents": 3164,
     "blocks": [
       {
-        "id": "noteD",
+        "id": "b1",
         "text": "What you notice is bare steel, and oak with a low lip is the main thing in the pack, batch oak crock fifty nine."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "The ledge is oak, twenty four inches, with a low lip, batch copper peg twenty."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "It left the pottery yard on Friday after edge-grain glue-up, and the batch is maple stall thirty three."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "A board maker packed it in paper and a cardboard edge because the lip stays low and even, batch cork crate forty six."
       }
     ],

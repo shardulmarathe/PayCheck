@@ -36,20 +36,20 @@
     "checkout_price_cents": 5883,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "A Sunday evening fill at the solder bench put a walnut stand into a cotton sleeve, batch pine bin forty eight."
+      },
+      {
+        "id": "b2",
         "text": "Batch ash hook sixty one names the cable table and mentions a fit check on a real desk."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b3",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "The night assembler signed the slip a market morning because the walnut stays steady, batch slate nook thirty five."
-      },
-      {
-        "id": "noteB",
-        "text": "A Sunday evening fill at the solder bench put a walnut stand into a cotton sleeve, batch pine bin forty eight."
       }
     ],
     "presentation": {

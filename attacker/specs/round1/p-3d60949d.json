@@ -28,11 +28,19 @@
     "checkout_price_cents": 3612,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "It left the cable table on Thursday after a braid check, and the batch is maple rack twenty three."
+      },
+      {
+        "id": "b2",
+        "text": "Set it out for a desk setup after a cool evening at the cable table, packed in a small cardboard tray, batch clay rack twenty two."
+      },
+      {
+        "id": "b3",
         "text": "Set it out for a desk setup after the next morning at the solder bench, packed in a small cardboard tray, batch brass crate sixty seven."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "The lead is braided cloth, two meters end to end, with metal plugs, batch copper pail eighty."
       }
     ],

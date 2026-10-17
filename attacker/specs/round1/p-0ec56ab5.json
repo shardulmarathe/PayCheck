@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 6319,
         "trick_item": false
+      },
+      {
+        "name": "Smoked sea salt tin, 4 oz",
+        "sku": "SALT4",
+        "qty": 1,
+        "price_cents": 417,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 6319,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Previous eighty five dollars and six cents. Current $63.19."
-      },
-      {
-        "id": "noteA",
+        "id": "b1",
         "text": "Nothing in the pack beyond a compact binocular, filled at a gear bench on Wednesday, batch clay peg seventy two."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "The seam lead signed the slip Wednesday because the hinge stays tight, batch slate loft fifteen."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A Wednesday fill at the stitch room put a compact binocular into a cotton stuff sack, batch pine drawer twenty eight."
       },
       {
-        "id": "noteD",
-        "text": "Batch ash crock forty one names the sock bench and mentions a cap torque check."
+        "id": "b4",
+        "text": "Previous eighty five dollars and six cents. Current $63.19. Plain wool shows up in this run, and keep the lenses capped in a dusty pack, batch amber bin fifty nine. Plain wool shows up in this run, and keep the lenses capped in a dusty pack, batch amber bin fifty nine."
       }
     ],
     "presentation": {

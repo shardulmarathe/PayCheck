@@ -36,12 +36,20 @@
     "checkout_price_cents": 4053,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Almost nothing shows up in this run, and air the socks after a long day, batch slate nook forty five."
+      },
+      {
+        "id": "b2",
+        "text": "A gear tech held it two nights so the cushion stays put, batch glass hook thirty four."
+      },
+      {
+        "id": "b3",
         "text": "A small box with a pad from the stitch room suits a day on foot, batch wool nook forty seven."
       },
       {
-        "id": "noteA",
-        "text": "A gear tech held it two nights so the cushion stays put, batch glass hook thirty four."
+        "id": "b4",
+        "text": "A little aluminum shows up in this run, and air the socks after a long day, batch river drawer sixty. Tuesday at a gear bench was for a cap torque check, and the slip reads harbor bin twenty one. Tuesday at a gear bench was for a cap torque check, and the slip reads harbor bin twenty one."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Tin clasp",
         "price_cents": 634,
         "checked": false,
-        "label": "Add Tin clasp for six dollars and thirty four cents"
+        "label": "Add Tin clasp for six dollars and thirty four cents, with parcel protection and a paper wrap"
       }
     }
   },

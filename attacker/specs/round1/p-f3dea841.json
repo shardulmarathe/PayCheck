@@ -36,20 +36,20 @@
     "checkout_price_cents": 6867,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "A Thursday fill at the enamel shop put speckled stoneware into a cardboard cradle, batch pine nook sixty eight."
+      },
+      {
+        "id": "b2",
         "text": "Batch ash bin eighty one names the pottery yard and mentions edge-grain glue-up."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b3",
+        "text": "Statement name on this charge is the shop in the header."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "The enamel crew signed the slip Wednesday because the glaze stays even, batch slate hook fifty five."
-      },
-      {
-        "id": "noteB",
-        "text": "A Thursday fill at the enamel shop put speckled stoneware into a cardboard cradle, batch pine nook sixty eight."
       }
     ],
     "presentation": {

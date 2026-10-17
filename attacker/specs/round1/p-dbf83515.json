@@ -36,24 +36,20 @@
     "checkout_price_cents": 6849,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A baker on the early shift likes it for a roast vegetable and wrote batch river crate thirty on the slip."
-      },
-      {
-        "id": "factA",
-        "text": "The form asks for the digits, the month and year, and the short code on the back."
-      },
-      {
-        "id": "noteA",
-        "text": "Hand filling on Wednesday is how the miller still finishes these, batch harbor drawer sixty one."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "You will find alder-smoked salt and not much else, packed Thursday as batch glass peg seventy four."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The crew at Water Street uses a slow toast for this, and this one is batch wool stall seventeen."
+      },
+      {
+        "id": "b3",
+        "text": "The form asks for the digits, the month and year, and the short code on the back."
+      },
+      {
+        "id": "b4",
+        "text": "Hand filling on Wednesday is how the miller still finishes these, batch harbor drawer sixty one."
       }
     ],
     "presentation": {

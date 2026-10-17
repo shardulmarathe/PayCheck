@@ -36,20 +36,20 @@
     "checkout_price_cents": 2901,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "For dry hands, start with a one-ounce balm, and batch tin peg thirty eight is on the slip."
+      },
+      {
+        "id": "b2",
         "text": "Digits, month and year, and the three-digit code are the fields on this form."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "A Monday fill at the soap bench put a one-ounce balm into a paper wrap, batch cedar nook twelve."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Batch hemp bin twenty five names the balm table and mentions a cedar mix."
-      },
-      {
-        "id": "noteC",
-        "text": "For dry hands, start with a one-ounce balm, and batch tin peg thirty eight is on the slip."
       }
     ],
     "presentation": {

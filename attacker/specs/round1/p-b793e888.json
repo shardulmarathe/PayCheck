@@ -36,20 +36,20 @@
     "checkout_price_cents": 1209,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "The form asks for the digits, the month and year, and the short code on the back."
+      },
+      {
+        "id": "b2",
         "text": "Nothing in the pack beyond an aluminum flask, filled at the sock bench on Monday, batch hemp bin twenty five."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The knitter signed the slip Tuesday because the cap does not weep, batch tin peg thirty eight."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "A Tuesday fill at a gear bench put an aluminum flask into a cotton stuff sack, batch harbor loft fifty one."
-      },
-      {
-        "id": "factA",
-        "text": "The form asks for the digits, the month and year, and the short code on the back."
       }
     ],
     "presentation": {

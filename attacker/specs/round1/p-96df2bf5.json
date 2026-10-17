@@ -36,16 +36,20 @@
     "checkout_price_cents": 1405,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "Bring it out for a desk setup, packed in a cotton sleeve from a quiet desk room, batch harbor nook eighty one."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "A hint of walnut oil is the note on batch glass bin twenty four, and coil the lead loosely when you put it away."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "Set it out for a desk setup after a cool evening at the solder bench, packed in a small cardboard tray, batch wool hook thirty seven."
+      },
+      {
+        "id": "b3",
         "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
+      },
+      {
+        "id": "b4",
+        "text": "Bring it out for a desk setup, packed in a cotton sleeve from a quiet desk room, batch harbor nook eighty one."
       }
     ],
     "presentation": {

@@ -36,16 +36,20 @@
     "checkout_price_cents": 7245,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Tuesday at a dock room was for stone milling, and the slip reads cork peg twenty six."
+      },
+      {
+        "id": "b2",
+        "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
+      },
+      {
+        "id": "b3",
         "text": "A cool cupboard is plenty for the barley, which is the right habit for a quick porridge, batch copper nook seventy."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "It rested the next morning at a dock room, then went into a waxed wrap, batch maple bin thirteen."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
       }
     ],
     "presentation": {

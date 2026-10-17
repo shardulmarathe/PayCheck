@@ -28,20 +28,20 @@
     "checkout_price_cents": 5661,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Earlier $69.65, selling fifty six dollars and sixty one cents."
+      },
+      {
+        "id": "b2",
         "text": "Almost nothing shows up in this run, and rinse the flask and leave the cap off, batch wool tray sixty seven."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Nothing in the pack beyond an aluminum flask, filled at a gear bench on Sunday evening, batch river pail eighty."
       },
       {
-        "id": "noteC",
-        "text": "A gear tech signed the slip Sunday evening because the cap does not weep, batch iron bin twenty three."
-      },
-      {
-        "id": "factA",
-        "text": "Earlier $69.65, selling fifty six dollars and sixty one cents."
+        "id": "b4",
+        "text": "A gear tech signed the slip Sunday evening because the cap does not weep, batch iron bin twenty three. A small box with a pad from the sock bench suits a long walk, batch glass rack fifty four. A small box with a pad from the sock bench suits a long walk, batch glass rack fifty four."
       }
     ],
     "presentation": {

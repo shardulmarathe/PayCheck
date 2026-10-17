@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 5268,
         "trick_item": false
+      },
+      {
+        "name": "Smoked sea salt tin, 4 oz",
+        "sku": "SALT4",
+        "qty": 1,
+        "price_cents": 417,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,19 +48,19 @@
     "checkout_price_cents": 5268,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The seam lead held it a short afternoon so the hinge stays tight, batch iron nook forty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "A small box with a pad from the sock bench suits a coat pocket, batch birch bin fifty six."
       },
       {
-        "id": "noteD",
+        "id": "b3",
         "text": "Plain wool shows up in this run, and keep the lenses capped in a dusty pack, batch amber hook sixty nine."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "Thursday at the stitch room was for a cap torque check, and the slip reads river tray thirty."
       }
     ],

@@ -36,20 +36,20 @@
     "checkout_price_cents": 3661,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "It left a quiet desk room on Wednesday after a braid check, and the batch is birch loft sixteen."
+      },
+      {
+        "id": "b2",
         "text": "The bench tech packed it in a small cardboard tray because the walnut stays steady, batch amber crate twenty nine."
       },
       {
-        "id": "factA",
+        "id": "b3",
         "text": "Digits, month and year, and the three-digit code are the fields on this form."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "The stand is walnut and holds a headset, batch iron peg seventy three."
-      },
-      {
-        "id": "noteB",
-        "text": "It left a quiet desk room on Wednesday after a braid check, and the batch is birch loft sixteen."
       }
     ],
     "presentation": {

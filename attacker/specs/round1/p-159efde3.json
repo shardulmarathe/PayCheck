@@ -36,16 +36,20 @@
     "checkout_price_cents": 7413,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "A baker on the early shift likes it for a quick porridge and wrote batch clay rack twenty two on the slip."
+      },
+      {
+        "id": "b2",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
+      },
+      {
+        "id": "b3",
         "text": "You will find thin-rolled barley and not much else, packed a market morning as batch birch tray sixty six."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "The crew at the mill shed uses a cool rest for this, and this one is batch amber pail seventy nine."
-      },
-      {
-        "id": "factA",
-        "text": "Have the plastic handy: digits, month and year, and the short code."
       }
     ],
     "presentation": {

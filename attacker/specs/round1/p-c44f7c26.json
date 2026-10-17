@@ -36,24 +36,20 @@
     "checkout_price_cents": 1773,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Have the plastic handy: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
+        "id": "b1",
         "text": "A gear tech signed the slip Thursday because the hinge stays tight, batch river crate thirty."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A Thursday fill at a gear bench put a compact binocular into a cotton stuff sack, batch iron crock forty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Batch birch rack fifty six names a gear bench and mentions a seam check."
       },
       {
-        "id": "noteD",
-        "text": "For a coat pocket, start with a compact binocular, and batch amber tray sixty nine is on the slip."
+        "id": "b4",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
       }
     ],
     "presentation": {

@@ -41,20 +41,20 @@
     "checkout_price_cents": 4325,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
+        "text": "The enamel crew packed it in paper and a cardboard edge because the glaze stays even, batch glass tray sixty four."
+      },
+      {
+        "id": "b2",
         "text": "What you notice is bare steel, and speckled stoneware is the main thing in the pack, batch wool pail seventy seven."
       },
       {
-        "id": "factA",
+        "id": "b3",
         "text": "Moisture sleeve five dollars and eleven cents"
       },
       {
-        "id": "noteA",
-        "text": "It left the pottery yard on Monday after a stoneware firing, and the batch is harbor stall fifty one."
-      },
-      {
-        "id": "noteB",
-        "text": "The enamel crew packed it in paper and a cardboard edge because the glaze stays even, batch glass tray sixty four."
+        "id": "b4",
+        "text": "It left the pottery yard on Monday after a stoneware firing, and the batch is harbor stall fifty one. The mugs are speckled stoneware and sold as a pair, batch tin crock thirty eight."
       }
     ],
     "presentation": {

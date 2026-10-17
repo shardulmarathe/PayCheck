@@ -36,24 +36,20 @@
     "checkout_price_cents": 3330,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
         "text": "every four weeks at $38.37."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "Set it out for a short run across a desk after a cool evening at the solder bench, packed in a small cardboard tray, batch ash rack twenty one."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The audio lead is cloth braid, one meter, with metal plugs, batch linen tray thirty four."
       },
       {
-        "id": "noteC",
-        "text": "It left the cable table on a market morning after hand soldering, and the batch is brass nook forty seven."
-      },
-      {
-        "id": "noteD",
-        "text": "A cable maker packed it in a small cardboard tray because the braid lies flat, batch copper bin sixty."
+        "id": "b4",
+        "text": "It left the cable table on a market morning after hand soldering, and the batch is brass nook forty seven. A hint of walnut oil is the note on batch pine pail seventy eight, and do not kink the braid."
       }
     ],
     "presentation": {

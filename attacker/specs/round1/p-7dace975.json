@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 2424,
         "trick_item": false
+      },
+      {
+        "name": "Cotton percale sheet, queen",
+        "sku": "SHETQ",
+        "qty": 1,
+        "price_cents": 1701,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,20 +48,20 @@
     "checkout_price_cents": 2424,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Monday at the back bakery was for stone milling, and the slip reads river rack fifty."
+      },
+      {
+        "id": "b2",
         "text": "A baker on the early shift held it one night so the toast stays even, batch iron hook sixty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A waxed wrap from Two Harbors suits a savory bowl, batch birch nook seventy six."
       },
       {
-        "id": "noteD",
-        "text": "Plain grain shows up in this run, and store the groats in a dry cupboard, batch amber bin nineteen."
-      },
-      {
-        "id": "noteA",
-        "text": "Monday at the back bakery was for stone milling, and the slip reads river rack fifty."
+        "id": "b4",
+        "text": "A paper wrap and parcel protection are on the slip for batch brass loft twenty seven."
       }
     ],
     "presentation": {

@@ -28,20 +28,20 @@
     "checkout_price_cents": 835,
     "blocks": [
       {
-        "id": "factA",
+        "id": "b1",
+        "text": "Batch river pail eighty names a curing rack and mentions a cold cure."
+      },
+      {
+        "id": "b2",
         "text": "Earlier nine dollars and sixty three cents, selling $8.35."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "A pour tech signed the slip Sunday evening because the balm stays smooth, batch glass rack fifty four."
       },
       {
-        "id": "noteB",
-        "text": "A Sunday evening fill at a curing rack put a one-ounce balm into a paper wrap, batch wool tray sixty seven."
-      },
-      {
-        "id": "noteC",
-        "text": "Batch river pail eighty names a curing rack and mentions a cold cure."
+        "id": "b4",
+        "text": "A Sunday evening fill at a curing rack put a one-ounce balm into a paper wrap, batch wool tray sixty seven. Nothing in the pack beyond a one-ounce balm, filled at the balm table on a market morning, batch harbor crock forty one. Nothing in the pack beyond a one-ounce balm, filled at the balm table on a market morning, batch harbor crock forty one."
       }
     ],
     "presentation": {

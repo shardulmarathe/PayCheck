@@ -36,15 +36,19 @@
     "checkout_price_cents": 5514,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "What you notice is cotton fiber, and cotton paper is the main thing in the pack, batch iron drawer forty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Keep the stack under a light weight, which is the right habit for a short letter, batch birch peg fifty six."
       },
       {
-        "id": "noteA",
+        "id": "b3",
+        "text": "It rested half a day at the press room, then went into a slim box, batch amber stall sixty nine."
+      },
+      {
+        "id": "b4",
         "text": "The pencil lead packed it in a slim box because the flap seals cleanly, batch river loft thirty."
       }
     ],

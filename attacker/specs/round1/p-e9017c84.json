@@ -36,16 +36,20 @@
     "checkout_price_cents": 2484,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "Almost no smell is the note on batch oak peg thirty nine, and coil the lead loosely when you put it away."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "Set it out for a desk setup after the next morning at the cable table, packed in a small cardboard tray, batch cedar loft fifty two."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "The lead is braided cloth, two meters end to end, with metal plugs, batch hemp crate sixty five."
+      },
+      {
+        "id": "b3",
         "text": "every six weeks at $28.35."
+      },
+      {
+        "id": "b4",
+        "text": "Almost no smell is the note on batch oak peg thirty nine, and coil the lead loosely when you put it away. Bring it out for a desk setup, packed in a cotton sleeve from the solder bench, batch cork drawer twenty six."
       }
     ],
     "presentation": {

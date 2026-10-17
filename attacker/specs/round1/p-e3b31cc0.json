@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 6383,
         "trick_item": false
+      },
+      {
+        "name": "Merino hiking sock, pair",
+        "sku": "SOK2",
+        "qty": 1,
+        "price_cents": 1660,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,12 +43,20 @@
     "checkout_price_cents": 6383,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Bare steel shows up in this run, and hand-wash the pan and dry the rim, batch ash crock fifty one."
+      },
+      {
+        "id": "b2",
+        "text": "Nothing in the pack beyond enamel over steel, filled at a board mill on Friday, batch linen stall sixty four."
+      },
+      {
+        "id": "b3",
         "text": "A board maker held it two nights so the lip stays smooth, batch slate loft twenty five."
       },
       {
-        "id": "noteB",
-        "text": "Paper and a cardboard edge from the pottery yard suits a two-quart soup, batch pine drawer thirty eight."
+        "id": "b4",
+        "text": "Paper and a cardboard edge from the pottery yard suits a two-quart soup, batch pine drawer thirty eight. Thursday at the enamel shop was for an enamel fire, and the slip reads clay peg twelve. Thursday at the enamel shop was for an enamel fire, and the slip reads clay peg twelve."
       }
     ],
     "presentation": {

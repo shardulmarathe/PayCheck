@@ -28,12 +28,20 @@
     "checkout_price_cents": 3389,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "What you notice is almost nothing after drying, and washed linen is the main thing in the pack, batch ash crock forty one."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Wash the napkins cold and hang them straight, which is the right habit for a weeknight supper, batch linen stall fifty four."
+      },
+      {
+        "id": "b3",
+        "text": "It rested the next morning at the loom room, then went into a cotton sack, batch brass crate sixty seven."
+      },
+      {
+        "id": "b4",
+        "text": "It rested the next morning at the cutting table, then went into a cotton sack, batch cedar loft fifty two. The weaver packed it in a cotton sack because the hem stays even, batch pine drawer twenty eight. The weaver packed it in a cotton sack because the hem stays even, batch pine drawer twenty eight."
       }
     ],
     "presentation": {

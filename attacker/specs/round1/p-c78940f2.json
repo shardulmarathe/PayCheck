@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 1493,
         "trick_item": false
+      },
+      {
+        "name": "Buckwheat groats, 24 oz",
+        "sku": "BWHT24",
+        "qty": 1,
+        "price_cents": 967,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 1493,
     "blocks": [
       {
-        "id": "noteC",
-        "text": "For a light curtain, start with brass rings, and batch slate loft fifteen is on the slip."
-      },
-      {
-        "id": "noteD",
-        "text": "A paper band holds a little cedar from the cupboard in, which is what the weaver wanted for batch pine drawer twenty eight."
-      },
-      {
-        "id": "factA",
+        "id": "b1",
         "text": "Previous $16.55. Current fourteen dollars and ninety three cents."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "A Tuesday fill at a wash house put brass rings into a paper band, batch amber bin fifty nine."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Batch clay peg seventy two names a wash house and mentions a cold rinse."
+      },
+      {
+        "id": "b4",
+        "text": "For a light curtain, start with brass rings, and batch slate loft fifteen is on the slip. A hemmer on the day shift signed the slip Tuesday because the brass stays bright, batch birch nook forty six. A hemmer on the day shift signed the slip Tuesday because the brass stays bright, batch birch nook forty six."
       }
     ],
     "presentation": {

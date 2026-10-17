@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 4599,
         "trick_item": false
+      },
+      {
+        "name": "Linen washcloth, pair",
+        "sku": "WASH2",
+        "qty": 1,
+        "price_cents": 443,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,16 +43,20 @@
     "checkout_price_cents": 4599,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The speaker is slate colored and runs on a replaceable cell, batch brass drawer twenty seven."
+      },
+      {
+        "id": "b2",
+        "text": "The speaker is slate colored and runs on a replaceable cell, batch cedar hook seventy two."
+      },
+      {
+        "id": "b3",
         "text": "It left the cable table on a market morning after a braid check, and the batch is hemp nook fifteen."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "A cable maker packed it in a small cardboard tray because the cell door seats fully, batch tin drawer twenty eight."
-      },
-      {
-        "id": "noteA",
-        "text": "The speaker is slate colored and runs on a replaceable cell, batch cedar hook seventy two."
       }
     ],
     "presentation": {

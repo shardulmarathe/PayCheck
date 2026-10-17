@@ -41,24 +41,20 @@
     "checkout_price_cents": 2947,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Sack seal $6.12"
-      },
-      {
-        "id": "noteA",
+        "id": "b1",
         "text": "A small box with a pad from the sock bench suits a coat pocket, batch cork stall sixteen."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Almost nothing shows up in this run, and keep the lenses capped in a dusty pack, batch oak crate twenty nine."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Nothing in the pack beyond a compact binocular, filled at a gear bench on Sunday evening, batch cedar pail forty two."
       },
       {
-        "id": "noteD",
-        "text": "A gear tech signed the slip Sunday evening because the hinge stays tight, batch hemp rack fifty five."
+        "id": "b4",
+        "text": "Sack seal $6.12. The knitter held it two nights so the hinge stays tight, batch maple crock seventy three."
       }
     ],
     "presentation": {

@@ -36,24 +36,20 @@
     "checkout_price_cents": 8607,
     "blocks": [
       {
-        "id": "noteC",
-        "text": "Set it out for a light curtain after two nights at the loom room, packed in a cotton sack, batch harbor peg sixty one."
+        "id": "b1",
+        "text": "Statement name on this charge is the shop in the header."
       },
       {
-        "id": "noteD",
-        "text": "The rings are brass and sold in a set of eight, batch glass loft seventy four."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
+        "id": "b2",
         "text": "Bring it out for a light curtain, packed in a paper band from a wash house, batch hemp nook thirty five."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Wet linen is the note on batch tin drawer forty eight, and a soft cloth keeps the brass bright."
+      },
+      {
+        "id": "b4",
+        "text": "Set it out for a light curtain after two nights at the loom room, packed in a cotton sack, batch harbor peg sixty one."
       }
     ],
     "presentation": {

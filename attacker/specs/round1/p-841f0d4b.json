@@ -36,24 +36,20 @@
     "checkout_price_cents": 6089,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "Paper and a cardboard edge from the enamel shop suits a short row of pictures, batch oak peg thirty nine."
+        "id": "b1",
+        "text": "The kiln tech held it one night so the lip stays low and even, batch cork drawer twenty six."
       },
       {
-        "id": "factA",
+        "id": "b2",
         "text": "The form asks for the digits, the month and year, and the short code on the back."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "It rested a short afternoon at the pottery yard, then went into paper and a cardboard edge, batch copper hook seventy."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "Tuesday at a board mill was for an enamel fire, and the slip reads maple nook thirteen."
-      },
-      {
-        "id": "noteC",
-        "text": "The kiln tech held it one night so the lip stays low and even, batch cork drawer twenty six."
       }
     ],
     "presentation": {

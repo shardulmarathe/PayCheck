@@ -36,16 +36,20 @@
     "checkout_price_cents": 2549,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Thursday at a cutting bench was for a graphite check, and the slip reads brass peg thirty seven."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The printer held it two nights so the flap seals cleanly, batch copper loft fifty."
       },
       {
-        "id": "noteA",
-        "text": "It rested the next morning at the pencil bench, then went into a slim box, batch linen drawer twenty four."
+        "id": "b3",
+        "text": "A folder held it two nights so the flap seals cleanly, batch hemp hook thirty five."
+      },
+      {
+        "id": "b4",
+        "text": "It rested the next morning at the pencil bench, then went into a slim box, batch linen drawer twenty four. Keep the stack under a light weight, which is the right habit for a short letter, batch ash nook eighty one. Keep the stack under a light weight, which is the right habit for a short letter, batch ash nook eighty one."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Leather loop",
         "price_cents": 168,
         "checked": false,
-        "label": "Add Leather loop for one dollar and sixty eight cents"
+        "label": "one dollar and sixty eight cents covers Leather loop plus parcel protection and a paper wrap"
       }
     }
   },

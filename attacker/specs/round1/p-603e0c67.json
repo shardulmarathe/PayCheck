@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 1229,
         "trick_item": false
+      },
+      {
+        "name": "Braided linen lead, 2 m",
+        "sku": "LEAD2M",
+        "qty": 1,
+        "price_cents": 1753,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,11 +43,19 @@
     "checkout_price_cents": 1229,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Hand splitting on Wednesday is how the match packer still finishes these, batch harbor stall twenty one."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "You will find split birch and not much else, packed Wednesday as batch glass tray thirty four."
+      },
+      {
+        "id": "b3",
+        "text": "A crate holds split birch in, which is what the match packer wanted for batch hemp crock seventy five."
+      },
+      {
+        "id": "b4",
         "text": "Give it two nights at a splitting bench, and batch tin crock seventy eight stays with a tin of eight."
       }
     ],

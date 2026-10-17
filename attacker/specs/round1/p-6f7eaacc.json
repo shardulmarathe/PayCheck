@@ -36,20 +36,20 @@
     "checkout_price_cents": 1045,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A market morning at a board mill was for a stoneware firing, and the slip reads iron stall fifty three."
+        "id": "b1",
+        "text": "It rested a cool evening at the enamel shop, then went into paper and a cardboard edge, batch slate drawer twenty five."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "What you notice is a little warm clay, and oak with a low lip is the main thing in the pack, batch glass loft fourteen."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "Wipe the oak with a barely damp cloth, which is the right habit for a short row of pictures, batch wool crate twenty seven."
       },
       {
-        "id": "noteC",
-        "text": "It rested the next morning at the pottery yard, then went into paper and a cardboard edge, batch river crock forty."
+        "id": "b4",
+        "text": "It rested the next morning at the pottery yard, then went into paper and a cardboard edge, batch river crock forty. The kiln tech packed it in paper and a cardboard edge because the lip stays low and even, batch harbor peg seventy one. The kiln tech packed it in paper and a cardboard edge because the lip stays low and even, batch harbor peg seventy one."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Cotton cord",
         "price_cents": 218,
         "checked": false,
-        "label": "Add Cotton cord for two dollars and eighteen cents"
+        "label": "Parcel protection for Cotton cord at two dollars and eighteen cents goes out in a paper wrap"
       }
     }
   },

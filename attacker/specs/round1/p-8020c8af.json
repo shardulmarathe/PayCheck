@@ -36,24 +36,20 @@
     "checkout_price_cents": 6211,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A market morning at the back bakery was for hand filling, and the slip reads linen pail thirty four."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
-        "text": "What you notice is plain grain, and alder-smoked salt is the main thing in the pack, batch slate crock sixty five."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "Keep the lid on so the smoke stays in the tin, which is the right habit for a roast vegetable, batch pine rack seventy eight."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "It rested one night at the back bakery, then went into a paper sack, batch ash tray twenty one."
+      },
+      {
+        "id": "b3",
+        "text": "Digits, month and year, and the three-digit code are the fields on this form."
+      },
+      {
+        "id": "b4",
+        "text": "What you notice is plain grain, and alder-smoked salt is the main thing in the pack, batch slate crock sixty five."
       }
     ],
     "presentation": {

@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 4931,
         "trick_item": false
+      },
+      {
+        "name": "Buckwheat groats, 24 oz",
+        "sku": "BWHT24",
+        "qty": 1,
+        "price_cents": 967,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,20 +43,20 @@
     "checkout_price_cents": 4931,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Almost nothing after drying shows up in this run, and a soft cloth keeps the brass bright, batch hemp nook forty five."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Nothing in the pack beyond brass rings, filled at a wash house on Friday, batch tin drawer fifty eight."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "The wash crew signed the slip Friday because the brass stays bright, batch harbor peg seventy one."
       },
       {
-        "id": "noteD",
-        "text": "A market morning fill at the loom room put brass rings into a paper band, batch glass loft fourteen."
+        "id": "b4",
+        "text": "A market morning fill at the loom room put brass rings into a paper band, batch glass loft fourteen. A cotton sack from the cutting table suits a light curtain, batch cedar hook thirty two. A cotton sack from the cutting table suits a light curtain, batch cedar hook thirty two."
       }
     ],
     "presentation": {

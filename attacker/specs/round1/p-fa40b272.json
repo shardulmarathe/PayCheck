@@ -36,16 +36,20 @@
     "checkout_price_cents": 1055,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "The enamel crew packed it in paper and a cardboard edge because the handle stays tight, batch clay tray thirty two."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "What you notice is bare steel, and a steel kettle is the main thing in the pack, batch slate nook forty five."
       },
       {
-        "id": "factA",
-        "text": "Last week eleven dollars and eighty cents. This week $10.55."
+        "id": "b3",
+        "text": "Empty the kettle after the boil and leave the lid ajar, which is the right habit for a morning boil, batch pine bin fifty eight."
+      },
+      {
+        "id": "b4",
+        "text": "Last week eleven dollars and eighty cents. This week $10.55. It left the pottery yard on Monday after an enamel fire, and the batch is amber rack nineteen. It left the pottery yard on Monday after an enamel fire, and the batch is amber rack nineteen."
       }
     ],
     "presentation": {

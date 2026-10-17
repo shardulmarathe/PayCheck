@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 5800,
         "trick_item": false
+      },
+      {
+        "name": "Walnut headset stand",
+        "sku": "STAND1",
+        "qty": 1,
+        "price_cents": 365,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 5800,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The filling crew packed it in a paper sack because the lid seats better after a rest, batch river peg thirty."
+      },
+      {
+        "id": "b2",
         "text": "What you notice is a faint smoke, and raw wildflower honey is the main thing in the pack, batch iron loft forty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Keep the jar out of a sunny window, which is the right habit for tea and toast, batch birch drawer fifty six."
       },
       {
-        "id": "noteA",
-        "text": "The filling crew packed it in a paper sack because the lid seats better after a rest, batch river peg thirty."
+        "id": "b4",
+        "text": "Batch slate peg fifteen lists parcel protection with a paper wrap."
       }
     ],
     "presentation": {

@@ -36,19 +36,19 @@
     "checkout_price_cents": 3814,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The crew at the cutting table uses a cold rinse for this, and this one is batch iron bin seventy three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "A hemmer on the day shift likes it for a two-person table and wrote batch birch hook sixteen on the slip."
       },
       {
-        "id": "noteD",
+        "id": "b3",
         "text": "Bring it out for a two-person table, packed in a paper band from a wash house, batch amber nook twenty nine."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "You will find loom-woven cotton and not much else, packed Wednesday as batch river pail sixty."
       }
     ],

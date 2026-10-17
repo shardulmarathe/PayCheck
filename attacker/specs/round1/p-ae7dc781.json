@@ -36,12 +36,20 @@
     "checkout_price_cents": 1059,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "A hemmer on the day shift likes it for drying cups and wrote batch brass crate twenty seven on the slip."
+      },
+      {
+        "id": "b2",
+        "text": "A loom run on Tuesday is how the weaver still finishes these, batch pine drawer fifty eight."
+      },
+      {
+        "id": "b3",
         "text": "You will find hemmed linen and not much else, packed Tuesday as batch ash crock seventy one."
       },
       {
-        "id": "noteA",
-        "text": "A loom run on Tuesday is how the weaver still finishes these, batch pine drawer fifty eight."
+        "id": "b4",
+        "text": "The crew at a wash house uses hand hemming for this, and this one is batch linen stall fourteen. Give it two nights at the cutting table, and batch slate loft forty five stays with a flat mailer. Give it two nights at the cutting table, and batch slate loft forty five stays with a flat mailer."
       }
     ],
     "presentation": {

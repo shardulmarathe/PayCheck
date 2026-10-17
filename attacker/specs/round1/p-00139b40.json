@@ -28,16 +28,20 @@
     "checkout_price_cents": 4517,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "It rested one night at the loom room, then went into a cotton sack, batch oak bin fifty nine."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "A market morning at the loom room was for a loom run, and the slip reads cedar hook seventy two."
       },
       {
-        "id": "noteA",
-        "text": "Air the throw on a dry day, which is the right habit for a couch in a cool room, batch cork pail forty six."
+        "id": "b3",
+        "text": "Friday at a wash house was for hand hemming, and the slip reads wool rack fifty seven."
+      },
+      {
+        "id": "b4",
+        "text": "Air the throw on a dry day, which is the right habit for a couch in a cool room, batch cork pail forty six. What you notice is wet linen, and heather wool is the main thing in the pack, batch maple tray thirty three. What you notice is wet linen, and heather wool is the main thing in the pack, batch maple tray thirty three."
       }
     ],
     "presentation": {

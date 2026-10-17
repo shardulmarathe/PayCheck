@@ -36,24 +36,20 @@
     "checkout_price_cents": 5505,
     "blocks": [
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
-      },
-      {
-        "id": "noteA",
+        "id": "b1",
         "text": "You will find a compact binocular and not much else, packed Tuesday as batch river tray twenty."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "The crew at the sock bench uses a cap torque check for this, and this one is batch iron nook thirty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "A gear tech likes it for a coat pocket and wrote batch birch bin forty six on the slip."
       },
       {
-        "id": "noteD",
-        "text": "Bring it out for a coat pocket, packed in a cotton stuff sack from a gear bench, batch amber hook fifty nine."
+        "id": "b4",
+        "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
       }
     ],
     "presentation": {

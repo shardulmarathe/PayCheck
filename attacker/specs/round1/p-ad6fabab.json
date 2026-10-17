@@ -28,16 +28,20 @@
     "checkout_price_cents": 1638,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Bring it out for a jar of yogurt, packed in a waxed wrap from a dock room, batch wool rack fifty seven."
+      },
+      {
+        "id": "b2",
         "text": "Plain grain is the note on batch river tray seventy, and keep the sack sealed so the cherries stay soft."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Set it out for a jar of yogurt after the next morning at the back bakery, packed in a paper sack, batch iron nook thirteen."
       },
       {
-        "id": "noteA",
-        "text": "Bring it out for a jar of yogurt, packed in a waxed wrap from a dock room, batch wool rack fifty seven."
+        "id": "b4",
+        "text": "Bring it out for a jar of yogurt, packed in a tin with a slip lid from Water Street, batch cedar nook twelve."
       }
     ],
     "presentation": {

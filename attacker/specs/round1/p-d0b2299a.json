@@ -36,15 +36,19 @@
     "checkout_price_cents": 4214,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A cloth sack holds a warm grain smell in, which is what a baker on the early shift wanted for batch iron loft thirty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Give it a cool evening at Water Street, and batch birch drawer forty six stays with a tin with a slip lid."
       },
       {
-        "id": "noteA",
+        "id": "b3",
+        "text": "Hand filling on Tuesday is how a baker on the early shift still finishes these, batch amber crock fifty nine."
+      },
+      {
+        "id": "b4",
         "text": "For tea and toast, start with raw wildflower honey, and batch river peg twenty is on the slip."
       }
     ],

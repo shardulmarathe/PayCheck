@@ -36,12 +36,20 @@
     "checkout_price_cents": 3771,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "For a dense country loaf, start with whole rye berries, and batch maple bin twenty three is on the slip."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A glass jar holds a faint smoke in, which is what a baker on the early shift wanted for batch cork peg thirty six."
+      },
+      {
+        "id": "b3",
+        "text": "Give it one night at the back bakery, and batch oak loft forty nine stays with a paper sack."
+      },
+      {
+        "id": "b4",
+        "text": "A cool rest on Thursday is how a baker on the early shift still finishes these, batch cedar drawer sixty two. Batch copper nook eighty names Water Street and mentions stone milling. Batch copper nook eighty names Water Street and mentions stone milling."
       }
     ],
     "presentation": {
@@ -62,7 +70,7 @@
         "name": "Canvas bib",
         "price_cents": 756,
         "checked": false,
-        "label": "Add Canvas bib for $7.56"
+        "label": "A paper wrap holds Canvas bib at $7.56, with parcel protection"
       }
     }
   },

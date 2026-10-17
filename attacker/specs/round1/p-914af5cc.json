@@ -28,19 +28,19 @@
     "checkout_price_cents": 6164,
     "blocks": [
       {
-        "id": "noteC",
+        "id": "b1",
         "text": "Bring it out for a roast vegetable, packed in a tin with a slip lid from Two Harbors, batch maple hook seventy three."
       },
       {
-        "id": "noteD",
-        "text": "A toasty note is the note on batch cork loft sixteen, and keep the lid on so the smoke stays in the tin."
+        "id": "b2",
+        "text": "The crew at a dock room uses hand filling for this, and this one is batch clay peg seventy two."
       },
       {
-        "id": "noteA",
+        "id": "b3",
         "text": "The crew at the back bakery uses a cool rest for this, and this one is batch brass nook forty seven."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "A baker on the early shift likes it for a roast vegetable and wrote batch copper bin sixty on the slip."
       }
     ],

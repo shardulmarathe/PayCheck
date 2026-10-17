@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 5703,
         "trick_item": false
+      },
+      {
+        "name": "Lay flat notebook, ruled",
+        "sku": "NOTE1",
+        "qty": 1,
+        "price_cents": 391,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 5703,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "The wash crew likes it for drying cups and wrote batch clay pail forty two on the slip."
+      },
+      {
+        "id": "b2",
+        "text": "Rural drop $8.91"
+      },
+      {
+        "id": "b3",
         "text": "You will find hemmed linen and not much else, packed Wednesday as batch birch rack sixteen."
       },
       {
-        "id": "noteB",
-        "text": "The crew at the cutting table uses a loom run for this, and this one is batch amber tray twenty nine."
-      },
-      {
-        "id": "factA",
-        "text": "Rural drop $8.91"
+        "id": "b4",
+        "text": "The crew at the cutting table uses a loom run for this, and this one is batch amber tray twenty nine. A cold rinse on Wednesday is how the wash crew still finishes these, batch iron crock seventy three."
       }
     ],
     "presentation": {

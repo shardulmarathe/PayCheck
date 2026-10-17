@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 6748,
         "trick_item": false
+      },
+      {
+        "name": "Enamel saucepan, 2 qt",
+        "sku": "PAN2Q",
+        "qty": 1,
+        "price_cents": 1177,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,12 +48,20 @@
     "checkout_price_cents": 6748,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Nothing in the pack beyond foam cushions, filled at a quiet desk room on Friday, batch river crock seventy."
+      },
+      {
+        "id": "b2",
         "text": "A cable maker signed the slip Friday because the foam keeps its shape, batch iron stall thirteen."
       },
       {
-        "id": "noteA",
-        "text": "Nothing in the pack beyond foam cushions, filled at a quiet desk room on Friday, batch river crock seventy."
+        "id": "b3",
+        "text": "A Friday fill at the solder bench put foam cushions into a cotton sleeve, batch birch tray twenty six."
+      },
+      {
+        "id": "b4",
+        "text": "Parcel protection and a paper wrap are noted for batch oak drawer thirty nine."
       }
     ],
     "presentation": {

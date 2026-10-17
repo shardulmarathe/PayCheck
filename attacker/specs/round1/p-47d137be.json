@@ -28,12 +28,20 @@
     "checkout_price_cents": 6919,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "It left the cutting table on Tuesday after hand hemming, and the batch is hemp rack sixty five."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A hemmer on the day shift packed it in a cotton sack because the hem stays even, batch tin tray seventy eight."
+      },
+      {
+        "id": "b3",
+        "text": "What you notice is wet linen, and washed linen is the main thing in the pack, batch harbor nook twenty one."
+      },
+      {
+        "id": "b4",
+        "text": "Wash the napkins cold and hang them straight, which is the right habit for a weeknight supper, batch glass bin thirty four. The napkins are washed linen and soften after a cold rinse, batch cedar pail fifty two. The napkins are washed linen and soften after a cold rinse, batch cedar pail fifty two."
       }
     ],
     "presentation": {

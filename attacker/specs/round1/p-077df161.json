@@ -36,20 +36,20 @@
     "checkout_price_cents": 4062,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "every quarter at $46.84."
+      },
+      {
+        "id": "b2",
         "text": "The seam lead signed the slip Wednesday because the cap does not weep, batch maple stall fifty three."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "A Wednesday fill at the stitch room put an aluminum flask into a cotton stuff sack, batch cork crate sixty six."
       },
       {
-        "id": "noteC",
-        "text": "Batch oak crock seventy nine names the sock bench and mentions a merino knit."
-      },
-      {
-        "id": "factA",
-        "text": "every quarter at $46.84."
+        "id": "b4",
+        "text": "Batch oak crock seventy nine names the sock bench and mentions a merino knit. Nothing in the pack beyond an aluminum flask, filled at a gear bench on Wednesday, batch copper peg forty."
       }
     ],
     "presentation": {

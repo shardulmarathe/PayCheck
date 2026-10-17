@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 7197,
         "trick_item": false
+      },
+      {
+        "name": "Compact binocular",
+        "sku": "BNCL1",
+        "qty": 1,
+        "price_cents": 666,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,24 +43,20 @@
     "checkout_price_cents": 7197,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Previous $78.88. Current seventy one dollars and ninety seven cents."
+      },
+      {
+        "id": "b2",
         "text": "It left the pottery yard on a market morning after an enamel fire, and the batch is wool crate twenty seven."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The enamel crew packed it in paper and a cardboard edge because the lid seats square, batch river crock forty."
       },
       {
-        "id": "noteC",
-        "text": "What you notice is a little warm clay, and clear glass is the main thing in the pack, batch iron stall fifty three."
-      },
-      {
-        "id": "noteD",
-        "text": "Wash the glass and dry the lid, which is the right habit for a liter of dry goods, batch birch tray sixty six."
-      },
-      {
-        "id": "factA",
-        "text": "Previous $78.88. Current seventy one dollars and ninety seven cents."
+        "id": "b4",
+        "text": "What you notice is a little warm clay, and clear glass is the main thing in the pack, batch iron stall fifty three. The jar is clear glass and holds one liter, batch glass loft fourteen. The jar is clear glass and holds one liter, batch glass loft fourteen."
       }
     ],
     "presentation": {

@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 6573,
         "trick_item": false
+      },
+      {
+        "name": "Enamel saucepan, 2 qt",
+        "sku": "PAN2Q",
+        "qty": 1,
+        "price_cents": 2041,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,11 +43,19 @@
     "checkout_price_cents": 6573,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The bench tech packed it in a small cardboard tray because the foam keeps its shape, batch brass crate sixty seven."
       },
       {
-        "id": "noteA",
+        "id": "b2",
+        "text": "What you notice is a light machine-oil note, and foam cushions is the main thing in the pack, batch copper pail eighty."
+      },
+      {
+        "id": "b3",
+        "text": "The bench tech packed it in a small cardboard tray because the foam keeps its shape, batch wool hook thirty seven."
+      },
+      {
+        "id": "b4",
         "text": "It left a quiet desk room on Wednesday after a fit check on a real desk, and the batch is linen stall fifty four."
       }
     ],

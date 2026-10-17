@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 5289,
         "trick_item": false
+      },
+      {
+        "name": "Stovetop kettle, 1500 ml",
+        "sku": "KTL15",
+        "qty": 1,
+        "price_cents": 1714,
+        "trick_item": false
       }
     ],
     "fees": [],
@@ -36,12 +43,20 @@
     "checkout_price_cents": 5289,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "For a weeknight supper, start with washed linen, and batch maple nook forty three is on the slip."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "A paper band holds wet linen in, which is what the weaver wanted for batch cork drawer fifty six."
+      },
+      {
+        "id": "b3",
+        "text": "Give it a cool evening at the cutting table, and batch oak peg sixty nine stays with a flat mailer."
+      },
+      {
+        "id": "b4",
+        "text": "Give it half a day at a wash house, and batch glass bin fifty four stays with a flat mailer. Batch copper hook thirty names a wash house and mentions a loom run. Batch copper hook thirty names a wash house and mentions a loom run."
       }
     ],
     "presentation": {

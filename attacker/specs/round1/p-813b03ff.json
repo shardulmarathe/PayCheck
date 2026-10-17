@@ -36,16 +36,20 @@
     "checkout_price_cents": 6653,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Have the plastic handy: digits, month and year, and the short code."
+      },
+      {
+        "id": "b2",
         "text": "Thursday at a cutting bench was for a short print run, and the slip reads hemp crock seventy five."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The printer held it the next morning so the sheet lies flat, batch tin stall eighteen."
       },
       {
-        "id": "factA",
-        "text": "Have the plastic handy: digits, month and year, and the short code."
+        "id": "b4",
+        "text": "A slim box from the press room suits a daily note, batch harbor crate thirty one."
       }
     ],
     "presentation": {

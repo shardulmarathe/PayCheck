@@ -36,20 +36,20 @@
     "checkout_price_cents": 5557,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "Nothing in the pack beyond a compact binocular, filled at the sock bench on Monday, batch brass bin fifty seven."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The knitter signed the slip Tuesday because the hinge stays tight, batch copper hook seventy."
       },
       {
-        "id": "noteD",
-        "text": "A Tuesday fill at a gear bench put a compact binocular into a cotton stuff sack, batch maple nook thirteen."
+        "id": "b3",
+        "text": "A gear tech signed the slip Sunday evening because the hinge stays tight, batch hemp rack fifty five."
       },
       {
-        "id": "noteA",
-        "text": "A little aluminum shows up in this run, and keep the lenses capped in a dusty pack, batch linen pail forty four."
+        "id": "b4",
+        "text": "A little aluminum shows up in this run, and keep the lenses capped in a dusty pack, batch linen pail forty four. A small box with a pad from the stitch room suits a coat pocket, batch ash tray thirty one. A small box with a pad from the stitch room suits a coat pocket, batch ash tray thirty one."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Beeswax puck",
         "price_cents": 983,
         "checked": false,
-        "label": "Add Beeswax puck for nine dollars and eighty three cents"
+        "label": "Parcel protection for Beeswax puck at nine dollars and eighty three cents goes out in a paper wrap"
       }
     }
   },

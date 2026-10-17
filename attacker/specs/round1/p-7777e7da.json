@@ -41,24 +41,20 @@
     "checkout_price_cents": 2633,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Signature pad four dollars and seven cents"
+      },
+      {
+        "id": "b2",
         "text": "Set it out for a liter of dry goods after a short afternoon at the enamel shop, packed in paper and a cardboard edge, batch ash pail forty one."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The jar is clear glass and holds one liter, batch linen rack fifty four."
       },
       {
-        "id": "noteC",
-        "text": "It left the pottery yard on Wednesday after a stoneware firing, and the batch is brass hook sixty seven."
-      },
-      {
-        "id": "noteD",
-        "text": "The kiln tech packed it in paper and a cardboard edge because the lid seats square, batch copper nook eighty."
-      },
-      {
-        "id": "factA",
-        "text": "Signature pad four dollars and seven cents"
+        "id": "b4",
+        "text": "It left the pottery yard on Wednesday after a stoneware firing, and the batch is brass hook sixty seven. Bare steel is the note on batch pine tray twenty eight, and wash the glass and dry the lid."
       }
     ],
     "presentation": {

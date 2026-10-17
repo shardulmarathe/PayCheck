@@ -36,16 +36,20 @@
     "checkout_price_cents": 4523,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "A paper sack holds a warm grain smell in, which is what the miller wanted for batch iron loft thirteen."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Give it a cool evening at the back bakery, and batch birch drawer twenty six stays with a cloth sack."
       },
       {
-        "id": "noteA",
-        "text": "For tea and toast, start with raw wildflower honey, and batch river peg seventy is on the slip."
+        "id": "b3",
+        "text": "Hand filling on Friday is how the filling crew still finishes these, batch amber crock thirty nine."
+      },
+      {
+        "id": "b4",
+        "text": "For tea and toast, start with raw wildflower honey, and batch river peg seventy is on the slip. Batch wool bin fifty seven names a dock room and mentions a cool rest. Batch wool bin fifty seven names a dock room and mentions a cool rest."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Stone rest",
         "price_cents": 452,
         "checked": false,
-        "label": "Add Stone rest for four dollars and fifty two cents"
+        "label": "four dollars and fifty two cents covers Stone rest plus parcel protection and a paper wrap"
       }
     }
   },

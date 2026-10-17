@@ -33,16 +33,20 @@
     "checkout_price_cents": 2158,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Set it out for daily chopping after one night at the enamel shop, packed in paper and a cardboard edge, batch oak bin nineteen."
+      },
+      {
+        "id": "b2",
+        "text": "A board maker likes it for daily chopping and wrote batch copper rack fifty on the slip."
+      },
+      {
+        "id": "b3",
         "text": "Bring it out for daily chopping, packed in a cardboard cradle from a board mill, batch maple tray sixty three."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "Bare steel is the note on batch cork pail seventy six, and oil the board when the wood looks pale."
-      },
-      {
-        "id": "noteA",
-        "text": "A board maker likes it for daily chopping and wrote batch copper rack fifty on the slip."
       }
     ],
     "presentation": {

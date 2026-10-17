@@ -36,16 +36,20 @@
     "checkout_price_cents": 1747,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "The night assembler held it the next morning so the joint stays flexible, batch slate drawer fifteen."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "A small cardboard tray from the cable table suits a desk setup, batch pine peg twenty eight."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b2",
+        "text": "A hint of walnut oil shows up in this run, and coil the lead loosely when you put it away, batch ash stall forty one."
+      },
+      {
+        "id": "b3",
+        "text": "Statement name on this charge is the shop in the header."
+      },
+      {
+        "id": "b4",
+        "text": "The night assembler held it the next morning so the joint stays flexible, batch slate drawer fifteen."
       }
     ],
     "presentation": {

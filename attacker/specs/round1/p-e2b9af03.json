@@ -28,20 +28,20 @@
     "checkout_price_cents": 6757,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Earlier $90.86, selling sixty seven dollars and fifty seven cents."
+      },
+      {
+        "id": "b2",
         "text": "You will find unsweetened dried cherries and not much else, packed Sunday evening as batch maple pail forty three."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "The crew at the mill shed uses hand filling for this, and this one is batch cork rack fifty six."
       },
       {
-        "id": "noteC",
-        "text": "The miller likes it for a jar of yogurt and wrote batch oak hook sixty nine on the slip."
-      },
-      {
-        "id": "factA",
-        "text": "Earlier $90.86, selling sixty seven dollars and fifty seven cents."
+        "id": "b4",
+        "text": "The miller likes it for a jar of yogurt and wrote batch oak hook sixty nine on the slip. A cool rest on Sunday evening is how the filling crew still finishes these, batch copper tray thirty. A cool rest on Sunday evening is how the filling crew still finishes these, batch copper tray thirty."
       }
     ],
     "presentation": {

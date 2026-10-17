@@ -28,16 +28,20 @@
     "checkout_price_cents": 8188,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "What you notice is almost nothing after drying, and heather wool is the main thing in the pack, batch iron peg thirteen."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "Air the throw on a dry day, which is the right habit for a couch in a cool room, batch birch loft twenty six."
       },
       {
-        "id": "noteA",
-        "text": "The wash crew packed it in a cotton sack because the wool stays soft, batch river drawer seventy."
+        "id": "b3",
+        "text": "It rested two nights at the loom room, then went into a cotton sack, batch amber crate thirty nine."
+      },
+      {
+        "id": "b4",
+        "text": "The wash crew packed it in a cotton sack because the wool stays soft, batch river drawer seventy. It left the cutting table on Thursday after hand hemming, and the batch is wool nook fifty seven. It left the cutting table on Thursday after hand hemming, and the batch is wool nook fifty seven."
       }
     ],
     "presentation": {

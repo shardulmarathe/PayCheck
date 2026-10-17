@@ -36,16 +36,20 @@
     "checkout_price_cents": 4805,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "A small box with a pad from the stitch room suits a long walk, batch amber crock thirty nine."
+      },
+      {
+        "id": "b2",
         "text": "Plain wool shows up in this run, and rinse the flask and leave the cap off, batch clay stall fifty two."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Nothing in the pack beyond an aluminum flask, filled at the sock bench on a market morning, batch slate crate sixty five."
       },
       {
-        "id": "noteA",
-        "text": "A small box with a pad from the stitch room suits a long walk, batch amber crock thirty nine."
+        "id": "b4",
+        "text": "Nothing in the pack beyond an aluminum flask, filled at a gear bench on Friday, batch copper loft fifty. A gear tech held it a cool evening so the cap does not weep, batch birch drawer twenty six. A gear tech held it a cool evening so the cap does not weep, batch birch drawer twenty six."
       }
     ],
     "presentation": {
@@ -66,7 +70,7 @@
         "name": "Wool washer",
         "price_cents": 553,
         "checked": false,
-        "label": "Add Wool washer for $5.53"
+        "label": "Wool washer at $5.53 includes parcel protection in a paper wrap"
       }
     }
   },

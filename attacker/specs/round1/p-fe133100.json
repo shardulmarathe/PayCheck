@@ -36,16 +36,20 @@
     "checkout_price_cents": 3437,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "You will find cushioned merino and not much else, packed Thursday as batch cork loft thirty six."
+      },
+      {
+        "id": "b2",
+        "text": "Statement name on this charge is the shop in the header."
+      },
+      {
+        "id": "b3",
         "text": "Give it one night at a gear bench, and batch copper bin eighty stays with a strap wrap."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "A seam check on Wednesday is how the knitter still finishes these, batch maple hook twenty three."
-      },
-      {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
       }
     ],
     "presentation": {

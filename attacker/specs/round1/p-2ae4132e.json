@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 7696,
         "trick_item": false
+      },
+      {
+        "name": "Graphite pencil, dozen",
+        "sku": "PEN12",
+        "qty": 1,
+        "price_cents": 1989,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,19 +48,19 @@
     "checkout_price_cents": 7696,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The crew at the cutting table uses a cold rinse for this, and this one is batch iron bin fifty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The weaver likes it for a two-person table and wrote batch birch hook sixty six on the slip."
       },
       {
-        "id": "noteD",
+        "id": "b3",
         "text": "Bring it out for a two-person table, packed in a paper band from a wash house, batch amber nook seventy nine."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "You will find loom-woven cotton and not much else, packed a market morning as batch river pail forty."
       }
     ],

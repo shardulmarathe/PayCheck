@@ -36,20 +36,20 @@
     "checkout_price_cents": 3019,
     "blocks": [
       {
-        "id": "noteD",
-        "text": "A dry-rack cure on Wednesday is how the match packer still finishes these, batch slate loft fifteen."
+        "id": "b1",
+        "text": "Give it the next morning at the match room, and batch brass bin fifty seven stays with a tin of eight."
       },
       {
-        "id": "noteA",
+        "id": "b2",
         "text": "For damp kindling, start with firestarter pucks, and batch birch nook forty six is on the slip."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "A crate holds split birch in, which is what the yard crew wanted for batch amber bin fifty nine."
       },
       {
-        "id": "noteC",
-        "text": "Give it the next morning at a splitting bench, and batch clay peg seventy two stays with a tin of eight."
+        "id": "b4",
+        "text": "Give it the next morning at a splitting bench, and batch clay peg seventy two stays with a tin of eight. Batch iron hook thirty three names the match room and mentions a dry-rack cure. Batch iron hook thirty three names the match room and mentions a dry-rack cure."
       }
     ],
     "presentation": {
@@ -70,7 +70,7 @@
         "name": "Rubber foot",
         "price_cents": 259,
         "checked": false,
-        "label": "Add Rubber foot for two dollars and fifty nine cents"
+        "label": "Parcel protection for Rubber foot at two dollars and fifty nine cents goes out in a paper wrap"
       }
     }
   },

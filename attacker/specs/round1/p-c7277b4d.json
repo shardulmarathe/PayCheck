@@ -36,20 +36,20 @@
     "checkout_price_cents": 6285,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "Give it the next morning at the mill shed, and batch cork rack fifty six stays with a paper sack."
+      },
+      {
+        "id": "b2",
         "text": "Stone milling on Monday is how the miller still finishes these, batch oak hook sixty nine."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "You will find raw wildflower honey and not much else, packed Monday as batch cedar nook twelve."
       },
       {
-        "id": "factA",
+        "id": "b4",
         "text": "Use the plastic you meant to use. The form is the digits, the month and year, and the short code."
-      },
-      {
-        "id": "noteA",
-        "text": "Give it the next morning at the mill shed, and batch cork rack fifty six stays with a paper sack."
       }
     ],
     "presentation": {

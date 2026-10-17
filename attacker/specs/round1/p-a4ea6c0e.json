@@ -29,6 +29,13 @@
         "qty": 1,
         "price_cents": 941,
         "trick_item": false
+      },
+      {
+        "name": "Merino hiking sock, pair",
+        "sku": "SOK2",
+        "qty": 1,
+        "price_cents": 941,
+        "trick_item": false
       }
     ],
     "fees": [
@@ -41,16 +48,20 @@
     "checkout_price_cents": 941,
     "blocks": [
       {
-        "id": "noteA",
-        "text": "Bring it out for a two-quart soup, packed in a cardboard cradle from a board mill, batch harbor hook thirty one."
-      },
-      {
-        "id": "noteB",
+        "id": "b1",
         "text": "Bare steel is the note on batch glass nook forty four, and hand-wash the pan and dry the rim."
       },
       {
-        "id": "factA",
+        "id": "b2",
+        "text": "Set it out for a two-quart soup after a short afternoon at the enamel shop, packed in paper and a cardboard edge, batch wool bin fifty seven."
+      },
+      {
+        "id": "b3",
         "text": "Fuel offset two dollars and sixty one cents"
+      },
+      {
+        "id": "b4",
+        "text": "Bring it out for a two-quart soup, packed in a cardboard cradle from a board mill, batch harbor hook thirty one. A board maker likes it for a two-quart soup and wrote batch tin rack eighteen on the slip."
       }
     ],
     "presentation": {

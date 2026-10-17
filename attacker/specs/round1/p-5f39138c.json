@@ -28,20 +28,20 @@
     "checkout_price_cents": 5114,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The weaver held it a cool evening so the weave stays flat, batch iron bin thirty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "A cotton sack from the cutting table suits a two-person table, batch birch hook forty six."
       },
       {
-        "id": "noteD",
+        "id": "b3",
         "text": "Wet linen shows up in this run, and shake crumbs off and wipe the mats with a damp cloth, batch amber nook fifty nine."
       },
       {
-        "id": "noteA",
-        "text": "Tuesday at the loom room was for a cold rinse, and the slip reads river pail twenty."
+        "id": "b4",
+        "text": "Tuesday at the loom room was for a cold rinse, and the slip reads river pail twenty. It rested two nights at the loom room, then went into a cotton sack, batch wool tray seventy seven. It rested two nights at the loom room, then went into a cotton sack, batch wool tray seventy seven."
       }
     ],
     "presentation": {

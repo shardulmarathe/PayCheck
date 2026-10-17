@@ -41,11 +41,19 @@
     "checkout_price_cents": 1077,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Bring it out for a two-quart soup, packed in a cardboard cradle from a board mill, batch ash crock seventy one."
+      },
+      {
+        "id": "b2",
+        "text": "A little warm clay is the note on batch linen stall fourteen, and hand-wash the pan and dry the rim."
+      },
+      {
+        "id": "b3",
         "text": "The crew at the pottery yard uses an enamel fire for this, and this one is batch slate loft forty five."
       },
       {
-        "id": "noteB",
+        "id": "b4",
         "text": "The enamel crew likes it for a two-quart soup and wrote batch pine drawer fifty eight on the slip."
       }
     ],

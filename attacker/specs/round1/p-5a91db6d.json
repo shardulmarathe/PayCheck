@@ -36,16 +36,20 @@
     "checkout_price_cents": 1041,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
         "text": "Dry wood is the note on batch river stall forty, and keep the crate off a damp floor."
       },
       {
-        "id": "noteB",
+        "id": "b2",
         "text": "Set it out for a small stove after a cool evening at the wood yard, packed in a slide box, batch iron crate fifty three."
       },
       {
-        "id": "factA",
-        "text": "Fields on this form: digits, month and year, and the short code."
+        "id": "b3",
+        "text": "The crate holds split birch for a small stove, batch birch pail sixty six."
+      },
+      {
+        "id": "b4",
+        "text": "Digits, month and year, and the three-digit code are the fields on this form."
       }
     ],
     "presentation": {

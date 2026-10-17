@@ -36,20 +36,20 @@
     "checkout_price_cents": 7217,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
+        "text": "The printer held it one night so the flap seals cleanly, batch river pail eighty."
+      },
+      {
+        "id": "b2",
         "text": "A slim box from the press room suits a short letter, batch iron bin twenty three."
       },
       {
-        "id": "noteC",
+        "id": "b3",
         "text": "Fresh paper shows up in this run, and keep the stack under a light weight, batch birch hook thirty six."
       },
       {
-        "id": "factA",
+        "id": "b4",
         "text": "Statement name on this charge is the shop in the header."
-      },
-      {
-        "id": "noteA",
-        "text": "The printer held it one night so the flap seals cleanly, batch river pail eighty."
       }
     ],
     "presentation": {

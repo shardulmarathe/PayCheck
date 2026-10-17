@@ -36,19 +36,19 @@
     "checkout_price_cents": 1227,
     "blocks": [
       {
-        "id": "noteB",
+        "id": "b1",
         "text": "The crew at Two Harbors uses a slow toast for this, and this one is batch iron hook fifty three."
       },
       {
-        "id": "noteC",
+        "id": "b2",
         "text": "The miller likes it for a savory bowl and wrote batch birch nook sixty six on the slip."
       },
       {
-        "id": "noteD",
+        "id": "b3",
         "text": "Bring it out for a savory bowl, packed in a glass jar from the mill shed, batch amber bin seventy nine."
       },
       {
-        "id": "noteA",
+        "id": "b4",
         "text": "You will find toasted buckwheat and not much else, packed a market morning as batch river rack forty."
       }
     ],

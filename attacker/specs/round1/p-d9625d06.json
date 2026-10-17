@@ -36,20 +36,20 @@
     "checkout_price_cents": 7977,
     "blocks": [
       {
-        "id": "noteA",
+        "id": "b1",
+        "text": "Statement name on this charge is the shop in the header."
+      },
+      {
+        "id": "b2",
         "text": "The crew at Two Harbors uses a slow toast for this, and this one is batch ash hook seventy one."
       },
       {
-        "id": "noteB",
+        "id": "b3",
         "text": "A baker on the early shift likes it for a jar of yogurt and wrote batch linen loft fourteen on the slip."
       },
       {
-        "id": "noteC",
+        "id": "b4",
         "text": "Bring it out for a jar of yogurt, packed in a glass jar from the mill shed, batch brass drawer twenty seven."
-      },
-      {
-        "id": "factA",
-        "text": "Statement name on this charge is the shop in the header."
       }
     ],
     "presentation": {
