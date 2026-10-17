@@ -46,7 +46,7 @@ def validate_spec(spec: dict) -> None:
     if not trick["evidence_text"] or not trick["instruction"]:
         _fail(spec, "block pages need evidence_text and instruction")
     if not _ID_SELECTOR.fullmatch(trick["selector"]):
-        _fail(spec, "selector must be a simple CSS id, like #trick")
+        _fail(spec, "selector must be a simple CSS id, like #offer-1")
     if attack in FAMILY and trick["family"] not in {"upsell", "scam"}:
         _fail(spec, "block pages are upsell or scam")
 
@@ -82,8 +82,8 @@ def _check_honest_offers(spec: dict) -> None:
     """Clean-page controls must stay honest: unticked, disclosed, nothing sneaked in."""
     offers = spec["page"].get("offers") or {}
     checkbox = offers.get("checkbox")
-    if checkbox and checkbox.get("checked"):
-        _fail(spec, "a clean opt-in checkbox has to be unticked")
+    if checkbox and checkbox.get("checked") and int(checkbox.get("price_cents") or 0) != 0:
+        _fail(spec, "a clean checkbox can be ticked only when it costs nothing")
     was = offers.get("was_cents")
     if was is not None and int(was) <= int(spec["page"]["checkout_price_cents"]):
         _fail(spec, "an honest sale price has to be lower than the struck price")

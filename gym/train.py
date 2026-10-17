@@ -2,8 +2,9 @@
 
 Each round gets its own stores, products, prices, fees, add-ons, and wording.
 Held-out attacks (``copycat_domain``, ``listing_injection``) are not generated.
-About 15% of the generated pages are written to ``<out>/dev/`` and are not part
-of the training labels. The frozen test set is never used as that holdout.
+``--n-train`` pages are the training labels. ``--n-dev`` pages are a holdout
+taken as whole ``group_id`` families and written to ``<out>/dev/``. The frozen
+test set is never used as that holdout.
 
 Rounds 2 and later also overlap-check attacker specs in ``data/attacker-roundN``
 when that directory is present. Any overlap fails the round.
@@ -13,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from collections import Counter
 from pathlib import Path
 
@@ -23,8 +25,10 @@ from gym.hashing import content_hash
 from gym.materialize import materialize
 from gym.overlap import assert_no_test_overlap
 from gym.paths import ROOT
+from gym.render import render_html, structural_features
 from gym.taxonomy import HELD_OUT
 from gym.validate import validate_spec
+from gym.wording import diversity
 
 
 def training_specs(count: int, seed: int, *, round_n: int = 1) -> list[dict]:
@@ -57,53 +61,154 @@ def training_specs(count: int, seed: int, *, round_n: int = 1) -> list[dict]:
     return specs
 
 
-def split_train_dev(specs: list[dict], percent: int = 15) -> tuple[list[dict], list[dict]]:
-    """Hold out ``percent`` of the generated pages, stratified by attack type.
-
-    The dev pages are a subset of this round. They are not the frozen test set.
-    """
-    if percent < 0 or percent > 50:
-        raise ValueError("dev percent must be between 0 and 50")
-    groups: dict[str, list[dict]] = {}
-    order: list[str] = []
+def _strata(specs: list[dict]) -> list[tuple[tuple[str, str, str], list[dict]]]:
+    buckets: dict[tuple[str, str, str], list[dict]] = {}
+    order: list[tuple[str, str, str]] = []
     for spec in specs:
-        attack = spec["trick"]["attack_type"]
-        if attack not in groups:
-            groups[attack] = []
-            order.append(attack)
-        groups[attack].append(spec)
-    total = len(specs)
-    dev_n = (total * percent) // 100
-    if dev_n <= 0 or total < 2:
-        return list(specs), []
-    if dev_n >= total:
-        dev_n = total - 1
-    raw = {attack: dev_n * len(groups[attack]) / total for attack in order}
-    floors = {attack: int(raw[attack]) for attack in order}
-    leftover = dev_n - sum(floors.values())
-    ranked = sorted(order, key=lambda attack: (-(raw[attack] - floors[attack]), order.index(attack)))
-    counts = dict(floors)
-    cursor = 0
-    while leftover > 0 and ranked:
-        attack = ranked[cursor % len(ranked)]
-        if counts[attack] < len(groups[attack]):
-            counts[attack] += 1
-            leftover -= 1
-        cursor += 1
-        if cursor > len(ranked) * (dev_n + 2):
+        key = (
+            spec["trick"]["attack_type"],
+            spec["trick"]["variant"],
+            spec["page"]["kind"],
+        )
+        if key not in buckets:
+            buckets[key] = []
+            order.append(key)
+        buckets[key].append(spec)
+    return [(key, buckets[key]) for key in order]
+
+
+def _dev_targets(sizes: list[int], n_dev: int) -> list[int]:
+    total = sum(sizes)
+    if n_dev <= 0 or total == 0:
+        return [0] * len(sizes)
+    if n_dev > total:
+        raise ValueError(f"dev count {n_dev} is larger than the round ({total})")
+    raw = [n_dev * size / total for size in sizes]
+    floors = [int(value) for value in raw]
+    leftover = n_dev - sum(floors)
+    order = sorted(range(len(sizes)), key=lambda index: (-(raw[index] - floors[index]), index))
+    counts = floors[:]
+    for index in order:
+        if leftover <= 0:
             break
-    dev_ids: set[str] = set()
-    for attack, group in groups.items():
-        take = counts[attack]
-        if take <= 0:
-            continue
-        if take >= len(group):
-            take = len(group) - 1 if len(group) > 1 else 0
-        for index in range(take):
-            dev_ids.add(group[int(index * len(group) / take)]["page_id"])
-    dev = [spec for spec in specs if spec["page_id"] in dev_ids]
-    train = [spec for spec in specs if spec["page_id"] not in dev_ids]
+        if counts[index] < sizes[index]:
+            counts[index] += 1
+            leftover -= 1
+    if sum(counts) != n_dev:
+        raise RuntimeError("dev allocation does not match n_dev")
+    return counts
+
+
+def _group_size(size: int, want: int) -> int:
+    """Family size that divides both the stratum and the dev quota.
+
+    Consecutive seeds in one stratum share a family. The size stays at most 8
+    so a family is a short seed window. A size of 1 is still a whole group.
+    """
+    if size <= 1:
+        return 1
+    if want <= 0 or want >= size:
+        return min(8, size)
+    common = math.gcd(size, want)
+    cap = min(8, common)
+    for candidate in range(cap, 0, -1):
+        if common % candidate == 0:
+            return candidate
+    return 1
+
+
+def _chunk_indexes(n_groups: int, take: int) -> set[int]:
+    if take <= 0:
+        return set()
+    if take >= n_groups:
+        return set(range(n_groups))
+    step = n_groups / take
+    picked = {int(index * step) for index in range(take)}
+    if len(picked) != take:
+        picked = set(range(take))
+    return picked
+
+
+def split_train_dev(
+    specs: list[dict],
+    percent: int = 15,
+    n_dev: int | None = None,
+) -> tuple[list[dict], list[dict]]:
+    """Hold out whole seed families.
+
+    ``n_dev`` is an exact page count. When it is omitted, ``percent`` of the
+    generated pages are held out (the older ``--n`` path). A ``group_id`` is
+    entirely train or entirely dev. Dev specs are marked ``split: dev``.
+    """
+    if n_dev is None:
+        if percent < 0 or percent > 50:
+            raise ValueError("dev percent must be between 0 and 50")
+        n_dev = (len(specs) * percent) // 100
+    if n_dev < 0:
+        raise ValueError("n_dev must be at least 0")
+    strata = _strata(specs)
+    targets = _dev_targets([len(rows) for _key, rows in strata], n_dev)
+    next_id = 1
+    for (_key, rows), want in zip(strata, targets):
+        size = _group_size(len(rows), want)
+        chunks = [rows[index : index + size] for index in range(0, len(rows), size)]
+        if want <= 0:
+            take = 0
+        elif want >= len(rows):
+            take = len(chunks)
+        else:
+            take = want // size
+        picked = _chunk_indexes(len(chunks), take)
+        for index, chunk in enumerate(chunks):
+            group_id = f"g-{next_id:04d}"
+            next_id += 1
+            for spec in chunk:
+                spec["group_id"] = group_id
+                spec["split"] = "dev" if index in picked else "train"
+    dev = [spec for spec in specs if spec["split"] == "dev"]
+    train = [spec for spec in specs if spec["split"] != "dev"]
+    if len(dev) != n_dev:
+        raise RuntimeError(f"dev split has {len(dev)} pages, wanted {n_dev}")
+    train_groups = {spec["group_id"] for spec in train}
+    dev_groups = {spec["group_id"] for spec in dev}
+    if train_groups & dev_groups:
+        raise RuntimeError("a group_id is in both train and dev")
     return train, dev
+
+
+_FEATURES = ("checkbox", "popup", "fee", "strike", "radio")
+
+
+def feature_rates(specs: list[dict]) -> dict:
+    """Clean rate divided by the trick rate for each structural control."""
+    clean = [spec for spec in specs if spec["trick"]["attack_type"] == "none"]
+    trick = [spec for spec in specs if spec["trick"]["attack_type"] != "none"]
+
+    def rates(group: list[dict]) -> dict[str, float]:
+        hits: Counter[str] = Counter()
+        for spec in group:
+            found = structural_features(render_html(spec))
+            for name in _FEATURES:
+                if found[name]:
+                    hits[name] += 1
+        total = len(group) or 1
+        return {name: round(hits[name] / total, 4) for name in _FEATURES}
+
+    clean_rates = rates(clean)
+    trick_rates = rates(trick)
+    relative = {}
+    for name in _FEATURES:
+        if trick_rates[name] == 0:
+            relative[name] = None
+        else:
+            relative[name] = round(clean_rates[name] / trick_rates[name], 4)
+    return {
+        "clean": clean_rates,
+        "trick": trick_rates,
+        "relative": relative,
+        "n_clean": len(clean),
+        "n_trick": len(trick),
+    }
 
 
 def _attacker_paths(directory: Path) -> list[Path]:
@@ -155,6 +260,7 @@ def write_training(
     attacker_dir: Path | None = None,
     attacker_explicit: bool = False,
     dev_percent: int = 15,
+    n_dev: int | None = None,
 ) -> str:
     specs = training_specs(count, seed, round_n=round_n)
     catalog = generate_catalog(seed, round_n=round_n)
@@ -173,7 +279,7 @@ def write_training(
         else:
             print(f"no attacker specs at {default_dir} (round {round_n} template pages only)")
             attacker_note = "missing"
-    train_specs, dev_specs = split_train_dev(specs, dev_percent)
+    train_specs, dev_specs = split_train_dev(specs, dev_percent, n_dev=n_dev)
     labels = materialize(train_specs, out_dir)
     digest = content_hash(out_dir, slice_file=None)
     dev_digest = None
@@ -215,7 +321,10 @@ def write_training(
         "n_generated": count,
         "n_train": len(labels),
         "n_dev": len(dev_specs),
-        "dev_percent": dev_percent,
+        "dev_percent": dev_percent if n_dev is None else None,
+        "diversity_train": diversity(train_specs),
+        "diversity_dev": diversity(dev_specs),
+        "feature_rates": feature_rates(specs),
         "seed": seed,
         "seed_formula": "SPLIT_SEED + round * 1000003",
         "content_hash": digest,
@@ -234,9 +343,12 @@ def write_training(
         ),
     }
     _write_manifest(out_dir / "manifest.json", manifest)
+    train_diversity = diversity(train_specs)
     print(
         f"wrote round={round_n} train={len(labels)} dev={len(dev_specs)} "
-        f"attacker={len(attacker_specs)} dir={out_dir} hash={digest} overlap=pass seed={seed}"
+        f"attacker={len(attacker_specs)} dir={out_dir} hash={digest} overlap=pass seed={seed} "
+        f"distinct_before={train_diversity['distinct_before']} "
+        f"distinct_after={train_diversity['distinct_after']}"
     )
     return digest
 
@@ -267,7 +379,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         description="Generate one training round. The seed defaults to SPLIT_SEED + round * 1000003."
     )
     parser.add_argument("--round", type=int, default=1, help="Round number, starting at 1.")
-    parser.add_argument("--n", type=int, default=50, help="Pages to generate before the dev holdout.")
+    parser.add_argument(
+        "--n",
+        type=int,
+        default=None,
+        help="Pages to generate, then hold out --dev-percent. Overrides --n-train and --n-dev.",
+    )
+    parser.add_argument("--n-train", type=int, default=1500, help="Training pages. Default 1500.")
+    parser.add_argument("--n-dev", type=int, default=300, help="Dev pages, taken as whole groups. Default 300.")
     parser.add_argument("--out", type=Path, default=None, help="Defaults to data/trainset/roundN.")
     parser.add_argument("--seed", type=int, default=None, help="Defaults to the seed derived from --round.")
     parser.add_argument(
@@ -280,8 +399,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     args = parser.parse_args(argv)
     if args.round < 1:
         raise SystemExit("--round starts at 1")
-    if args.n < 1:
-        raise SystemExit("--n must be at least 1")
+    if args.n is None:
+        if args.n_train < 1 or args.n_dev < 0:
+            raise SystemExit("--n-train must be at least 1 and --n-dev must be at least 0")
+        args.count = args.n_train + args.n_dev
+        args.exact_dev = args.n_dev
+    else:
+        if args.n < 1:
+            raise SystemExit("--n must be at least 1")
+        args.count = args.n
+        args.exact_dev = None
     if args.seed is None:
         args.seed = seed_for_round(args.round)
     if args.out is None:
@@ -292,13 +419,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     write_training(
-        args.n,
+        args.count,
         args.out,
         args.seed,
         round_n=args.round,
         attacker_dir=args.attacker,
         attacker_explicit=args.attacker is not None,
         dev_percent=args.dev_percent,
+        n_dev=args.exact_dev,
     )
 
 

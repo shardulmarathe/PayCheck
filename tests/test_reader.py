@@ -32,7 +32,7 @@ def test_reader_caps_visible_text_and_keeps_prices_and_hidden():
         "controls": [{"kind": "checkbox", "id": "addon", "name": "addon", "checked": True, "label": "plan"}],
         "modals": [],
         "visible": ["line " + ("x" * 200) for _ in range(80)],
-        "hidden": [{"reason": "offscreen", "selector": "#trick", "text": "hidden instruction stays"}],
+        "hidden": [{"reason": "offscreen", "selector": "#offer-1", "text": "hidden instruction stays"}],
         "comments": [],
     }
     text = format_extract(data)
@@ -59,8 +59,8 @@ def test_reader_sees_checked_controls_prices_domain_and_hidden_text():
     assert "checkbox checked | id=addon" in checkbox_text
     assert "total:" in checkbox_text
     assert hidden["trick"]["evidence_text"] in hidden_text
-    assert "offscreen | #trick |" in hidden_text
-    assert "hidden_flagged:\n(none)" in clean_text
+    assert "offscreen | #offer-1 |" in hidden_text
+    assert "hidden_flagged:\n(blank)" in clean_text
     assert clean["store"]["domain"] in clean_text
 
 

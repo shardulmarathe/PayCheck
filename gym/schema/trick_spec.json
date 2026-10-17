@@ -12,6 +12,15 @@
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9_-]{0,80}$"
     },
+    "legacy_page_id": {
+      "type": "string",
+      "description": "Private id from before pages were renamed. Not rendered."
+    },
+    "group_id": {
+      "type": "string",
+      "pattern": "^g-[0-9]{4,}$",
+      "description": "Seed family. A group is entirely train or entirely dev."
+    },
     "store": {
       "type": "object",
       "additionalProperties": false,
@@ -186,7 +195,10 @@
             "add_label": {"type": "string", "minLength": 1},
             "pay_label": {"type": "string", "minLength": 1},
             "verify_label": {"type": "string", "minLength": 1},
-            "review_line": {"type": "string", "minLength": 1}
+            "review_line": {"type": "string", "minLength": 1},
+            "protect_label": {"type": "string", "minLength": 1},
+            "quiet_label": {"type": "string", "minLength": 1},
+            "keep_label": {"type": "string", "minLength": 1}
           }
         }
       }
@@ -220,7 +232,15 @@
       "type": "string",
       "pattern": "^(template|ec-darkpattern|attacker-round[0-9]+)$"
     },
-    "split": {"enum": ["train", "test"]},
+    "split": {"enum": ["train", "dev", "test"]},
+    "slice": {
+      "enum": ["in_dist", "heldout_template", "heldout_attack"],
+      "description": "Test-page slice. Held-out attacks, reserved-template pages, or in-distribution pages."
+    },
+    "page_template": {
+      "enum": ["standard", "reserved"],
+      "description": "reserved is the template pool training is not allowed to sample."
+    },
     "dataset_page_ids": {
       "type": "array",
       "items": {"type": "string", "pattern": "^[0-9]+$"}

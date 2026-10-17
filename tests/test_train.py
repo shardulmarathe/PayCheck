@@ -150,6 +150,19 @@ def test_rounds_are_distinct_and_dev_is_not_the_test_set(tmp_path: Path):
     assert train and dev
     assert len(train) + len(dev) == len(first)
     assert {spec["page_id"] for spec in train}.isdisjoint({spec["page_id"] for spec in dev})
+    assert {spec["group_id"] for spec in train}.isdisjoint({spec["group_id"] for spec in dev})
+    assert all(spec["split"] == "dev" for spec in dev)
+    assert all(spec["split"] == "train" for spec in train)
+    cloned = json.loads(json.dumps(second))
+    for spec in cloned:
+        spec["split"] = "train"
+        spec.pop("group_id", None)
+    train_exact, dev_exact = split_train_dev(cloned, n_dev=6)
+    assert len(dev_exact) == 6
+    assert len(train_exact) == len(cloned) - 6
+    assert {spec["group_id"] for spec in train_exact}.isdisjoint(
+        {spec["group_id"] for spec in dev_exact}
+    )
 
     out = tmp_path / "round1"
     write_training(20, out, seed_for_round(1), round_n=1)

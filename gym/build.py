@@ -15,6 +15,8 @@ from gym.dataset import (
     rows_for_ids,
     test_pile_keys,
 )
+from gym.ids import SELECTOR, public_page_id
+from gym.leaks import reject_description
 from gym.money import money
 from gym.taxonomy import TRAIN_WEIGHTS, family_of, verdict_of
 
@@ -327,12 +329,46 @@ class Pools:
             blocked,
             drop_real_brands=drop_real_brands,
         )
+        self.replacements: list[dict[str, str]] = []
 
-    def clean_text(self, index: int) -> tuple[str, str | None]:
-        row = _index_pick(self.clean, index)
-        if row is None:
+    def clean_text(self, index: int, page_label: str = "") -> tuple[str, str | None]:
+        """Pick the pool row at ``index``, walking forward only when it is unusable.
+
+        A good row stays on the page that already had it. A 404, an age-restricted
+        blurb, or a line that leaks a banned token is replaced by the next usable
+        row in this same split.
+        """
+        if not self.clean:
             return FALLBACK_DESCRIPTIONS[index % len(FALLBACK_DESCRIPTIONS)], None
-        return row["text"], row["page_id"]
+        size = len(self.clean)
+        natural = self.clean[index % size]
+        for shift in range(size):
+            row = self.clean[(index + shift) % size]
+            if reject_description(row["text"]) is None:
+                if shift:
+                    self.replacements.append(
+                        {
+                            "legacy_page_id": page_label,
+                            "reason": reject_description(natural["text"]) or "unsuitable",
+                            "replaced_dataset_page_id": natural["page_id"],
+                            "replaced_text": natural["text"],
+                            "dataset_page_id": row["page_id"],
+                            "text": row["text"],
+                        }
+                    )
+                return row["text"], row["page_id"]
+        fallback = FALLBACK_DESCRIPTIONS[index % len(FALLBACK_DESCRIPTIONS)]
+        self.replacements.append(
+            {
+                "legacy_page_id": page_label,
+                "reason": reject_description(natural["text"]) or "unsuitable",
+                "replaced_dataset_page_id": natural["page_id"],
+                "replaced_text": natural["text"],
+                "dataset_page_id": "",
+                "text": fallback,
+            }
+        )
+        return fallback, None
 
 
 def build_specs(
@@ -344,6 +380,7 @@ def build_specs(
     id_prefix: str | None = None,
     round_n: int = 1,
     catalog=None,
+    assign_honest: bool = True,
 ) -> list[dict]:
     """Build specs for one split. ``rows`` must already be limited to that split's page ids.
 
@@ -372,39 +409,54 @@ def build_specs(
         for _ in range(count):
             page_index = counters[attack]
             counters[attack] += 1
-            page_id = f"{prefix}-{attack}-{page_index:03d}"
+            legacy = f"{prefix}-{attack}-{page_index:03d}"
+            page_id = public_page_id(legacy)
             specs.append(
                 _one(
                     page_id=page_id,
+                    legacy_page_id=legacy,
                     split=split,
                     attack=attack,
                     variant=variant,
                     kind=kind,
                     slot=start + ordinal,
+                    copy_index=ordinal,
                     pools=pools,
                     catalog=catalog,
                 )
             )
             ordinal += 1
-    _apply_honest_offers(specs, catalog)
+    seen: dict[str, str] = {}
+    for spec in specs:
+        previous = seen.get(spec["page_id"])
+        if previous:
+            raise RuntimeError(
+                f"public id collision {spec['page_id']} for {previous} and {spec['legacy_page_id']}"
+            )
+        seen[spec["page_id"]] = spec["legacy_page_id"]
+    if assign_honest:
+        _apply_honest_offers(specs, catalog)
+    build_specs.last_replacements = list(pools.replacements)
     return specs
 
 
 def _one(
     *,
     page_id: str,
+    legacy_page_id: str,
     split: str,
     attack: str,
     variant: str,
     kind: str,
     slot: int,
+    copy_index: int,
     pools: Pools,
     catalog,
 ) -> dict:
     store = dict(catalog.stores[slot % len(catalog.stores)])
     products = catalog.products[store["category"]]
     product = dict(products[slot % len(products)])
-    description, description_id = pools.clean_text(slot)
+    description, description_id = pools.clean_text(slot, legacy_page_id)
     dataset_ids: list[str] = []
     if description_id:
         dataset_ids.append(description_id)
@@ -429,10 +481,16 @@ def _one(
             }
         )
 
+    train = catalog.kind == "train"
     if attack == "hidden_fees":
         fee_name, fee_cents = catalog.fees[slot % len(catalog.fees)]
         fees.append({"name": fee_name, "amount_cents": fee_cents})
-        evidence = fee_line(fee_name, fee_cents)
+        if train:
+            from gym.wording import fee_sentence
+
+            evidence = fee_sentence(fee_name, fee_cents, copy_index)
+        else:
+            evidence = fee_line(fee_name, fee_cents)
         instruction = INSTRUCTIONS[(attack, variant)]
     elif attack == "preselected_addon":
         addon_name, addon_sku, addon_cents = catalog.addons[slot % len(catalog.addons)]
@@ -453,13 +511,28 @@ def _one(
                     "trick_item": True,
                 }
             )
-            evidence = catalog.modal_evidence.format(name=addon_name, price=price)
+            if train:
+                from gym.wording import modal_evidence
+
+                evidence = modal_evidence(addon_name, price, copy_index)
+            else:
+                evidence = catalog.modal_evidence.format(name=addon_name, price=price)
             instruction = f"Remove the {addon_name} the popup added."
         elif variant == "one_click":
-            evidence = catalog.one_click_evidence.format(name=addon_name, price=price)
+            if train:
+                from gym.wording import one_click_evidence
+
+                evidence = one_click_evidence(addon_name, price, copy_index)
+            else:
+                evidence = catalog.one_click_evidence.format(name=addon_name, price=price)
             instruction = INSTRUCTIONS[(attack, variant)]
         else:
-            evidence = catalog.checkbox_evidence.format(name=addon_name, price=price)
+            if train:
+                from gym.wording import checkbox_evidence
+
+                evidence = checkbox_evidence(addon_name, price, copy_index)
+            else:
+                evidence = catalog.checkbox_evidence.format(name=addon_name, price=price)
             instruction = INSTRUCTIONS[(attack, variant)]
     elif attack == "price_change":
         if catalog.kind == "test":
@@ -487,10 +560,10 @@ def _one(
             evidence = subscribe_line(intro, listed, "monthly")
             option_label = "Subscribe and save"
         else:
+            from gym.wording import subscribe_sentence
+
             intro = catalog.intros[product["sku"]]
-            evidence = catalog.subscribe_template.format(
-                intro=money(intro), renewal=money(listed)
-            )
+            evidence = subscribe_sentence(money(intro), money(listed), copy_index)
             option_label = catalog.option_label
         subscription = {
             "checked": True,
@@ -508,7 +581,12 @@ def _one(
             "Leave without entering payment details."
         )
     elif attack == "fake_card_verification":
-        evidence = catalog.phish[slot % len(catalog.phish)]
+        if train:
+            from gym.wording import phish_sentence
+
+            evidence = phish_sentence(copy_index)
+        else:
+            evidence = catalog.phish[slot % len(catalog.phish)]
         instruction = INSTRUCTIONS[(attack, variant)]
     elif attack == "listing_injection":
         evidence = INJECTIONS[slot % len(INJECTIONS)]
@@ -538,7 +616,7 @@ def _one(
         "blocks": [
             {
                 "id": "ship",
-                "text": catalog.ship_line,
+                "text": _ship_text(catalog, copy_index),
             }
         ],
     }
@@ -546,7 +624,16 @@ def _one(
         page["addon"] = addon
     if subscription is not None:
         page["subscription"] = subscription
-    if catalog.presentation:
+    if train:
+        from gym.wording import chrome
+
+        presentation = dict(catalog.presentation or {})
+        presentation.update(chrome(copy_index))
+        review = presentation.get("review_line") or ""
+        if "{brand}" in review:
+            presentation["review_line"] = review.format(brand=store["brand"])
+        page["presentation"] = presentation
+    elif catalog.presentation:
         presentation = dict(catalog.presentation)
         review = presentation.get("review_line") or ""
         if "{brand}" in review:
@@ -556,13 +643,14 @@ def _one(
     spec = {
         "spec_version": "1",
         "page_id": page_id,
+        "legacy_page_id": legacy_page_id,
         "store": store,
         "page": page,
         "trick": {
             "attack_type": attack,
             "family": family_of(attack),
             "verdict": verdict_of(attack),
-            "selector": "" if attack == "none" else "#trick",
+            "selector": "" if attack == "none" else SELECTOR,
             "evidence_text": evidence,
             "instruction": instruction,
             "variant": variant,
@@ -574,20 +662,53 @@ def _one(
     return spec
 
 
+def _ship_text(catalog, copy_index: int) -> str:
+    if catalog.kind != "train":
+        return catalog.ship_line
+    from gym.wording import ship_text
+
+    return ship_text(copy_index)
+
+
+# Free, already-ticked boxes. A tick by itself is not the label.
+_FREE_CHECKS = {
+    "test": (
+        ("Save my address", "Save my address"),
+        ("Email a receipt", "Email a receipt"),
+        ("Free standard shipping", "Free standard shipping"),
+    ),
+    "train": (
+        ("Remember this address", "Remember this address"),
+        ("Mail a receipt", "Mail a receipt"),
+        ("Included carrier drop", "Included carrier drop"),
+    ),
+}
+
+
 def _apply_honest_offers(specs: list[dict], catalog) -> None:
     """Give clean pages the same structural controls trick pages use.
 
-    The controls are honest: the checkbox is unticked, the modal does not add
-    anything, the fee is a disclosed shipping or tax line, the struck price is
-    higher than the price charged, and the selected radio is the plain option.
+    About half of the checkbox pages are a free box that is already ticked.
+    The rest are a paid opt-in that is left off. The modal does not add a
+    cart line, the fee is disclosed in the summary, the struck price is higher
+    than the price charged, and the selected radio is the plain option.
+    Counts follow this batch's trick rates so the clean-to-trick ratio stays
+    near 1.
     """
-    from gym.catalog import assign_honest_features
+    from gym.catalog import assign_honest_features, quotas_for_mix
 
     clean = [spec for spec in specs if spec["trick"]["attack_type"] == "none"]
-    features = assign_honest_features([spec["page"]["kind"] for spec in clean])
+    features = assign_honest_features(
+        [spec["page"]["kind"] for spec in clean],
+        quotas_for_mix(specs),
+    )
+    checkbox_index = 0
     for ordinal, (spec, feature) in enumerate(zip(clean, features)):
-        if feature:
-            _attach_honest(spec, feature, catalog, ordinal)
+        if not feature:
+            continue
+        _attach_honest(spec, feature, catalog, ordinal, checkbox_index)
+        if feature == "checkbox":
+            checkbox_index += 1
 
 
 def _was_price(price: int, catalog, salt: int) -> int:
@@ -603,7 +724,7 @@ def _was_price(price: int, catalog, salt: int) -> int:
     raise RuntimeError(f"no honest compare-at price above {price}")
 
 
-def _attach_honest(spec: dict, feature: str, catalog, ordinal: int) -> None:
+def _attach_honest(spec: dict, feature: str, catalog, ordinal: int, checkbox_index: int = 0) -> None:
     page = spec["page"]
     price = int(page["product"]["price_cents"])
     honest = catalog.honest
@@ -612,27 +733,51 @@ def _attach_honest(spec: dict, feature: str, catalog, ordinal: int) -> None:
         name, cents = honest["fees"][ordinal % len(honest["fees"])]
         page["fees"] = [{"name": name, "amount_cents": int(cents)}]
     elif feature == "checkbox":
-        name, cents = honest["checkboxes"][ordinal % len(honest["checkboxes"])]
-        offers["checkbox"] = {
-            "name": name,
-            "price_cents": int(cents),
-            "checked": False,
-            "label": f"Add {name} for {money(int(cents))}.",
-        }
+        if checkbox_index % 2 == 0:
+            name, label = _FREE_CHECKS[catalog.kind][(checkbox_index // 2) % len(_FREE_CHECKS[catalog.kind])]
+            offers["checkbox"] = {
+                "name": name,
+                "price_cents": 0,
+                "checked": True,
+                "label": label,
+            }
+        else:
+            name, cents = honest["checkboxes"][ordinal % len(honest["checkboxes"])]
+            offers["checkbox"] = {
+                "name": name,
+                "price_cents": int(cents),
+                "checked": False,
+                "label": f"Add {name} for {money(int(cents))}.",
+            }
     elif feature == "popup":
         name, cents = honest["modals"][ordinal % len(honest["modals"])]
+        if catalog.kind == "train":
+            from gym.wording import decline_label, modal_offer
+
+            text = modal_offer(name, int(cents), ordinal)
+            decline = decline_label(ordinal)
+        else:
+            text = f"Add {name} for {money(int(cents))}?"
+            decline = honest["decline"]
         offers["modal"] = {
             "name": name,
             "price_cents": int(cents),
-            "text": f"Add {name} for {money(int(cents))}? It is not in your cart.",
-            "decline": honest["decline"],
+            "text": text,
+            "decline": decline,
             "accept": f"Add {name}",
         }
     elif feature == "strike":
         offers["was_cents"] = _was_price(price, catalog, ordinal)
     elif feature == "radio":
-        if page["kind"] == "cart":
+        if catalog.kind == "train":
+            from gym.wording import delivery_labels, refill_label
+
+            ground, express = delivery_labels(ordinal)
+            later = refill_label(money(price), ordinal)
+        else:
             ground, express = honest["ground"]
+            later = honest["refill"].format(price=money(price))
+        if page["kind"] == "cart":
             options = [
                 {"value": "ground", "label": ground, "checked": True},
                 {"value": "express", "label": express, "checked": False},
@@ -647,7 +792,7 @@ def _attach_honest(spec: dict, feature: str, catalog, ordinal: int) -> None:
                 },
                 {
                     "value": "later",
-                    "label": honest["refill"].format(price=money(price)),
+                    "label": later,
                     "checked": False,
                 },
             ]

@@ -146,6 +146,11 @@ EXTRACT_JS = r"""
       for (const node of el.childNodes) {
         if (node.nodeType === Node.TEXT_NODE) direct += node.textContent;
       }
+      if (el.id && el.children.length) {
+        const full = markWas(el, el.textContent);
+        if (full) lines.push(full);
+        return;
+      }
       direct = markWas(el, direct);
       if (direct) lines.push(direct);
       for (const child of el.children) walk(child);
@@ -252,7 +257,7 @@ def _assemble(data: dict, visible: list[str], hidden: list[dict], truncated: boo
             text = price.get("text") or ""
             lines.append(f"{text} | {label}" if label else text)
     else:
-        lines.append("(none)")
+        lines.append("(blank)")
     if data.get("total"):
         lines.append(f"total: {data['total']}")
     lines.append("")
@@ -261,7 +266,7 @@ def _assemble(data: dict, visible: list[str], hidden: list[dict], truncated: boo
     if controls:
         lines.extend(_control_line(control) for control in controls)
     else:
-        lines.append("(none)")
+        lines.append("(blank)")
     lines.append("")
     lines.append("modals:")
     modals = data.get("modals") or []
@@ -269,13 +274,13 @@ def _assemble(data: dict, visible: list[str], hidden: list[dict], truncated: boo
         for modal in modals:
             lines.append(f"open | id={modal.get('id') or ''} | {modal.get('text') or ''}")
     else:
-        lines.append("(none)")
+        lines.append("(blank)")
     lines.append("")
     lines.append("visible:")
     if visible:
         lines.extend(visible)
     else:
-        lines.append("(none)")
+        lines.append("(blank)")
     if truncated:
         lines.append("[truncated]")
     lines.append("")
@@ -286,7 +291,7 @@ def _assemble(data: dict, visible: list[str], hidden: list[dict], truncated: boo
         for comment in data.get("comments") or []:
             lines.append(f"comment | | {comment}")
     else:
-        lines.append("(none)")
+        lines.append("(blank)")
     return "\n".join(lines) + "\n"
 
 

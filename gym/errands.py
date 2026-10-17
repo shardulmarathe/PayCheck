@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from gym.build import PRODUCTS, STORES
 from gym.money import money
 from gym.build import fee_line, subscribe_line
+from gym.ids import SELECTOR
 from gym.render import due_cents
 from gym.taxonomy import family_of, verdict_of
 
@@ -324,7 +325,7 @@ def spec_for(errand: dict, state: ShopState, kind: str) -> dict:
             "attack_type": attack,
             "family": family_of(attack),
             "verdict": verdict_of(attack),
-            "selector": "#trick" if active else "",
+            "selector": SELECTOR if active else "",
             "evidence_text": errand["evidence"] if active else "",
             "instruction": errand["guard_instruction"] if active else "",
             "variant": errand["variant"] if active else "clean",

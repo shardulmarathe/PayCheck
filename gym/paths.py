@@ -35,5 +35,9 @@ def slice_path() -> Path:
     return ROOT / "gym" / "testset" / "slice100.txt"
 
 
+def replacements_path() -> Path:
+    return ROOT / "gym" / "testset" / "clean_replacements.json"
+
+
 def schema_dir() -> Path:
     return ROOT / "gym" / "schema"

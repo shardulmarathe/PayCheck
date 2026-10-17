@@ -41,6 +41,9 @@ FAMILY = {
 }
 
 # (attack_type, variant, page kind, count). Sums to 300, half clean.
+# Trick rows stay first and keep their counts so each trick slot is stable.
+# Clean rows follow, and their kind counts match the trick kind counts:
+# checkout 98, product 26, cart 10, payment 16.
 TEST_PLAN: list[tuple[str, str, str, int]] = [
     ("hidden_fees", "drip", "checkout", 24),
     ("preselected_addon", "checkbox", "checkout", 10),
@@ -51,10 +54,10 @@ TEST_PLAN: list[tuple[str, str, str, int]] = [
     ("copycat_domain", "lookalike", "checkout", 16),
     ("fake_card_verification", "phishing", "payment", 16),
     ("listing_injection", "offscreen", "product", 16),
-    ("none", "clean", "product", 50),
-    ("none", "clean", "cart", 34),
-    ("none", "clean", "checkout", 34),
-    ("none", "clean", "payment", 32),
+    ("none", "clean", "checkout", 98),
+    ("none", "clean", "product", 26),
+    ("none", "clean", "cart", 10),
+    ("none", "clean", "payment", 16),
 ]
 
 # Stratified 100-page slice. Counts sum to 100.
@@ -69,21 +72,22 @@ SLICE_COUNTS = {
     "none": 50,
 }
 
-# Weights sum to 100. Scaled to --n with the largest-remainder method.
-# copycat_domain and listing_injection stay out. fake_card_verification is in,
-# so round 0 has scam pages.
+# Weights sum to 100 and split about 50/50. Clean kinds mirror the trick kinds
+# in the same round (checkout 34, product 3, cart 3, payment 10). Scaled to
+# --n-train plus --n-dev with the largest-remainder method.
+# copycat_domain and listing_injection stay out. fake_card_verification is in.
 TRAIN_WEIGHTS: list[tuple[str, str, str, int]] = [
-    ("none", "clean", "product", 16),
-    ("none", "clean", "cart", 8),
-    ("none", "clean", "checkout", 8),
+    ("none", "clean", "checkout", 34),
+    ("none", "clean", "product", 3),
+    ("none", "clean", "cart", 3),
     ("none", "clean", "payment", 10),
-    ("hidden_fees", "drip", "checkout", 12),
-    ("preselected_addon", "checkbox", "checkout", 6),
-    ("preselected_addon", "modal", "cart", 6),
-    ("preselected_addon", "one_click", "product", 6),
+    ("hidden_fees", "drip", "checkout", 10),
+    ("preselected_addon", "checkbox", "checkout", 4),
+    ("preselected_addon", "modal", "cart", 3),
+    ("preselected_addon", "one_click", "product", 3),
     ("price_change", "drift", "checkout", 10),
     ("subscription_trap", "autorenew", "checkout", 10),
-    ("fake_card_verification", "phishing", "payment", 8),
+    ("fake_card_verification", "phishing", "payment", 10),
 ]
 
 VIEWPORT = (1280, 800)

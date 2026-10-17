@@ -62,6 +62,13 @@ _FEE_NAMES = (
     "Carton liner", "Doorstep bag", "Rush window", "Small order",
     "Lane toll", "Crate strap", "Dock pass", "Porter charge",
 )
+# Ordinary retail names mixed into trick fees. The amount and the moment they
+# appear are the trick, not a spooky label. These must stay off the test surface.
+_PLAIN_FEE_NAMES = (
+    "Paper bag", "Can deposit", "Route drop", "Town levy",
+    "Lane postage", "Crate fee", "Porter bag", "Shelf bag",
+    "Glass return", "City handoff", "Market bag", "Counter drop",
+)
 _ADDON_NAMES = (
     "3-year device shield", "Cell warranty", "Drop coverage", "Assembly visit",
     "Cable replacement", "Spill guard", "Extra year cover", "Lens cover plan",
@@ -235,11 +242,18 @@ def test_catalog() -> Catalog:
         intros={},
         safe_deltas={},
         honest={
-            "fees": (("Shipping", 325), ("Sales tax", 215)),
-            "checkboxes": (("Gift wrap", 160),),
+            "fees": (
+                ("Bag fee", 75),
+                ("Bottle deposit", 10),
+                ("Delivery fee", 399),
+                ("Sales tax", 215),
+                ("Shipping", 325),
+                ("Cardboard wrap", 125),
+            ),
+            "checkboxes": (("Gift wrap", 160), ("Gift note", 95)),
             "modals": (("Tissue wrap", 240),),
             "was_deltas": (155, 255, 355),
-            "refill": "Monthly refill — {price}, only if you select it",
+            "refill": "Monthly refill — {price}",
             "ground": ("Ground shipping — included", "Express shipping — not selected"),
             "decline": "No thanks",
         },
@@ -272,7 +286,50 @@ def honest_quotas(total: int) -> list[tuple[str, int]]:
     return [(raw[index][0], counts[index]) for index in range(len(raw)) if counts[index]]
 
 
-def assign_honest_features(kinds: list[str]) -> list[str | None]:
+_FEATURE_ORDER = ("checkbox", "popup", "fee", "strike", "radio")
+
+
+def quotas_for_mix(specs: list[dict]) -> list[tuple[str, int]]:
+    """Honest-control counts that match this batch's trick feature rates.
+
+    One control per clean page, so the sum is capped at the clean-page count.
+    Checkbox is the pre-ticked add-on, popup is a modal or a one-click offer,
+    fee is a drip fee, strike is a drifted price, and radio is a subscription.
+    """
+    clean = [spec for spec in specs if spec["trick"]["attack_type"] == "none"]
+    trick = [spec for spec in specs if spec["trick"]["attack_type"] != "none"]
+    n_clean = len(clean)
+    n_trick = len(trick)
+    if n_clean == 0 or n_trick == 0:
+        return []
+    hits = {name: 0 for name in _FEATURE_ORDER}
+    for spec in trick:
+        attack = spec["trick"]["attack_type"]
+        variant = spec["trick"]["variant"]
+        if attack == "preselected_addon" and variant == "checkbox":
+            hits["checkbox"] += 1
+        elif attack == "preselected_addon" and variant in {"modal", "one_click"}:
+            hits["popup"] += 1
+        elif attack == "hidden_fees":
+            hits["fee"] += 1
+        elif attack == "price_change":
+            hits["strike"] += 1
+        elif attack == "subscription_trap":
+            hits["radio"] += 1
+    raw = [hits[name] * n_clean / n_trick for name in _FEATURE_ORDER]
+    counts = [int(round(value)) for value in raw]
+    while sum(counts) > n_clean:
+        index = max(range(len(counts)), key=lambda item: (counts[item], -item))
+        if counts[index] == 0:
+            break
+        counts[index] -= 1
+    return [(name, count) for name, count in zip(_FEATURE_ORDER, counts) if count]
+
+
+def assign_honest_features(
+    kinds: list[str],
+    quotas: list[tuple[str, int]] | None = None,
+) -> list[str | None]:
     """One honest control per chosen clean page. ``None`` leaves the page plain.
 
     Preferred page kinds match where the trick uses that control, so a fee line
@@ -312,7 +369,8 @@ def assign_honest_features(kinds: list[str]) -> list[str | None]:
                 break
         return placed
 
-    for feature, count in honest_quotas(len(kinds)):
+    plan = list(quotas) if quotas is not None else honest_quotas(len(kinds))
+    for feature, count in plan:
         placed = take(feature, _KIND_CYCLE[feature], count)
         if placed < count:
             take(feature, _KIND_FALLBACK, count - placed)
@@ -408,7 +466,8 @@ def generate_catalog(seed: int, round_n: int = 1) -> Catalog:
             )
             sku_index += 1
 
-    fee_names = _window(_FEE_NAMES, (round_n - 1) * 4, 4)
+    fee_names = list(_window(_PLAIN_FEE_NAMES, (round_n - 1) * 2, 2))
+    fee_names.extend(_window(_FEE_NAMES, (round_n - 1) * 2, 2))
     fees = tuple((name, _pick_cents(rng, 115, 380, banned_cents, round_n + index)) for index, name in enumerate(fee_names))
     addon_names = _window(_ADDON_NAMES, (round_n - 1) * 4, 4)
     addons = tuple(

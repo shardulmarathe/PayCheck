@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ brand }} — {{ title }}</title>
+  <style>
+    html { background: #efe4d4; }
+    body {
+      margin: 0;
+      color: #2c241c;
+      background:
+        radial-gradient(circle at 12px 12px, rgba(90, 62, 32, 0.08) 1px, transparent 1.4px) 0 0 / 18px 18px,
+        #f7f0e4;
+      font-family: "Liberation Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    button, input { font-family: inherit; font-size: 16px; color: inherit; }
+    .ribbon {
+      background: #6e3b2a;
+      color: #f8efe4;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .shop-name { font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .host { font-size: 13px; opacity: 0.85; }
+    .trail { margin: 0; padding: 10px 28px; background: #e7d3b8; font-size: 13px; }
+    .trail b { font-weight: 700; }
+    .sheet {
+      width: 720px;
+      margin: 28px auto 48px;
+      background: #fffaf3;
+      border: 1px solid #c9b194;
+      box-shadow: 6px 6px 0 #e4d2b8;
+      padding: 28px 32px 36px;
+    }
+    h1 { font-size: 30px; margin: 0 0 8px; font-weight: 700; }
+    .blurb { color: #6d5b48; margin: 0 0 16px; }
+    .swatch {
+      width: 72px;
+      height: 72px;
+      border: 2px dashed #b08968;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #6e3b2a;
+      margin-bottom: 12px;
+    }
+    table.tally { width: 100%; border-collapse: collapse; margin-top: 18px; }
+    table.tally th, table.tally td {
+      text-align: left;
+      padding: 8px 0;
+      border-bottom: 1px dashed #d9c6ad;
+      vertical-align: baseline;
+    }
+    table.tally th { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #6e3b2a; }
+    td.money, th.money { text-align: right; }
+    .grand { display: flex; justify-content: space-between; margin-top: 14px; font-size: 20px; font-weight: 700; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    button, .go {
+      border: 1px solid #6e3b2a;
+      background: #fffaf3;
+      padding: 9px 14px;
+      cursor: pointer;
+    }
+    .go, button.solid { background: #6e3b2a; color: #f8efe4; font-weight: 700; text-decoration: unset; display: inline-block; }
+    .tick, .choice { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0; }
+    .popup {
+      margin-top: 18px;
+      padding: 16px;
+      border: 3px double #6e3b2a;
+      background: #f3e6d4;
+    }
+    .overlay {
+      margin-top: 22px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid #6e3b2a;
+    }
+    .was { text-decoration: line-through; color: #8a7360; margin-right: 8px; }
+    .note { margin-top: 22px; padding-top: 12px; border-top: 1px solid #e4d2b8; }
+    .note h2 { font-size: 16px; margin: 0 0 8px; }
+    .parked {
+      position: absolute;
+      left: -4800px;
+      top: 4px;
+      width: 420px;
+      height: 48px;
+      overflow: hidden;
+    }
+    label.entry { display: block; margin: 12px 0; font-size: 14px; }
+    label.entry input {
+      display: block;
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px;
+      border: 1px solid #c9b194;
+      background: #fff;
+    }
+    @media (max-width: 800px) {
+      .sheet { width: auto; margin: 12px; }
+      .ribbon, .trail { padding-left: 12px; padding-right: 12px; }
+    }
+  </style>
+</head>
+<body data-store-domain="{{ domain }}" data-page-kind="{{ kind }}" data-store-brand="{{ brand }}">
+  {% if trick_mode == "offscreen" %}
+  <div id="{{ trick_id }}" class="parked">{{ evidence }}</div>
+  {% endif %}
+  <header class="ribbon">
+    <div class="shop-name">{{ brand }}</div>
+    {% if trick_mode == "domain" %}
+    <div id="{{ trick_id }}" class="host">{{ evidence }}</div>
+    {% else %}
+    <div class="host">{{ domain }}</div>
+    {% endif %}
+  </header>
+  <p class="trail">
+    {% for step in steps %}
+      {% if step.current %}<b>{{ step.label }}</b>{% else %}{{ step.label }}{% endif %}{% if not loop.last %} · {% endif %}
+    {% endfor %}
+    · bag {{ cart_count }}
+  </p>
+  <main class="sheet">
+    {% if kind == "product" %}
+      <div class="swatch">{{ product.image_label }}</div>
+      <h1>{{ product.name }}</h1>
+      <p class="blurb">{{ product.rating }} stars · {{ product.review_count }} notes · item {{ product.sku }}</p>
+      <p class="grand"><span>Asking price</span><span>{% if offers.was_cents %}<span class="was" data-price="{{ offers.was_cents }}" data-price-label="{{ product.name }}">{{ offers.was_text }}</span> {% endif %}{{ product_price }}</span></p>
+      {% if live %}
+      <form method="post" action="{{ actions['add'] }}"><div class="actions"><button class="solid" type="submit">{{ presentation.add_label }}</button></div></form>
+      {% else %}
+      <div class="actions"><button class="solid" type="button">{{ presentation.add_label }}</button></div>
+      {% endif %}
+    {% elif kind == "cart" %}
+      <h1>Your bag</h1>
+      {% for item in cart %}
+      <p>{{ item.qty }} × {{ item.name }} — {{ item.line_text }}</p>
+      {% if live %}
+      <form method="post" action="{{ actions['remove'] }}"><input type="hidden" name="sku" value="{{ item.sku }}"><button type="submit">Take out {{ item.name }}</button></form>
+      {% else %}
+      <button type="button">Take out {{ item.name }}</button>
+      {% endif %}
+      {% endfor %}
+      {% if not cart %}<p>The bag is empty.</p>{% endif %}
+      {% if live %}
+      <div class="actions"><a class="go" href="{{ actions['checkout'] }}">Open the tally</a></div>
+      {% else %}
+      <div class="actions"><button class="solid" type="button">Open the tally</button></div>
+      {% endif %}
+    {% elif kind == "checkout" %}
+      <h1>Review and send</h1>
+      <p class="blurb">{{ presentation.review_line }}</p>
+      {% if trick_mode == "subscription" and subscription %}
+        {% if live %}<form method="post" action="{{ actions['update'] }}">{% endif %}
+        <label class="choice"><input type="radio" id="purchase-sub" name="purchase" value="sub" {% if subscription.checked %}checked{% endif %}><span id="{{ trick_id }}">{{ evidence }}</span></label>
+        <label class="choice"><input type="radio" id="purchase-once" name="purchase" value="once" {% if not subscription.checked %}checked{% endif %}><span>One-time purchase — {{ listed_text }}</span></label>
+        <div class="actions">
+          {% if live %}
+          <button type="submit">Refresh tally</button>
+          <button class="solid" type="submit" formaction="{{ actions['continue'] }}">{{ presentation.continue_label }}</button>
+          {% else %}
+          <button class="solid" type="button">{{ presentation.continue_label }}</button>
+          {% endif %}
+        </div>
+        {% if live %}</form>{% endif %}
+      {% elif trick_mode == "checkbox" and addon %}
+        {% if live %}<form method="post" action="{{ actions['update'] }}"><input type="hidden" name="addon_form" value="1">{% endif %}
+        <label class="tick"><input type="checkbox" id="addon" name="addon" value="1" {% if addon.checked %}checked{% endif %}><span><span id="{{ trick_id }}">{{ evidence }}</span></span></label>
+        <div class="actions">
+          {% if live %}
+          <button type="submit">Refresh tally</button>
+          <button class="solid" type="submit" formaction="{{ actions['continue'] }}">{{ presentation.continue_label }}</button>
+          {% else %}
+          <button class="solid" type="button">{{ presentation.continue_label }}</button>
+          {% endif %}
+        </div>
+        {% if live %}</form>{% endif %}
+      {% elif trick_mode == "price" %}
+        {% if live %}
+        <form method="post" action="{{ actions['continue'] }}"><div class="actions"><button class="solid" type="submit">{{ presentation.continue_label }}</button></div></form>
+        <form method="post" action="{{ actions['abort'] }}"><div class="actions"><button type="submit">Leave the tally</button></div></form>
+        {% else %}
+        <div class="actions"><button class="solid" type="button">{{ presentation.continue_label }}</button></div>
+        {% endif %}
+      {% else %}
+        {% if live %}
+        <form method="post" action="{{ actions['update'] }}">
+          {% if fees %}<input type="hidden" name="fee_form" value="1"><label class="tick"><input type="checkbox" id="fee" name="fee" value="1" checked><span>Keep the {{ fees[0].name }} line ({{ fees[0].amount_text }})</span></label>{% endif %}
+          <div class="actions"><button type="submit">Refresh tally</button><button class="solid" type="submit" formaction="{{ actions['continue'] }}">{{ presentation.continue_label }}</button></div>
+        </form>
+        {% else %}
+        <div class="actions"><button class="solid" type="button">{{ presentation.continue_label }}</button></div>
+        {% endif %}
+      {% endif %}
+    {% elif kind == "payment" %}
+      {% if trick_mode == "phishing" %}<h1 id="{{ trick_id }}">{{ evidence }}</h1>{% else %}<h1>Card details</h1>{% endif %}
+      {% if live %}<form method="post" action="{{ actions['pay'] }}">{% endif %}
+      <label class="entry">Card number <input name="card_number" autocomplete="off" inputmode="numeric"></label>
+      <label class="entry">Expiry <input name="exp" placeholder="MM/YY" autocomplete="off"></label>
+      <label class="entry">Security code <input name="cvv" autocomplete="off"></label>
+      {% if trick_mode == "phishing" %}<label class="entry">Bank password <input type="password" name="bank_password" autocomplete="off"></label>{% endif %}
+      <div class="actions">
+        {% if live %}
+        <button class="solid" type="submit">{{ presentation.verify_label if trick_mode == "phishing" else presentation.pay_label }}</button>
+        {% else %}
+        <button class="solid" type="button">{{ presentation.verify_label if trick_mode == "phishing" else presentation.pay_label }}</button>
+        {% endif %}
+      </div>
+      {% if live %}</form><form method="post" action="{{ actions['abort'] }}"><div class="actions"><button type="submit">Leave the tally</button></div></form>{% endif %}
+    {% endif %}
+
+    {% if offers.checkbox %}
+    <label class="tick"><input type="checkbox" id="opt-in" name="opt_in" value="1"{% if offers.checkbox.checked %} checked{% endif %}><span>{{ offers.checkbox.label }}</span></label>
+    {% elif addon and not addon.checked and trick_mode == "none" %}
+    <label class="tick"><input type="checkbox" id="opt-in" name="opt_in" value="1"><span>Add {{ addon.name }} for {{ addon.price_text }}.</span></label>
+    {% endif %}
+    {% if offers.radios %}
+      {% for option in offers.radios.options %}
+      <label class="choice"><input type="radio" id="opt-radio-{{ loop.index0 }}" name="{{ offers.radios.name }}" value="{{ option.value }}"{% if option.checked %} checked{% endif %}><span>{{ option.label }}</span></label>
+      {% endfor %}
+    {% elif subscription and not subscription.checked and trick_mode == "none" %}
+      <label class="choice"><input type="radio" id="opt-radio-0" name="purchase" value="once" checked><span>One-time purchase — {{ product_price }}</span></label>
+      <label class="choice"><input type="radio" id="opt-radio-1" name="purchase" value="sub"><span>{{ subscription.option_label }} — {{ subscription.intro_text }} today, then {{ subscription.renewal_text }} {{ subscription.cadence }}</span></label>
+    {% endif %}
+    {% if trick_mode == "one_click" %}
+    <div class="popup" role="dialog" aria-modal="true">
+      <p id="{{ trick_id }}">{{ evidence }}</p>
+      {% if addon %}<p data-price="{{ addon.price_cents }}" data-price-label="{{ addon.name }}">{{ addon.price_text }}</p>{% endif %}
+      <div class="actions"><button class="solid" type="button">{{ presentation.protect_label }}</button><button type="button">{{ presentation.quiet_label }}</button></div>
+    </div>
+    {% endif %}
+    {% if trick_mode == "banner" %}<p id="{{ trick_id }}">{{ evidence }}</p>{% endif %}
+
+    <table class="tally">
+      <tr><th>Line</th><th class="money">Amount</th></tr>
+      {% if cart %}
+        {% for item in cart %}
+        <tr>
+          <td>{{ item.qty }} × {{ item.name }}</td>
+          <td class="money">
+            {% if trick_mode == "price" and loop.first %}
+            <span class="was" data-price="{{ page_listed_cents }}" data-price-label="{{ item.name }}">{{ listed_text }}</span>
+            <span id="{{ trick_id }}" data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ evidence }}</span>
+            {% elif offers.was_cents and loop.first %}
+            <span class="was" data-price="{{ offers.was_cents }}" data-price-label="{{ item.name }}">{{ offers.was_text }}</span>
+            <span{% if price_anchor and loop.first %} id="{{ price_anchor }}"{% endif %} data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+            {% else %}
+            <span{% if price_anchor and loop.first %} id="{{ price_anchor }}"{% endif %} data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td class="money">
+            {% if offers.was_cents %}
+            <span class="was" data-price="{{ offers.was_cents }}" data-price-label="{{ product.name }}">{{ offers.was_text }}</span>
+            <span{% if price_anchor %} id="{{ price_anchor }}"{% endif %} data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
+            {% else %}
+            <span{% if price_anchor %} id="{{ price_anchor }}"{% endif %} data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% endif %}
+      {% for fee in fees %}
+      <tr data-fee="{{ fee.name }}">
+        <td colspan="2"><span{% if fee.anchor %} id="{{ fee.anchor }}"{% endif %}>{{ fee.lead }}<span data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.label }}">{{ fee.amount_text }}</span>{{ fee.trail }}</span></td>
+      </tr>
+      {% endfor %}
+      {% if trick_mode == "checkbox" and addon and addon.checked %}
+      <tr><td>{{ addon.name }}</td><td class="money"><span data-price="{{ addon.price_cents }}" data-price-label="{{ addon.name }}">{{ addon.price_text }}</span></td></tr>
+      {% endif %}
+    </table>
+    {% if trick_mode == "subscription" and kind != "checkout" %}
+    <p id="{{ trick_id }}">{{ evidence }}</p>
+    {% endif %}
+    <p class="grand"><span>Amount due</span><span data-total="{{ total_cents }}">{{ total_text }}</span></p>
+    <section class="note">
+      <h2>{{ presentation.about }}</h2>
+      <p>{{ product.description }}</p>
+      {% for block in blocks %}<p id="block-{{ block.id }}">{{ block.text }}</p>{% endfor %}
+    </section>
+    {% if trick_mode == "modal" %}
+    <div class="overlay" role="dialog" aria-modal="true">
+      <p id="{{ trick_id }}">{{ evidence }}</p>
+      <div class="actions">
+        {% if live %}<a class="go" href="{{ actions['checkout'] }}">{{ presentation.keep_label }}</a>{% else %}<button class="solid" type="button">{{ presentation.keep_label }}</button>{% endif %}
+        {% for item in cart if item.trick_item %}
+          {% if live %}
+          <form method="post" action="{{ actions['remove'] }}"><input type="hidden" name="sku" value="{{ item.sku }}"><button type="submit">Take out {{ item.name }}</button></form>
+          {% else %}
+          <button type="button">Take out {{ item.name }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% if offers.modal %}
+    <div class="overlay" role="dialog" aria-modal="true">
+      <p>{{ offers.modal.text }}</p>
+      <div class="actions">
+        <button class="solid" type="button" autofocus>{{ offers.modal.decline }}</button>
+        <button type="button">{{ offers.modal.accept }}</button>
+      </div>
+    </div>
+    {% endif %}
+  </main>
+</body>
+</html>

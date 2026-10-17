@@ -29,8 +29,8 @@ python -m playwright install chromium
 python -m gym.dataset --check          # frozen page-id split still matches the seed
 make testset                           # rebuild the 300-page test set and require the same hash
 make test
-python -m gym.train --round 1 --n 50
-python -m gym.train --round 2 --n 50
+python -m gym.train --round 1 --n-train 1500 --n-dev 300
+python -m gym.train --round 2 --n-train 1500 --n-dev 300
 python -m gym.render_specs --specs-dir DIR --out data/attacker-round2 --source attacker-round2
 python -m gym.serve --port 8765
 ```
@@ -38,6 +38,8 @@ python -m gym.serve --port 8765
 `make testset` does not rewrite the committed files. `python -m gym.testset --write` does, and should be a no-op diff when the font and browser match.
 
 The shop server is at [Checkout guard gym](http://127.0.0.1:8765) once `python -m gym.serve --port 8765` is running. Give the agent the errand instruction and the start URL only. Trick type and the correct cart are on `/errands.json` for the harness. Card fields are discarded and not stored.
+
+Sixty test pages are a template holdout: different stores and `reserved.html.j2`, which the train generator does not import. `copycat_domain` and `listing_injection` are tagged `heldout_attack`. The rest of the in-template pages are `in_dist`. Similarity against round 1 is in the test-set manifest.
 
 ## Frozen test set
 
@@ -62,7 +64,7 @@ A fee is a checkout summary line. A price change is a higher price next to the s
 Content hash (SHA-256, see `gym/schema/README.md`):
 
 ```
-8f07b8479900cca750ab8768728e1a913656dbcf1add7cc724b686a817396f45
+09e967709353fa5ba4007e4fed669df97777eaa728fe1623e3d76a83b1b8a4fe
 ```
 
 `gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).

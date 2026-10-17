@@ -9,7 +9,7 @@ from gym.train import training_specs
 
 FEATURES = ("checkbox", "popup", "fee", "strike")
 EXTRA = ("radio",)
-MIN_RELATIVE = 0.25
+MIN_RELATIVE = 0.9
 
 
 def _groups(specs: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -101,9 +101,13 @@ def test_honest_controls_keep_the_clean_label():
         offers = spec["page"].get("offers") or {}
         checkbox = offers.get("checkbox")
         if checkbox:
-            assert checkbox["checked"] is False
             assert 'id="opt-in" name="opt_in" value="1"' in html
-            assert "checked" not in html.split('id="opt-in"', 1)[1][:40]
+            if checkbox["price_cents"] == 0:
+                assert checkbox["checked"] is True
+                assert "checked" in html.split('id="opt-in"', 1)[1][:80]
+            else:
+                assert checkbox["checked"] is False
+                assert "checked" not in html.split('id="opt-in"', 1)[1][:80]
         modal = offers.get("modal")
         if modal:
             assert modal["decline"] == "No thanks"

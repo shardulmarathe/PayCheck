@@ -20,6 +20,10 @@
   ],
   "properties": {
     "page_id": {"type": "string", "minLength": 1},
+    "legacy_page_id": {
+      "type": "string",
+      "description": "Earlier id for this same page. Empty when the page never had one."
+    },
     "store": {"type": "string", "minLength": 1},
     "family": {"enum": ["upsell", "scam", "clean"]},
     "attack_type": {
@@ -59,6 +63,10 @@
       "type": "string",
       "pattern": "^(template|ec-darkpattern|attacker-round[0-9]+)$"
     },
-    "split": {"enum": ["train", "test"]}
+    "split": {"enum": ["train", "dev", "test"]},
+    "slice": {
+      "enum": ["in_dist", "heldout_template", "heldout_attack"],
+      "description": "Set on frozen test pages. Training labels omit it."
+    }
   }
 }

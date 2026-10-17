@@ -16,7 +16,6 @@
       --soft: {{ skin.soft }};
     }
     * { box-sizing: border-box; }
-    html { scrollbar-width: none; }
     html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
     html, body {
       margin: 0;
@@ -26,7 +25,6 @@
       font-family: "Liberation Sans", sans-serif;
       font-size: 16px;
       line-height: 1.4;
-      font-kerning: none;
       font-feature-settings: "kern" 0, "liga" 0;
       text-rendering: geometricPrecision;
     }
@@ -90,7 +88,7 @@
       border-color: var(--accent);
       font-weight: 700;
     }
-    a.primary { display: inline-block; text-decoration: none; }
+    a.primary { display: inline-block; text-decoration: unset; }
     .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .checkline, .radioline { display: flex; gap: 8px; align-items: flex-start; margin: 10px 0; }
     .fine { color: var(--muted); font-size: 14px; }
@@ -313,7 +311,7 @@
 
         {% if offers.checkbox %}
         <label class="checkline">
-          <input type="checkbox" id="opt-in" name="opt_in" value="1">
+          <input type="checkbox" id="opt-in" name="opt_in" value="1"{% if offers.checkbox.checked %} checked{% endif %}>
           <span>{{ offers.checkbox.label }}</span>
         </label>
         {% elif addon and not addon.checked and trick_mode == "none" %}
@@ -343,11 +341,11 @@
         <div class="offer" role="dialog" aria-modal="true">
           <p id="{{ trick_id }}">{{ evidence }}</p>
           {% if addon %}
-          <p data-price="{{ addon.price_cents }}" data-price-label="{{ addon.name }}">{{ addon.name }} {{ addon.price_text }}</p>
+          <p data-price="{{ addon.price_cents }}" data-price-label="{{ addon.name }}">{{ addon.price_text }}</p>
           {% endif %}
           <div class="actions">
-            <button class="primary" type="button">Add protection and check out</button>
-            <button class="quiet" type="button">No thanks, keep my cart</button>
+            <button class="primary" type="button">{{ presentation.protect_label }}</button>
+            <button class="quiet" type="button">{{ presentation.quiet_label }}</button>
           </div>
         </div>
         {% endif %}
@@ -367,9 +365,9 @@
               <span id="{{ trick_id }}" data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ evidence }}</span>
               {% elif offers.was_cents and loop.first %}
               <span class="was" data-price="{{ offers.was_cents }}" data-price-label="{{ item.name }}">{{ offers.was_text }}</span>
-              <span data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+              <span{% if price_anchor and loop.first %} id="{{ price_anchor }}"{% endif %} data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
               {% else %}
-              <span data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
+              <span{% if price_anchor and loop.first %} id="{{ price_anchor }}"{% endif %} data-price="{{ item.qty * item.price_cents }}" data-price-label="{{ item.name }}">{{ item.line_text }}</span>
               {% endif %}
             </span>
           </div>
@@ -380,21 +378,16 @@
             {% if offers.was_cents %}
             <span>
               <span class="was" data-price="{{ offers.was_cents }}" data-price-label="{{ product.name }}">{{ offers.was_text }}</span>
-              <span data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
+              <span{% if price_anchor %} id="{{ price_anchor }}"{% endif %} data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
             </span>
             {% else %}
-            <span data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
+            <span{% if price_anchor %} id="{{ price_anchor }}"{% endif %} data-price="{{ product.price_cents }}" data-price-label="{{ product.name }}">{{ product_price }}</span>
             {% endif %}
           </div>
         {% endif %}
         {% for fee in fees %}
         <div class="row" data-fee="{{ fee.name }}">
-          {% if trick_mode == "fee" and loop.first %}
-          <span id="{{ trick_id }}" data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.name }}">{{ evidence }}</span>
-          {% else %}
-          <span>{{ fee.name }}</span>
-          <span data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.name }}">{{ fee.amount_text }}</span>
-          {% endif %}
+          <span{% if fee.anchor %} id="{{ fee.anchor }}"{% endif %}>{{ fee.lead }}<span data-price="{{ fee.amount_cents }}" data-price-label="{{ fee.label }}">{{ fee.amount_text }}</span>{{ fee.trail }}</span>
         </div>
         {% endfor %}
         {% if trick_mode == "subscription" and kind != "checkout" %}
@@ -425,9 +418,9 @@
     <p id="{{ trick_id }}">{{ evidence }}</p>
     <div class="actions">
       {% if live %}
-      <a class="primary" href="{{ actions['checkout'] }}">Keep protection</a>
+      <a class="primary" href="{{ actions['checkout'] }}">{{ presentation.keep_label }}</a>
       {% else %}
-      <button class="primary" type="button">Keep protection</button>
+      <button class="primary" type="button">{{ presentation.keep_label }}</button>
       {% endif %}
       {% if cart %}
         {% for item in cart if item.trick_item %}

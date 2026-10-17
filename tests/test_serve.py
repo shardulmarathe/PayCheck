@@ -1,4 +1,5 @@
 import json
+import re
 import threading
 import urllib.parse
 import urllib.request
@@ -70,7 +71,7 @@ def test_errands_reach_the_known_cart_or_abort():
         oats = Client(base)
         oats.open("/e/pantry-oats/add", {})
         checkout = oats.open("/e/pantry-oats/checkout")
-        assert "Care &amp; handling $2.99" in checkout
+        assert re.search(r"Care &amp; handling(?:\s|<[^>]*>)*\$2\.99", checkout)
         assert "was not in the listed price" not in checkout
         assert "fee fee" not in checkout.lower()
         assert "checkbox checked" not in checkout

@@ -13,6 +13,7 @@ from gym.validate import validate_label, validate_spec
 
 LABEL_KEYS = (
     "page_id",
+    "legacy_page_id",
     "store",
     "family",
     "attack_type",
@@ -27,7 +28,10 @@ LABEL_KEYS = (
 
 
 def dump_label(row: dict) -> str:
-    ordered = {key: row[key] for key in LABEL_KEYS}
+    keys = list(LABEL_KEYS)
+    if row.get("slice"):
+        keys.append("slice")
+    ordered = {key: row[key] for key in keys}
     return json.dumps(ordered, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -68,7 +72,7 @@ def materialize(specs: list[dict], out_dir: Path) -> list[dict]:
                 got = browser.text_content(trick["selector"])
                 if got != evidence:
                     raise RuntimeError(
-                        f"{spec['page_id']}: #trick text {got!r} != evidence {evidence!r}"
+                        f"{spec['page_id']}: selector text {got!r} != evidence {evidence!r}"
                     )
                 bbox = browser.bbox(trick["selector"])
                 if bbox is None:
@@ -78,6 +82,7 @@ def materialize(specs: list[dict], out_dir: Path) -> list[dict]:
                 raise RuntimeError(f"{spec['page_id']}: evidence missing from page reader output")
             label = {
                 "page_id": spec["page_id"],
+                "legacy_page_id": spec.get("legacy_page_id") or "",
                 "store": spec["store"]["id"],
                 "family": trick["family"],
                 "attack_type": trick["attack_type"],
@@ -89,6 +94,8 @@ def materialize(specs: list[dict], out_dir: Path) -> list[dict]:
                 "source": spec["source"],
                 "split": spec["split"],
             }
+            if spec.get("slice"):
+                label["slice"] = spec["slice"]
             validate_label(label)
             page_id = spec["page_id"]
             (out_dir / "html" / f"{page_id}.html").write_text(html, encoding="utf-8")

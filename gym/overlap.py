@@ -18,6 +18,14 @@ from gym.render_specs import walk_strings
 
 _HOST = re.compile(r"[a-z0-9][a-z0-9.-]*\.example")
 
+# Historical test-set buttons. A training page that still prints one of these
+# is copying the frozen chrome.
+TEST_CHROME = (
+    "Add protection and check out",
+    "No thanks, keep my cart",
+    "Keep protection",
+)
+
 
 def _fold(text: str) -> str:
     return " ".join(text.casefold().split())
@@ -230,7 +238,7 @@ def overlap_problems(specs: list[dict]) -> list[str]:
         copied_addons = addons & surface["addon_names"]
         if copied_addons:
             problems.append(f"{page_id}: add-on name overlaps the test set ({sorted(copied_addons)[0]})")
-        copied_cents = _cents_of(spec) & surface["cents"]
+        copied_cents = {cents for cents in (_cents_of(spec) & surface["cents"]) if cents}
         if copied_cents:
             problems.append(f"{page_id}: price point overlaps the test set ({money(min(copied_cents))})")
         quote = spec["trick"]["evidence_text"]
@@ -249,11 +257,16 @@ def overlap_problems(specs: list[dict]) -> list[str]:
             if conflicts_with_test_pile(html, banned):
                 problems.append(f"{page_id}: normalized test-pile string in the rendered page")
             else:
-                folded = norm_key(html)
-                for key in long_keys:
-                    if key in folded:
-                        problems.append(f"{page_id}: rendered page contains test evidence")
+                for phrase in TEST_CHROME:
+                    if phrase in html:
+                        problems.append(f"{page_id}: reuses a test button label ({phrase})")
                         break
+                else:
+                    folded = norm_key(html)
+                    for key in long_keys:
+                        if key in folded:
+                            problems.append(f"{page_id}: rendered page contains test evidence")
+                            break
     return problems
 
 

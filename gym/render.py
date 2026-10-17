@@ -7,6 +7,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+from gym.ids import ANCHOR_ID, product_slug
 from gym.money import money
 from gym.validate import selector_id, validate_spec
 
@@ -140,9 +141,13 @@ def trick_mode(spec: dict) -> str:
 
 
 def page_url(spec: dict) -> str:
+    """Store path plus the public page id. The id does not name an attack."""
     domain = spec["store"]["domain"]
     kind = spec["page"]["kind"]
-    return f"http://{domain}/{kind}/{spec['page_id']}"
+    page_id = spec["page_id"]
+    if kind == "product":
+        return f"http://{domain}/p/{product_slug(spec['page']['product']['name'])}/{page_id}"
+    return f"http://{domain}/{kind}/{page_id}"
 
 
 def structural_features(html: str) -> dict[str, bool]:
@@ -174,6 +179,9 @@ def _presentation(spec: dict) -> dict[str, str]:
         "pay_label": custom.get("pay_label") or "Pay now",
         "verify_label": custom.get("verify_label") or "Verify card",
         "review_line": review,
+        "protect_label": custom.get("protect_label") or "Add protection and check out",
+        "quiet_label": custom.get("quiet_label") or "No thanks, keep my cart",
+        "keep_label": custom.get("keep_label") or "Keep protection",
     }
 
 
@@ -187,8 +195,10 @@ def render_html(spec: dict, *, check: bool = True) -> str:
     live = runtime.get("mode") == "live"
     skin = dict(SKINS.get(spec["store"]["skin"], DEFAULT_SKIN))
     kind = page["kind"]
-    current = _step_label(kind)
-    steps = [{"label": label, "current": label == current} for label in STEP_LABELS]
+    reserved = spec.get("page_template") == "reserved"
+    step_labels = ("Piece", "Bag", "Review", "Card") if reserved else STEP_LABELS
+    current = step_labels[{"product": 0, "cart": 1, "checkout": 2, "payment": 3}[kind]]
+    steps = [{"label": label, "current": label == current} for label in step_labels]
     addon = page.get("addon")
     subscription = page.get("subscription")
     offers = page.get("offers") or {}
@@ -212,10 +222,7 @@ def render_html(spec: dict, *, check: bool = True) -> str:
             }
             for item in page["cart"]
         ],
-        "fees": [
-            {**fee, "amount_text": money(fee["amount_cents"])}
-            for fee in page["fees"]
-        ],
+        "fees": _fee_rows(spec, mode),
         "listed_text": money(page["listed_price_cents"]),
         "checkout_text": money(page["checkout_price_cents"]),
         "page_listed_cents": page["listed_price_cents"],
@@ -239,6 +246,7 @@ def render_html(spec: dict, *, check: bool = True) -> str:
         "blocks": page["blocks"],
         "live": live,
         "presentation": _presentation(spec),
+        "price_anchor": ANCHOR_ID if not trick["selector"] and not page["fees"] else "",
         "offers": {
             "checkbox": offers.get("checkbox"),
             "radios": offers.get("radios"),
@@ -256,7 +264,45 @@ def render_html(spec: dict, *, check: bool = True) -> str:
             "abort": runtime.get("abort_action", ""),
         },
     }
-    return _environment().get_template("page.html.j2").render(**context)
+    template_name = "reserved.html.j2" if spec.get("page_template") == "reserved" else "page.html.j2"
+    return _environment().get_template(template_name).render(**context)
+
+
+def _fee_rows(spec: dict, mode: str) -> list[dict]:
+    """One row shape for every fee: lead, then the money, then an optional trail.
+
+    The inner price element is only the money string. Its ``data-price-label``
+    is the fee name, so the reader line is ``$X.XX | Name`` for a disclosed
+    fee and for a drip fee. On a drip fee the outer text equals the evidence.
+    """
+    trick = spec["trick"]
+    rows = []
+    for index, fee in enumerate(spec["page"]["fees"]):
+        amount = money(fee["amount_cents"])
+        lead, trail = f"{fee['name']} ", ""
+        if mode == "fee" and index == 0 and trick["evidence_text"]:
+            evidence = trick["evidence_text"]
+            if evidence.count(amount) != 1:
+                raise ValueError(
+                    f"{spec['page_id']}: fee evidence must contain {amount} once"
+                )
+            lead, trail = evidence.split(amount, 1)
+        anchor = ""
+        if mode == "fee" and index == 0 and trick["selector"]:
+            anchor = selector_id(trick["selector"])
+        elif not trick["selector"] and index == 0:
+            anchor = ANCHOR_ID
+        rows.append(
+            {
+                **fee,
+                "amount_text": amount,
+                "lead": lead,
+                "trail": trail,
+                "label": fee["name"],
+                "anchor": anchor,
+            }
+        )
+    return rows
 
 
 def _step_label(kind: str) -> str:
