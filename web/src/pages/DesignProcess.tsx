@@ -20,15 +20,15 @@ export function DesignProcess({ data }: { data: Dataset }) {
         <LoopDiagram
           nodes={process.nodes}
           roundLabel={process.round_label}
-          caught={process.caught_pct}
+          caught={data.shown.training ? process.caught_pct : null}
           caption={process.caught_caption}
-          example={data.example.training}
+          example={data.shown.training && data.example.training}
         />
       </section>
       <section className="section">
         <div className="kicker-row">
           <p className="label">{process.steps_kicker}</p>
-          <ExampleMark show={data.example.training || data.example.eval} />
+          <ExampleMark show={data.shown.training && data.example.training} />
         </div>
         <div className="steps-v3">
           {process.steps.map((step) => (
@@ -49,8 +49,8 @@ export function DesignProcess({ data }: { data: Dataset }) {
             <br />
             {process.plug_title_lines[1]}
           </h2>
-          <HiddenTrick id="design-urgency" kind="dashed" label="Blocked · fake urgency">
-            <span className="trick-badge">Only 2 left!</span>
+          <HiddenTrick id="design-verify" kind="dashed" label="Blocked · fake card verification">
+            <span className="trick-badge">Verify your card to continue</span>
           </HiddenTrick>
         </div>
         <div className="code-card">

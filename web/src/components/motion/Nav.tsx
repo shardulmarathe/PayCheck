@@ -60,6 +60,11 @@ export function NavProvider({ children }: { children: ReactNode }) {
     if (!lenis) return;
     const id = tabFromHash(window.location.hash);
     if (id === "demo") return;
+    if (!document.getElementById(sectionId(id))) {
+      window.history.replaceState(null, "", "#demo");
+      setActive("demo");
+      return;
+    }
     lenis.scrollTo(`#${sectionId(id)}`, { immediate: true, offset: -NAV_H, force: true });
   }, [lenis]);
 
@@ -97,6 +102,7 @@ export function NavProvider({ children }: { children: ReactNode }) {
 
   const glideTo = (id: TabId) => {
     const hash = sectionId(id);
+    if (id !== "demo" && !document.getElementById(hash)) return;
     setActive(id);
     window.history.replaceState(null, "", `#${hash}`);
     if (!lenis) return;

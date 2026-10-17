@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { formatLatency, trimNum } from "../src/lib/format";
+import { formatLatency, lostCounterCopy, subscriptionCopy, trimNum } from "../src/lib/format";
+import { lossWindow, visualAt } from "../src/lib/replay";
 import type {
   Dataset,
   ModelEval,
@@ -22,6 +23,19 @@ function num(value: unknown): number | undefined {
 
 function str(value: unknown): string | undefined {
   return typeof value === "string" ? value : undefined;
+}
+
+/** Build-time. Unset follows NODE_ENV: production hides examples, dev shows them with labels. */
+export function showExamples(): boolean {
+  const raw = process.env.NEXT_PUBLIC_SHOW_EXAMPLES?.trim().toLowerCase();
+  if (raw === "1" || raw === "true" || raw === "yes") return true;
+  if (raw === "0" || raw === "false" || raw === "no") return false;
+  return process.env.NODE_ENV !== "production";
+}
+
+/** A runs file is publishable only when it explicitly says `"synthetic": false`. */
+function publishable(raw: unknown): raw is Record<string, unknown> {
+  return isRecord(raw) && raw.synthetic === false;
 }
 
 function readJson(file: string, notes: string[]): unknown | undefined {
@@ -110,15 +124,20 @@ function normalizeModel(raw: unknown, notes: string[], file: string): ModelEval 
   };
 }
 
-function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; claim?: "within" | "beats"; catch_pct: number | null; cost_ratio: number | null; point_gap: number | null } | undefined {
+function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; claim?: "within" | "beats"; catch_pct: number | null; cost_ratio: number | null; point_gap: number | null } | "withheld" | undefined {
   const evalDir = path.join(runsRoot, "eval");
-  const leaderboard = readJson(path.join(evalDir, "leaderboard.json"), notes);
+  const leaderboardPath = path.join(evalDir, "leaderboard.json");
+  const leaderboard = readJson(leaderboardPath, notes);
+  if (leaderboard != null && !publishable(leaderboard)) {
+    notes.push("runs/eval/leaderboard.json is synthetic; benchmark scores stay hidden");
+    return "withheld";
+  }
   const rawModels: unknown[] = [];
   let claim: "within" | "beats" | undefined;
   let catchPct: number | null = null;
   let costRatio: number | null = null;
   let pointGap: number | null = null;
-  if (isRecord(leaderboard) && Array.isArray(leaderboard.models)) {
+  if (publishable(leaderboard) && Array.isArray(leaderboard.models)) {
     rawModels.push(...leaderboard.models);
     if (leaderboard.claim === "beats" || leaderboard.claim === "within") claim = leaderboard.claim;
     catchPct = num(leaderboard.catch_pct) ?? null;
@@ -127,13 +146,21 @@ function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; c
   } else if (Array.isArray(leaderboard)) {
     rawModels.push(...leaderboard);
   }
-  if (rawModels.length === 0) {
+  if (rawModels.length === 0 && leaderboard == null) {
+    let withheld = false;
     for (const file of listJson(evalDir)) {
-      if (path.basename(file) === "leaderboard.json") continue;
+      if (path.basename(file) === "leaderboard.json" || path.basename(file) === "results.json") continue;
       const parsed = readJson(file, notes);
-      if (isRecord(parsed) && Array.isArray(parsed.models)) rawModels.push(...parsed.models);
-      else if (parsed) rawModels.push(parsed);
+      if (parsed == null) continue;
+      if (!publishable(parsed)) {
+        notes.push(`${path.basename(file)} is synthetic; benchmark scores stay hidden`);
+        withheld = true;
+        continue;
+      }
+      if (Array.isArray(parsed.models)) rawModels.push(...parsed.models);
+      else rawModels.push(parsed);
     }
+    if (rawModels.length === 0 && withheld) return "withheld";
   }
   if (rawModels.length === 0) return undefined;
   const models = rawModels
@@ -162,27 +189,44 @@ function takeRounds(items: unknown[], notes: string[], file: string): TrainingRo
   return rounds;
 }
 
-function loadRounds(runsRoot: string, notes: string[]): TrainingRound[] | undefined {
+function loadRounds(runsRoot: string, notes: string[]): TrainingRound[] | "withheld" | undefined {
+  const trainingFiles = listJson(path.join(runsRoot, "training"));
   const fromFiles: TrainingRound[] = [];
-  for (const file of listJson(path.join(runsRoot, "training"))) {
+  let withheld = false;
+  for (const file of trainingFiles) {
     const parsed = readJson(file, notes);
-    const items = Array.isArray(parsed) ? parsed : [parsed];
+    if (parsed == null) continue;
+    if (!publishable(parsed)) {
+      notes.push(`${path.basename(file)} is synthetic; training rounds stay hidden`);
+      withheld = true;
+      continue;
+    }
+    const items = Array.isArray(parsed.rounds) ? parsed.rounds : [parsed];
     fromFiles.push(...takeRounds(items, notes, path.basename(file)));
   }
   if (fromFiles.length) {
     fromFiles.sort((a, b) => a.round - b.round);
     return fromFiles;
   }
+  if (trainingFiles.length) return withheld ? "withheld" : undefined;
 
   const fromEval: TrainingRound[] = [];
   for (const file of listJson(path.join(runsRoot, "eval"))) {
     const parsed = readJson(file, notes);
-    if (!isRecord(parsed) || !Array.isArray(parsed.rounds)) continue;
+    if (!publishable(parsed) || !Array.isArray(parsed.rounds)) {
+      if (parsed != null && isRecord(parsed) && Array.isArray(parsed.rounds)) {
+        notes.push(`${path.basename(file)} rounds are synthetic; training rounds stay hidden`);
+        withheld = true;
+      }
+      continue;
+    }
     fromEval.push(...takeRounds(parsed.rounds, notes, path.basename(file)));
   }
-  if (!fromEval.length) return undefined;
-  fromEval.sort((a, b) => a.round - b.round);
-  return fromEval;
+  if (fromEval.length) {
+    fromEval.sort((a, b) => a.round - b.round);
+    return fromEval;
+  }
+  return withheld ? "withheld" : undefined;
 }
 
 function isVerdict(value: unknown): value is Verdict {
@@ -199,7 +243,7 @@ function isVerdict(value: unknown): value is Verdict {
   );
 }
 
-function isReplay(value: unknown): value is Replay {
+function isReplay(value: Record<string, unknown>): boolean {
   if (!isRecord(value) || !str(value.id) || !str(value.title) || !Array.isArray(value.steps)) return false;
   if (!isVerdict(value.verdict) || num(value.duration_ms) == null || num(value.budget) == null) return false;
   if (!isRecord(value.scene_view) || (value.scene_view.kind !== "cart" && value.scene_view.kind !== "scam")) {
@@ -210,18 +254,45 @@ function isReplay(value: unknown): value is Replay {
   return false;
 }
 
-function loadReplays(runsRoot: string, notes: string[]): Replay[] | undefined {
-  const dir = path.join(runsRoot, "replays");
+function moneyFields(value: Record<string, unknown>): Pick<Replay, "overcharge_usd" | "exposed" | "subscription" | "subscription_monthly_usd" | "synthetic"> {
+  const cart = isRecord(value.final_cart) ? value.final_cart : undefined;
+  const monthly = value.subscription_monthly_usd === null ? null : (num(value.subscription_monthly_usd) ?? null);
+  return {
+    overcharge_usd: num(value.overcharge_usd) ?? num(value.dollars_lost) ?? 0,
+    exposed: value.exposed === true,
+    subscription: value.subscription === true || value.unwanted_subscription === true || cart?.subscription === true,
+    subscription_monthly_usd: monthly,
+    synthetic: value.synthetic === true,
+  };
+}
+
+function normalizeReplay(value: unknown): Replay | undefined {
+  if (!isRecord(value) || !isReplay(value)) return undefined;
+  return { ...(value as unknown as Replay), ...moneyFields(value) };
+}
+
+function loadReplays(runsRoot: string, notes: string[]): Replay[] | "withheld" | undefined {
+  const files = listJson(path.join(runsRoot, "replays"));
+  if (!files.length) return undefined;
   const replays: Replay[] = [];
-  for (const file of listJson(dir)) {
+  let withheld = false;
+  for (const file of files) {
     const parsed = readJson(file, notes);
-    const items = Array.isArray(parsed) ? parsed : [parsed];
+    if (parsed == null) continue;
+    if (!publishable(parsed)) {
+      notes.push(`${path.basename(file)} is synthetic; replays stay hidden`);
+      withheld = true;
+      continue;
+    }
+    const items = Array.isArray(parsed.replays) ? parsed.replays : [parsed];
     for (const item of items) {
-      if (isReplay(item)) replays.push(item);
-      else if (item) notes.push(`${path.basename(file)} is not a replay`);
+      const replay = normalizeReplay(item);
+      if (replay) replays.push({ ...replay, synthetic: false });
+      else notes.push(`${path.basename(file)} is not a visual replay`);
     }
   }
-  return replays.length ? replays : undefined;
+  if (replays.length) return replays;
+  return withheld ? "withheld" : undefined;
 }
 
 function isTallyItem(value: unknown): value is TallyItem {
@@ -237,10 +308,16 @@ function isTallyItem(value: unknown): value is TallyItem {
   );
 }
 
-function loadTally(runsRoot: string, notes: string[]): TallyItem[] | undefined {
-  const parsed = readJson(path.join(runsRoot, "tally.json"), notes);
-  const items = isRecord(parsed) && Array.isArray(parsed.items) ? parsed.items : Array.isArray(parsed) ? parsed : [];
-  if (!items.length) return undefined;
+function loadTally(runsRoot: string, notes: string[]): TallyItem[] | "withheld" | undefined {
+  const file = path.join(runsRoot, "tally.json");
+  if (!fs.existsSync(file)) return undefined;
+  const parsed = readJson(file, notes);
+  if (parsed == null) return undefined;
+  if (!publishable(parsed)) {
+    notes.push("runs/tally.json is synthetic; tally stays hidden");
+    return "withheld";
+  }
+  const items = Array.isArray(parsed.items) ? parsed.items : [parsed];
   const tally = items.filter(isTallyItem);
   if (tally.length !== items.length) notes.push("runs/tally.json has items that do not match the tally shape");
   return tally.length ? tally : undefined;
@@ -320,48 +397,108 @@ function loadResults(repoRoot: string, notes: string[]): ResultsView {
   return EMPTY_RESULTS;
 }
 
-/** Build-time dataset. Real runs/ JSON replaces a section; everything else stays on fixtures. */
+function assertDefaultReplay(): void {
+  const upsell = fixtureDataset.replays.find((replay) => replay.scene === "upsell");
+  if (!upsell || upsell.scene !== "upsell") throw new Error("default replay missing");
+  const window = lossWindow(upsell);
+  if (window.end > 20_000) throw new Error("default replay loss window passes 20s");
+  const atTwenty = visualAt(20_000, upsell, false);
+  if (atTwenty.loss < 1) throw new Error(`default replay loss is ${atTwenty.loss} at 20s`);
+  if (upsell.overcharge_usd !== 9.99 || upsell.exposed || upsell.subscription || upsell.subscription_monthly_usd != null) {
+    throw new Error("default replay money fields drifted");
+  }
+  if (lostCounterCopy(upsell.overcharge_usd) !== "lost $9.99") {
+    throw new Error(`lost counter copy was ${lostCounterCopy(upsell.overcharge_usd)}`);
+  }
+  if (subscriptionCopy(14.99) !== "Signed you up for $14.99/month") {
+    throw new Error(`subscription copy was ${subscriptionCopy(14.99)}`);
+  }
+}
+
+function hideSynthetic(ds: Dataset, show: boolean, real: { models: boolean; rounds: boolean; replays: boolean; tally: boolean }): void {
+  const resultsReal = ds.results.slices.length > 0;
+  ds.shown = {
+    benchmarks: show || real.models || resultsReal,
+    replays: show || real.replays,
+    training: show || real.rounds,
+    tally: show || real.tally,
+  };
+  if (!ds.shown.benchmarks || (!show && !real.models)) {
+    if (!real.models) ds.models = [];
+    if (!ds.shown.benchmarks) {
+      ds.benchmarks.catch_pct = null;
+      ds.benchmarks.cost_ratio = null;
+      ds.benchmarks.point_gap = null;
+      ds.benchmarks.cost_annotation = "";
+      ds.results = EMPTY_RESULTS;
+    }
+  }
+  if (!ds.shown.replays) ds.replays = [];
+  if (!ds.shown.training) {
+    ds.rounds = [];
+    ds.process.caught_pct = null;
+    ds.process.round_label = "";
+  }
+  if (!ds.shown.tally) ds.tally.items = [];
+}
+
+/** Build-time dataset. Real runs/ JSON replaces a section; synthetic sections are omitted unless examples are on. */
 export function loadDataset(repoRoot: string): Dataset {
   assertClaimRules();
+  assertDefaultReplay();
+  const show = showExamples();
   const ds = structuredClone(fixtureDataset) as Dataset;
   const notes: string[] = [];
   ds.results = loadResults(repoRoot, notes);
-  if (process.env.GUARD_GYM_FORCE_FIXTURES === "1") {
-    ds.notes = ["GUARD_GYM_FORCE_FIXTURES=1, fixtures kept", ...notes];
-    return applyDerived(ds);
+  const real = { models: false, rounds: false, replays: false, tally: false };
+
+  if (process.env.GUARD_GYM_FORCE_FIXTURES !== "1") {
+    const runsRoot = path.join(repoRoot, "runs");
+    const models = loadModels(runsRoot, notes);
+    const rounds = loadRounds(runsRoot, notes);
+    const replays = loadReplays(runsRoot, notes);
+    const tally = loadTally(runsRoot, notes);
+
+    if (models && models !== "withheld") {
+      ds.models = models.models;
+      ds.example.eval = false;
+      real.models = true;
+      if (models.claim) ds.benchmarks.claim = models.claim;
+      if (models.catch_pct != null) ds.benchmarks.catch_pct = models.catch_pct;
+      if (models.cost_ratio != null) ds.benchmarks.cost_ratio = models.cost_ratio;
+      if (models.point_gap != null) ds.benchmarks.point_gap = models.point_gap;
+    }
+    if (rounds && rounds !== "withheld") {
+      ds.rounds = rounds;
+      ds.example.training = false;
+      real.rounds = true;
+    }
+    if (replays && replays !== "withheld") {
+      ds.replays = replays;
+      ds.example.replays = false;
+      real.replays = true;
+    }
+    if (tally && tally !== "withheld") {
+      ds.tally.items = tally;
+      ds.example.tally = false;
+      real.tally = true;
+    }
+  } else {
+    notes.unshift("GUARD_GYM_FORCE_FIXTURES=1, fixtures kept");
   }
 
-  const runsRoot = path.join(repoRoot, "runs");
-  const models = loadModels(runsRoot, notes);
-  const rounds = loadRounds(runsRoot, notes);
-  const replays = loadReplays(runsRoot, notes);
-  const tally = loadTally(runsRoot, notes);
-
-  if (models) {
-    ds.models = models.models;
-    ds.example.eval = false;
-    if (models.claim) ds.benchmarks.claim = models.claim;
-    if (models.catch_pct != null) ds.benchmarks.catch_pct = models.catch_pct;
-    if (models.cost_ratio != null) ds.benchmarks.cost_ratio = models.cost_ratio;
-    if (models.point_gap != null) ds.benchmarks.point_gap = models.point_gap;
+  hideSynthetic(ds, show, real);
+  if (!show && ds.replays.some((replay) => replay.synthetic)) {
+    throw new Error("synthetic replays leaked into a build with examples hidden");
   }
-  if (rounds) {
-    ds.rounds = rounds;
-    ds.example.training = false;
-  }
-  if (replays) {
-    ds.replays = replays;
-    ds.example.replays = false;
-  }
-  if (tally) {
-    ds.tally.items = tally;
-    ds.example.tally = false;
+  if (!show && !real.models && ds.models.length) {
+    throw new Error("synthetic benchmark scores leaked into a build with examples hidden");
   }
 
   const flags = Object.values(ds.example);
-  const real = flags.filter((flag) => !flag).length;
-  ds.isExample = real === 0;
-  ds.source = real === 0 ? "fixtures" : real === flags.length ? "runs" : "mixed";
+  const realCount = flags.filter((flag) => !flag).length;
+  ds.isExample = realCount === 0;
+  ds.source = realCount === 0 ? "fixtures" : realCount === flags.length ? "runs" : "mixed";
   ds.notes = notes;
   return applyDerived(ds);
 }

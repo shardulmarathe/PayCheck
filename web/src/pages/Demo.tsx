@@ -21,9 +21,13 @@ export function Demo({ data }: { data: Dataset }) {
   const phase = useIntroPhase();
   const settled = useRef(phase === "done");
   const showCopy = phase === "done" || reduced;
-  const upsell = data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell");
+  const story = data.shown.replays;
+  const claims = data.shown.benchmarks;
+  const upsell = story ? data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell") : undefined;
   const [choice, select] = useReplayChoice();
-  const visible = data.replays.find((replay) => (choice === 2 ? replay.scene === "scam" : replay.scene === "upsell")) ?? data.replays[0];
+  const visible = story
+    ? (data.replays.find((replay) => (choice === 2 ? replay.scene === "scam" : replay.scene === "upsell")) ?? data.replays[0])
+    : undefined;
   const addon = upsell?.without.lines.find((line) => line.damage);
   const catchPct = data.benchmarks.catch_pct;
   const catchLabel = catchPct == null || !Number.isFinite(catchPct) ? "[X]" : trimNum(Math.abs(catchPct));
@@ -38,9 +42,11 @@ export function Demo({ data }: { data: Dataset }) {
       <section className="section beat-hero" aria-labelledby="hero-title">
         <div className="hero-lockup">
           <div className="hero-copy">
-            <motion.p className="label" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(0)}>
-              {data.hero.eyebrow}
-            </motion.p>
+            {story ? (
+              <motion.p className="label" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(0)}>
+                {data.hero.eyebrow}
+              </motion.p>
+            ) : null}
             <motion.h1
               id="hero-title"
               className="display"
@@ -52,20 +58,24 @@ export function Demo({ data }: { data: Dataset }) {
               <br />
               {TAGLINE_LINES[1]}
             </motion.h1>
-            {addon ? (
+            {story && addon ? (
               <motion.p className="use-case" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(2)}>
                 {COPY.useCase(formatUsd(addon.amount))}
               </motion.p>
             ) : null}
-            <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(3)}>
-              {COPY.catchLine(catchLabel)}
-            </motion.p>
-            <motion.p className="hero-sonnet" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(4)}>
-              {sonnet.sentence}
-            </motion.p>
-            <motion.p className="slice-tag" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(5)}>
-              {sonnet.tag}
-            </motion.p>
+            {claims ? (
+              <>
+                <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(3)}>
+                  {COPY.catchLine(catchLabel)}
+                </motion.p>
+                <motion.p className="hero-sonnet" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(4)}>
+                  {sonnet.sentence}
+                </motion.p>
+                <motion.p className="slice-tag" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(5)}>
+                  {sonnet.tag}
+                </motion.p>
+              </>
+            ) : null}
           </div>
           <div id="kiosk-slot" className="kiosk-slot" />
         </div>
@@ -75,7 +85,7 @@ export function Demo({ data }: { data: Dataset }) {
         <ReplayScene replay={visible} example={data.example.replays} choice={choice} onChoice={select} />
       ) : null}
 
-      {upsell && addon ? (
+      {story && upsell && addon ? (
         <motion.section
           className="section beat-compare"
           aria-label="Comparison"

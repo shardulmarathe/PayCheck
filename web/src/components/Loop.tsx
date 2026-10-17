@@ -19,7 +19,7 @@ export function LoopDiagram({
 }: {
   nodes: { n: string; title: string; detail: string; place: "top" | "right" | "bottom" | "left" }[];
   roundLabel: string;
-  caught: number;
+  caught: number | null;
   caption: string;
   example: boolean;
 }) {
@@ -59,12 +59,16 @@ export function LoopDiagram({
         {reduced ? <circle cx={cx} cy={cy - ry} r="5" fill="#EEF1F5" /> : <motion.circle cx={dotX} cy={dotY} r="5" fill="#EEF1F5" />}
       </svg>
       <div className="loop-center">
-        <p className="label">{roundLabel}</p>
-        <p className="loop-pct">{caught}%</p>
-        <p className="micro">
-          {caption}
-          {example ? " · example data" : ""}
-        </p>
+        {caught != null ? (
+          <>
+            <p className="label">{roundLabel}</p>
+            <p className="loop-pct">{caught}%</p>
+            <p className="micro">
+              {caption}
+              {example ? " · example data" : ""}
+            </p>
+          </>
+        ) : null}
       </div>
       <div className="loop-labels">
         {nodes.map((node, index) => {

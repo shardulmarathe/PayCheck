@@ -28,6 +28,8 @@ export interface KioskScreen {
   quote: string;
   catchRate: number | null;
   readout: string;
+  /** Blank screen. Used when the replay recording is withheld. */
+  quiet?: boolean;
 }
 
 const EASE_CSS = "cubic-bezier(0.2, 0.8, 0.2, 1)";
@@ -62,6 +64,16 @@ function drawQuiet(ctx: CanvasRenderingContext2D, w: number, h: number, mode: Ki
     ctx.fillStyle = "#232932";
     ctx.fillRect(w * 0.22, h * 0.32 + row * 78, w * 0.56, 10);
   }
+}
+
+function drawNeutral(ctx: CanvasRenderingContext2D, w: number, h: number) {
+  ctx.fillStyle = "#11141A";
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = "#323A45";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(12, 12, w - 24, h - 24);
+  ctx.fillStyle = "#171B22";
+  ctx.fillRect(48, 72, w - 96, 56);
 }
 
 function drawCheckout(
@@ -159,7 +171,8 @@ function drawScreen(canvas: HTMLCanvasElement, screen: KioskScreen) {
   const h = canvas.height;
   const paint = (mode: KioskMode) => {
     if (mode === "demo") {
-      drawCheckout(ctx, w, h, screen, kioskPose.bracket, kioskPose.settle, kioskPose.glow, kioskPose.readout);
+      if (screen.quiet) drawNeutral(ctx, w, h);
+      else drawCheckout(ctx, w, h, screen, kioskPose.bracket, kioskPose.settle, kioskPose.glow, kioskPose.readout);
       return;
     }
     drawQuiet(ctx, w, h, mode, screen.catchRate);

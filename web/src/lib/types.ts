@@ -151,6 +151,19 @@ interface ReplayBase {
   steps: ReplayStep[];
   verdict: Verdict;
   timeline_caption: string;
+  /** True on fixtures and on any runs file that is not a real recording. */
+  synthetic: boolean;
+  /** Dollars paid above the expected total. Matches shopper `overcharge_usd` / `dollars_lost`. */
+  overcharge_usd: number;
+  /** True when card or bank details were submitted on a phishing page. */
+  exposed: boolean;
+  /** Unwanted subscription, including shopper `final_cart.subscription`. */
+  subscription: boolean;
+  /**
+   * Monthly price when the trap names one. `shopper/schema/replay.json` has no
+   * monthly field, so this stays null unless the showcase replay supplies it.
+   */
+  subscription_monthly_usd: number | null;
 }
 
 export interface UpsellReplay extends ReplayBase {
@@ -213,10 +226,21 @@ export interface FutureItem {
 }
 
 export interface ExampleFlags {
-  /** True when that block is still fixture data. */
+  /** True when that block is still fixture data. Labels render only while `shown` is also true. */
   eval: boolean;
   training: boolean;
   replays: boolean;
+  tally: boolean;
+}
+
+export interface ShownSections {
+  /** False hides the Benchmarks page and its nav link. */
+  benchmarks: boolean;
+  /** False hides the recorded replays. The landing is then the tagline and the kiosk. */
+  replays: boolean;
+  /** False hides the training-round statistic. The design-process page stays. */
+  training: boolean;
+  /** False drops tally numbers. The tally strip is not drawn. */
   tally: boolean;
 }
 
@@ -228,6 +252,8 @@ export interface Dataset {
   isExample: boolean;
   source: "fixtures" | "runs" | "mixed";
   example: ExampleFlags;
+  /** What production (or dev) is allowed to render. Synthetic sections are omitted when examples are off. */
+  shown: ShownSections;
   notes: string[];
   hero: {
     eyebrow: string;
@@ -297,7 +323,8 @@ export interface Dataset {
     feeds_label: string;
     nodes: { n: string; title: string; detail: string; place: "top" | "right" | "bottom" | "left" }[];
     round_label: string;
-    caught_pct: number;
+    /** Null when the training rounds are synthetic and examples are hidden. */
+    caught_pct: number | null;
     caught_caption: string;
     steps_kicker: string;
     steps: ProcessStep[];

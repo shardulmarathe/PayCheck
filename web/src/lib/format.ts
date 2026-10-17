@@ -4,6 +4,16 @@ export function trimNum(n: number): string {
   return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2).replace(/0$/, "").replace(/\.0$/, "");
 }
 
+/** Unguarded counter. The amount is `overcharge_usd`, already in dollars. */
+export function lostCounterCopy(amount: number): string {
+  return `lost ${formatUsd(amount)}`;
+}
+
+/** Subscription trap line. Only call with a real monthly price. */
+export function subscriptionCopy(monthly: number): string {
+  return `Signed you up for ${formatUsd(monthly)}/month`;
+}
+
 export function formatUsd(n: number, digits = 2): string {
   return n.toLocaleString("en-US", {
     style: "currency",

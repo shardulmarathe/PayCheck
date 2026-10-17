@@ -10,6 +10,7 @@ import type { UpsellReplay } from "../lib/types";
 const KioskCanvas = lazy(() => import("./KioskCanvas"));
 
 const ALT = "A self-checkout kiosk showing a cart where Battery Care+ was slipped in and blocked.";
+const ALT_QUIET = "A checkout kiosk.";
 
 function webglOk(): boolean {
   try {
@@ -39,6 +40,20 @@ export function screenFrom(replay: UpsellReplay, example: boolean, catchRate: nu
     quote,
     catchRate,
     readout: `Blocked · ${formatLatency(replay.verdict.latency_ms, example)}`,
+    quiet: false,
+  };
+}
+
+export function neutralScreen(): KioskScreen {
+  return {
+    url: "",
+    lines: [],
+    latency: null,
+    example: false,
+    quote: "",
+    catchRate: null,
+    readout: "",
+    quiet: true,
   };
 }
 
@@ -54,7 +69,9 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
   const scanRef = useRef<HTMLDivElement>(null);
   const [lost, setLost] = useState(false);
   const [webgl] = useState(() => webglOk() && !slowDevice());
+  const quiet = screen.quiet === true;
   const fallback = reduced || !webgl || lost;
+  const still = quiet ? <div className="kiosk-quiet" /> : <img src="/kiosk-hero-crop.webp" alt="" />;
   const activeRef = useRef(active);
   activeRef.current = active;
 
@@ -142,9 +159,9 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
   return (
     <div ref={shell} className="bg-kiosk" aria-hidden="true">
       {fallback ? (
-        <img src="/kiosk-hero-crop.webp" alt="" />
+        still
       ) : (
-        <Suspense fallback={<img src="/kiosk-hero-crop.webp" alt="" />}>
+        <Suspense fallback={still}>
           <KioskCanvas screen={screen} scanRef={scanRef} onLost={() => setLost(true)} />
         </Suspense>
       )}
@@ -153,7 +170,7 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
         <span className="kiosk-scan-band" />
         <span className="kiosk-scan-line" />
       </div>
-      <p className="sr-only">{ALT}</p>
+      <p className="sr-only">{quiet ? ALT_QUIET : ALT}</p>
     </div>
   );
 }

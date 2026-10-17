@@ -3,7 +3,7 @@ import type { KeyboardEvent, RefObject } from "react";
 import { usePrefersReducedMotion, useReplay } from "../hooks/useReplay";
 import type { ReplayChoice } from "../hooks/useRoute";
 import { easeOut, mixHex } from "../lib/ease";
-import { clock, formatLatency, formatUsd } from "../lib/format";
+import { clock, formatLatency, formatUsd, lostCounterCopy, subscriptionCopy } from "../lib/format";
 import { visualAt, type Visual } from "../lib/replay";
 import type { CartScene, LaneCopy, Replay } from "../lib/types";
 
@@ -70,6 +70,28 @@ function Readout({
   );
 }
 
+function LossMoment({
+  visual,
+  overcharge,
+  subscription,
+  monthly,
+}: {
+  visual: Visual;
+  overcharge: number;
+  subscription: boolean;
+  monthly: number | null;
+}) {
+  const showMoney = overcharge > 0 && visual.loss > 0.02;
+  const showPlan = subscription && monthly != null && monthly > 0 && visual.loss > 0.02;
+  if (!showMoney && !showPlan) return null;
+  return (
+    <div className="loss-moment">
+      {showMoney ? <p className="loss-counter">{lostCounterCopy(overcharge * visual.loss)}</p> : null}
+      {showPlan && monthly != null ? <p className="loss-counter loss-plan">{subscriptionCopy(monthly)}</p> : null}
+    </div>
+  );
+}
+
 function Receipt({ lane, visual }: { lane: LaneCopy; visual: Visual }) {
   const lost = lane.outcome === "lost";
   const since = visual.sincePaid;
@@ -119,6 +141,9 @@ function UpsellLane({
   shopper,
   yaw,
   onReplay,
+  overcharge,
+  subscription,
+  monthly,
 }: {
   copy: LaneCopy;
   scene: CartScene;
@@ -129,6 +154,9 @@ function UpsellLane({
   shopper: string;
   yaw: number;
   onReplay: () => void;
+  overcharge: number;
+  subscription: boolean;
+  monthly: number | null;
 }) {
   const guarded = side === "with";
   const showPopup = visual.popup > 0.35 || visual.settle > 0 || visual.clicked;
@@ -182,6 +210,9 @@ function UpsellLane({
                     </div>
                   </div>
                   {!guarded && visual.clicked ? <p className="lane-note">{copy.story_body}</p> : null}
+                  {!guarded ? (
+                    <LossMoment visual={visual} overcharge={overcharge} subscription={subscription} monthly={monthly} />
+                  ) : null}
                   {guarded ? <Readout visual={visual} latency={latency} example={example} category="upsell" inline /> : null}
                   {guarded ? (
                     <p className="steer" style={{ opacity: visual.steer }}>
@@ -394,6 +425,9 @@ export function ReplayScene({
             shopper={replay.shopper}
             yaw={yaw}
             onReplay={clockState.restart}
+            overcharge={replay.overcharge_usd}
+            subscription={replay.subscription}
+            monthly={replay.subscription_monthly_usd}
           />
           <UpsellLane
             copy={replay.with}
@@ -405,6 +439,9 @@ export function ReplayScene({
             shopper={replay.shopper}
             yaw={yaw}
             onReplay={clockState.restart}
+            overcharge={0}
+            subscription={false}
+            monthly={null}
           />
         </div>
       ) : (

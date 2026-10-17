@@ -21,7 +21,7 @@ function guardDataPlugin(): Plugin {
       if (id !== resolved) return null;
       const data = loadDataset(repoRoot);
       const note = data.notes.length ? ` notes=${data.notes.join(" | ")}` : "";
-      console.log(`[guard-data] source=${data.source} isExample=${data.isExample}${note}`);
+      console.log(`[guard-data] source=${data.source} isExample=${data.isExample} shown=${JSON.stringify(data.shown)}${note}`);
       return `export default ${JSON.stringify(data)};`;
     },
   };

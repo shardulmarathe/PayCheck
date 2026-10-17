@@ -29,6 +29,8 @@ export interface Visual {
   steer: number;
   lineFill: number;
   totalFill: number;
+  /** 0..1 running overcharge. Reaches 1 by 20s of the replay clock. */
+  loss: number;
   popup: number;
   product: number;
   search: number;
@@ -42,6 +44,13 @@ function at(replay: Replay, kind: StepKind): number | undefined {
   return replay.steps.find((step) => step.kind === kind)?.t_ms;
 }
 
+/** The unguarded loss finishes at or before 20 seconds, and prefers 18 seconds when the click is earlier. */
+export function lossWindow(replay: Replay): { start: number; end: number } {
+  const start = at(replay, "click") ?? at(replay, "popup") ?? 0;
+  const end = Math.min(20_000, Math.max(start + 400, 18_000));
+  return { start, end: Math.max(end, start) };
+}
+
 export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
   const catchAt = at(replay, "catch") ?? 0;
   const popupAt = at(replay, "popup") ?? 0;
@@ -49,6 +58,7 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
   const paidAt = at(replay, "paid") ?? replay.duration_ms;
   const clickAt = at(replay, "click") ?? popupAt + 3800;
   const latency = replay.verdict.latency_ms;
+  const lossAt = lossWindow(replay);
   const end = reduced || t >= replay.duration_ms - 1;
 
   if (end) {
@@ -72,6 +82,7 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
       steer: 1,
       lineFill: 1,
       totalFill: 1,
+      loss: 1,
       popup: 1,
       product: 0,
       search: 0,
@@ -107,6 +118,7 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
     steer: seg(t, catchAt + 1000, 600),
     lineFill: seg(t, paidAt, 600),
     totalFill: seg(t, paidAt + 300, 600),
+    loss: seg(t, lossAt.start, lossAt.end - lossAt.start),
     popup: seg(t, popupAt, 600),
     product: seg(t, productAt, 600) * (1 - seg(t, popupAt, 600)),
     search: 1 - seg(t, productAt, 600),

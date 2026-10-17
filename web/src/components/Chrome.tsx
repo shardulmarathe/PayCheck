@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { PRODUCT_NAME } from "../lib/product";
 import { EASE } from "../lib/ease";
-import { TABS, type TabId } from "../hooks/useRoute";
+import { type TabId } from "../hooks/useRoute";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { PANEL } from "../lib/motion";
 import { useIntroPhase } from "./motion/Intro";
 import { useNav } from "./motion/Nav";
 import { HiddenTrick } from "./HiddenTrick";
 
-export function TopBar() {
+export function TopBar({ tabs }: { tabs: readonly { id: TabId; href: string; label: string }[] }) {
   const reduced = usePrefersReducedMotion();
   const { active, glideTo } = useNav();
   const phase = useIntroPhase();
@@ -29,7 +29,7 @@ export function TopBar() {
           {PRODUCT_NAME}
         </a>
         <nav className="nav" aria-label="Sections">
-          {TABS.map((tab) => {
+          {tabs.map((tab) => {
             const current = tab.id === active;
             return (
               <a

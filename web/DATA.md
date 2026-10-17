@@ -1,6 +1,8 @@
 # Showcase data
 
-The site reads JSON from the repo-root `runs/` directory at dev and build time (`web/loader/loadDataset.ts`). A missing or invalid section stays on the fixture in `web/loader/fixtures.ts` and keeps its **example data** label. Set `GUARD_GYM_FORCE_FIXTURES=1` to ignore `runs/` entirely.
+The site reads JSON from the repo-root `runs/` directory at dev and build time (`web/loader/loadDataset.ts`). Every benchmarks, replay, training-round, and tally file needs a top-level `"synthetic": true|false`. A missing flag counts as synthetic. Set `GUARD_GYM_FORCE_FIXTURES=1` to ignore `runs/` entirely.
+
+`NEXT_PUBLIC_SHOW_EXAMPLES` is read when the dataset is built (Vite does not expose `NEXT_PUBLIC_*` to the browser). Unset, it is **false in production** and **true in `vite dev`**. `true` / `1` / `yes` shows fixtures and keeps the "example data" labels. `false` / `0` / `no` hides every section whose data is still synthetic: the block is not rendered, its numbers are left out of the client bundle, and the nav drops links to empty pages. The design-process and future pages stay, because they are copy; only the training-round statistic is removed. If the replays are hidden, the landing page is the tagline and the kiosk.
 
 Catch rates are percents from 0 to 100. Do not store fractions. `isExample` on the loaded dataset is true only when eval, training, replays, and tally are all still fixtures. Per-section flags live on `example`.
 
@@ -16,7 +18,7 @@ Citations are copy, not run data. They stay in the fixture.
 
 ## Eval
 
-`leaderboard.json` is either `{ "models": [ Model, ... ] }` or a bare array. Other files in `runs/eval/` are used only when the leaderboard is absent. Each file may be one model or `{ "models": [...] }`.
+`leaderboard.json` is `{ "synthetic": false, "models": [ Model, ... ] }`. A bare array, or a file without `"synthetic": false`, is hidden. Other files in `runs/eval/` are used only when the leaderboard is absent, and each of those also needs `"synthetic": false`.
 
 The object form may also carry the headline slot. `claim` is `"within"` unless it is exactly `"beats"`. `catch_pct`, `cost_ratio`, and `point_gap` are numbers. Leave them out and, once the eval is real, the loader fills them from the guard and Claude Sonnet rows: catch rate, Claude’s cost divided by the guard’s cost, and the guard’s catch rate minus Claude’s. `point_gap` is signed; positive means the guard is ahead.
 
@@ -64,7 +66,7 @@ While `catch_pct` is null, the catch line shows the literal `[X]`. The catch sen
 
 ## Results slices
 
-`runs/eval/results.json` wins, then `runs/results.json`. Until one of those is present and not synthetic, the site keeps the checked-in mock at `web/loader/results.mock.json` **hidden**. `"synthetic": true` drops every score, claim, gap, and `cost_per_page_usd` in that file. Production then says "Within [N] points of the baseline model." and shows no slice error bars.
+`runs/eval/results.json` wins, then `runs/results.json`. Both need `"synthetic": false` or the scores stay out. Until one of those is present and not synthetic, the checked-in mock at `web/loader/results.mock.json` is schema only. With examples hidden, the Benchmarks page and its nav link are omitted entirely (no "Within [N]" placeholder, no slice bars). With examples on, the page shows fixture scores and an example-data label, and the Sonnet line stays "Within [N] points of the baseline model." because the mock slices are not rendered.
 
 ```json
 {
@@ -115,23 +117,30 @@ While `catch_pct` is null, the catch line shows the literal `[X]`. The catch sen
 One object, or an array, per file:
 
 ```json
-{ "round": 3, "catch_seen": 94, "catch_heldout": 84 }
+{ "synthetic": false, "round": 3, "catch_seen": 94, "catch_heldout": 84 }
 ```
+
+A file may instead be `{ "synthetic": false, "rounds": [ ... ] }`. An array with no `synthetic` flag is hidden.
 
 `round` 0 is the untuned base. `catch_seen` is tricks like the training set. `catch_heldout` is trick types held out of training (`copycat_domain`, `listing_injection`). Both are percents.
 
 v3 does not draw a round chart. The loop center uses the latest round. Files in `runs/training/` win. If that folder has no valid rounds, a `rounds` array on an eval JSON file is used instead:
 
 ```json
-{ "rounds": [{ "round": 1, "catch_seen": 78, "catch_heldout": 63 }] }
+{ "synthetic": false, "rounds": [{ "round": 1, "catch_seen": 78, "catch_heldout": 63 }] }
 ```
 
 ## Replay
 
 ```json
 {
+  "synthetic": false,
   "id": "0142",
   "scene": "upsell",
+  "overcharge_usd": 9.99,
+  "exposed": false,
+  "subscription": false,
+  "subscription_monthly_usd": null,
   "title": "AA batteries, 12-pack, under $15",
   "budget": 15,
   "duration_ms": 38000,
@@ -178,13 +187,20 @@ v3 does not draw a round chart. The loop center uses the latest round. Files in 
 - Scam requires `scene_view.kind: "scam"` plus `columns` (`flagged_label`, `trick_label`, `steer_label`). The cart scene and the scam scene fields are the full objects in `web/src/lib/types.ts`.
 - Step `kind` is `search`, `product`, `popup`, `click`, `catch`, `paid`, or `other`. `tick` draws the shared timeline. `catch` is the red playhead dot.
 - The settled readout uses `verdict.latency_ms` through `formatLatency`. `null` (and every fixture replay) shows `[N] ms`. Do not bake a design millisecond into the fixture.
+- `overcharge_usd` is dollars paid above the expected total (shopper schema: `overcharge_usd`, same number as `dollars_lost`). The unguarded lane counts `lost $X.XX` in a solid red fill up to that amount. The count finishes by 20 seconds of autoplay. `0` draws no counter.
+- `exposed` is true when card or bank details were submitted on a phishing page. It does not add a third headline.
+- `subscription` is true for an unwanted subscription (`unwanted_subscription` or `final_cart.subscription` in `shopper/schema/replay.json`). `subscription_monthly_usd` is optional because that schema has no monthly price. When both are set, the unguarded lane adds `Signed you up for $X.XX/month`.
+- The default fixture upsell uses `overcharge_usd: 9.99`, `exposed: false`, `subscription: false`, and reaches the full loss by 18 seconds (click at 14s, paid at 18s).
 
 ## Tally
 
-`runs/tally.json` is `{ "items": [ ... ] }` or a bare array.
+`runs/tally.json` needs `"synthetic": false`. It is `{ "synthetic": false, "items": [ ... ] }`. A bare array is hidden.
+
+The tally strip is not drawn. The loader still drops synthetic items so they are not shipped in the client bundle.
 
 ```json
 {
+  "synthetic": false,
   "id": "dollars",
   "label": "Extra dollars spent",
   "with_guard": 9,

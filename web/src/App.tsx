@@ -1,5 +1,5 @@
 import { MotionConfig } from "framer-motion";
-import { BackgroundKiosk, screenFrom } from "./components/BackgroundKiosk";
+import { BackgroundKiosk, neutralScreen, screenFrom } from "./components/BackgroundKiosk";
 import { Footer, TopBar } from "./components/Chrome";
 import { LiftCarrier } from "./components/LiftCarrier";
 import { BracketCursor } from "./components/motion/BracketCursor";
@@ -13,6 +13,7 @@ import { Benchmarks } from "./pages/Benchmarks";
 import { Demo } from "./pages/Demo";
 import { DesignProcess } from "./pages/DesignProcess";
 import { Future } from "./pages/Future";
+import { TABS } from "./hooks/useRoute";
 import type { UpsellReplay } from "./lib/types";
 
 const data = getDataset();
@@ -34,19 +35,22 @@ export function App() {
 function Site() {
   const { arriving } = useNav();
   const phase = useIntroPhase();
-  const upsell = data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell");
+  const upsell = data.shown.replays
+    ? data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell")
+    : undefined;
   const guard = data.models.find((model) => model.emphasis);
   const screen = upsell
-    ? screenFrom(upsell, data.example.replays, guard?.catch_rate ?? null)
-    : null;
+    ? screenFrom(upsell, data.example.replays, data.shown.benchmarks ? (guard?.catch_rate ?? null) : null)
+    : neutralScreen();
+  const tabs = TABS.filter((tab) => tab.id !== "benchmarks" || data.shown.benchmarks);
   const dimmed = phase === "catch";
 
   return (
     <>
-      {screen ? <BackgroundKiosk screen={screen} /> : null}
+      <BackgroundKiosk screen={screen} />
       <ProgressHairline />
       <BracketCursor />
-      <TopBar />
+      <TopBar tabs={tabs} />
       <main id="content" className="page" tabIndex={-1} style={{ opacity: dimmed ? 0.6 : 1 }}>
         <a className="skip" href="#content">
           Skip to content
@@ -54,9 +58,11 @@ function Site() {
         <section id="demo" data-tab="demo" data-arrive={arriving === "demo" ? "1" : undefined}>
           <Demo data={data} />
         </section>
-        <section id="benchmarks" data-tab="benchmarks" data-arrive={arriving === "benchmarks" ? "1" : undefined}>
-          <Benchmarks data={data} />
-        </section>
+        {data.shown.benchmarks ? (
+          <section id="benchmarks" data-tab="benchmarks" data-arrive={arriving === "benchmarks" ? "1" : undefined}>
+            <Benchmarks data={data} />
+          </section>
+        ) : null}
         <section id="design-process" data-tab="design" data-arrive={arriving === "design" ? "1" : undefined}>
           <DesignProcess data={data} />
         </section>
