@@ -2,7 +2,7 @@ import { MotionConfig } from "framer-motion";
 import { BackgroundKiosk, neutralScreen, screenFrom } from "./components/BackgroundKiosk";
 import { Footer, TopBar } from "./components/Chrome";
 import { LiftCarrier } from "./components/LiftCarrier";
-import { BracketCursor } from "./components/motion/BracketCursor";
+import { StoryCarriers } from "./components/StoryCarriers";
 import { IntroProvider, useIntroPhase } from "./components/motion/Intro";
 import { NavProvider, useNav } from "./components/motion/Nav";
 import { ProgressHairline } from "./components/motion/ProgressHairline";
@@ -49,9 +49,8 @@ function Site() {
     <>
       <BackgroundKiosk screen={screen} />
       <ProgressHairline />
-      <BracketCursor />
       <TopBar tabs={tabs} />
-      <main id="content" className="page" tabIndex={-1} style={{ opacity: dimmed ? 0.6 : 1 }}>
+      <main id="content" className="page" tabIndex={-1} style={{ opacity: dimmed ? 0.28 : 1 }}>
         <a className="skip" href="#content">
           Skip to content
         </a>
@@ -72,6 +71,7 @@ function Site() {
         <Footer note={data.footer_note} />
       </main>
       {upsell ? <LiftCarrier label={upsell.scene_view.popup_fine_print} /> : null}
+      <StoryCarriers />
     </>
   );
 }

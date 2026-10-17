@@ -1,8 +1,40 @@
+import { useEffect, useRef } from "react";
 import { HiddenTrick } from "../components/HiddenTrick";
+import { useNav } from "../components/motion/Nav";
+import { usePrefersReducedMotion } from "../hooks/useReplay";
 import type { Dataset } from "../lib/types";
 
 export function Future({ data }: { data: Dataset }) {
   const future = data.future;
+  const list = useRef<HTMLElement>(null);
+  const reduced = usePrefersReducedMotion();
+  const { isGliding } = useNav();
+
+  useEffect(() => {
+    const root = list.current;
+    if (!root) return;
+    const rows = [...root.querySelectorAll<HTMLElement>(".future-row")];
+    if (reduced || isGliding) {
+      root.classList.remove("will-draw");
+      rows.forEach((row) => row.classList.add("is-drawn"));
+      return;
+    }
+    root.classList.add("will-draw");
+    const seen = new WeakSet<Element>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || seen.has(entry.target)) return;
+          seen.add(entry.target);
+          entry.target.classList.add("is-drawn");
+        });
+      },
+      { rootMargin: "0px 0px -15% 0px", threshold: 0.2 },
+    );
+    rows.forEach((row) => observer.observe(row));
+    return () => observer.disconnect();
+  }, [reduced, isGliding]);
+
   return (
     <div className="wrap">
       <section className="section">
@@ -16,10 +48,12 @@ export function Future({ data }: { data: Dataset }) {
           {future.body}
         </p>
       </section>
-      <section className="section future-list">
-        {future.items.map((item) => (
+      <section className="section future-list" ref={list}>
+        {future.items.map((item, index) => (
           <article key={item.n} className="future-row">
-            <p className="micro">{item.n}</p>
+            <p className="micro" data-future-first={index === 0 ? "" : undefined}>
+              {item.n}
+            </p>
             <div>
               <h2>{item.title}</h2>
               <p className="body">{item.body}</p>

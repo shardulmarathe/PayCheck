@@ -116,12 +116,9 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
         h: lerp(hero.h, small.h, t),
       };
       const hide = narrow && t > 0.85;
-      const page = document.documentElement.scrollHeight - vh;
-      const progress = page > 0 ? Math.min(1, Math.max(0, window.scrollY / page)) : 0;
-      const parallax = poster ? 0 : (progress - 0.5) * 24;
       node.style.width = `${box.w}px`;
       node.style.height = `${box.h}px`;
-      node.style.transform = `translate3d(${box.x}px, ${box.y + parallax}px, 0)`;
+      node.style.transform = `translate3d(${box.x}px, ${box.y}px, 0)`;
       node.style.visibility = hide ? "hidden" : "visible";
 
       const replay = document.querySelector(".replay-section")?.getBoundingClientRect();
@@ -134,7 +131,8 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
       const crowded = centered(replay) || centered(bench) || activeRef.current === "benchmarks";
       const floor = crowded ? 0.2 : 0.35;
       kioskPose.presence = lerp(1, floor, t);
-      kioskPose.yaw = poster ? 0 : (progress - 0.5) * ((4 * Math.PI) / 180);
+      const heroLeave = slot ? Math.min(1, Math.max(0, -slot.top / Math.max(slot.height, 1))) : 0;
+      kioskPose.yaw = poster ? 0 : heroLeave * ((20 * Math.PI) / 180);
       kioskPose.invalidate();
     };
 

@@ -3,12 +3,13 @@ import { useRef } from "react";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { useNav } from "./motion/Nav";
 import { EASE } from "../lib/ease";
+import { ENTER, STAGGER } from "../lib/motion";
 import { formatPct, trimNum } from "../lib/format";
 import type { ModelEval } from "../lib/types";
 
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
+  const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
   const reduced = usePrefersReducedMotion();
   const { isGliding } = useNav();
   return { ref, reveal: reduced || isGliding || inView, reduced };
@@ -65,11 +66,37 @@ export function CostScatter({
           ))}
         </div>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-          {yMarks.map((mark) => (
-            <line key={mark} x1="0" x2="100" y1={catchY(mark)} y2={catchY(mark)} stroke="#232932" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          {yMarks.map((mark, index) => (
+            <line
+              key={mark}
+              x1="0"
+              x2="100"
+              y1={catchY(mark)}
+              y2={catchY(mark)}
+              stroke="#232932"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={reveal && !reduced ? 0 : 1}
+              style={{ transition: `stroke-dashoffset ${reduced ? 0 : ENTER}s cubic-bezier(${EASE.join(",")}) ${index * STAGGER}s` }}
+            />
           ))}
-          {marks.map((mark) => (
-            <line key={mark} y1="0" y2="100" x1={logX(mark)} x2={logX(mark)} stroke="#232932" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          {marks.map((mark, index) => (
+            <line
+              key={mark}
+              y1="0"
+              y2="100"
+              x1={logX(mark)}
+              x2={logX(mark)}
+              stroke="#232932"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={reveal && !reduced ? 0 : 1}
+              style={{ transition: `stroke-dashoffset ${reduced ? 0 : ENTER}s cubic-bezier(${EASE.join(",")}) ${(index + yMarks.length) * STAGGER}s` }}
+            />
           ))}
         </svg>
         {models.map((model) => {
@@ -89,6 +116,9 @@ export function CostScatter({
               left: `${Math.min(logX(guard.cost_per_1k_checks_usd), logX(claude.cost_per_1k_checks_usd))}%`,
               width: `${Math.abs(logX(claude.cost_per_1k_checks_usd) - logX(guard.cost_per_1k_checks_usd))}%`,
               top: `${catchY(guard.catch_rate)}%`,
+              transform: reveal && !reduced ? "scaleX(1)" : "scaleX(0)",
+              transformOrigin: logX(claude.cost_per_1k_checks_usd) < logX(guard.cost_per_1k_checks_usd) ? "left center" : "right center",
+              transition: `transform ${reduced ? 0 : 0.9}s cubic-bezier(${EASE.join(",")})`,
             }}
           >
             <span>{gap}</span>
@@ -105,10 +135,11 @@ export function CostScatter({
               key={model.id}
               initial={{ opacity: reduced ? 1 : 0 }}
               animate={{ opacity: reveal ? 1 : 0 }}
-              transition={{ duration: reduced ? 0 : 0.6, ease: EASE }}
+              transition={{ duration: reduced ? 0 : ENTER, ease: EASE }}
             >
               <span
                 className={`scatter-point ${model.emphasis ? "guard" : "sm"} ${hollow ? "hollow" : ""}`}
+                data-guard-dot={model.emphasis ? "" : undefined}
                 style={{ left: `${left}%`, top: `${top}%` }}
               />
               <span className={`scatter-label ${place}`} style={{ left: `${left}%`, top: `${top}%` }}>

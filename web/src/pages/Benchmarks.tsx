@@ -24,7 +24,7 @@ export function Benchmarks({ data }: { data: Dataset }) {
           {data.example.eval ? " · example data" : ""}
         </p>
         <h1 className="h1 claim-title">
-          {headline[0]}
+          <span data-catch-slot>{headline[0]}</span>
           <br />
           {headline[1]}
         </h1>

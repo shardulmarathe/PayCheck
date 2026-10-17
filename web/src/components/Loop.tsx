@@ -2,6 +2,7 @@ import { animate, motion, useInView, useMotionValue, useTransform } from "framer
 import { useEffect, useRef } from "react";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { EASE } from "../lib/ease";
+import { useNav } from "./motion/Nav";
 
 const SPOTS = [
   { t: 0.88, align: "left" },
@@ -32,28 +33,34 @@ export function LoopDiagram({
   caption: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
   const reduced = usePrefersReducedMotion();
-  const progress = useMotionValue(0);
+  const { isGliding } = useNav();
+  const progress = useMotionValue(reduced ? 1 : 0);
+  const lit = reduced || isGliding || inView;
+  const shown = nodes.slice(0, SPOTS.length);
   useEffect(() => {
-    if (!inView || reduced) return;
-    const controls = animate(progress, 1, { duration: 2.6, ease: EASE });
+    if (reduced || isGliding) {
+      progress.set(1);
+      return;
+    }
+    if (!inView) return;
+    const controls = animate(progress, 1, { duration: 1.6, delay: shown.length * 0.12, ease: EASE });
     return () => controls.stop();
-  }, [inView, reduced, progress]);
+  }, [inView, reduced, isGliding, progress, shown.length]);
   const cx = 500;
   const cy = 250;
   const rx = 300;
   const ry = 118;
   const dotX = useTransform(progress, (value) => cx + rx * Math.sin(value * Math.PI * 2));
   const dotY = useTransform(progress, (value) => cy - ry * Math.cos(value * Math.PI * 2));
-  const shown = nodes.slice(0, SPOTS.length);
 
   return (
     <div className="loop-v3" ref={ref}>
       <div className="loop-stage">
         <svg className="loop-floor" viewBox="0 0 1000 520" aria-hidden="true">
           <ellipse cx={cx} cy={cy} rx="360" ry="168" fill="#11141A" />
-          <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke="#323A45" strokeWidth="1.5" />
+          <ellipse data-loop-ring="" cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke="#323A45" strokeWidth="1.5" />
           {SPOTS.map((spot, index) => {
             const angle = spot.t * Math.PI * 2;
             const x = cx + rx * Math.sin(angle);
@@ -81,16 +88,20 @@ export function LoopDiagram({
             const x = cx + rx * Math.sin(angle);
             const y = cy - ry * Math.cos(angle);
             return (
-              <div
+              <motion.div
                 key={node.n}
                 className={`loop-label ${spot.align}`}
+                data-loop-last={index === shown.length - 1 ? "" : undefined}
+                initial={false}
+                animate={{ opacity: lit ? 1 : 0 }}
+                transition={{ duration: reduced || isGliding ? 0 : 0.25, delay: reduced || isGliding ? 0 : index * 0.12, ease: EASE }}
                 style={{ left: `${(x / 1000) * 100}%`, top: `${(y / 520) * 100}%` }}
               >
                 <p>
                   {node.n} {node.title}
                 </p>
                 <p className="micro">{node.detail}</p>
-              </div>
+              </motion.div>
             );
           })}
         </div>

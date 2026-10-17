@@ -8,7 +8,8 @@ import { COPY } from "../lib/copy";
 import { heroClaim } from "../lib/results";
 import { EASE } from "../lib/ease";
 import { formatUsd, trimNum } from "../lib/format";
-import { STAGGER } from "../lib/motion";
+import { ENTER, STAGGER } from "../lib/motion";
+import { useNav } from "../components/motion/Nav";
 import { TAGLINE_LINES } from "../lib/product";
 import type { Dataset, UpsellReplay } from "../lib/types";
 
@@ -18,6 +19,7 @@ function money(n: number): string {
 
 export function Demo({ data }: { data: Dataset }) {
   const reduced = usePrefersReducedMotion();
+  const { isGliding } = useNav();
   const phase = useIntroPhase();
   const settled = useRef(phase === "done");
   const showCopy = phase === "done" || reduced;
@@ -35,7 +37,7 @@ export function Demo({ data }: { data: Dataset }) {
   const enter = (index: number) =>
     reduced || settled.current
       ? { duration: 0 }
-      : { duration: 0.7, delay: index * STAGGER, ease: EASE };
+      : { duration: ENTER, delay: index * STAGGER, ease: EASE };
 
   return (
     <div className="wrap">
@@ -43,7 +45,7 @@ export function Demo({ data }: { data: Dataset }) {
         <div className="hero-lockup">
           <div className="hero-copy">
             {story ? (
-              <motion.p className="label" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(0)}>
+              <motion.p className="label" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(0)}>
                 {data.hero.eyebrow}
               </motion.p>
             ) : null}
@@ -51,7 +53,7 @@ export function Demo({ data }: { data: Dataset }) {
               id="hero-title"
               className="display"
               initial={false}
-              animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }}
+              animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }}
               transition={enter(1)}
             >
               {TAGLINE_LINES[0]}
@@ -59,19 +61,19 @@ export function Demo({ data }: { data: Dataset }) {
               {TAGLINE_LINES[1]}
             </motion.h1>
             {story && addon ? (
-              <motion.p className="use-case" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(2)}>
+              <motion.p className="use-case" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(2)}>
                 {COPY.useCase(formatUsd(addon.amount))}
               </motion.p>
             ) : null}
             {claims ? (
               <>
-                <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(3)}>
+                <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(3)}>
                   {COPY.catchLine(catchLabel)}
                 </motion.p>
-                <motion.p className="hero-sonnet" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(4)}>
+                <motion.p className="hero-sonnet" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(4)}>
                   {sonnet.sentence}
                 </motion.p>
-                <motion.p className="slice-tag" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(5)}>
+                <motion.p className="slice-tag" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(5)}>
                   {sonnet.tag}
                 </motion.p>
               </>
@@ -92,13 +94,17 @@ export function Demo({ data }: { data: Dataset }) {
           initial={reduced ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: reduced ? 0 : 0.9, ease: EASE }}
+          transition={{ duration: reduced || isGliding ? 0 : ENTER, ease: EASE }}
         >
           <div className="compare">
-            <span className="compare-lost">{formatUsd(upsell.without.paid)}</span>
+            <span className="compare-lost" data-unguarded-total>
+              {formatUsd(upsell.without.paid)}
+            </span>
             <span className="compare-word">without</span>
             <span className="compare-dot">·</span>
-            <span className="compare-kept">{formatUsd(upsell.with.paid)}</span>
+            <span className="compare-kept" data-guarded-total>
+              {formatUsd(upsell.with.paid)}
+            </span>
             <span className="compare-word">with</span>
           </div>
           <p className="compare-caption">{COPY.comparisonCaption(money(upsell.budget), formatUsd(addon.amount), data.example.replays)}</p>

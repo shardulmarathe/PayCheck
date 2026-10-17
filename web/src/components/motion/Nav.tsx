@@ -60,12 +60,20 @@ export function NavProvider({ children }: { children: ReactNode }) {
     if (!lenis) return;
     const id = tabFromHash(window.location.hash);
     if (id === "demo") return;
-    if (!document.getElementById(sectionId(id))) {
+    const hash = sectionId(id);
+    if (!document.getElementById(hash)) {
       window.history.replaceState(null, "", "#demo");
       setActive("demo");
       return;
     }
-    lenis.scrollTo(`#${sectionId(id)}`, { immediate: true, offset: -NAV_H, force: true });
+    const jump = () => lenis.scrollTo(`#${hash}`, { immediate: true, offset: -NAV_H, force: true });
+    jump();
+    const early = window.setTimeout(jump, 0);
+    const late = window.setTimeout(jump, 60);
+    return () => {
+      window.clearTimeout(early);
+      window.clearTimeout(late);
+    };
   }, [lenis]);
 
   useEffect(() => {
@@ -104,10 +112,10 @@ export function NavProvider({ children }: { children: ReactNode }) {
     const hash = sectionId(id);
     if (id !== "demo" && !document.getElementById(hash)) return;
     setActive(id);
-    window.history.replaceState(null, "", `#${hash}`);
-    if (!lenis) return;
-    if (reduced) {
-      lenis.scrollTo(`#${hash}`, { immediate: true, offset: -NAV_H });
+    const writeHash = () => window.history.replaceState(null, "", `#${hash}`);
+    if (!lenis || reduced) {
+      writeHash();
+      if (lenis) lenis.scrollTo(`#${hash}`, { immediate: true, offset: -NAV_H, force: true });
       return;
     }
     setGliding(true);
@@ -116,9 +124,11 @@ export function NavProvider({ children }: { children: ReactNode }) {
       duration: GLIDE,
       easing: easeInOutCubic,
       lock: true,
+      force: true,
       onComplete: () => {
         setGliding(false);
         setArriving(id);
+        writeHash();
         window.setTimeout(() => setArriving((current) => (current === id ? null : current)), 900);
       },
     });

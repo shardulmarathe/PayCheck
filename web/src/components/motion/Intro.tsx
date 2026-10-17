@@ -109,34 +109,41 @@ export function IntroProvider({ children }: { children: ReactNode }) {
     const tick = (now: number) => {
       if (stopped) return;
       const elapsed = now - t0;
+      // 0–0.9 loader, 0.9–2.0 mark flight, 2.0–4.4 catch, 4.4–5.5 pull-back.
+      const loaderEnd = 900;
+      const flightEnd = 2000;
+      const catchEnd = 4400;
+      const doneAt = 5500;
       let next: IntroPhase = "done";
-      if (elapsed < 700) next = "loader";
-      else if (elapsed < 1600) next = "flight";
-      else if (elapsed < 3000) next = "catch";
-      else if (elapsed < 4000) next = "pullback";
+      if (elapsed < loaderEnd) next = "loader";
+      else if (elapsed < flightEnd) next = "flight";
+      else if (elapsed < catchEnd) next = "catch";
+      else if (elapsed < doneAt) next = "pullback";
       if (next !== current) {
         current = next;
         setPhase(next);
       }
 
-      const catchT = elapsed - 1600;
-      if (elapsed < 1600) {
+      const catchT = elapsed - flightEnd;
+      if (elapsed < flightEnd) {
         kioskPose.cameraPull = 0;
         kioskPose.sweep = 0;
         kioskPose.bracket = 0;
         kioskPose.settle = 0;
         kioskPose.glow = 0;
         kioskPose.readout = 0;
-      } else if (elapsed < 3000) {
+      } else if (elapsed < catchEnd) {
         kioskPose.cameraPull = 0;
-        kioskPose.sweep = Math.min(1, Math.max(0, catchT / 700));
-        const lockAt = 460;
-        kioskPose.bracket = easeOut(Math.min(1, Math.max(0, (catchT - lockAt) / 400)));
-        kioskPose.readout = easeOut(Math.min(1, Math.max(0, (catchT - lockAt - 400) / 250)));
-        kioskPose.settle = easeOut(Math.min(1, Math.max(0, (catchT - lockAt - 650) / 500)));
-        kioskPose.glow = kioskPose.bracket * (1 - kioskPose.settle);
+        kioskPose.sweep = Math.min(1, Math.max(0, catchT / 900));
+        const lockAt = 450;
+        kioskPose.bracket = easeOut(Math.min(1, Math.max(0, (catchT - lockAt) / 250)));
+        const glowRise = easeOut(Math.min(1, Math.max(0, (catchT - lockAt) / 300)));
+        const glowFade = easeOut(Math.min(1, Math.max(0, (catchT - 1700) / 600)));
+        kioskPose.glow = glowRise * (1 - glowFade);
+        kioskPose.settle = glowFade;
+        kioskPose.readout = easeOut(Math.min(1, Math.max(0, (catchT - 700) / 400)));
       } else {
-        kioskPose.cameraPull = easeInOutCubic((elapsed - 3000) / 1000);
+        kioskPose.cameraPull = easeInOutCubic((elapsed - catchEnd) / 1100);
         kioskPose.sweep = 1;
         kioskPose.bracket = 1;
         kioskPose.settle = 1;
@@ -146,7 +153,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
 
       const loader = document.getElementById("intro-loader");
       if (loader) {
-        const fade = elapsed < 700 ? 1 : Math.max(0, 1 - (elapsed - 700) / (PANEL * 1000));
+        const fade = elapsed < loaderEnd ? 1 : Math.max(0, 1 - (elapsed - loaderEnd) / (PANEL * 1000));
         loader.style.opacity = String(fade);
       }
       const mark = document.getElementById("intro-mark");
@@ -154,11 +161,11 @@ export function IntroProvider({ children }: { children: ReactNode }) {
       if (mark) {
         const fromX = window.innerWidth / 2 - 32;
         const fromY = window.innerHeight / 2 - 8;
-        if (elapsed < 700 || !target) {
+        if (elapsed < loaderEnd || !target) {
           mark.style.opacity = "1";
           mark.style.transform = `translate3d(${fromX}px, ${fromY}px, 0) scale(1)`;
-        } else if (elapsed < 1600) {
-          const p = easeInOutCubic((elapsed - 700) / 900);
+        } else if (elapsed < flightEnd) {
+          const p = easeInOutCubic((elapsed - loaderEnd) / 1100);
           const x = fromX + (target.left - fromX) * p;
           const y = fromY + (target.top - fromY) * p;
           const scale = 1 + (target.width / 64 - 1) * p;
@@ -169,11 +176,11 @@ export function IntroProvider({ children }: { children: ReactNode }) {
         }
       }
       const bar = document.getElementById("progress-hairline");
-      if (bar && elapsed < 4000) bar.style.transform = `scaleX(${Math.min(1, elapsed / 4000)})`;
+      if (bar && elapsed < doneAt) bar.style.transform = `scaleX(${Math.min(1, elapsed / loaderEnd)})`;
 
       placeKioskNow();
       kioskPose.invalidate();
-      if (elapsed >= 4000) {
+      if (elapsed >= doneAt) {
         finish();
         return;
       }
