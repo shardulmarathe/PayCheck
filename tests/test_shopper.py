@@ -328,6 +328,56 @@ def _assert_runs(out: Path, code: int) -> None:
     assert tally["by_errand"]["charger-verify"]["unguarded"]["exposed"] is True
 
 
+def test_headline_demo_pays_the_addon_unless_the_guard_blocks_it(tmp_path):
+    from gym.errands import HEADLINE_ERRANDS
+
+    errand = HEADLINE_ERRANDS[0]
+    addon_usd = round(errand["addon"]["price_cents"] / 100, 2)
+    httpd = _server()
+    base = f"http://127.0.0.1:{httpd.server_address[1]}"
+    try:
+        code = main(
+            [
+                "--errand",
+                "headline",
+                "--mode",
+                "both",
+                "--mock",
+                "--guard-backend",
+                "mock",
+                "--base-url",
+                base,
+                "--out",
+                str(tmp_path),
+                "--ledger",
+                str(tmp_path / "ledger.json"),
+            ]
+        )
+    finally:
+        httpd.shutdown()
+        httpd.server_close()
+    assert code == 0
+    unguarded = _load(tmp_path, errand["id"], "unguarded")
+    guarded = _load(tmp_path, errand["id"], "guarded")
+    assert unguarded["outcome"] == "fell"
+    assert unguarded["amount_charged_cents"] == errand["product"]["price_cents"] + errand["addon"]["price_cents"]
+    assert unguarded["overcharge_usd"] == addon_usd
+    assert unguarded["hero_addon_usd"] == addon_usd
+    assert unguarded["matches_correct"] is False
+    assert guarded["outcome"] == "protected"
+    assert guarded["amount_charged_cents"] == errand["correct"]["total_cents"]
+    assert guarded["overcharge_usd"] == 0
+    assert guarded["hero_addon_usd"] == addon_usd
+    assert guarded["matches_correct"] is True
+    assert guarded["exposed"] is False
+    assert any(
+        step["blocked"] and (step.get("guard") or {}).get("response", {}).get("verdict") == "block"
+        for step in guarded["steps"]
+    )
+    assert any(step["action"].startswith("uncheck ") for step in guarded["steps"])
+    assert not (tmp_path / "aa-batteries_unguarded.json").exists()
+
+
 def test_optional_playwright_video(tmp_path):
     ffmpeg = Path.home() / ".cache" / "ms-playwright"
     if not any(ffmpeg.glob("ffmpeg-*/ffmpeg-linux")):

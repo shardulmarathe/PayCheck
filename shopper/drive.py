@@ -314,6 +314,11 @@ async def run_errand(
     if tripped and scored["outcome"] != "stopped":
         scored = dict(scored)
         scored["outcome"] = "stopped"
+    hero_addon_usd = None
+    if harness.get("headline"):
+        raw_addon = harness.get("addon_usd")
+        if isinstance(raw_addon, (int, float)) and not isinstance(raw_addon, bool):
+            hero_addon_usd = round(float(raw_addon), 2)
     document = assemble(
         errand_id=errand_id,
         mode=mode,
@@ -331,6 +336,7 @@ async def run_errand(
         usd_spent=max(0.0, ledger.usd - spent_before),
         video=video_rel,
         error=error if scored["outcome"] in {"error", "stopped"} else None,
+        hero_addon_usd=hero_addon_usd,
     )
     write_json(out_dir / f"{errand_id}_{mode}.json", document)
     return document

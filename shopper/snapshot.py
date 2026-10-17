@@ -30,7 +30,16 @@ CONTROLS_JS = r"""
     const style = getComputedStyle(el);
     const hidden = type === "hidden" || style.visibility === "hidden" || style.display === "none";
     const dialog = el.closest("[role=dialog], dialog[open], [aria-modal=true]");
-    let text = (el.innerText || el.getAttribute("aria-label") || el.getAttribute("value") || "").replace(/\s+/g, " ").trim();
+    let text = "";
+    if (type === "checkbox" || type === "radio") {
+      const wrap = el.closest("label");
+      const linked = el.id ? document.querySelector('label[for="' + CSS.escape(el.id) + '"]') : null;
+      const source = wrap || linked;
+      if (source) text = (source.innerText || source.textContent || "").replace(/\s+/g, " ").trim();
+    }
+    if (!text) {
+      text = (el.innerText || el.getAttribute("aria-label") || el.getAttribute("value") || "").replace(/\s+/g, " ").trim();
+    }
     if (!text && el.id) {
       const label = document.querySelector('label[for="' + CSS.escape(el.id) + '"]');
       if (label) text = (label.innerText || "").replace(/\s+/g, " ").trim();

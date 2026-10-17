@@ -199,6 +199,7 @@ def assemble(
     usd_spent: float,
     video: str | None,
     error: str | None,
+    hero_addon_usd: float | None = None,
 ) -> dict:
     document = {
         "schema_version": "1",
@@ -232,6 +233,8 @@ def assemble(
         "video": video,
         "error": error,
     }
+    if hero_addon_usd is not None:
+        document["hero_addon_usd"] = hero_addon_usd
     validate_replay(document)
     return document
 

@@ -26,7 +26,7 @@ _OK_OUTCOMES = {"clean", "protected", "fell", "incomplete", "stopped"}
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the checkout-guard shopper against the gym.")
-    parser.add_argument("--errand", default="all", help="errand id, or 'all'")
+    parser.add_argument("--errand", default="all", help="errand id, 'headline', or 'all' (all skips the headline demo)")
     parser.add_argument("--mode", choices=("unguarded", "guarded", "both"), default="both")
     parser.add_argument("--guard-url", default=os.environ.get("GUARD_URL") or "", help="guard origin; /check is appended")
     parser.add_argument("--guard-backend", choices=("mock", "http"), default="http")
@@ -56,9 +56,18 @@ def _health(base_url: str) -> None:
         raise RuntimeError(f"gym health check failed at {url}")
 
 
+def _is_headline(row: dict) -> bool:
+    return bool((row.get("harness") or {}).get("headline"))
+
+
 def _select(catalog: list[dict], errand: str) -> list[dict]:
     if errand == "all":
-        return list(catalog)
+        return [row for row in catalog if not _is_headline(row)]
+    if errand == "headline":
+        chosen = [row for row in catalog if _is_headline(row)]
+        if not chosen:
+            raise SystemExit("no headline errand in the catalog")
+        return chosen
     chosen = [row for row in catalog if row.get("id") == errand]
     if not chosen:
         known = ", ".join(row.get("id", "") for row in catalog)

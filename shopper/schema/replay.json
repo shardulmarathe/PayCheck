@@ -66,6 +66,7 @@
     "dollars_lost": {"type": "number", "minimum": 0},
     "overcharge_usd": {"type": "number", "minimum": 0},
     "exposed": {"type": "boolean"},
+    "hero_addon_usd": {"type": "number", "minimum": 0},
     "outcome": {"enum": ["clean", "protected", "fell", "incomplete", "stopped", "error"]},
     "matches_correct": {"type": "boolean"},
     "usd_spent": {"type": "number", "minimum": 0},
