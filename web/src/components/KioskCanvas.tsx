@@ -18,31 +18,62 @@ import {
   type Group,
   type Material,
 } from "three";
-import { easeOut } from "../lib/ease";
-import { formatLatencyCount } from "../lib/format";
+import { kioskPose, type KioskMode } from "./kioskPose";
 
 export interface KioskScreen {
   url: string;
   lines: { label: string; value: string; trick?: boolean }[];
   latency: number | null;
   example: boolean;
+  quote: string;
+  catchRate: number | null;
+  readout: string;
 }
 
-const EASE_CSS = "cubic-bezier(0.22, 1, 0.36, 1)";
+const EASE_CSS = "cubic-bezier(0.2, 0.8, 0.2, 1)";
 
-function drawScreen(
-  canvas: HTMLCanvasElement,
+function drawQuiet(ctx: CanvasRenderingContext2D, w: number, h: number, mode: KioskMode, catchRate: number | null) {
+  ctx.fillStyle = "#171B22";
+  ctx.fillRect(0, 0, w, h);
+  if (mode === "benchmarks") {
+    const track = w * 0.62;
+    const x = (w - track) / 2;
+    const y = h * 0.48;
+    ctx.fillStyle = "#232932";
+    ctx.fillRect(x, y, track, 10);
+    const pct = catchRate == null ? 0 : Math.min(1, Math.max(0, catchRate / 100));
+    ctx.fillStyle = "#EEF1F5";
+    ctx.fillRect(x, y, track * pct, 10);
+    return;
+  }
+  if (mode === "design") {
+    ctx.strokeStyle = "#232932";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.ellipse(w / 2, h / 2, w * 0.22, h * 0.16, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillStyle = "#EEF1F5";
+    ctx.beginPath();
+    ctx.arc(w / 2 + w * 0.22, h / 2, 12, 0, Math.PI * 2);
+    ctx.fill();
+    return;
+  }
+  for (let row = 0; row < 3; row += 1) {
+    ctx.fillStyle = "#232932";
+    ctx.fillRect(w * 0.22, h * 0.32 + row * 78, w * 0.56, 10);
+  }
+}
+
+function drawCheckout(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
   screen: KioskScreen,
   bracket: number,
   settle: number,
   glow: number,
-  count: number,
+  readout: number,
 ) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-  const w = canvas.width;
-  const h = canvas.height;
-  ctx.clearRect(0, 0, w, h);
   ctx.fillStyle = "#0A0C0F";
   ctx.fillRect(0, 0, w, h);
   ctx.strokeStyle = "#232932";
@@ -96,21 +127,56 @@ function drawScreen(
       ctx.lineTo(right, bottom - arm);
       ctx.stroke();
       if (glow > 0.02) {
-        ctx.shadowColor = `rgb(255 69 58 / ${0.45 * glow})`;
-        ctx.shadowBlur = 16;
+        ctx.shadowColor = "rgb(255 69 58 / 0.20)";
+        ctx.shadowBlur = 12 * glow;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }
     }
   });
 
-  const readoutY = 230 + Math.max(screen.lines.length, trickIndex + 1) * 108 + 16;
-  const read = [255, 69, 58].map((channel, i) => Math.round(channel + ([154, 163, 174][i] - channel) * settle));
-  ctx.fillStyle = `rgb(${read[0]} ${read[1]} ${read[2]})`;
-  ctx.font = "400 40px 'IBM Plex Mono', monospace";
-  ctx.textAlign = "left";
-  const label = `${formatLatencyCount(screen.latency, count, screen.example)} · Blocked · upsell`;
-  ctx.fillText(label, pad, readoutY);
+  if (readout > 0.02) {
+    const readoutY = 230 + Math.max(screen.lines.length, trickIndex + 1) * 108 + 16;
+    ctx.save();
+    ctx.globalAlpha = readout;
+    ctx.fillStyle = "#9AA3AE";
+    ctx.font = "400 40px 'IBM Plex Mono', monospace";
+    ctx.textAlign = "left";
+    ctx.fillText(screen.readout, pad, readoutY);
+    if (screen.quote) {
+      ctx.font = "400 32px 'IBM Plex Mono', monospace";
+      ctx.fillText(`"${screen.quote}"`, pad, readoutY + 64, w - pad * 2);
+    }
+    ctx.restore();
+  }
+  void h;
+}
+
+function drawScreen(canvas: HTMLCanvasElement, screen: KioskScreen) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const w = canvas.width;
+  const h = canvas.height;
+  const paint = (mode: KioskMode) => {
+    if (mode === "demo") {
+      drawCheckout(ctx, w, h, screen, kioskPose.bracket, kioskPose.settle, kioskPose.glow, kioskPose.readout);
+      return;
+    }
+    drawQuiet(ctx, w, h, mode, screen.catchRate);
+  };
+  ctx.clearRect(0, 0, w, h);
+  if (kioskPose.mode === kioskPose.modeFrom || kioskPose.modeMix >= 0.999) {
+    paint(kioskPose.mode);
+    return;
+  }
+  ctx.save();
+  ctx.globalAlpha = 1 - kioskPose.modeMix;
+  paint(kioskPose.modeFrom);
+  ctx.restore();
+  ctx.save();
+  ctx.globalAlpha = kioskPose.modeMix;
+  paint(kioskPose.mode);
+  ctx.restore();
 }
 
 function ringGeometry(): BufferGeometry {
@@ -132,11 +198,10 @@ function shadowTexture(): CanvasTexture {
   canvas.height = 256;
   const ctx = canvas.getContext("2d");
   if (ctx) {
-    const paint = ctx.createRadialGradient(256, 128, 10, 256, 128, 230);
-    paint.addColorStop(0, "rgba(0,0,0,0.9)");
-    paint.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = paint;
-    ctx.fillRect(0, 0, 512, 256);
+    ctx.fillStyle = "rgba(0,0,0,0.55)";
+    ctx.beginPath();
+    ctx.ellipse(256, 128, 180, 70, 0, 0, Math.PI * 2);
+    ctx.fill();
   }
   const texture = new CanvasTexture(canvas);
   texture.colorSpace = SRGBColorSpace;
@@ -144,23 +209,32 @@ function shadowTexture(): CanvasTexture {
   return texture;
 }
 
+function LightRig() {
+  const amb = useRef<{ intensity: number } | null>(null);
+  const dir = useRef<{ intensity: number } | null>(null);
+  useFrame(() => {
+    const presence = kioskPose.presence;
+    if (amb.current) amb.current.intensity = 2.4 * presence;
+    if (dir.current) dir.current.intensity = 2.2 * presence;
+  });
+  return (
+    <>
+      <ambientLight ref={amb} intensity={2.4} />
+      <directionalLight ref={dir} color="#EEF1F5" intensity={2.2} position={[-6, 9, 2]} />
+    </>
+  );
+}
+
 function KioskMesh({
   screen,
   scanRef,
-  rootRef,
 }: {
   screen: KioskScreen;
   scanRef: RefObject<HTMLDivElement | null>;
-  rootRef: RefObject<HTMLDivElement | null>;
 }) {
   const group = useRef<Group>(null);
   const invalidate = useThree((state) => state.invalidate);
   const camera = useThree((state) => state.camera);
-  const visible = useRef(true);
-  const heroReady = useRef(false);
-  const mountedAt = useRef(performance.now());
-  const catchStart = useRef<number | null>(null);
-  const yaw = useRef(MathUtils.degToRad(-28));
   const drawn = useRef("");
 
   const materials = useMemo(() => {
@@ -230,83 +304,47 @@ function KioskMesh({
   }, [materials.screenMat]);
 
   useEffect(() => {
-    const node = rootRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        visible.current = !!entry?.isIntersecting;
-        if ((entry?.intersectionRatio ?? 0) >= 0.6) heroReady.current = true;
-        if (visible.current) invalidate();
-      },
-      { threshold: [0, 0.6] },
-    );
-    if (node) observer.observe(node);
-    const arm = window.setTimeout(() => invalidate(), 2300);
+    kioskPose.invalidate = () => invalidate();
     const fonts = document.fonts?.ready.then(() => invalidate());
+    invalidate();
     return () => {
-      observer.disconnect();
-      window.clearTimeout(arm);
+      kioskPose.invalidate = () => {};
       void fonts;
     };
-  }, [invalidate, materials, paint.texture, parts, rootRef]);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (visible.current) invalidate();
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    invalidate();
-    return () => window.removeEventListener("scroll", onScroll);
   }, [invalidate]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
+    const pull = kioskPose.cameraPull;
+    camera.position.set(5.2 + pull * 2, 4.4 + pull * 1.2, 14 + pull * 10);
     camera.lookAt(0.15, 3.7, 0);
     const root = group.current;
-    if (!root || !visible.current) return;
-    const hero = rootRef.current;
-    let progress = 0;
-    if (hero) {
-      const rect = hero.getBoundingClientRect();
-      const total = rect.height || 1;
-      progress = Math.min(1, Math.max(0, -rect.top / total));
-    }
-    const target = MathUtils.degToRad(-28 + progress * 20);
-    yaw.current = MathUtils.damp(yaw.current, target, 4, delta);
-    root.rotation.y = yaw.current;
-
-    const now = performance.now();
-    if (catchStart.current == null && heroReady.current && now - mountedAt.current >= 2300) {
-      catchStart.current = now;
-    }
-    const elapsed = catchStart.current == null ? -1 : now - catchStart.current;
-    const scan = elapsed < 0 ? 0 : Math.min(1, elapsed / 900);
-    const catchAt = 900 * 0.46;
-    const bracket = elapsed < catchAt ? 0 : easeOut(Math.min(1, (elapsed - catchAt) / 600));
-    const glowIn = elapsed < catchAt ? 0 : easeOut(Math.min(1, (elapsed - catchAt) / 300));
-    const glowOut = elapsed < catchAt + 1200 ? 0 : easeOut(Math.min(1, (elapsed - catchAt - 1200) / 600));
-    const glow = glowIn * (1 - glowOut);
-    const settle = elapsed < catchAt + 1200 ? 0 : easeOut(Math.min(1, (elapsed - catchAt - 1200) / 900));
-    const count = elapsed < catchAt ? 0 : easeOut(Math.min(1, (elapsed - catchAt) / 400));
-    const settled = elapsed > catchAt + 2100;
+    if (!root) return;
+    root.rotation.y = MathUtils.degToRad(-18) + kioskPose.yaw;
+    materials.edge.color.set(kioskPose.presence > 0.7 ? "#323A45" : "#232932");
+    materials.rimMat.opacity = kioskPose.presence > 0.7 ? 0.55 : 0;
 
     const scanEl = scanRef.current;
     if (scanEl) {
-      const show = elapsed >= 0 && elapsed <= 980;
+      const show = kioskPose.sweep > 0.02 && kioskPose.sweep < 0.98 && kioskPose.cameraPull < 0.2;
       scanEl.style.opacity = show ? "1" : "0";
-      scanEl.style.top = `${18 + scan * 52}%`;
+      scanEl.style.top = `${18 + kioskPose.sweep * 52}%`;
     }
-    if (hero) hero.dataset.catch = settled ? "settled" : elapsed >= 0 ? "playing" : "wait";
 
-    const signature = `${scan.toFixed(2)}|${bracket.toFixed(2)}|${settle.toFixed(2)}|${count.toFixed(2)}|${glow.toFixed(2)}`;
+    const signature = [
+      kioskPose.mode,
+      kioskPose.modeFrom,
+      kioskPose.modeMix.toFixed(2),
+      kioskPose.bracket.toFixed(2),
+      kioskPose.settle.toFixed(2),
+      kioskPose.glow.toFixed(2),
+      kioskPose.readout.toFixed(2),
+      screen.readout,
+    ].join("|");
     if (signature !== drawn.current) {
       drawn.current = signature;
-      drawScreen(paint.canvas, screen, bracket, settle, glow, count);
+      drawScreen(paint.canvas, screen);
       paint.texture.needsUpdate = true;
     }
-
-    const spinning = Math.abs(yaw.current - target) > 0.002;
-    const playing = elapsed >= 0 && !settled;
-    if (spinning || playing) invalidate();
   });
 
   const faces = (front: Material, top: Material): Material[] => [
@@ -341,12 +379,10 @@ function KioskMesh({
 export default function KioskCanvas({
   screen,
   scanRef,
-  rootRef,
   onLost,
 }: {
   screen: KioskScreen;
   scanRef: RefObject<HTMLDivElement | null>;
-  rootRef: RefObject<HTMLDivElement | null>;
   onLost?: () => void;
 }) {
   const ready = useRef(false);
@@ -381,9 +417,8 @@ export default function KioskCanvas({
         invalidate();
       }}
     >
-      <ambientLight intensity={2.4} />
-      <directionalLight color="#EEF1F5" intensity={2.2} position={[-6, 9, 2]} />
-      <KioskMesh screen={screen} scanRef={scanRef} rootRef={rootRef} />
+      <LightRig />
+      <KioskMesh screen={screen} scanRef={scanRef} />
     </Canvas>
   );
 }

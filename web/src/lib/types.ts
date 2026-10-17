@@ -1,3 +1,4 @@
+import type { ResultsView } from "./results";
 import type { MetricId } from "./taxonomy";
 
 export interface ModelEval {
@@ -22,6 +23,10 @@ export interface ModelEval {
   /** Null until a real eval log has a median. The UI then shows "[N] ms". */
   latency_ms_median: number | null;
   cost_per_1k_checks_usd: number;
+  /** Lower end of the 95% confidence interval, catch-rate percent. Null hides the bar. */
+  ci_low: number | null;
+  /** Upper end of the 95% confidence interval, catch-rate percent. Null hides the bar. */
+  ci_high: number | null;
   /** Catch rate 0–100 keyed by attack row id. */
   catch_rate_by_attack: Record<string, number>;
   /**
@@ -249,7 +254,21 @@ export interface Dataset {
     latency_note: string;
     cost_kicker: string;
     cost_headline: string;
-    /** True while [N] and [40] are still literal placeholders. */
+    /**
+     * "beats" only when the JSON says so. Anything else, including a missing
+     * field, renders the "within" headline.
+     */
+    claim: "within" | "beats";
+    /** Guard catch rate for the headline. Null renders the literal [X]. */
+    catch_pct: number | null;
+    /** Claude cost divided by the guard cost. Null renders the literal [N]. */
+    cost_ratio: number | null;
+    /**
+     * Guard catch rate minus Claude's, in points. Positive means the guard is
+     * ahead. Null renders [N] in the headline and [+N] on the gap line.
+     */
+    point_gap: number | null;
+    /** True while [N] and [X] are still literal placeholders. */
     cost_placeholder: boolean;
     cost_note: string;
     cost_annotation: string;
@@ -264,6 +283,11 @@ export interface Dataset {
   };
   rounds: TrainingRound[];
   models: ModelEval[];
+  /**
+   * Slice claims. Empty slices and a null cost ratio mean production has no
+   * publishable results (the checked-in file is synthetic).
+   */
+  results: ResultsView;
   process: {
     kicker: string;
     title_lines: string[];

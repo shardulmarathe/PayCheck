@@ -1,5 +1,5 @@
-/** The only ease on the site: cubic-bezier(0.22, 1, 0.36, 1). */
-export const EASE = [0.22, 1, 0.36, 1] as const;
+/** The only ease on the site: cubic-bezier(0.2, 0.8, 0.2, 1). */
+export const EASE = [0.2, 0.8, 0.2, 1] as const;
 
 function sample(t: number, p1: number, p2: number): number {
   const u = 1 - t;
@@ -11,7 +11,7 @@ function sampleDerivative(t: number, p1: number, p2: number): number {
   return 3 * u * u * p1 + 6 * u * t * (p2 - p1) + 3 * t * t * (1 - p2);
 }
 
-/** Y of cubic-bezier(0.22, 1, 0.36, 1) at progress x in 0..1. */
+/** Y of cubic-bezier(0.2, 0.8, 0.2, 1) at progress x in 0..1. */
 export function easeOut(x: number): number {
   if (x <= 0) return 0;
   if (x >= 1) return 1;

@@ -1,30 +1,59 @@
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useRef } from "react";
 import { PRODUCT_NAME } from "../lib/product";
 import { EASE } from "../lib/ease";
 import { TABS, type TabId } from "../hooks/useRoute";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
-import { useCut, type CutPhase } from "../hooks/useCut";
+import { PANEL } from "../lib/motion";
+import { useIntroPhase } from "./motion/Intro";
+import { useNav } from "./motion/Nav";
+import { HiddenTrick } from "./HiddenTrick";
 
-export function TopBar({ route }: { route: TabId }) {
+export function TopBar() {
   const reduced = usePrefersReducedMotion();
+  const { active, glideTo } = useNav();
+  const phase = useIntroPhase();
+  const startedDone = useRef(phase === "done");
+  const shown = phase === "done" || reduced;
   return (
-    <header className="topbar">
+    <header className={`topbar ${shown ? "" : "is-hidden"} ${startedDone.current || reduced ? "no-motion" : ""}`}>
       <div className="wrap topbar-inner">
-        <a className="wordmark" href="#/">
+        <a
+          className="wordmark"
+          href="#demo"
+          onClick={(event) => {
+            event.preventDefault();
+            glideTo("demo");
+          }}
+        >
           {PRODUCT_NAME}
         </a>
         <nav className="nav" aria-label="Sections">
           {TABS.map((tab) => {
-            const current = tab.id === route;
+            const current = tab.id === active;
             return (
-              <a key={tab.id} href={tab.href} aria-current={current ? "page" : undefined}>
-                {tab.label}
+              <a
+                key={tab.id}
+                href={tab.href}
+                aria-current={current ? "page" : undefined}
+                onClick={(event) => {
+                  event.preventDefault();
+                  glideTo(tab.id as TabId);
+                }}
+              >
+                {tab.id === "future" ? (
+                  <>
+                    <span className="nav-long">{tab.label}</span>
+                    <span className="nav-short">Future</span>
+                  </>
+                ) : (
+                  tab.label
+                )}
                 {current ? (
                   <motion.span
                     layoutId="tab-underline"
                     className="nav-underline"
-                    transition={{ duration: reduced ? 0 : 0.7, ease: EASE }}
+                    transition={{ duration: reduced ? 0 : PANEL, ease: EASE }}
                   />
                 ) : null}
               </a>
@@ -41,31 +70,12 @@ export function Footer({ note }: { note: string }) {
     <footer className="footer">
       <div className="wrap footer-inner">
         <p className="footer-name">{PRODUCT_NAME}</p>
+        <HiddenTrick id="footer-fee" kind="solid" label="Blocked · drip fee">
+          Service fee +$1.49
+        </HiddenTrick>
         <p className="micro">{note}</p>
       </div>
     </footer>
-  );
-}
-
-export function Shutter({ phase }: { phase: CutPhase }) {
-  if (phase === "idle") return null;
-  return (
-    <div className={`shutter ${phase}`} aria-hidden="true">
-      <div className="shutter-scan">
-        <span className="shutter-band" />
-        <span className="shutter-line" />
-      </div>
-    </div>
-  );
-}
-
-export function Stage({ route, children }: { route: TabId; children: (shown: TabId) => ReactNode }) {
-  const { shown, phase } = useCut(route);
-  return (
-    <div className="stage">
-      <div className="stage-page">{children(shown)}</div>
-      <Shutter phase={phase} />
-    </div>
   );
 }
 

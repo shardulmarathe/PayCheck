@@ -1,3 +1,4 @@
+import { EMPTY_RESULTS } from "../src/lib/results";
 import type { Dataset } from "../src/lib/types";
 
 const REQUEST_CODE = `const verdict = await guard.check({ page, cart, budget: 15 });
@@ -205,7 +206,7 @@ export const fixtureDataset: Dataset = {
   },
   benchmarks: {
     kicker: "Benchmarks · frozen test set",
-    title_lines: ["Near-frontier catch rate,", "at a fraction of the cost."],
+    title_lines: ["Catches [X]% of checkout tricks.", "Within [N] points of the baseline model."],
     body: "Every model sees the same 300 pages, held back before any training data was generated.",
     test_pages: 300,
     roster: [
@@ -220,11 +221,14 @@ export const fixtureDataset: Dataset = {
     latency_title: "Latency per check · median",
     latency_note: "Log scale · lower is better",
     cost_kicker: "Cost per 1,000 checks vs catch rate",
-    cost_headline:
-      "Similar catch rate at a fraction of the cost: [N] pts behind Gemini 3.1 Pro at 1/[40] the cost per check",
+    cost_headline: "Within [N] points of the baseline model.",
+    claim: "within",
+    catch_pct: null,
+    cost_ratio: null,
+    point_gap: null,
     cost_placeholder: true,
-    cost_note: "If the guard is ahead, the line flips to “[N] pts ahead of Gemini 3.1 Pro”",
-    cost_annotation: "1/[40] the cost · [N] pts behind",
+    cost_note: "Say beats only when that slice's claim is exactly beats. The cost phrase appears only when both models have cost_per_page_usd.",
+    cost_annotation: "",
     cost_axis: "Cost per 1,000 checks · log scale",
     hollow_caption:
       "Hollow point: ran on the 100-page slice only. Switch to the slice to compare all five models on the same pages.",
@@ -236,6 +240,7 @@ export const fixtureDataset: Dataset = {
     summary_note:
       "False blocks are the share of clean pages (trick: none) the model stopped. Evidence match is the share of blocks whose quoted sentence matches the labeled trick.",
   },
+  results: EMPTY_RESULTS,
   rounds: [
     { round: 0, catch_seen: 52, catch_heldout: 41 },
     { round: 1, catch_seen: 78, catch_heldout: 63 },
@@ -256,6 +261,8 @@ export const fixtureDataset: Dataset = {
       evidence_match: 88,
       latency_ms_median: null,
       cost_per_1k_checks_usd: 0.04,
+      ci_low: 87.8,
+      ci_high: 94.2,
       catch_rate_by_attack: {
         popup_add_on: 96,
         prechecked_extra: 94,
@@ -280,6 +287,8 @@ export const fixtureDataset: Dataset = {
       evidence_match: 90,
       latency_ms_median: 3400,
       cost_per_1k_checks_usd: 1.6,
+      ci_low: 89.3,
+      ci_high: 98.7,
       catch_rate_by_attack: {
         popup_add_on: 97,
         prechecked_extra: 95,
@@ -304,6 +313,8 @@ export const fixtureDataset: Dataset = {
       evidence_match: 83,
       latency_ms_median: 1900,
       cost_per_1k_checks_usd: 6.2,
+      ci_low: 85.5,
+      ci_high: 92.5,
       catch_rate_by_attack: {
         popup_add_on: 92,
         prechecked_extra: 88,
@@ -328,6 +339,8 @@ export const fixtureDataset: Dataset = {
       evidence_match: 41,
       latency_ms_median: 43,
       cost_per_1k_checks_usd: 0.04,
+      ci_low: 41.4,
+      ci_high: 52.6,
       catch_rate_by_attack: {
         popup_add_on: 51,
         prechecked_extra: 44,
@@ -352,6 +365,8 @@ export const fixtureDataset: Dataset = {
       evidence_match: null,
       latency_ms_median: 58,
       cost_per_1k_checks_usd: 0.05,
+      ci_low: 32.5,
+      ci_high: 43.5,
       catch_rate_by_attack: {
         popup_add_on: 40,
         prechecked_extra: 35,
@@ -457,5 +472,5 @@ export const fixtureDataset: Dataset = {
       },
     ],
   },
-  footer_note: "Recorded demos and example data. Nothing on this site runs live.",
+  footer_note: "Recorded demos. Nothing on this site runs live.",
 };

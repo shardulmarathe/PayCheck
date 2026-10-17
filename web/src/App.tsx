@@ -1,41 +1,71 @@
-import { useEffect } from "react";
-import { Footer, Stage, TopBar } from "./components/Chrome";
+import { MotionConfig } from "framer-motion";
+import { BackgroundKiosk, screenFrom } from "./components/BackgroundKiosk";
+import { Footer, TopBar } from "./components/Chrome";
+import { LiftCarrier } from "./components/LiftCarrier";
+import { BracketCursor } from "./components/motion/BracketCursor";
+import { IntroProvider, useIntroPhase } from "./components/motion/Intro";
+import { NavProvider, useNav } from "./components/motion/Nav";
+import { ProgressHairline } from "./components/motion/ProgressHairline";
+import { SmoothScroll } from "./components/motion/SmoothScroll";
 import { getDataset } from "./data/dataset";
-import { TABS, useRoute } from "./hooks/useRoute";
-import { PRODUCT_NAME } from "./lib/product";
+import { EASE, ENTER } from "./lib/motion";
 import { Benchmarks } from "./pages/Benchmarks";
 import { Demo } from "./pages/Demo";
 import { DesignProcess } from "./pages/DesignProcess";
 import { Future } from "./pages/Future";
+import type { UpsellReplay } from "./lib/types";
 
 const data = getDataset();
 
 export function App() {
-  const route = useRoute();
-  useEffect(() => {
-    const tab = TABS.find((item) => item.id === route);
-    document.title = route === "demo" || !tab ? PRODUCT_NAME : `${PRODUCT_NAME} · ${tab.label}`;
-  }, [route]);
+  return (
+    <MotionConfig reducedMotion="user" transition={{ duration: ENTER, ease: [...EASE] }}>
+      <IntroProvider>
+        <SmoothScroll>
+          <NavProvider>
+            <Site />
+          </NavProvider>
+        </SmoothScroll>
+      </IntroProvider>
+    </MotionConfig>
+  );
+}
+
+function Site() {
+  const { arriving } = useNav();
+  const phase = useIntroPhase();
+  const upsell = data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell");
+  const guard = data.models.find((model) => model.emphasis);
+  const screen = upsell
+    ? screenFrom(upsell, data.example.replays, guard?.catch_rate ?? null)
+    : null;
+  const dimmed = phase === "catch";
 
   return (
     <>
-      <a className="skip" href="#content">
-        Skip to content
-      </a>
-      <TopBar route={route} />
-      <main id="content" tabIndex={-1}>
-        <Stage route={route}>
-          {(shown) => (
-            <>
-              {shown === "demo" ? <Demo data={data} /> : null}
-              {shown === "benchmarks" ? <Benchmarks data={data} /> : null}
-              {shown === "design" ? <DesignProcess data={data} /> : null}
-              {shown === "future" ? <Future data={data} /> : null}
-            </>
-          )}
-        </Stage>
+      {screen ? <BackgroundKiosk screen={screen} /> : null}
+      <ProgressHairline />
+      <BracketCursor />
+      <TopBar />
+      <main id="content" className="page" tabIndex={-1} style={{ opacity: dimmed ? 0.6 : 1 }}>
+        <a className="skip" href="#content">
+          Skip to content
+        </a>
+        <section id="demo" data-tab="demo" data-arrive={arriving === "demo" ? "1" : undefined}>
+          <Demo data={data} />
+        </section>
+        <section id="benchmarks" data-tab="benchmarks" data-arrive={arriving === "benchmarks" ? "1" : undefined}>
+          <Benchmarks data={data} />
+        </section>
+        <section id="design-process" data-tab="design" data-arrive={arriving === "design" ? "1" : undefined}>
+          <DesignProcess data={data} />
+        </section>
+        <section id="future" data-tab="future" data-arrive={arriving === "future" ? "1" : undefined}>
+          <Future data={data} />
+        </section>
+        <Footer note={data.footer_note} />
       </main>
-      <Footer note={data.footer_note} />
+      {upsell ? <LiftCarrier label={upsell.scene_view.popup_fine_print} /> : null}
     </>
   );
 }

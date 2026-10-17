@@ -18,6 +18,8 @@ Citations are copy, not run data. They stay in the fixture.
 
 `leaderboard.json` is either `{ "models": [ Model, ... ] }` or a bare array. Other files in `runs/eval/` are used only when the leaderboard is absent. Each file may be one model or `{ "models": [...] }`.
 
+The object form may also carry the headline slot. `claim` is `"within"` unless it is exactly `"beats"`. `catch_pct`, `cost_ratio`, and `point_gap` are numbers. Leave them out and, once the eval is real, the loader fills them from the guard and Claude Sonnet rows: catch rate, Claude’s cost divided by the guard’s cost, and the guard’s catch rate minus Claude’s. `point_gap` is signed; positive means the guard is ahead.
+
 ```json
 {
   "id": "guard",
@@ -32,6 +34,8 @@ Citations are copy, not run data. They stay in the fixture.
   "evidence_match": 88,
   "latency_ms_median": 212,
   "cost_per_1k_checks_usd": 0.04,
+  "ci_low": 87.8,
+  "ci_high": 94.2,
   "catch_rate_by_attack": { "popup_add_on": 96 },
   "by_attack": {
     "popup_add_on": {
@@ -47,7 +51,8 @@ Citations are copy, not run data. They stay in the fixture.
 
 Required: `id`, `model`, `catch_rate`, `latency_ms_median`, `cost_per_1k_checks_usd`.
 
-- `emphasis` (or `role: "guard"`) marks the fine-tuned guard.
+- `emphasis` (or `role: "guard"`) marks the fine-tuned guard. Its scatter point stays white with the glow ring.
+- `ci_low` and `ci_high` are the 95% confidence interval in catch-rate percent. Both are required to draw that model’s error bar. The bar length is the interval, not a fixed pixel size. A missing pair draws no bar.
 - `catch_rate_300` / `catch_rate_100` may be `null`. A model with only `catch_rate_100` is a hollow point. The vertical axis is 40–100; a catch rate under 40 sits on the 40 line.
 - `catch_rate_by_attack` is keyed by attack row id: `popup_add_on`, `prechecked_extra`, `subscription_trap`, `hidden_fees`, `price_change`, `copycat_domain`, `fake_card_verification`, `listing_injection`. Popup add-on and pre-checked extra are both `preselected_addon` variants; they are separate rows.
 - `by_attack` is optional. Without it, false-block and evidence-match cells are an em dash. Latency and cost repeat the model-level figure, because those are per check.
@@ -55,7 +60,55 @@ Required: `id`, `model`, `catch_rate`, `latency_ms_median`, `cost_per_1k_checks_
 
 Latency cells use `formatLatency` in `web/src/lib/format.ts`. While a section is still example data, or the log has no latency, the site shows the literal `[N] ms`. A real value under 1000 ms renders as `212 ms`; 1000 ms or more renders as `1.4 s`.
 
-When eval is real, the scatter annotation replaces the literal `1/[40] the cost · [N] pts behind` from the guard and Gemini costs. It flips to `ahead` when the guard’s catch rate is higher. The Benchmarks headline and the landing comparison caption live in `web/src/lib/copy.ts`, not in this JSON.
+While `catch_pct` is null, the catch line shows the literal `[X]`. The catch sentence lives in `web/src/lib/copy.ts`. The Sonnet sentence does **not** use `cost_ratio` or `point_gap`. It is built from the results file below. The cost-scatter gap line is labeled only when that file has a page-cost ratio, or when `point_gap` is a real number. It does not say `1/[N] the cost` as a placeholder.
+
+## Results slices
+
+`runs/eval/results.json` wins, then `runs/results.json`. Until one of those is present and not synthetic, the site keeps the checked-in mock at `web/loader/results.mock.json` **hidden**. `"synthetic": true` drops every score, claim, gap, and `cost_per_page_usd` in that file. Production then says "Within [N] points of the baseline model." and shows no slice error bars.
+
+```json
+{
+  "synthetic": false,
+  "hero_slice": "in_dist",
+  "models": {
+    "guard": { "label": "SureShop guard", "cost_per_page_usd": 0.00004 },
+    "sonnet": { "label": "Baseline model", "cost_per_page_usd": 0.0062 }
+  },
+  "slices": {
+    "in_dist": {
+      "claim": "beats",
+      "gap_points": 2.4,
+      "scores": {
+        "guard": { "score": 93.1, "ci_low": 89.4, "ci_high": 95.8 },
+        "baseline": { "score": null, "ci_low": null, "ci_high": null }
+      }
+    },
+    "heldout_attack": {
+      "claim": "within",
+      "gap_points": 5.5,
+      "scores": {
+        "guard": { "score": 84, "ci_low": 79.1, "ci_high": 88.2 },
+        "baseline": { "score": null, "ci_low": null, "ci_high": null }
+      }
+    },
+    "heldout_template": {
+      "claim": "within",
+      "gap_points": 3.1,
+      "scores": {
+        "guard": { "score": 88.4, "ci_low": 83.6, "ci_high": 92.1 },
+        "baseline": { "score": null, "ci_low": null, "ci_high": null }
+      }
+    }
+  }
+}
+```
+
+- `hero_slice` is `in_dist` (familiar pages), `heldout_attack` (new attacks), or `heldout_template` (new templates). Anything else, including a missing field, is `in_dist`. The hero speaks only that slice, then a 12 px tag such as "on familiar pages".
+- `claim` is `"within"` unless it is exactly `"beats"`. The hero says "Level with the baseline model" or "Within [N] points of the baseline model". `[N]` is `gap_points` when that number is present.
+- Benchmarks joins the slices that exist: "Level with the baseline model on familiar pages, within 5.5 points on new attacks, within 3.1 points on new templates."
+- Each score is a catch rate, 0–100. `ci_low` and `ci_high` together draw that model's error bar on the slice. One without the other draws the point only.
+- `cost_per_page_usd` must be set on both `guard` (or `sureshop`) and `sonnet` (or `claude`) or the words "at 1/[N] the cost" are omitted. The ratio is Sonnet's page cost divided by ours. `cost_per_1k_checks_usd` does not fill this phrase.
+- Model ids on a score row should match `models`. `guard` is drawn in near-white. Other dots stay `#9AA3AE`.
 
 ## Training
 

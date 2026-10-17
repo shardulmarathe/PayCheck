@@ -1,3 +1,4 @@
+import { HiddenTrick } from "../components/HiddenTrick";
 import type { Dataset } from "../lib/types";
 
 export function Future({ data }: { data: Dataset }) {
@@ -26,6 +27,10 @@ export function Future({ data }: { data: Dataset }) {
             <p className="micro future-status">{item.status}</p>
           </article>
         ))}
+        <HiddenTrick id="future-sub" kind="solid" label="Blocked · subscription trap">
+          <span className="trick-box" />
+          Subscribe & save 10% · renews at $12.99/mo
+        </HiddenTrick>
       </section>
     </div>
   );

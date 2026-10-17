@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { KioskHero } from "../components/KioskHero";
+import { useRef } from "react";
 import { ReplayScene } from "../components/Replay";
-import { Shutter } from "../components/Chrome";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
-import { useCut } from "../hooks/useCut";
 import { useReplayChoice } from "../hooks/useRoute";
+import { useIntroPhase } from "../components/motion/Intro";
 import { COPY } from "../lib/copy";
+import { heroClaim } from "../lib/results";
 import { EASE } from "../lib/ease";
-import { formatUsd } from "../lib/format";
+import { formatUsd, trimNum } from "../lib/format";
+import { STAGGER } from "../lib/motion";
 import { TAGLINE_LINES } from "../lib/product";
 import type { Dataset, UpsellReplay } from "../lib/types";
 
@@ -17,40 +18,62 @@ function money(n: number): string {
 
 export function Demo({ data }: { data: Dataset }) {
   const reduced = usePrefersReducedMotion();
+  const phase = useIntroPhase();
+  const settled = useRef(phase === "done");
+  const showCopy = phase === "done" || reduced;
   const upsell = data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell");
   const [choice, select] = useReplayChoice();
-  const target = data.replays.find((replay) => (choice === 2 ? replay.scene === "scam" : replay.scene === "upsell")) ?? data.replays[0];
-  const { shown, phase } = useCut(target?.id ?? "replay");
-  const visible = data.replays.find((replay) => replay.id === shown) ?? target;
+  const visible = data.replays.find((replay) => (choice === 2 ? replay.scene === "scam" : replay.scene === "upsell")) ?? data.replays[0];
   const addon = upsell?.without.lines.find((line) => line.damage);
+  const catchPct = data.benchmarks.catch_pct;
+  const catchLabel = catchPct == null || !Number.isFinite(catchPct) ? "[X]" : trimNum(Math.abs(catchPct));
+  const sonnet = heroClaim(data.results);
+  const enter = (index: number) =>
+    reduced || settled.current
+      ? { duration: 0 }
+      : { duration: 0.7, delay: index * STAGGER, ease: EASE };
 
   return (
     <div className="wrap">
       <section className="section beat-hero" aria-labelledby="hero-title">
         <div className="hero-lockup">
           <div className="hero-copy">
-            <p className="label">{data.hero.eyebrow}</p>
+            <motion.p className="label" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(0)}>
+              {data.hero.eyebrow}
+            </motion.p>
             <motion.h1
               id="hero-title"
               className="display"
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduced ? 0 : 0.9, ease: EASE }}
+              initial={false}
+              animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }}
+              transition={enter(1)}
             >
               {TAGLINE_LINES[0]}
               <br />
               {TAGLINE_LINES[1]}
             </motion.h1>
-            <p className="hero-lead">A small, fast model reads every page and cart before your agent pays, and stops the trick.</p>
+            {addon ? (
+              <motion.p className="use-case" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(2)}>
+                {COPY.useCase(formatUsd(addon.amount))}
+              </motion.p>
+            ) : null}
+            <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(3)}>
+              {COPY.catchLine(catchLabel)}
+            </motion.p>
+            <motion.p className="hero-sonnet" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(4)}>
+              {sonnet.sentence}
+            </motion.p>
+            <motion.p className="slice-tag" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 12 }} transition={enter(5)}>
+              {sonnet.tag}
+            </motion.p>
           </div>
-          {upsell ? <KioskHero replay={upsell} example={data.example.replays} /> : null}
+          <div id="kiosk-slot" className="kiosk-slot" />
         </div>
       </section>
 
       {visible ? (
-        <ReplayScene key={visible.id} replay={visible} example={data.example.replays} choice={choice} onChoice={select} />
+        <ReplayScene replay={visible} example={data.example.replays} choice={choice} onChoice={select} />
       ) : null}
-      <Shutter phase={phase} />
 
       {upsell && addon ? (
         <motion.section

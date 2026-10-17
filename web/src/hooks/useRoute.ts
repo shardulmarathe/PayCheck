@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
 
 export const TABS = [
-  { id: "demo", href: "#/", label: "Demo" },
-  { id: "benchmarks", href: "#/benchmarks", label: "Benchmarks" },
-  { id: "design", href: "#/design-process", label: "Design process" },
-  { id: "future", href: "#/future", label: "Future improvements" },
+  { id: "demo", href: "#demo", label: "Demo" },
+  { id: "benchmarks", href: "#benchmarks", label: "Benchmarks" },
+  { id: "design", href: "#design-process", label: "Design process" },
+  { id: "future", href: "#future", label: "Future improvements" },
 ] as const;
 
 export type TabId = (typeof TABS)[number]["id"];
 
-export function parseHash(hash: string): TabId {
+/** Element id the tab glides to. The design tab's id stays `design` for the observer. */
+export function sectionId(tab: TabId): string {
+  if (tab === "design") return "design-process";
+  return tab;
+}
+
+export function tabFromHash(hash: string): TabId {
   const path = hash.replace(/^#/, "").replace(/\/$/, "") || "/";
-  if (path === "/" || path === "/demo" || path === "/replay-2" || path === "replay-2") return "demo";
-  if (path === "/benchmarks") return "benchmarks";
-  if (path === "/design-process" || path === "/design") return "design";
-  if (path === "/future" || path === "/future-improvements") return "future";
+  if (path === "/benchmarks" || path === "benchmarks") return "benchmarks";
+  if (path === "/design-process" || path === "design-process" || path === "/design" || path === "design") return "design";
+  if (path === "/future" || path === "future" || path === "/future-improvements" || path === "future-improvements") return "future";
   return "demo";
+}
+
+export function parseHash(hash: string): TabId {
+  return tabFromHash(hash);
 }
 
 export type ReplayChoice = 1 | 2;
@@ -36,8 +45,8 @@ export function useReplayChoice(): [ReplayChoice, (next: ReplayChoice) => void] 
   }, []);
 
   const select = (next: ReplayChoice) => {
-    const hash = next === 2 ? "#/replay-2" : "#/";
-    if (window.location.hash !== hash) window.location.hash = hash;
+    const hash = next === 2 ? "#replay-2" : "#demo";
+    if (window.location.hash !== hash) window.history.replaceState(null, "", hash);
     setChoice(next);
   };
 

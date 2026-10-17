@@ -10,6 +10,7 @@ import type {
   Verdict,
 } from "../src/lib/types";
 import { fixtureDataset } from "./fixtures";
+import { assertClaimRules, EMPTY_RESULTS, normalizeResults, type ResultsView } from "../src/lib/results";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return !!value && typeof value === "object" && !Array.isArray(value);
@@ -67,6 +68,9 @@ function normalizeModel(raw: unknown, notes: string[], file: string): ModelEval 
     return undefined;
   }
   const pages = num(raw.pages) ?? 300;
+  const ciLow = num(raw.ci_low);
+  const ciHigh = num(raw.ci_high);
+  const ci = ciLow != null && ciHigh != null ? { low: ciLow, high: ciHigh } : null;
   const catch300 =
     raw.catch_rate_300 === null ? null : (num(raw.catch_rate_300) ?? (pages >= 300 ? catchRate : null));
   const catch100 =
@@ -99,17 +103,27 @@ function normalizeModel(raw: unknown, notes: string[], file: string): ModelEval 
     evidence_match: raw.evidence_match === null ? null : (num(raw.evidence_match) ?? null),
     latency_ms_median: latency,
     cost_per_1k_checks_usd: cost,
+    ci_low: ci?.low ?? null,
+    ci_high: ci?.high ?? null,
     catch_rate_by_attack: numMap(raw.catch_rate_by_attack) ?? {},
     by_attack: byAttack,
   };
 }
 
-function loadModels(runsRoot: string, notes: string[]): ModelEval[] | undefined {
+function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; claim?: "within" | "beats"; catch_pct: number | null; cost_ratio: number | null; point_gap: number | null } | undefined {
   const evalDir = path.join(runsRoot, "eval");
   const leaderboard = readJson(path.join(evalDir, "leaderboard.json"), notes);
   const rawModels: unknown[] = [];
+  let claim: "within" | "beats" | undefined;
+  let catchPct: number | null = null;
+  let costRatio: number | null = null;
+  let pointGap: number | null = null;
   if (isRecord(leaderboard) && Array.isArray(leaderboard.models)) {
     rawModels.push(...leaderboard.models);
+    if (leaderboard.claim === "beats" || leaderboard.claim === "within") claim = leaderboard.claim;
+    catchPct = num(leaderboard.catch_pct) ?? null;
+    costRatio = num(leaderboard.cost_ratio) ?? null;
+    pointGap = num(leaderboard.point_gap) ?? null;
   } else if (Array.isArray(leaderboard)) {
     rawModels.push(...leaderboard);
   }
@@ -125,7 +139,7 @@ function loadModels(runsRoot: string, notes: string[]): ModelEval[] | undefined 
   const models = rawModels
     .map((raw, index) => normalizeModel(raw, notes, `eval model ${index}`))
     .filter((model): model is ModelEval => !!model);
-  return models.length ? models : undefined;
+  return models.length ? { models, claim, catch_pct: catchPct, cost_ratio: costRatio, point_gap: pointGap } : undefined;
 }
 
 function normalizeRound(raw: unknown): TrainingRound | undefined {
@@ -259,23 +273,61 @@ function applyDerived(ds: Dataset): Dataset {
   const testSet = ds.benchmarks.roster.find((col) => col.label === "Test set");
   if (testSet) testSet.title = `${testPages} pages`;
 
-  const gemini = ds.models.find((model) => model.id === "gemini" || /gemini/i.test(model.model));
-  if (!ds.example.eval && guard && gemini && guard.cost_per_1k_checks_usd > 0) {
-    const pts = Math.abs(gemini.catch_rate - guard.catch_rate);
-    const ahead = guard.catch_rate > gemini.catch_rate;
-    const ratio = gemini.cost_per_1k_checks_usd / guard.cost_per_1k_checks_usd;
-    ds.benchmarks.cost_annotation = `1/${trimNum(ratio)} the cost · ${trimNum(pts)} pts ${ahead ? "ahead" : "behind"}`;
-    ds.benchmarks.cost_placeholder = false;
+  const claude = ds.models.find((model) => model.id === "claude" || /claude/i.test(model.model));
+  if (!ds.example.eval && guard && claude && guard.cost_per_1k_checks_usd > 0) {
+    if (ds.benchmarks.catch_pct == null) ds.benchmarks.catch_pct = guard.catch_rate;
+    if (ds.benchmarks.cost_ratio == null) ds.benchmarks.cost_ratio = claude.cost_per_1k_checks_usd / guard.cost_per_1k_checks_usd;
+    if (ds.benchmarks.point_gap == null) ds.benchmarks.point_gap = guard.catch_rate - claude.catch_rate;
+    const ratio = ds.benchmarks.cost_ratio;
+    const gap = ds.benchmarks.point_gap;
+    if (ratio != null && gap != null) {
+      const signed = `${gap > 0 ? "+" : gap < 0 ? "-" : ""}${trimNum(Math.abs(gap))}`;
+      ds.benchmarks.cost_annotation = `1/${trimNum(ratio)} the cost · ${signed} pts`;
+      ds.benchmarks.cost_placeholder = false;
+    }
   }
   return ds;
 }
 
+/**
+ * Real slice scores come from runs/eval/results.json (or runs/results.json).
+ * The checked-in mock is synthetic, so its scores, claims, gaps, and costs stay hidden.
+ */
+function loadResults(repoRoot: string, notes: string[]): ResultsView {
+  const mockPath = path.join(repoRoot, "web", "loader", "results.mock.json");
+  const mock = normalizeResults(readJson(mockPath, notes));
+  if (!mock?.synthetic) {
+    throw new Error("web/loader/results.mock.json must stay a synthetic results file");
+  }
+
+  const candidates = [path.join(repoRoot, "runs", "eval", "results.json"), path.join(repoRoot, "runs", "results.json")];
+  for (const file of candidates) {
+    if (!fs.existsSync(file)) continue;
+    const parsed = normalizeResults(readJson(file, notes));
+    const label = path.relative(repoRoot, file);
+    if (!parsed) {
+      notes.push(`${label} is not a results file`);
+      continue;
+    }
+    if (parsed.synthetic) {
+      notes.push(`${label} is synthetic; slice scores stay hidden`);
+      return EMPTY_RESULTS;
+    }
+    notes.push(`results from ${label}`);
+    return parsed.view;
+  }
+  notes.push("results.mock.json is synthetic; slice scores stay hidden");
+  return EMPTY_RESULTS;
+}
+
 /** Build-time dataset. Real runs/ JSON replaces a section; everything else stays on fixtures. */
 export function loadDataset(repoRoot: string): Dataset {
+  assertClaimRules();
   const ds = structuredClone(fixtureDataset) as Dataset;
   const notes: string[] = [];
+  ds.results = loadResults(repoRoot, notes);
   if (process.env.GUARD_GYM_FORCE_FIXTURES === "1") {
-    ds.notes = ["GUARD_GYM_FORCE_FIXTURES=1, fixtures kept"];
+    ds.notes = ["GUARD_GYM_FORCE_FIXTURES=1, fixtures kept", ...notes];
     return applyDerived(ds);
   }
 
@@ -286,8 +338,12 @@ export function loadDataset(repoRoot: string): Dataset {
   const tally = loadTally(runsRoot, notes);
 
   if (models) {
-    ds.models = models;
+    ds.models = models.models;
     ds.example.eval = false;
+    if (models.claim) ds.benchmarks.claim = models.claim;
+    if (models.catch_pct != null) ds.benchmarks.catch_pct = models.catch_pct;
+    if (models.cost_ratio != null) ds.benchmarks.cost_ratio = models.cost_ratio;
+    if (models.point_gap != null) ds.benchmarks.point_gap = models.point_gap;
   }
   if (rounds) {
     ds.rounds = rounds;

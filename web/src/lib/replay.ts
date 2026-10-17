@@ -50,7 +50,6 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
   const clickAt = at(replay, "click") ?? popupAt + 3800;
   const latency = replay.verdict.latency_ms;
   const end = reduced || t >= replay.duration_ms - 1;
-  const countAt = (now: number) => (latency == null ? 0 : Math.round(seg(now, catchAt, 400) * latency));
 
   if (end) {
     return {
@@ -83,10 +82,10 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
     };
   }
 
-  const dimIn = seg(t, catchAt, 800);
-  const dimOut = seg(t, catchAt + 1200, 1000);
-  const glowIn = seg(t, catchAt, 300);
-  const glowOut = seg(t, catchAt + 1200, 600);
+  const dimIn = seg(t, catchAt, 400);
+  const dimOut = seg(t, catchAt + 1100, 500);
+  const bracket = seg(t, catchAt, 400);
+  const settle = seg(t, catchAt + 900, 500);
 
   return {
     catchAt,
@@ -95,11 +94,11 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
     paidAt,
     clickAt,
     dim: dimIn * (1 - dimOut),
-    bracket: seg(t, catchAt, 600),
-    settle: seg(t, catchAt + 1200, 900),
-    glow: glowIn * (1 - glowOut),
-    msShown: t < catchAt ? 0 : countAt(t),
-    count: t < catchAt ? 0 : seg(t, catchAt, 400),
+    bracket,
+    settle,
+    glow: bracket * (1 - settle),
+    msShown: t < catchAt ? 0 : (latency ?? 0),
+    count: t < catchAt ? 0 : 1,
     sincePaid: Math.max(0, t - paidAt),
     letterFlip: seg(t, catchAt, 400),
     letterBracket: seg(t, catchAt + 400, 200),

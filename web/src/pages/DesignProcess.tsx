@@ -1,4 +1,5 @@
 import { ExampleMark } from "../components/Chrome";
+import { HiddenTrick } from "../components/HiddenTrick";
 import { LoopDiagram } from "../components/Loop";
 import type { Dataset } from "../lib/types";
 
@@ -42,11 +43,16 @@ export function DesignProcess({ data }: { data: Dataset }) {
         </div>
       </section>
       <section className="section plug-v3">
-        <h2 className="h2">
-          {process.plug_title_lines[0]}
-          <br />
-          {process.plug_title_lines[1]}
-        </h2>
+        <div>
+          <h2 className="h2">
+            {process.plug_title_lines[0]}
+            <br />
+            {process.plug_title_lines[1]}
+          </h2>
+          <HiddenTrick id="design-urgency" kind="dashed" label="Blocked · fake urgency">
+            <span className="trick-badge">Only 2 left!</span>
+          </HiddenTrick>
+        </div>
         <div className="code-card">
           <p className="label">TypeScript</p>
           <pre>{process.request_code}</pre>

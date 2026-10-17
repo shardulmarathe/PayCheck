@@ -3,7 +3,7 @@ import type { KeyboardEvent, RefObject } from "react";
 import { usePrefersReducedMotion, useReplay } from "../hooks/useReplay";
 import type { ReplayChoice } from "../hooks/useRoute";
 import { easeOut, mixHex } from "../lib/ease";
-import { clock, formatLatency, formatLatencyCount, formatUsd } from "../lib/format";
+import { clock, formatLatency, formatUsd } from "../lib/format";
 import { visualAt, type Visual } from "../lib/replay";
 import type { CartScene, LaneCopy, Replay } from "../lib/types";
 
@@ -27,8 +27,8 @@ function CornerFrame({ progress, settle, glow, dashed }: { progress: number; set
   if (progress <= 0.01) return null;
   const color = mixHex("#FF453A", "#EEF1F5", settle);
   const out = (1 - progress) * 12;
-  const filter = glow > 0.02 ? `drop-shadow(0 0 8px rgb(255 69 58 / ${0.45 * glow}))` : undefined;
-  const dash = dashed ? "3 2" : undefined;
+  const filter = glow > 0.02 ? "drop-shadow(0 0 6px rgb(255 69 58 / 0.20))" : undefined;
+  const dash = dashed ? "4 3" : undefined;
   const corners = [
     { key: "tl", style: { top: -out, left: -out }, d: "M13 1 H1 V13" },
     { key: "tr", style: { top: -out, right: -out }, d: "M1 1 H13 V13" },
@@ -63,8 +63,8 @@ function Readout({
   const color = mixHex("#FF453A", "#9AA3AE", visual.settle);
   return (
     <p className={inline ? "readout inline" : "readout"} style={{ color }} aria-hidden="true">
-      <span style={{ textShadow: visual.glow > 0.05 ? `0 0 8px rgb(255 69 58 / ${0.45 * visual.glow})` : undefined }}>
-        {formatLatencyCount(latency, visual.count, example)} · Blocked · {category}
+      <span style={{ textShadow: visual.glow > 0.05 ? "0 0 6px rgb(255 69 58 / 0.20)" : undefined }}>
+        {formatLatency(latency, example)} · Blocked · {category}
       </span>
     </p>
   );
@@ -134,7 +134,7 @@ function UpsellLane({
   const showPopup = visual.popup > 0.35 || visual.settle > 0 || visual.clicked;
   const shadow = panelShadow(yaw);
   return (
-    <article className="lane">
+      <article className="lane" data-lift-panel={guarded ? "" : undefined}>
       <div className="lane-kicker">
         <p className="label">{copy.kicker}</p>
         <p className="micro">{shopper}</p>
@@ -176,7 +176,9 @@ function UpsellLane({
                     </div>
                     <div className="fine-wrap">
                       {guarded ? <CornerFrame progress={visual.bracket} settle={visual.settle} glow={visual.glow} dashed={false} /> : null}
-                      <p className="fine-print">{scene.popup_fine_print}</p>
+                      <p className="fine-print" data-lift-target={guarded ? "" : undefined}>
+                        {scene.popup_fine_print}
+                      </p>
                     </div>
                   </div>
                   {!guarded && visual.clicked ? <p className="lane-note">{copy.story_body}</p> : null}
