@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { formatLatency, lostCounterCopy, subscriptionCopy, trimNum } from "../src/lib/format";
+import { lostCounterCopy, subscriptionCopy, trimNum } from "../src/lib/format";
 import { lossWindow, visualAt } from "../src/lib/replay";
 import type {
   Dataset,
@@ -324,22 +324,9 @@ function loadTally(runsRoot: string, notes: string[]): TallyItem[] | "withheld" 
 }
 
 function applyDerived(ds: Dataset): Dataset {
-  const rounds = [...ds.rounds].sort((a, b) => a.round - b.round);
-  const last = rounds[rounds.length - 1];
-  const trained = rounds.filter((round) => round.round > 0);
   const guard = ds.models.find((model) => model.emphasis) ?? ds.models[0];
   const upsell = ds.replays.find((replay) => replay.scene === "upsell");
 
-  if (last) {
-    ds.process.round_label = last.round === 0 ? "Base" : `Round ${last.round}`;
-    ds.process.caught_pct = last.catch_seen;
-  }
-  const step04 = ds.process.steps.find((step) => step.n === "04");
-  const step05 = ds.process.steps.find((step) => step.n === "05");
-  if (step04 && guard && !ds.example.eval && guard.latency_ms_median != null) {
-    step04.meta = `${formatLatency(guard.latency_ms_median)} median`;
-  }
-  if (step05 && !ds.example.training) step05.meta = `${trained.length} rounds so far`;
   if (guard && !ds.example.eval && guard.latency_ms_median != null) ds.hero.median_catch_ms = guard.latency_ms_median;
   else if (upsell && !ds.example.replays && upsell.verdict.latency_ms != null) {
     ds.hero.median_catch_ms = upsell.verdict.latency_ms;
@@ -434,11 +421,7 @@ function hideSynthetic(ds: Dataset, show: boolean, real: { models: boolean; roun
     }
   }
   if (!ds.shown.replays) ds.replays = [];
-  if (!ds.shown.training) {
-    ds.rounds = [];
-    ds.process.caught_pct = null;
-    ds.process.round_label = "";
-  }
+  if (!ds.shown.training) ds.rounds = [];
   if (!ds.shown.tally) ds.tally.items = [];
 }
 

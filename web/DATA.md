@@ -2,15 +2,15 @@
 
 The site reads JSON from the repo-root `runs/` directory at dev and build time (`web/loader/loadDataset.ts`). Every benchmarks, replay, training-round, and tally file needs a top-level `"synthetic": true|false`. A missing flag counts as synthetic. Set `GUARD_GYM_FORCE_FIXTURES=1` to ignore `runs/` entirely.
 
-`NEXT_PUBLIC_SHOW_EXAMPLES` is read when the dataset is built (Vite does not expose `NEXT_PUBLIC_*` to the browser). Unset, it is **false in production** and **true in `vite dev`**. `true` / `1` / `yes` shows fixtures and keeps the "example data" labels. `false` / `0` / `no` hides every section whose data is still synthetic: the block is not rendered, its numbers are left out of the client bundle, and the nav drops links to empty pages. The design-process and future pages stay, because they are copy; only the training-round statistic is removed. If the replays are hidden, the landing page is the tagline and the kiosk.
+`NEXT_PUBLIC_SHOW_EXAMPLES` is read when the dataset is built (Vite does not expose `NEXT_PUBLIC_*` to the browser). Unset, it is **false in production** and **true in `vite dev`**. `true` / `1` / `yes` shows fixtures and keeps the "example data" labels. `false` / `0` / `no` hides every section whose data is still synthetic: the block is not rendered, its numbers are left out of the client bundle, and the nav drops links to empty pages. The design-process and future pages stay, because they are copy. The training-loop ring reads `process.new_layout_pct` and `process.round_n`. Both stay null until a real new-layout result is filled in, and null renders as `[X]%` and `ROUND r[n]`. Do not copy `catch_seen` into that ring. If the replays are hidden, the landing page is the tagline and the kiosk.
 
 Catch rates are percents from 0 to 100. Do not store fractions. `isExample` on the loaded dataset is true only when eval, training, replays, and tally are all still fixtures. Per-section flags live on `example`.
 
 | File | Replaces |
 | --- | --- |
 | `runs/eval/leaderboard.json` (or any other `runs/eval/*.json`) | summary table, cost scatter, the cost-gap label |
-| `runs/training/*.json` (for example `round0.json`) | the design-process loop’s round and caught figure |
-| `rounds` inside `runs/eval/*.json` | that same loop figure, only when `runs/training/` has no valid rounds |
+| `runs/training/*.json` (for example `round0.json`) | loaded for the dataset; not drawn in the training loop |
+| `rounds` inside `runs/eval/*.json` | the same training rounds, only when `runs/training/` has no valid rounds |
 | `runs/replays/*.json` | the Demo replays, the kiosk screen, and the comparison line |
 | `runs/tally.json` | loaded, not drawn. v3 removed the tally strip |
 

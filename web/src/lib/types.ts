@@ -321,10 +321,17 @@ export interface Dataset {
     sources_label: string;
     sources: { title: string; detail: string }[];
     feeds_label: string;
-    nodes: { n: string; title: string; detail: string; place: "top" | "right" | "bottom" | "left" }[];
-    round_label: string;
-    /** Null when the training rounds are synthetic and examples are hidden. */
-    caught_pct: number | null;
+    nodes: { n: string; title: string; detail: string; place: "left" | "right" | "bottom" }[];
+    /**
+     * Round index printed in the ring. Null stays the `r[n]` placeholder.
+     * Training-round files do not fill this.
+     */
+    round_n: number | null;
+    /**
+     * New-layout test score, the headline number. Null stays `[X]%`.
+     * Never copy a training-round catch rate into this field.
+     */
+    new_layout_pct: number | null;
     caught_caption: string;
     steps_kicker: string;
     steps: ProcessStep[];

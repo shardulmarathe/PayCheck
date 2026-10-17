@@ -1249,17 +1249,24 @@ table.data .group th {
 .held-title { font-size: 28px; line-height: 36px; font-weight: 300; max-width: none; }
 .held-table td, .held-table th[scope="row"] { font-family: var(--mono); font-size: 16px; }
 
-.loop-v3 { position: relative; height: 640px; margin-top: 72px; }
-.loop-floor { width: min(1000px, 100%); height: auto; display: block; margin: 0 auto; }
-.loop-v3 .loop-center { top: 48%; }
-.loop-v3 .loop-pct { font-size: 64px; line-height: 68px; }
-.loop-labels { position: absolute; inset: 0; }
-.loop-label {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 220px;
-  text-align: center;
+.loop-v3 { position: relative; margin-top: 72px; }
+.loop-stage { position: relative; width: min(1000px, 100%); margin: 0 auto; aspect-ratio: 1000 / 520; }
+.loop-floor { width: 100%; height: 100%; display: block; }
+.loop-v3 .loop-center { top: 50%; width: 280px; }
+.loop-round {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  color: var(--text-2);
 }
+.loop-v3 .loop-pct { font-size: 64px; line-height: 68px; margin: 4px 0; }
+.loop-labels { position: absolute; inset: 0; }
+.loop-label { position: absolute; width: 300px; }
+.loop-label.left { transform: translate(calc(-100% - 16px), calc(-100% - 40px)); text-align: right; }
+.loop-label.right { transform: translate(16px, calc(-100% - 40px)); text-align: left; }
+.loop-label.below { transform: translate(-50%, 44px); text-align: center; width: min(500px, 92%); }
+.node-list .title + .micro { text-transform: none; letter-spacing: 0; }
 .loop-label p:first-child { font-size: 18px; line-height: 24px; }
 .loop-label .micro { text-transform: none; letter-spacing: 0; margin-top: 4px; }
 .loop-floor circle:last-of-type { filter: blur(0.4px); }
@@ -1335,8 +1342,9 @@ table.data .group th {
   .compare { flex-direction: column; align-items: center; gap: 8px; }
   .compare-lost, .compare-kept { font-size: 56px; }
   .compare-word { font-size: 24px; }
-  .loop-v3 { height: auto; }
-  .loop-floor, .loop-labels, .loop-v3 .loop-center { display: none; }
+  .loop-stage { aspect-ratio: auto; }
+  .loop-floor, .loop-labels { display: none; }
+  .loop-v3 .loop-center { position: static; transform: none; width: auto; margin: 28px 0 8px; }
   .future-row { grid-template-columns: 36px 1fr; }
   .future-status { grid-column: 2; }
   .future-row h2 { font-size: 28px; line-height: 34px; }

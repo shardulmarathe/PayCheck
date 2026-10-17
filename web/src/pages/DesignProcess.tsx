@@ -1,4 +1,3 @@
-import { ExampleMark } from "../components/Chrome";
 import { HiddenTrick } from "../components/HiddenTrick";
 import { LoopDiagram } from "../components/Loop";
 import type { Dataset } from "../lib/types";
@@ -19,17 +18,13 @@ export function DesignProcess({ data }: { data: Dataset }) {
         </p>
         <LoopDiagram
           nodes={process.nodes}
-          roundLabel={process.round_label}
-          caught={data.shown.training ? process.caught_pct : null}
+          round={process.round_n}
+          score={process.new_layout_pct}
           caption={process.caught_caption}
-          example={data.shown.training && data.example.training}
         />
       </section>
       <section className="section">
-        <div className="kicker-row">
-          <p className="label">{process.steps_kicker}</p>
-          <ExampleMark show={data.shown.training && data.example.training} />
-        </div>
+        <p className="label">{process.steps_kicker}</p>
         <div className="steps-v3">
           {process.steps.map((step) => (
             <article key={step.n} className="step-v3">

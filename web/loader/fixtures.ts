@@ -221,8 +221,7 @@ export const fixtureDataset: Dataset = {
     body: "Every model sees the same 300 pages, held back before any training data was generated.",
     test_pages: 300,
     roster: [
-      { label: "Attacker", title: "Grok", detail: "writes new tricks each round" },
-      { label: "Shopper", title: "Claude Haiku", detail: "via Browser Use" },
+      { label: "Practice pages", title: "New each round", detail: "one trick per page" },
       { label: "Guard", title: "Qwen3-4B", detail: "fine-tuned on veri.studio" },
       { label: "Test set", title: "300 pages", detail: "frozen, split by page" },
     ],
@@ -393,7 +392,7 @@ export const fixtureDataset: Dataset = {
   process: {
     kicker: "Design process · how it is built",
     title_lines: ["Every miss becomes", "the next lesson."],
-    body: "One model invents tricks, one shops, one guards. Whatever slips past goes back into training.",
+    body: "Each round brings new practice pages. The guard reads each one and passes or blocks it. Misses on dev pages seed the next round.",
     sources_label: "Real dark-pattern sources",
     sources: [
       { title: "Princeton dark-patterns study", detail: "11K shopping sites, 2019" },
@@ -402,14 +401,13 @@ export const fixtureDataset: Dataset = {
     ],
     feeds_label: "feeds the attacker",
     nodes: [
-      { n: "01", title: "Attacker builds the store", detail: "Grok · new tricks each round", place: "top" },
-      { n: "02", title: "Shopper walks it", detail: "Claude Haiku via Browser Use", place: "right" },
-      { n: "03", title: "Guard checks every page", detail: "Qwen3-4B, fine-tuned", place: "bottom" },
-      { n: "04", title: "Misses go back into training", detail: "fine-tuned on veri.studio", place: "left" },
+      { n: "01", title: "New practice pages", detail: "each hiding one trick", place: "left" },
+      { n: "02", title: "Guard reads each page", detail: "Qwen3-4B, QLoRA · passes or blocks", place: "right" },
+      { n: "03", title: "Misses seed the next round", detail: "misses on dev pages · fresh dev split each round", place: "bottom" },
     ],
-    round_label: "Round 3",
-    caught_pct: 94,
-    caught_caption: "caught",
+    round_n: null,
+    new_layout_pct: null,
+    caught_caption: "new-layout test · the headline",
     steps_kicker: "Step by step",
     steps: [
       {
@@ -420,26 +418,20 @@ export const fixtureDataset: Dataset = {
       },
       {
         n: "02",
-        title: "Grok builds a store",
-        body: "Each round, Grok builds a practice store hiding one trick: a popup add-on, pre-checked extra, hidden fee, checkout price change, subscription trap or fake card-verification page. Copycat stores and listing injection are held out for testing.",
+        title: "New practice pages",
+        body: "Each round brings new practice pages, each hiding one of five tricks: hidden fees, pre-selected add-ons (pre-checked box, popup, one-click offer), price changes, subscription traps or fake card verification. Copycat stores and listing injection are held out (never trained on).",
         meta: "",
       },
       {
         n: "03",
-        title: "Haiku goes shopping",
-        body: "Claude Haiku runs the errand in a real browser through Browser Use.",
+        title: "The guard reads each page",
+        body: "Qwen3-4B, fine-tuned with QLoRA on veri.studio, passes or blocks every page.",
         meta: "",
       },
       {
         n: "04",
-        title: "The guard checks every step",
-        body: "Before payment it allows or blocks, quotes the trick and tells the shopper how to steer around it.",
-        meta: "",
-      },
-      {
-        n: "05",
-        title: "Misses become training",
-        body: "Every trick that got through joins the next fine-tune on veri.studio.",
+        title: "Misses seed the next round",
+        body: "Misses on dev pages seed the next round. Each round is scored on a fresh dev split; the headline is the new-layout test, on page layouts it never trains on.",
         meta: "",
       },
     ],
@@ -472,7 +464,7 @@ export const fixtureDataset: Dataset = {
       {
         n: "03",
         title: "Runs on-device",
-        body: "A quantized guard that checks pages on the shopper's own laptop or phone.",
+        body: "A quantized guard that checks pages on a laptop or phone.",
         status: "Later",
       },
       {
