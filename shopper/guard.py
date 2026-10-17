@@ -29,14 +29,100 @@ def normalize(value: str) -> str:
     return _SPACE.sub(" ", value or "").strip()
 
 
-def _armed(attack_type: str, text: str) -> bool:
-    """Whether the matched label is still the dangerous state of the page."""
-    if attack_type == "hidden_fees" and "id=fee" in text:
-        return "checkbox checked | id=fee" in text
-    if attack_type == "subscription_trap" and "id=purchase-once" in text:
-        return "radio checked | id=purchase-once" not in text
-    if attack_type == "preselected_addon" and "id=addon" in text:
-        return "checkbox checked | id=addon" in text
+_STOP_WORDS = {
+    "a",
+    "an",
+    "and",
+    "at",
+    "for",
+    "from",
+    "in",
+    "include",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "the",
+    "this",
+    "to",
+    "was",
+    "with",
+    "your",
+}
+
+
+def _content_words(value: str) -> set[str]:
+    return {word for word in re.findall(r"[a-z0-9]+", value.lower()) if word not in _STOP_WORDS and not word.isdigit()}
+
+
+def _related(label: str, evidence: str) -> bool:
+    """True when a control label is the same offer as the guard evidence."""
+    if evidence and evidence.casefold() in label.casefold():
+        return True
+    words = _content_words(evidence)
+    if not words:
+        return False
+    found = words & _content_words(label)
+    if len(words) == 1:
+        return bool(found)
+    return len(found) >= 2
+
+
+def _control_rows(text: str):
+    """Yield checkbox and radio rows from the gym reader's compact text."""
+    for line in text.splitlines():
+        if "|" not in line:
+            continue
+        head = line.split("|", 1)[0].strip().lower()
+        if head.startswith("checkbox"):
+            kind = "checkbox"
+        elif head.startswith("radio"):
+            kind = "radio"
+        else:
+            continue
+        if "unchecked" in head:
+            state = "unchecked"
+        elif "checked" in head:
+            state = "checked"
+        else:
+            state = ""
+        yield kind, state, line.split("|")[-1].strip()
+
+
+def _named_state(text: str, kind: str, evidence: str) -> str:
+    """'on' or 'off' when a control label matches the evidence, else ''."""
+    on = False
+    off = False
+    for row_kind, state, label in _control_rows(text):
+        if row_kind != kind or not state or not _related(label, evidence):
+            continue
+        if state == "checked":
+            on = True
+        else:
+            off = True
+    if on:
+        return "on"
+    if off:
+        return "off"
+    return ""
+
+
+def _armed(attack_type: str, text: str, evidence: str) -> bool:
+    """Whether the matched label is still the dangerous state of the page.
+
+    This follows the gym reader's control labels. It does not look up element
+    ids or a fee-row layout.
+    """
+    if attack_type == "hidden_fees":
+        return _named_state(text, "checkbox", evidence) != "off"
+    if attack_type == "subscription_trap":
+        for kind, state, label in _control_rows(text):
+            if kind == "radio" and state == "checked" and ("one-time" in label.lower() or "one time" in label.lower()):
+                return False
+        return True
+    if attack_type == "preselected_addon":
+        return _named_state(text, "checkbox", evidence) != "off"
     return True
 
 
@@ -121,7 +207,7 @@ class MockGuard:
                 continue
             if not evidence or evidence not in folded:
                 continue
-            if not _armed(rule.attack_type, folded):
+            if not _armed(rule.attack_type, text, rule.evidence):
                 continue
             hits.append(rule)
         if not hits:

@@ -118,20 +118,21 @@ GEOMETRY_JS = r"""
     return [Math.round(rect.x), Math.round(rect.y), Math.round(rect.width), Math.round(rect.height)];
   }
   if (!evidence) return {viewport: viewport, evidence_bbox: null};
-  const trick = document.getElementById("trick");
-  const trickText = trick ? (trick.innerText || trick.textContent || "") : "";
-  if (trick && trickText.indexOf(evidence) !== -1) {
-    return {viewport: viewport, evidence_bbox: boxOf(trick)};
-  }
   const nodes = document.body ? document.body.querySelectorAll("*") : [];
+  let best = null;
+  let bestArea = Infinity;
   for (const node of nodes) {
-    if (node.children.length) continue;
     const text = (node.innerText || node.textContent || "").replace(/\s+/g, " ").trim();
-    if (text && text.indexOf(evidence) !== -1) {
-      return {viewport: viewport, evidence_bbox: boxOf(node)};
+    if (!text || text.indexOf(evidence) === -1) continue;
+    const box = boxOf(node);
+    if (!box) continue;
+    const area = box[2] * box[3];
+    if (area < bestArea) {
+      best = box;
+      bestArea = area;
     }
   }
-  return {viewport: viewport, evidence_bbox: null};
+  return {viewport: viewport, evidence_bbox: best};
 }
 """
 
