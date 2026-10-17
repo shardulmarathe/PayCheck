@@ -12,17 +12,19 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.1.1"]
+dev = ["pytest==9.1.1", "browser-use==0.13.11", "pillow==12.3.0"]
+shopper = ["browser-use==0.13.11", "pillow==12.3.0"]
 
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["gym*"]
+include = ["gym*", "shopper*"]
 
 [tool.setuptools.package-data]
 gym = ["templates/*.html", "templates/*.j2", "schema/*.json", "schema/*.md"]
+shopper = ["schema/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -15,3 +15,5 @@ data/trainset/
 data/attacker/
 data/attacker-round*/
 *.log
+runs/shopper/*
+!runs/shopper/.gitkeep
