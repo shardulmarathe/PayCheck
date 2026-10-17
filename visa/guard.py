@@ -51,15 +51,7 @@ def call_check(
     """POST the cart or checkout page. Fail closed on any unusable response."""
 
     url = resolve_check_url(check_url)
-    body = json.dumps(
-        {
-            "html": page.get("html", ""),
-            "url": page.get("url", ""),
-            "amount_cents": page.get("amount_cents"),
-            "currency": page.get("currency", "USD"),
-            "order_id": page.get("order_id", ""),
-        }
-    ).encode("utf-8")
+    body = json.dumps(guard_payload(page)).encode("utf-8")
     request = urllib.request.Request(
         url,
         data=body,
@@ -72,9 +64,23 @@ def call_check(
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")[:500]
         raise GuardError(f"guard returned HTTP {exc.code}: {detail}") from exc
-    except urllib.error.URLError as exc:
-        raise GuardError(f"guard check failed: {exc.reason}") from exc
+    except (urllib.error.URLError, TimeoutError, OSError) as exc:
+        raise GuardError(f"guard check failed: {exc}") from exc
     return parse_decision(payload)
+
+
+def guard_payload(page: Mapping[str, Any]) -> dict[str, str]:
+    """Same body the shopper guard client posts: text, url, action, target."""
+
+    text = page.get("text")
+    if text is None:
+        text = page.get("html", "")
+    return {
+        "text": str(text),
+        "url": str(page.get("url", "")),
+        "action": str(page.get("action", "place_order")),
+        "target": str(page.get("target", "")),
+    }
 
 
 def parse_decision(payload: bytes) -> GuardDecision:

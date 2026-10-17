@@ -1,10 +1,6 @@
 # Signed agent check (Visa Trusted Agent Protocol)
 
-SureShop's payment step for the Visa challenge, The Future of Shopping: Powered by AI, Secured by Visa.
-
-The agent signs each HTTP request with Visa's open-source [Trusted Agent Protocol](https://github.com/visa/trusted-agent-protocol). The demo store checks that signature and rejects unsigned or tampered requests. `pay()` then calls the guard at `SURESHOP_CHECK_URL`. An allow submits one payment. A block logs the trick type and evidence and does not submit a payment.
-
-The name of this step is Signed agent check (Visa Trusted Agent Protocol).
+The agent signs each HTTP request with the open-source [Trusted Agent Protocol](https://github.com/visa/trusted-agent-protocol). The demo store checks that signature and rejects unsigned or tampered requests. `pay()` then calls the guard at `SURESHOP_CHECK_URL`. An allow submits one payment. A block logs the trick type and evidence and does not submit a payment. A guard error does not submit a payment.
 
 ## Demo
 
@@ -25,16 +21,16 @@ The trace is printed and written to `runs/visa/<timestamp>.json` and `runs/visa/
 The guard in that command is a local stand-in, so the demo runs without the trained model. To use the model instead:
 
 ```bash
-SURESHOP_CHECK_URL=http://127.0.0.1:8787 python -m visa.demo --check-url http://127.0.0.1:8787/check
+python -m visa.demo --check-url "$SURESHOP_CHECK_URL"
 ```
 
-`SURESHOP_CHECK_URL` may be the origin or the full `/check` URL. `pay()` POSTs JSON:
+`SURESHOP_CHECK_URL` may be the origin or the full `/check` URL. `pay()` POSTs the same JSON body as the shopper guard client:
 
 ```json
-{"html": "<!DOCTYPE html>...", "url": "http://store/checkout?order=clean", "amount_cents": 1149, "currency": "USD", "order_id": "ord-clean"}
+{"text": "Total $11.49", "url": "http://store/checkout?order=clean", "action": "place_order", "target": "Pay now"}
 ```
 
-A decision is `verdict` of `allow` or `block`, plus `attack_type` (the trick type) and `evidence`. The gym guard's `pass` is treated as allow. Anything else, including a down guard, does not submit a payment.
+A decision is `verdict` of `allow` or `block`, plus `attack_type` (the trick type) and `evidence`. The shopper guard's `pass` is treated as allow. Any other response, including an HTTP error or a down guard, does not submit a payment.
 
 ## Signature
 
@@ -71,50 +67,7 @@ Production merchants retrieve the public key from the scheme directory (Visa pub
 
 ## Payment backends
 
-`pay(page, processor)` calls the guard first. Only an allow reaches `processor.charge`.
-
-| `SURESHOP_PAYMENT_BACKEND` | Adapter | What a result says |
-| --- | --- | --- |
-| `mock` (default) | `MockProcessor` | `provenance: mock` |
-| `visa-sandbox` | `VisaSandboxProcessor` | `provenance: visa-sandbox` |
-
-`MockProcessor` is what the demo runs. It approves locally and does not contact a card network.
-
-`VisaSandboxProcessor` is a stub for the Visa Intelligent Commerce developer sandbox. `charge()` does not open a socket. With any required variable unset it raises `VisaSandboxNotConfigured` and names the missing variables. With every variable set it still returns `status: not_sent`, because this build does not submit a live charge.
-
-## Switching to the Visa developer sandbox
-
-The demo keeps using the mock until you select the stub:
-
-```bash
-export SURESHOP_PAYMENT_BACKEND=visa-sandbox
-```
-
-Create a Visa Developer account, open a project, and add **Visa Intelligent Commerce**. Sandbox access is the credential source. Nothing in this package calls `https://sandbox.api.visa.com` until a later change replaces `VisaSandboxProcessor.charge`, and that method still refuses to run unless every variable below is set.
-
-Set these from the project's Sandbox credentials. Paths are files on disk. Do not commit them.
-
-| Variable | Required | Where it comes from |
-| --- | --- | --- |
-| `VISA_USER_ID` | yes | Project → Sandbox → Credentials. Two-way SSL user id (HTTP basic auth). |
-| `VISA_PASSWORD` | yes | Same panel. Two-way SSL password. |
-| `VISA_CERT_PATH` | yes | Client certificate PEM (`cert.pem`) downloaded after Visa signs your certificate request. |
-| `VISA_KEY_PATH` | yes | Private key created when you generated that certificate request. Visa does not have this key. |
-| `VISA_KEY_PASSPHRASE` | only if that key is encrypted | The passphrase you chose for the key. |
-| `VISA_MLE_KEY_ID` | yes | Project → Sandbox → Message-Level Encryption → Generate Key ID. Sent as the `keyId` header on encrypted calls. |
-| `VISA_MLE_PRIVATE_KEY_PATH` | yes | Private key for the MLE certificate request. Used to decrypt sandbox responses. |
-| `VISA_MLE_SERVER_CERT_PATH` | yes | Visa's MLE server certificate for that key id. Used to encrypt request payloads. |
-| `VISA_SANDBOX_BASE_URL` | no | Defaults to `https://sandbox.api.visa.com`. Certification is `https://cert.api.visa.com`. Production is `https://api.visa.com`. This stub accepts only the sandbox host. |
-
-Two-way SSL and message-level encryption are documented at:
-
-- https://developer.visa.com/capabilities/visa-intelligent-commerce
-- https://developer.visa.com/pages/working-with-visa-apis/two-way-ssl
-- https://developer.visa.com/docs/message-level-encryption
-
-A sandbox project also needs a certificate signing request whose UID matches the project, the Visa Developer Platform sandbox CA installed next to the client certificate, and the MLE key id embedded in the MLE certificate request. Those files are how `VISA_CERT_PATH`, `VISA_KEY_PATH`, `VISA_MLE_PRIVATE_KEY_PATH`, and `VISA_MLE_SERVER_CERT_PATH` get their contents.
-
-Visa Acceptance Intelligent Commerce is a different product (`https://apitest.visaacceptance.com`, paths under `/acp/v1/instructions`). It uses a merchant or organization id, a REST shared-secret key, a token requester id, and a relationship id from a Visa Acceptance account manager, plus TMS Passkey setup. This stub does not call that host. Those credentials are not a substitute for the Developer Center variables above.
+`pay(page, processor)` calls the guard first. Only an allow reaches `processor.charge`. The demo runs `MockProcessor`, and its results say `provenance: mock`. `VisaSandboxProcessor` is an unused placeholder and does not call a payment network.
 
 ## Tests
 

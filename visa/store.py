@@ -64,7 +64,10 @@ def page_for(order: str) -> dict[str, object]:
             "merchant": "SureShop",
             "description": "AA batteries with a handling line",
             "html": FEE_HTML,
+            "text": FEE_HTML,
             "url_path": "/checkout?order=fee",
+            "action": "place_order",
+            "target": "Pay now",
         }
     if order == "clean":
         return {
@@ -74,7 +77,10 @@ def page_for(order: str) -> dict[str, object]:
             "merchant": "SureShop",
             "description": "AA batteries",
             "html": CLEAN_HTML,
+            "text": CLEAN_HTML,
             "url_path": "/checkout?order=clean",
+            "action": "place_order",
+            "target": "Pay now",
         }
     raise KeyError(order)
 

@@ -67,7 +67,7 @@ class _GuardHandler(BaseHTTPRequestHandler):
             page = json.loads(raw.decode("utf-8"))
         except json.JSONDecodeError:
             page = {}
-        html = str(page.get("html", ""))
+        html = str(page.get("text", ""))
         type(self).calls += 1
         if FEE_EVIDENCE in html:
             body = {
@@ -176,7 +176,10 @@ def _scenario_checkout(
     if accepted:
         page = page_for(order)
         page["html"] = body
+        page["text"] = body
         page["url"] = base + path
+        page["action"] = "place_order"
+        page["target"] = "Pay now"
         pay_result = pay(page, processor, check_url=check_url)
     payment_calls = _call_count(processor) - payment_calls_before
     record = {
@@ -313,7 +316,6 @@ def run_demo(
             _echo_scenario(unsigned)
         trace = {
             "title": CHECK_NAME,
-            "challenge": "The Future of Shopping: Powered by AI, Secured by Visa",
             "protocol": "https://github.com/visa/trusted-agent-protocol",
             "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "agent_key_id": key.key_id,
@@ -352,7 +354,6 @@ def _write(trace: dict[str, object], out_dir: Path | None) -> Path:
 def _print_banner(key_id: str, guard_label: str) -> None:
     _say(LINE)
     _say(CHECK_NAME)
-    _say("The Future of Shopping: Powered by AI, Secured by Visa")
     _say("protocol: https://github.com/visa/trusted-agent-protocol")
     _say(f"agent keyId: {key_id}  (private key stayed in memory)")
     _say(f"guard: {guard_label}")

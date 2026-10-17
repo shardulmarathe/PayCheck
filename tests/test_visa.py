@@ -45,6 +45,7 @@ class BoomProcessor:
 class CheckServer(ThreadingHTTPServer):
     verdict = "allow"
     calls = 0
+    last_body: dict | None = None
 
 
 class CheckHandler(BaseHTTPRequestHandler):
@@ -53,9 +54,10 @@ class CheckHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         length = int(self.headers.get("Content-Length", "0"))
-        self.rfile.read(length)
+        raw = self.rfile.read(length)
         server: CheckServer = self.server  # type: ignore[assignment]
         server.calls += 1
+        server.last_body = json.loads(raw.decode()) if raw else {}
         if server.verdict == "block":
             body = {
                 "verdict": "block",
@@ -105,8 +107,11 @@ def _check_url(httpd: ThreadingHTTPServer) -> str:
 
 def _page() -> dict:
     return {
-        "html": "<p>Total $11.49</p>",
+        "text": "Total $11.49",
         "url": "http://store.example/checkout",
+        "action": "place_order",
+        "target": "Pay now",
+        "html": "<p>ignored</p>",
         "amount_cents": 1149,
         "currency": "USD",
         "order_id": "ord-1",
@@ -383,6 +388,12 @@ def test_allow_submits_exactly_one_payment():
     assert result.payment.status == "approved"
     assert result.payment.amount_cents == 1149
     assert "4111" not in json.dumps(result.to_dict())
+    assert httpd.last_body == {
+        "text": "Total $11.49",
+        "url": "http://store.example/checkout",
+        "action": "place_order",
+        "target": "Pay now",
+    }
 
 
 def test_guard_pass_is_allow_and_a_down_guard_sends_nothing():
@@ -401,6 +412,35 @@ def test_guard_pass_is_allow_and_a_down_guard_sends_nothing():
     assert blocked.payment_calls == 0
     assert blocked.paid is False
     assert "HTTP 500" in blocked.reason
+
+
+def test_guard_error_sends_no_payment():
+    refused = pay(_page(), BoomProcessor(), check_url="http://127.0.0.1:9/check")
+    assert refused.payment_calls == 0
+    assert refused.paid is False
+    assert refused.payment is None
+
+    class GarbageHandler(CheckHandler):
+        def do_POST(self) -> None:
+            length = int(self.headers.get("Content-Length", "0"))
+            self.rfile.read(length)
+            data = b'{"error":"nope"}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+
+    broken = _serve(CheckServer(("127.0.0.1", 0), GarbageHandler))
+    processor = BoomProcessor()
+    try:
+        result = pay(_page(), processor, check_url=_check_url(broken))
+    finally:
+        broken.shutdown()
+        broken.server_close()
+    assert processor.calls == 0
+    assert result.payment_calls == 0
+    assert result.paid is False
 
 
 def test_unusable_verdict_is_not_an_allow():
@@ -463,6 +503,7 @@ def test_demo_trace_allow_block_and_rejects(tmp_path):
     assert "Signed agent check (Visa Trusted Agent Protocol)" in written
     assert "verified by Visa" not in written
     assert "verified by visa" not in written.lower()
+    assert "The Future of Shopping" not in written
     assert "BEGIN PRIVATE" not in written
     assert list(tmp_path.glob("*.pem")) == []
     assert list(tmp_path.glob("*.key")) == []
@@ -474,3 +515,5 @@ def test_copy_does_not_say_verified_by_visa():
     for path in files:
         text = path.read_text(encoding="utf-8").lower()
         assert "verified by visa" not in text, path
+        assert "the future of shopping" not in text, path
+        assert "secured by visa" not in text, path

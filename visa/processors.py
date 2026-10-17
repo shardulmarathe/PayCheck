@@ -1,9 +1,7 @@
 """Payment backends.
 
 ``MockProcessor`` is the one the demo runs. Its results say ``provenance: mock``.
-``VisaSandboxProcessor`` is a stub for the Visa Intelligent Commerce developer
-sandbox. It does not open a socket. See ``visa/README.md`` for the credentials
-that arm it.
+``VisaSandboxProcessor`` is an unused placeholder and does not call a payment network.
 """
 
 from __future__ import annotations
@@ -76,14 +74,12 @@ VISA_SANDBOX_ENV = (
 
 
 class VisaSandboxNotConfigured(Exception):
-    """Required sandbox credentials are absent. No Visa host was contacted."""
+    """The unused placeholder is not configured. No network call was made."""
 
     def __init__(self, missing: tuple[str, ...]) -> None:
         self.missing = missing
         names = ", ".join(missing)
-        super().__init__(
-            "Visa Intelligent Commerce sandbox credentials are missing: " + names
-        )
+        super().__init__("visa-sandbox placeholder is not configured: " + names)
 
 
 @dataclass(frozen=True)
@@ -128,12 +124,7 @@ class VisaSandboxConfig:
 
 
 class VisaSandboxProcessor:
-    """Stub adapter for the Visa Intelligent Commerce developer sandbox.
-
-    ``charge`` checks credentials and returns. It does not call Visa.
-    A missing credential raises ``VisaSandboxNotConfigured`` before any
-    network object is constructed.
-    """
+    """Unused placeholder. ``charge`` does not call a payment network."""
 
     provenance = "visa-sandbox"
 
@@ -171,10 +162,7 @@ class VisaSandboxProcessor:
             amount_cents=payment.amount_cents,
             currency=payment.currency,
             order_id=payment.order_id,
-            detail=(
-                "credentials are set; this stub does not call the Visa "
-                "Intelligent Commerce sandbox"
-            ),
+            detail="unused placeholder; no payment was sent",
         )
 
 
