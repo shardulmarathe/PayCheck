@@ -215,6 +215,83 @@ main { padding-top: 64px; outline: none; }
 }
 .beat-compare .example-mark { margin-top: 16px; }
 
+.problem-title {
+  margin-top: 12px;
+  max-width: 860px;
+  font-size: 40px;
+  line-height: 52px;
+  letter-spacing: -0.01em;
+  font-weight: 300;
+}
+.problem-cite {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-2);
+}
+.problem-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  column-gap: 48px;
+  align-items: start;
+}
+.problem-receipt {
+  width: 260px;
+  height: 164px;
+  margin-top: 46px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+}
+.problem-receipt-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.problem-receipt-row + .problem-receipt-row {
+  border-top: 1px solid var(--hairline);
+}
+.problem-key {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-2);
+}
+.problem-amt {
+  font-family: var(--mono);
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.problem-amt.loss { color: var(--red); }
+.problem-rule {
+  margin: 40px 0 0;
+  border: 0;
+  border-top: 1px solid var(--hairline);
+}
+.problem-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px 120px;
+  margin-top: 40px;
+}
+.problem-line {
+  margin: 0;
+  max-width: 540px;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--text);
+}
+
 .hero-bottom {
   display: grid;
   grid-template-columns: minmax(0, 640px) minmax(260px, 420px);
@@ -937,6 +1014,9 @@ table.data .group th {
   .node-list { display: block; }
   .future-label { padding-top: 8px; }
   .kiosk-hero { height: 380px; }
+  .problem-lead, .problem-split { grid-template-columns: 1fr; }
+  .problem-receipt { margin-top: 32px; }
+  .problem-split { gap: 32px; }
   .replay-tilt-plane { transform: none; }
   .comparison-line { font-size: 24px; line-height: 32px; max-width: none; }
   .browser, .browser.scam { height: auto; min-height: 360px; }
@@ -1724,6 +1804,7 @@ section[data-arrive="1"] > .wrap {
   .display { font-size: 40px; line-height: 48px; }
   .use-case { font-size: 16px; line-height: 24px; }
   .hero-claim { font-size: 24px; line-height: 32px; }
+  .problem-title { font-size: 32px; line-height: 40px; }
   .kiosk-slot { height: 420px; min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import { Problem } from "../components/Problem";
 import { ReplayScene } from "../components/Replay";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { useReplayChoice } from "../hooks/useRoute";
@@ -82,6 +83,8 @@ export function Demo({ data }: { data: Dataset }) {
           <div id="kiosk-slot" className="kiosk-slot" />
         </div>
       </section>
+
+      <Problem />
 
       {visible ? (
         <ReplayScene replay={visible} example={data.example.replays} choice={choice} onChoice={select} />

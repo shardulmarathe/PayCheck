@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { formatLatency, formatUsd } from "../lib/format";
+import { replayLiftProgress } from "../lib/kioskLift";
 import { kioskPose, placeKioskNow, setKioskPlacer } from "./kioskPose";
 import type { KioskScreen } from "./KioskCanvas";
 import { useLenis } from "./motion/SmoothScroll";
@@ -93,7 +94,7 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
         w: smallW,
         h: smallH,
       };
-      const scrolled = Math.min(1, Math.max(0, -slot.top / (slot.height || 1)));
+      const scrolled = replayLiftProgress();
       const pull = kioskPose.cameraPull;
       const large = {
         x: vw * 0.38,
@@ -109,11 +110,13 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
       };
       const poster = reduced;
       const t = poster ? (scrolled > 0.5 ? 1 : 0) : scrolled;
+      const slotGone = hero.y + hero.h < 0;
+      const from = slotGone ? { x: small.x, y: vh + 8, w: small.w, h: small.h } : hero;
       const box = {
-        x: lerp(hero.x, small.x, t),
-        y: lerp(hero.y, small.y, t),
-        w: lerp(hero.w, small.w, t),
-        h: lerp(hero.h, small.h, t),
+        x: lerp(from.x, small.x, t),
+        y: lerp(from.y, small.y, t),
+        w: lerp(from.w, small.w, t),
+        h: lerp(from.h, small.h, t),
       };
       const hide = narrow && t > 0.85;
       node.style.width = `${box.w}px`;
@@ -131,8 +134,7 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
       const crowded = centered(replay) || centered(bench) || activeRef.current === "benchmarks";
       const floor = crowded ? 0.2 : 0.35;
       kioskPose.presence = lerp(1, floor, t);
-      const heroLeave = slot ? Math.min(1, Math.max(0, -slot.top / Math.max(slot.height, 1))) : 0;
-      kioskPose.yaw = poster ? 0 : heroLeave * ((20 * Math.PI) / 180);
+      kioskPose.yaw = poster ? 0 : scrolled * ((20 * Math.PI) / 180);
       kioskPose.invalidate();
     };
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
+import { replayLiftProgress } from "../lib/kioskLift";
 
 /** A copy of the kiosk's trick line travels into the guarded replay panel. */
 export function LiftCarrier({ label }: { label: string }) {
@@ -20,9 +21,8 @@ export function LiftCarrier({ label }: { label: string }) {
       frame = 0;
       const from = document.querySelector("[data-trick-line]")?.getBoundingClientRect();
       const to = document.querySelector("[data-lift-target]")?.getBoundingClientRect();
-      const slot = document.getElementById("kiosk-slot")?.getBoundingClientRect();
-      if (!from || !to || !slot) return;
-      const t = Math.min(1, Math.max(0, -slot.top / (slot.height || 1)));
+      if (!from || !to) return;
+      const t = replayLiftProgress();
       const p = Math.min(1, Math.max(0, (t - 0.06) / 0.82));
       const show = t > 0.06 && t < 0.9;
       const x = from.left + (to.left - from.left) * p;
