@@ -1,4 +1,4 @@
-.PHONY: test testset
+.PHONY: test testset visa-demo
 
 PY ?= python3
 
@@ -7,3 +7,6 @@ test:
 
 testset:
 	$(PY) -m gym.testset --check
+
+visa-demo:
+	$(PY) -m visa.demo

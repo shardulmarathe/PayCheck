@@ -15,3 +15,9 @@ data/trainset/
 data/attacker/
 data/attacker-round*/
 *.log
+
+# Private keys. Demo agent keys are generated in memory.
+*.pem
+*.p12
+*.key
+runs/visa/*.json

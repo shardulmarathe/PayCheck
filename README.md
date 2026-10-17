@@ -10,6 +10,7 @@ This repository is private.
 | `train/` | Training and eval (another agent) |
 | `shopper/` | Browser Use shopper, with and without the guard |
 | `web/` | Showcase site |
+| `visa/` | Signed agent check (Visa Trusted Agent Protocol) and guarded payment |
 | `runs/` | JSON run data the showcase site reads |
 | `data/` | Yada dark-pattern strings and the frozen test pages |
 
@@ -33,6 +34,7 @@ python -m gym.train --round 1 --n 50
 python -m gym.train --round 2 --n 50
 python -m gym.render_specs --specs-dir DIR --out data/attacker-round2 --source attacker-round2
 python -m gym.serve --port 8765
+python -m visa.demo
 ```
 
 `make testset` does not rewrite the committed files. `python -m gym.testset --write` does, and should be a no-op diff when the font and browser match.
@@ -68,3 +70,11 @@ Content hash (SHA-256, see `gym/schema/README.md`):
 `gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).
 
 Schemas, the label row, and the guard output contract are in `gym/schema/README.md`.
+
+## Signed agent check (Visa Trusted Agent Protocol)
+
+`visa/` is the payment step for The Future of Shopping: Powered by AI, Secured by Visa. The agent signs checkout requests with Visa's Trusted Agent Protocol. The demo store checks the signature, then `pay()` calls the guard at `SURESHOP_CHECK_URL` and only then submits a payment. A block logs the trick and evidence and does not pay. The demo processor is labeled `provenance: mock`. Credentials for the Visa Intelligent Commerce developer sandbox are in `visa/README.md`.
+
+```bash
+python -m visa.demo
+```
