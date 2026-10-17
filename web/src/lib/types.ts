@@ -19,7 +19,8 @@ export interface ModelEval {
   false_block_rate: number | null;
   /** Percent of blocks whose quoted evidence matches the labeled sentence. Null if unknown. */
   evidence_match: number | null;
-  latency_ms_median: number;
+  /** Null until a real eval log has a median. The UI then shows "[N] ms". */
+  latency_ms_median: number | null;
   cost_per_1k_checks_usd: number;
   /** Catch rate 0–100 keyed by attack row id. */
   catch_rate_by_attack: Record<string, number>;
@@ -62,7 +63,8 @@ export interface ReceiptLine {
 
 export interface Verdict {
   action: "allow" | "block";
-  latency_ms: number;
+  /** Null in fixtures. A real replay log fills this; the UI never invents one. */
+  latency_ms: number | null;
   category: "upsell" | "scam" | string;
   trick: string;
   evidence: string;
@@ -78,6 +80,8 @@ export interface CartScene {
   search_query: string;
   product_url: string;
   cart_url: string;
+  /** Address drawn on the kiosk screen. Falls back to cart_url when omitted. */
+  checkout_url?: string;
   product_mark: string;
   product_title: string;
   product_price: string;
@@ -106,10 +110,13 @@ export interface ScamScene {
   headline: string;
   body: string;
   fields: string[];
+  submit?: string;
   order_label: string;
   order_item: string;
   order_price: string;
   flagged_prefix: string;
+  /** Characters shown before the letter flip. */
+  flagged_from?: string;
   flagged_mark: string;
   flagged_suffix: string;
   flagged_real: string;
@@ -193,9 +200,11 @@ export interface ProcessStep {
   meta: string;
 }
 
-export interface FutureGroup {
-  label: string;
-  items: { title: string; body: string }[];
+export interface FutureItem {
+  n: string;
+  title: string;
+  body: string;
+  status: string;
 }
 
 export interface ExampleFlags {
@@ -222,7 +231,7 @@ export interface Dataset {
     checks_label: string;
     checks: string;
     median_label: string;
-    median_catch_ms: number;
+    median_catch_ms: number | null;
   };
   replays: Replay[];
   tally: { kicker: string; items: TallyItem[] };
@@ -280,7 +289,7 @@ export interface Dataset {
     kicker: string;
     title_lines: string[];
     body: string;
-    groups: FutureGroup[];
+    items: FutureItem[];
   };
   footer_note: string;
 }

@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { formatCost, formatMs, formatPct } from "../lib/format";
+import { formatCost, formatLatency, formatMs, formatPct } from "../lib/format";
 import { ATTACK_ROWS, METRICS, type MetricId } from "../lib/taxonomy";
 import type { ModelEval } from "../lib/types";
 import { ExampleMark } from "./Chrome";
@@ -60,7 +60,7 @@ export function SummaryTable({
       <div className="kicker-row">
         <div>
           <p className="label">{kicker}</p>
-          <h3 className="h3">{title}</h3>
+          {title ? <h3 className="h3">{title}</h3> : null}
         </div>
         <ExampleMark show={example} />
       </div>
@@ -87,7 +87,7 @@ export function SummaryTable({
                 <td className={model.emphasis ? "on" : undefined}>{formatPct(model.catch_rate)}</td>
                 <td>{formatPct(model.false_block_rate)}</td>
                 <td>{formatPct(model.evidence_match)}</td>
-                <td>{formatMs(model.latency_ms_median)}</td>
+                <td>{formatLatency(model.latency_ms_median, example)}</td>
                 <td>{formatCost(model.cost_per_1k_checks_usd)}</td>
               </tr>
             ))}
@@ -106,6 +106,42 @@ const NOTES: Record<MetricId, string> = {
   latency_ms: "Median latency is per check. Each row repeats the model median until a per-attack series is in the data.",
   cost_per_1k_checks_usd: "Cost is per 1,000 checks. Each row repeats the model cost until a per-attack series is in the data.",
 };
+
+const HELD_OUT_MODELS = ["guard", "gemini", "claude"] as const;
+
+export function HeldOutTable({ models }: { models: ModelEval[] }) {
+  const columns = HELD_OUT_MODELS.map((id) => models.find((model) => model.id === id)).filter((model): model is ModelEval => !!model);
+  const rows = ATTACK_ROWS.filter((row) => row.heldOut);
+  return (
+    <div className="table-scroll">
+      <table className="data held-table">
+        <caption className="sr-only">Catch rate on trick types held out of training</caption>
+        <thead>
+          <tr>
+            <th>Trick</th>
+            {columns.map((model) => (
+              <th key={model.id} className={model.emphasis ? "on" : undefined}>
+                {model.short}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.id}>
+              <th scope="row">{row.label}</th>
+              {columns.map((model) => (
+                <td key={model.id} className={model.emphasis ? "on" : undefined}>
+                  {formatPct(model.catch_rate_by_attack[row.id])}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export function AttackTable({
   models,

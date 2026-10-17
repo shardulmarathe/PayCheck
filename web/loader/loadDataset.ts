@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { trimNum } from "../src/lib/format";
+import { formatLatency, trimNum } from "../src/lib/format";
 import type {
   Dataset,
   ModelEval,
@@ -175,7 +175,7 @@ function isVerdict(value: unknown): value is Verdict {
   if (!isRecord(value)) return false;
   return (
     (value.action === "allow" || value.action === "block") &&
-    num(value.latency_ms) != null &&
+    (value.latency_ms == null || num(value.latency_ms) != null) &&
     !!str(value.category) &&
     !!str(value.trick) &&
     !!str(value.evidence) &&
@@ -245,10 +245,14 @@ function applyDerived(ds: Dataset): Dataset {
   }
   const step04 = ds.process.steps.find((step) => step.n === "04");
   const step05 = ds.process.steps.find((step) => step.n === "05");
-  if (step04 && guard) step04.meta = `${trimNum(guard.latency_ms_median)} ms median`;
-  if (step05) step05.meta = `${trained.length} rounds so far`;
-  if (guard && !ds.example.eval) ds.hero.median_catch_ms = guard.latency_ms_median;
-  else if (upsell && !ds.example.replays) ds.hero.median_catch_ms = upsell.verdict.latency_ms;
+  if (step04 && guard && !ds.example.eval && guard.latency_ms_median != null) {
+    step04.meta = `${formatLatency(guard.latency_ms_median)} median`;
+  }
+  if (step05 && !ds.example.training) step05.meta = `${trained.length} rounds so far`;
+  if (guard && !ds.example.eval && guard.latency_ms_median != null) ds.hero.median_catch_ms = guard.latency_ms_median;
+  else if (upsell && !ds.example.replays && upsell.verdict.latency_ms != null) {
+    ds.hero.median_catch_ms = upsell.verdict.latency_ms;
+  }
 
   const testPages = ds.models.some((model) => model.pages >= 300) ? 300 : (guard?.pages ?? ds.benchmarks.test_pages);
   ds.benchmarks.test_pages = testPages;
@@ -260,9 +264,7 @@ function applyDerived(ds: Dataset): Dataset {
     const pts = Math.abs(gemini.catch_rate - guard.catch_rate);
     const ahead = guard.catch_rate > gemini.catch_rate;
     const ratio = gemini.cost_per_1k_checks_usd / guard.cost_per_1k_checks_usd;
-    const relation = ahead ? "ahead of" : "behind";
-    ds.benchmarks.cost_headline = `Similar catch rate at a fraction of the cost: ${trimNum(pts)} pts ${relation} Gemini 3.1 Pro at 1/${trimNum(ratio)} the cost per check`;
-    ds.benchmarks.cost_annotation = `1/${trimNum(ratio)} the cost`;
+    ds.benchmarks.cost_annotation = `1/${trimNum(ratio)} the cost · ${trimNum(pts)} pts ${ahead ? "ahead" : "behind"}`;
     ds.benchmarks.cost_placeholder = false;
   }
   return ds;

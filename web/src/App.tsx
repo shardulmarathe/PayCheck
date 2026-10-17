@@ -25,10 +25,14 @@ export function App() {
       <TopBar route={route} />
       <main id="content" tabIndex={-1}>
         <Stage route={route}>
-          {route === "demo" ? <Demo data={data} /> : null}
-          {route === "benchmarks" ? <Benchmarks data={data} /> : null}
-          {route === "design" ? <DesignProcess data={data} /> : null}
-          {route === "future" ? <Future data={data} /> : null}
+          {(shown) => (
+            <>
+              {shown === "demo" ? <Demo data={data} /> : null}
+              {shown === "benchmarks" ? <Benchmarks data={data} /> : null}
+              {shown === "design" ? <DesignProcess data={data} /> : null}
+              {shown === "future" ? <Future data={data} /> : null}
+            </>
+          )}
         </Stage>
       </main>
       <Footer note={data.footer_note} />

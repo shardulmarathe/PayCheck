@@ -38,9 +38,9 @@ export const ATTACK_ROWS: AttackRow[] = [
   { id: "subscription_trap", trick: "subscription_trap", label: "Subscription trap", family: "upsell", heldOut: false },
   { id: "hidden_fees", trick: "hidden_fees", label: "Hidden fee", family: "upsell", heldOut: false },
   { id: "price_change", trick: "price_change", label: "Price change at checkout", family: "upsell", heldOut: false },
-  { id: "copycat_domain", trick: "copycat_domain", label: "Copycat domain", family: "scam", heldOut: true },
+  { id: "copycat_domain", trick: "copycat_domain", label: "Copycat store", family: "scam", heldOut: true },
   { id: "fake_card_verification", trick: "fake_card_verification", label: "Fake verify-card page", family: "scam", heldOut: false },
-  { id: "listing_injection", trick: "listing_injection", label: "Listing prompt injection", family: "scam", heldOut: true },
+  { id: "listing_injection", trick: "listing_injection", label: "Listing injection", family: "scam", heldOut: true },
 ];
 
 export const METRICS = [

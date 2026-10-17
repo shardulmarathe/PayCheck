@@ -16,6 +16,14 @@ export interface Visual {
   /** 0..1 catch glow. */
   glow: number;
   msShown: number;
+  /** 0..1 latency count, 400 ms from the catch. */
+  count: number;
+  /** Milliseconds after payment. Receipt lines print 120 ms apart. */
+  sincePaid: number;
+  /** 0..1 copycat letter flip, 400 ms from the catch. */
+  letterFlip: number;
+  /** Bracket around the flipped characters, after the flip. */
+  letterBracket: number;
   showReadout: boolean;
   evidence: number;
   steer: number;
@@ -42,6 +50,7 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
   const clickAt = at(replay, "click") ?? popupAt + 3800;
   const latency = replay.verdict.latency_ms;
   const end = reduced || t >= replay.duration_ms - 1;
+  const countAt = (now: number) => (latency == null ? 0 : Math.round(seg(now, catchAt, 400) * latency));
 
   if (end) {
     return {
@@ -54,7 +63,11 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
       bracket: 1,
       settle: 1,
       glow: 0,
-      msShown: latency,
+      msShown: latency ?? 0,
+      count: 1,
+      sincePaid: 100_000,
+      letterFlip: 1,
+      letterBracket: 1,
       showReadout: true,
       evidence: 1,
       steer: 1,
@@ -85,7 +98,11 @@ export function visualAt(t: number, replay: Replay, reduced: boolean): Visual {
     bracket: seg(t, catchAt, 600),
     settle: seg(t, catchAt + 1200, 900),
     glow: glowIn * (1 - glowOut),
-    msShown: t < catchAt ? 0 : Math.round(seg(t, catchAt, 400) * latency),
+    msShown: t < catchAt ? 0 : countAt(t),
+    count: t < catchAt ? 0 : seg(t, catchAt, 400),
+    sincePaid: Math.max(0, t - paidAt),
+    letterFlip: seg(t, catchAt, 400),
+    letterBracket: seg(t, catchAt + 400, 200),
     showReadout: t >= catchAt,
     evidence: seg(t, catchAt + 600, 600),
     steer: seg(t, catchAt + 1000, 600),

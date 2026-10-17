@@ -78,5 +78,12 @@ export function useReplay(duration: number, active: boolean) {
     setPlaying((on) => !on);
   };
 
-  return { t, playing, reduced, seek, pause, toggle };
+  const restart = () => {
+    if (reduced) return;
+    tRef.current = 0;
+    setT(0);
+    setPlaying(true);
+  };
+
+  return { t, playing, reduced, seek, pause, toggle, restart };
 }

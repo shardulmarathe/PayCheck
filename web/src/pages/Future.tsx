@@ -15,21 +15,18 @@ export function Future({ data }: { data: Dataset }) {
           {future.body}
         </p>
       </section>
-      <div className="section">
-        {future.groups.map((group) => (
-          <div key={group.label} className="future-group">
-            <p className="label future-label">{group.label}</p>
-            <div className="future-items">
-              {group.items.map((item) => (
-                <article key={item.title} className="future-item">
-                  <h2 className="title">{item.title}</h2>
-                  <p className="body">{item.body}</p>
-                </article>
-              ))}
+      <section className="section future-list">
+        {future.items.map((item) => (
+          <article key={item.n} className="future-row">
+            <p className="micro">{item.n}</p>
+            <div>
+              <h2>{item.title}</h2>
+              <p className="body">{item.body}</p>
             </div>
-          </div>
+            <p className="micro future-status">{item.status}</p>
+          </article>
         ))}
-      </div>
+      </section>
     </div>
   );
 }

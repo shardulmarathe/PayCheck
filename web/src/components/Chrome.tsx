@@ -1,9 +1,10 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { PRODUCT_NAME } from "../lib/product";
 import { EASE } from "../lib/ease";
 import { TABS, type TabId } from "../hooks/useRoute";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
+import { useCut, type CutPhase } from "../hooks/useCut";
 
 export function TopBar({ route }: { route: TabId }) {
   const reduced = usePrefersReducedMotion();
@@ -46,22 +47,24 @@ export function Footer({ note }: { note: string }) {
   );
 }
 
-export function Stage({ route, children }: { route: TabId; children: ReactNode }) {
-  const reduced = usePrefersReducedMotion();
+export function Shutter({ phase }: { phase: CutPhase }) {
+  if (phase === "idle") return null;
+  return (
+    <div className={`shutter ${phase}`} aria-hidden="true">
+      <div className="shutter-scan">
+        <span className="shutter-band" />
+        <span className="shutter-line" />
+      </div>
+    </div>
+  );
+}
+
+export function Stage({ route, children }: { route: TabId; children: (shown: TabId) => ReactNode }) {
+  const { shown, phase } = useCut(route);
   return (
     <div className="stage">
-      <AnimatePresence mode="sync" initial={false}>
-        <motion.div
-          key={route}
-          className="stage-page"
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={reduced ? undefined : { opacity: 0 }}
-          transition={{ duration: reduced ? 0 : 0.6, ease: EASE }}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      <div className="stage-page">{children(shown)}</div>
+      <Shutter phase={phase} />
     </div>
   );
 }

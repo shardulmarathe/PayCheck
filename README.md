@@ -34,7 +34,7 @@ cd web && npm ci && npm run build
 
 `npm run dev` serves the site on `0.0.0.0` and `$PORT` (or 5173). `npm run build` typechecks and writes static files to `web/dist`.
 
-The Demo landing is three beats: the tagline with a React Three Fiber checkout-kiosk hero, the side-by-side replay in perspective, and one comparison line. Further replays on that tab are labeled Replay 2, Replay 3, and so on. The kiosk turns slowly with scroll and is a still image when `prefers-reduced-motion` is set. The site is still a static Vite export.
+The Demo landing is three beats: the tagline with a lazy React Three Fiber checkout kiosk, a Replay 1 / Replay 2 switch in one slot, and one comparison line. The kiosk turns with scroll, pauses offscreen, and falls back to `kiosk-hero-crop.webp` for reduced motion, viewports under 768px, and no WebGL. Tab changes and the replay switch use a shutter cut. Latency readouts go through `formatLatency` and stay `[N] ms` until a real log exists. The Benchmarks headline and the comparison caption live in `web/src/lib/copy.ts`. The site is still a static Vite export.
 
 The loader reads `runs/` at dev and build time and falls back, per section, to fixtures in `web/loader/fixtures.ts`. Blocks still on fixtures show an **example data** label. Drop real JSON in `runs/eval/`, `runs/training/`, `runs/replays/`, and `runs/tally.json` and the matching label goes away. Shapes are in `web/DATA.md`. `GUARD_GYM_FORCE_FIXTURES=1` keeps the fixtures even when `runs/` has files. There is no analytics and no live API.
 

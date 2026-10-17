@@ -40,6 +40,9 @@ const port = Number(process.env.PORT) || 5173;
 
 export default defineConfig({
   plugins: [react(), guardDataPlugin(), htmlConstants()],
+  resolve: {
+    alias: [{ find: /^three$/, replacement: path.resolve(path.dirname(fileURLToPath(import.meta.url)), "vendor/three-lite.js") }],
+  },
   server: { host: "0.0.0.0", port },
   preview: { host: "0.0.0.0", port },
 });

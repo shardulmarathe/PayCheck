@@ -6,11 +6,11 @@ Catch rates are percents from 0 to 100. Do not store fractions. `isExample` on t
 
 | File | Replaces |
 | --- | --- |
-| `runs/eval/leaderboard.json` (or any other `runs/eval/*.json`) | model table, latency, cost scatter, hero median, cost headline |
-| `runs/training/*.json` (for example `round0.json`) | both catch-rate-by-round charts and the loop’s round / caught figure |
-| `rounds` inside `runs/eval/*.json` | the same round charts, only when `runs/training/` has no valid rounds |
-| `runs/replays/*.json` | both recorded scenes and the sample `/check` response |
-| `runs/tally.json` | the per-100-errands tally |
+| `runs/eval/leaderboard.json` (or any other `runs/eval/*.json`) | summary table, cost scatter, the cost-gap label |
+| `runs/training/*.json` (for example `round0.json`) | the design-process loop’s round and caught figure |
+| `rounds` inside `runs/eval/*.json` | that same loop figure, only when `runs/training/` has no valid rounds |
+| `runs/replays/*.json` | the Demo replays, the kiosk screen, and the comparison line |
+| `runs/tally.json` | loaded, not drawn. v3 removed the tally strip |
 
 Citations are copy, not run data. They stay in the fixture.
 
@@ -30,7 +30,7 @@ Citations are copy, not run data. They stay in the fixture.
   "catch_rate_100": null,
   "false_block_rate": 3,
   "evidence_match": 88,
-  "latency_ms_median": 41,
+  "latency_ms_median": 212,
   "cost_per_1k_checks_usd": 0.04,
   "catch_rate_by_attack": { "popup_add_on": 96 },
   "by_attack": {
@@ -38,7 +38,7 @@ Citations are copy, not run data. They stay in the fixture.
       "catch_rate": 96,
       "false_block_rate": null,
       "evidence_match": null,
-      "latency_ms": 41,
+      "latency_ms": 212,
       "cost_per_1k_checks_usd": 0.04
     }
   }
@@ -47,13 +47,15 @@ Citations are copy, not run data. They stay in the fixture.
 
 Required: `id`, `model`, `catch_rate`, `latency_ms_median`, `cost_per_1k_checks_usd`.
 
-- `emphasis` (or `role: "guard"`) marks the fine-tuned guard. Its latency bar is the text color.
-- `catch_rate_300` / `catch_rate_100` may be `null`. On the 300-page scatter, a model with only `catch_rate_100` is drawn hollow. The 100-page toggle omits models whose `catch_rate_100` is null.
+- `emphasis` (or `role: "guard"`) marks the fine-tuned guard.
+- `catch_rate_300` / `catch_rate_100` may be `null`. A model with only `catch_rate_100` is a hollow point. The vertical axis is 40–100; a catch rate under 40 sits on the 40 line.
 - `catch_rate_by_attack` is keyed by attack row id: `popup_add_on`, `prechecked_extra`, `subscription_trap`, `hidden_fees`, `price_change`, `copycat_domain`, `fake_card_verification`, `listing_injection`. Popup add-on and pre-checked extra are both `preselected_addon` variants; they are separate rows.
 - `by_attack` is optional. Without it, false-block and evidence-match cells are an em dash. Latency and cost repeat the model-level figure, because those are per check.
 - `none` is the clean-page trick id used for the model-level false-block rate. It is not an attack row.
 
-When eval is real, the cost headline replaces the literal `[N]` / `1/[40]` placeholder from the guard and Gemini costs, and the hero median uses the guard’s `latency_ms_median`.
+Latency cells use `formatLatency` in `web/src/lib/format.ts`. While a section is still example data, or the log has no latency, the site shows the literal `[N] ms`. A real value under 1000 ms renders as `212 ms`; 1000 ms or more renders as `1.4 s`.
+
+When eval is real, the scatter annotation replaces the literal `1/[40] the cost · [N] pts behind` from the guard and Gemini costs. It flips to `ahead` when the guard’s catch rate is higher. The Benchmarks headline and the landing comparison caption live in `web/src/lib/copy.ts`, not in this JSON.
 
 ## Training
 
@@ -65,7 +67,7 @@ One object, or an array, per file:
 
 `round` 0 is the untuned base. `catch_seen` is tricks like the training set. `catch_heldout` is trick types held out of training (`copycat_domain`, `listing_injection`). Both are percents.
 
-The large Benchmarks chart draws both series. The small line under the cost chart draws `catch_seen` only, and the last point is the only red mark. Files in `runs/training/` win. If that folder has no valid rounds, a `rounds` array on an eval JSON file is used instead:
+v3 does not draw a round chart. The loop center uses the latest round. Files in `runs/training/` win. If that folder has no valid rounds, a `rounds` array on an eval JSON file is used instead:
 
 ```json
 { "rounds": [{ "round": 1, "catch_seen": 78, "catch_heldout": 63 }] }
@@ -90,7 +92,7 @@ The large Benchmarks chart draws both series. The small line under the cost char
   ],
   "verdict": {
     "action": "block",
-    "latency_ms": 41,
+    "latency_ms": null,
     "category": "upsell",
     "trick": "popup add-on",
     "evidence": "By continuing, Battery Care+ ($9.99) is added to your order.",
@@ -122,7 +124,7 @@ The large Benchmarks chart draws both series. The small line under the cost char
 - Upsell requires `scene_view.kind: "cart"` plus `without` and `with`. Receipt `lines` use `amount`, and optionally `damage` or `muted`. `paid` is the total. `outcome` is `lost` or `ok`.
 - Scam requires `scene_view.kind: "scam"` plus `columns` (`flagged_label`, `trick_label`, `steer_label`). The cart scene and the scam scene fields are the full objects in `web/src/lib/types.ts`.
 - Step `kind` is `search`, `product`, `popup`, `click`, `catch`, `paid`, or `other`. `tick` draws the shared timeline. `catch` is the red playhead dot.
-- The settled readout uses `verdict.latency_ms`, not a separate clock.
+- The settled readout uses `verdict.latency_ms` through `formatLatency`. `null` (and every fixture replay) shows `[N] ms`. Do not bake a design millisecond into the fixture.
 
 ## Tally
 

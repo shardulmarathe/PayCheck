@@ -20,8 +20,26 @@ export function formatTally(n: number, format: "count" | "dollars"): string {
   return n.toLocaleString("en-US");
 }
 
-export function formatMs(n: number): string {
+export function formatMs(n: number | null | undefined): string {
+  if (n == null || !Number.isFinite(n)) return "—";
   return `${Math.round(n).toLocaleString("en-US")} ms`;
+}
+
+/**
+ * The only latency readout. Example data and missing logs stay the literal
+ * placeholder. Real milliseconds render as "212 ms"; a second or more renders
+ * as "1.4 s".
+ */
+export function formatLatency(ms: number | null | undefined, example = false): string {
+  return formatLatencyCount(ms, 1, example);
+}
+
+/** Count-up toward a real latency. The placeholder does not count. */
+export function formatLatencyCount(ms: number | null | undefined, progress: number, example = false): string {
+  if (example || ms == null || !Number.isFinite(ms)) return "[N] ms";
+  const p = Math.min(1, Math.max(0, progress));
+  if (ms < 1000) return `${Math.round(ms * p)} ms`;
+  return `${((ms / 1000) * p).toFixed(1)} s`;
 }
 
 export function formatPct(n: number | null | undefined): string {
