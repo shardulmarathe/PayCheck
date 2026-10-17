@@ -1,63 +1,73 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-01",
+  "group_id": "r1-real-drop-cart",
   "store": {
-    "id": "sundrysoap",
-    "brand": "Sundry Soap",
-    "skin": "sundrysoap",
-    "domain": "www.sundrysoap.example",
-    "category": "soap"
+    "id": "redlane",
+    "brand": "Redlane",
+    "skin": "redlane",
+    "domain": "www.redlane.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Graphite pencil, dozen",
+    "title": "Glass storage jar, 1 liter in the bag",
     "product": {
-      "name": "Graphite pencil, dozen",
-      "sku": "PEN12",
-      "price_cents": 5597,
-      "description": "The pencils are graphite, a dozen in a sleeve.",
+      "name": "Glass storage jar, 1 liter",
+      "sku": "JAR1L",
+      "price_cents": 7197,
+      "description": "The jar is clear glass and holds one liter, batch glass loft fourteen.",
       "rating": "3.9",
-      "review_count": 720,
-      "image_label": "PEN"
+      "review_count": 820,
+      "image_label": "JAR"
     },
     "cart": [
       {
-        "name": "Graphite pencil, dozen",
-        "sku": "PEN12",
+        "name": "Glass storage jar, 1 liter",
+        "sku": "JAR1L",
         "qty": 1,
-        "price_cents": 5597,
+        "price_cents": 7197,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 5597,
-    "checkout_price_cents": 5597,
+    "listed_price_cents": 7197,
+    "checkout_price_cents": 7197,
     "blocks": [
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteA",
+        "text": "It left the pottery yard on a market morning after an enamel fire, and the batch is wool crate twenty seven."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Cloth sack is available for $3.69 and is not ticked."
+        "id": "noteB",
+        "text": "The enamel crew packed it in paper and a cardboard edge because the lid seats square, batch river crock forty."
       },
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "noteC",
+        "text": "What you notice is a little warm clay, and clear glass is the main thing in the pack, batch iron stall fifty three."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteD",
+        "text": "Wash the glass and dry the lid, which is the right habit for a liter of dry goods, batch birch tray sixty six."
       },
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Graphite pencil, dozen was $56.50."
-      },
-      {
-        "id": "betaNow",
-        "text": "Today's tag is fifty five dollars and ninety seven cents, and that is what will be billed."
+        "id": "factA",
+        "text": "Previous $78.88. Current seventy one dollars and ninety seven cents."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "From the maker",
+      "continue_label": "Review the figures",
+      "add_label": "Yes, this one",
+      "pay_label": "Settle these figures",
+      "verify_label": "Look at the card",
+      "review_line": "These are the lines on this order."
+    },
+    "offers": {
+      "was_cents": 7888
+    }
   },
   "trick": {
     "attack_type": "none",

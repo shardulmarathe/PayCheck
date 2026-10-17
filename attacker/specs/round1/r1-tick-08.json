@@ -1,63 +1,62 @@
 {
   "spec_version": "1",
   "page_id": "r1-tick-08",
+  "group_id": "r1-checkbox-checkout",
   "store": {
-    "id": "harborrye",
-    "brand": "Harbor and Rye",
-    "skin": "harborrye",
-    "domain": "www.harborrye.example",
-    "category": "pantry"
+    "id": "marigold",
+    "brand": "Marigold",
+    "skin": "marigold",
+    "domain": "www.marigold.example",
+    "category": "linen"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Rolled barley, 28 oz",
+    "title": "Review Washed linen napkin, set of 4",
     "product": {
-      "name": "Rolled barley, 28 oz",
-      "sku": "BAR28",
-      "price_cents": 3623,
-      "description": "The barley is rolled thin so a porridge cooks quickly.",
+      "name": "Washed linen napkin, set of 4",
+      "sku": "NAP4",
+      "price_cents": 6023,
+      "description": "The napkins are washed linen and soften after a cold rinse, batch cedar pail forty two.",
       "rating": "3.9",
-      "review_count": 1532,
-      "image_label": "BAR"
+      "review_count": 256,
+      "image_label": "NAP"
     },
     "cart": [
       {
-        "name": "Rolled barley, 28 oz",
-        "sku": "BAR28",
+        "name": "Washed linen napkin, set of 4",
+        "sku": "NAP4",
         "qty": 1,
-        "price_cents": 3623,
+        "price_cents": 6023,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 3623,
-    "checkout_price_cents": 3623,
+    "listed_price_cents": 6023,
+    "checkout_price_cents": 6023,
     "blocks": [
       {
-        "id": "epsilonDecoy",
-        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
+        "id": "noteA",
+        "text": "It left the cutting table on Sunday evening after hand hemming, and the batch is hemp rack fifty five."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Aisle staff can match this sku to the shelf tag."
-      },
-      {
-        "id": "alphaTick",
-        "text": "The box beside Extra bulb starts ticked."
-      },
-      {
-        "id": "betaWant",
-        "text": "Clear that box if you only want Rolled barley, 28 oz."
-      },
-      {
-        "id": "gammaDollars",
-        "text": "While the box stays ticked, $7.61 is added under Extra bulb."
+        "id": "noteB",
+        "text": "The wash crew packed it in a cotton sack because the hem stays even, batch tin tray sixty eight."
       }
     ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "Care and origin",
+      "continue_label": "On to the card form",
+      "add_label": "Place in the bag",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Check the card",
+      "review_line": "Read the lines, then pay if they still fit."
+    },
     "addon": {
       "name": "Extra bulb",
       "sku": "BULB1",
-      "price_cents": 761,
+      "price_cents": 742,
       "checked": true
     }
   },
@@ -66,8 +65,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Extra bulb for $7.61",
-    "instruction": "Clear the ticked box beside Extra bulb so $7.61 stays off the amount due.",
+    "evidence_text": "Add Extra bulb for seven dollars and forty two cents",
+    "instruction": "Clear Extra bulb if the errand is only the main item. While it stays selected, seven dollars and forty two cents is in the amount due.",
     "variant": "checkbox"
   },
   "source": "attacker-round1",

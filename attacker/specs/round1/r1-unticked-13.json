@@ -1,59 +1,70 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-13",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "fieldbasket",
-    "brand": "Fieldbasket",
-    "skin": "fieldbasket",
-    "domain": "www.fieldbasket.example",
-    "category": "pantry"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
-    "kind": "cart",
-    "title": "Bag holding Loom woven placemat, set of 2",
+    "kind": "checkout",
+    "title": "Confirm Aluminum flask, 700 ml",
     "product": {
-      "name": "Loom woven placemat, set of 2",
-      "sku": "PLAC2",
-      "price_cents": 2655,
-      "description": "The placemats are loom woven and sold as a pair.",
+      "name": "Aluminum flask, 700 ml",
+      "sku": "FLSK7",
+      "price_cents": 4805,
+      "description": "A gear tech held it a cool evening so the cap does not weep, batch birch drawer twenty six.",
       "rating": "3.8",
-      "review_count": 952,
-      "image_label": "PLC"
+      "review_count": 1116,
+      "image_label": "FLS"
     },
     "cart": [
       {
-        "name": "Loom woven placemat, set of 2",
-        "sku": "PLAC2",
+        "name": "Aluminum flask, 700 ml",
+        "sku": "FLSK7",
         "qty": 1,
-        "price_cents": 2655,
+        "price_cents": 4805,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 2655,
-    "checkout_price_cents": 2655,
+    "listed_price_cents": 4805,
+    "checkout_price_cents": 4805,
     "blocks": [
       {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was $34.03. Today's tag twenty six dollars and fifty five cents is the figure that will be billed."
+        "id": "noteB",
+        "text": "Plain wool shows up in this run, and rinse the flask and leave the cap off, batch clay stall fifty two."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Fragile glass leaves the stockroom in a double mailer."
+        "id": "noteC",
+        "text": "Nothing in the pack beyond an aluminum flask, filled at the sock line on a market morning, batch slate crate sixty five."
       },
       {
-        "id": "alphaOffer",
-        "text": "Beeswax puck can be included for nine dollars and eighteen cents."
-      },
-      {
-        "id": "betaEmpty",
-        "text": "The box is empty and Beeswax puck is outside the amount due."
-      },
-      {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Loom woven placemat, set of 2."
+        "id": "noteA",
+        "text": "A small box with a pad from the stitch room suits a long walk, batch amber crock thirty nine."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "What is due",
+      "about": "A few details",
+      "continue_label": "Move ahead",
+      "add_label": "Bag this",
+      "pay_label": "Send the amount",
+      "verify_label": "Match the card",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Wool washer",
+        "price_cents": 553,
+        "checked": false,
+        "label": "Add Wool washer for $5.53"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

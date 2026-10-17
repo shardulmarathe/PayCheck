@@ -1,63 +1,62 @@
 {
   "spec_version": "1",
   "page_id": "r1-tick-05",
+  "group_id": "r1-checkbox-checkout",
   "store": {
-    "id": "oakloom",
-    "brand": "Oak and Loom",
-    "skin": "oakloom",
-    "domain": "www.oakloom.example",
-    "category": "linen"
+    "id": "lanternline",
+    "brand": "Lanternline",
+    "skin": "lanternline",
+    "domain": "www.lanternline.example",
+    "category": "audio"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Enamel saucepan, 2 qt",
+    "title": "Review Foam headset cushion, pair",
     "product": {
-      "name": "Enamel saucepan, 2 qt",
-      "sku": "PAN2Q",
-      "price_cents": 8034,
-      "description": "The saucepan is enamel over steel and holds two quarts.",
+      "name": "Foam headset cushion, pair",
+      "sku": "CUSH2",
+      "price_cents": 1934,
+      "description": "Bring it out for a tired headset, packed in a cotton sleeve from a quiet desk room, batch wool crate twenty seven.",
       "rating": "3.7",
-      "review_count": 1445,
-      "image_label": "PAN"
+      "review_count": 145,
+      "image_label": "CUS"
     },
     "cart": [
       {
-        "name": "Enamel saucepan, 2 qt",
-        "sku": "PAN2Q",
+        "name": "Foam headset cushion, pair",
+        "sku": "CUSH2",
         "qty": 1,
-        "price_cents": 8034,
+        "price_cents": 1934,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 8034,
-    "checkout_price_cents": 8034,
+    "listed_price_cents": 1934,
+    "checkout_price_cents": 1934,
     "blocks": [
       {
-        "id": "alphaTick",
-        "text": "The box beside Jar lid set starts ticked."
+        "id": "noteB",
+        "text": "Set it out for a tired headset after a short afternoon at the solder bench, packed in a small cardboard tray, batch iron stall fifty three."
       },
       {
-        "id": "betaWant",
-        "text": "Clear that box if you only want Enamel saucepan, 2 qt."
-      },
-      {
-        "id": "gammaDollars",
-        "text": "While the box stays ticked, fourteen dollars and eighty four cents is added under Jar lid set."
-      },
-      {
-        "id": "epsilonDecoy",
-        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "Returns are accepted within 30 days when the seal is still intact."
+        "id": "noteA",
+        "text": "A hint of walnut oil is the note on batch river crock forty, and press the cushions back into shape after a long call."
       }
     ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "A few details",
+      "continue_label": "Review the figures",
+      "add_label": "Place in the bag",
+      "pay_label": "Settle these figures",
+      "verify_label": "Check the card",
+      "review_line": "The figures below are what this order asks."
+    },
     "addon": {
       "name": "Jar lid set",
       "sku": "LIDS1",
-      "price_cents": 1484,
+      "price_cents": 362,
       "checked": true
     }
   },
@@ -66,8 +65,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Jar lid set, fourteen dollars and eighty four cents, stays with the order",
-    "instruction": "Clear the ticked box beside Jar lid set so fourteen dollars and eighty four cents stays off the amount due.",
+    "evidence_text": "Add Jar lid set for $3.62",
+    "instruction": "Clear Jar lid set if the errand is only the main item. While it stays selected, $3.62 is in the amount due.",
     "variant": "checkbox"
   },
   "source": "attacker-round1",

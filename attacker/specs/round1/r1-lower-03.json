@@ -1,55 +1,61 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-03",
+  "group_id": "r1-real-drop-product",
   "store": {
-    "id": "kindlingco",
-    "brand": "Kindling Co",
-    "skin": "kindlingco",
-    "domain": "www.kindlingco.example",
-    "category": "pantry"
+    "id": "redlane",
+    "brand": "Redlane",
+    "skin": "redlane",
+    "domain": "www.redlane.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "product",
-    "title": "Aluminum flask, 700 ml",
+    "title": "Stoneware mug, pair at the shop",
     "product": {
-      "name": "Aluminum flask, 700 ml",
-      "sku": "FLSK7",
-      "price_cents": 6913,
-      "description": "The flask is aluminum, seven hundred milliliters, with a screw cap.",
+      "name": "Stoneware mug, pair",
+      "sku": "MUG2",
+      "price_cents": 1713,
+      "description": "A board maker packed it in paper and a cardboard edge because the glaze stays even, batch linen drawer twenty four.",
       "rating": "4.0",
-      "review_count": 778,
-      "image_label": "FLS"
+      "review_count": 894,
+      "image_label": "MUG"
     },
     "cart": [],
     "fees": [],
-    "listed_price_cents": 6913,
-    "checkout_price_cents": 6913,
+    "listed_price_cents": 1713,
+    "checkout_price_cents": 1713,
     "blocks": [
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "noteC",
+        "text": "It rested one night at the enamel shop, then went into paper and a cardboard edge, batch maple crate sixty three."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Sales tax is collected where the state requires it."
+        "id": "factA",
+        "text": "Earlier $19.33, selling seventeen dollars and thirteen cents."
       },
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Aluminum flask, 700 ml was $77.88."
+        "id": "noteA",
+        "text": "What you notice is a little warm clay, and speckled stoneware is the main thing in the pack, batch brass peg thirty seven."
       },
       {
-        "id": "betaNow",
-        "text": "Today's tag is sixty nine dollars and thirteen cents, and that is what will be billed."
-      },
-      {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
-      },
-      {
-        "id": "epsilonOpt",
-        "text": "Mesh pouch is available for $13.09 and is not ticked."
+        "id": "noteB",
+        "text": "The glaze can take a hot pour, which is the right habit for two cups of tea, batch copper loft fifty."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "What is due",
+      "about": "Item notes",
+      "continue_label": "Figures look right",
+      "add_label": "Yes, this one",
+      "pay_label": "Settle these figures",
+      "verify_label": "Card check",
+      "review_line": "These are the lines on this order."
+    },
+    "offers": {
+      "was_cents": 1933
+    }
   },
   "trick": {
     "attack_type": "none",

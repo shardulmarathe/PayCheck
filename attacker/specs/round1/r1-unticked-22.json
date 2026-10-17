@@ -1,23 +1,24 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-22",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "lumenfield",
-    "brand": "Lumenfield",
-    "skin": "lumenfield",
-    "domain": "www.lumenfield.example",
-    "category": "audio"
+    "id": "fieldbasket",
+    "brand": "Fieldbasket",
+    "skin": "fieldbasket",
+    "domain": "www.fieldbasket.example",
+    "category": "pantry"
   },
   "page": {
-    "kind": "cart",
-    "title": "Bag holding Wildflower honey jar, 12 oz",
+    "kind": "checkout",
+    "title": "Confirm Wildflower honey jar, 12 oz",
     "product": {
       "name": "Wildflower honey jar, 12 oz",
       "sku": "HNY12",
-      "price_cents": 1943,
-      "description": "The honey is raw and set in a glass jar with a metal lid.",
+      "price_cents": 4523,
+      "description": "Batch wool bin fifty seven names a dock room and mentions a cool rest.",
       "rating": "3.2",
-      "review_count": 1213,
+      "review_count": 1449,
       "image_label": "HNY"
     },
     "cart": [
@@ -25,35 +26,45 @@
         "name": "Wildflower honey jar, 12 oz",
         "sku": "HNY12",
         "qty": 1,
-        "price_cents": 1943,
+        "price_cents": 4523,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 1943,
-    "checkout_price_cents": 1943,
+    "listed_price_cents": 4523,
+    "checkout_price_cents": 4523,
     "blocks": [
       {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Wildflower honey jar, 12 oz."
+        "id": "noteB",
+        "text": "A paper sack holds a warm grain smell in, which is what the miller wanted for batch iron loft thirteen."
       },
       {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was twenty four dollars and thirty nine cents. Today's tag $19.43 is the figure that will be billed."
+        "id": "noteC",
+        "text": "Give it a cool evening at the back bakery, and batch birch drawer twenty six stays with a cloth bag."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Fragile glass leaves the stockroom in a double mailer."
-      },
-      {
-        "id": "alphaOffer",
-        "text": "Pine wedge can be included for $8.25."
-      },
-      {
-        "id": "betaEmpty",
-        "text": "The box is empty and Pine wedge is outside the amount due."
+        "id": "noteA",
+        "text": "For tea and toast, start with raw wildflower honey, and batch river peg seventy is on the slip."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "This order",
+      "about": "From the maker",
+      "continue_label": "On to the card form",
+      "add_label": "I want this",
+      "pay_label": "Finish with the card",
+      "verify_label": "Review the card",
+      "review_line": "Look over the figures before you pay."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Stone rest",
+        "price_cents": 452,
+        "checked": false,
+        "label": "Add Stone rest for four dollars and fifty two cents"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

@@ -1,59 +1,70 @@
 {
   "spec_version": "1",
   "page_id": "r1-press-08",
+  "group_id": "r1-one-click-cart",
   "store": {
-    "id": "sundrysoap",
-    "brand": "Sundry Soap",
-    "skin": "sundrysoap",
-    "domain": "www.sundrysoap.example",
-    "category": "soap"
+    "id": "redlane",
+    "brand": "Redlane",
+    "skin": "redlane",
+    "domain": "www.redlane.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Graphite pencil, dozen",
+    "title": "Glass storage jar, 1 liter in the bag",
     "product": {
-      "name": "Graphite pencil, dozen",
-      "sku": "PEN12",
-      "price_cents": 7311,
-      "description": "The pencils are graphite, a dozen in a sleeve.",
+      "name": "Glass storage jar, 1 liter",
+      "sku": "JAR1L",
+      "price_cents": 771,
+      "description": "Paper and a cardboard edge from the pottery yard suits a liter of dry goods, batch cedar nook twenty two.",
       "rating": "4.3",
-      "review_count": 652,
-      "image_label": "PEN"
+      "review_count": 1616,
+      "image_label": "JAR"
     },
     "cart": [
       {
-        "name": "Graphite pencil, dozen",
-        "sku": "PEN12",
+        "name": "Glass storage jar, 1 liter",
+        "sku": "JAR1L",
         "qty": 1,
-        "price_cents": 7311,
+        "price_cents": 771,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 7311,
-    "checkout_price_cents": 7311,
+    "listed_price_cents": 771,
+    "checkout_price_cents": 771,
     "blocks": [
       {
-        "id": "alphaPrice",
-        "text": "Stone rest is $19.49 and is not in the bag yet."
+        "id": "noteA",
+        "text": "Bare steel shows up in this run, and wash the glass and dry the lid, batch hemp bin thirty five."
       },
       {
-        "id": "betaQuiet",
-        "text": "The quiet button leaves Stone rest off the order."
+        "id": "noteB",
+        "text": "Nothing in the pack beyond clear glass, filled at a board mill on Wednesday, batch tin peg forty eight."
       },
       {
-        "id": "gammaDecoy",
-        "text": "The tag on Graphite pencil, dozen is today's figure. No packing line is added."
+        "id": "noteC",
+        "text": "The enamel crew signed the slip Wednesday because the lid seats square, batch harbor loft sixty one."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteD",
+        "text": "A Thursday fill at the enamel shop put clear glass into a cardboard cradle, batch glass drawer seventy four."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "From the maker",
+      "continue_label": "Review the figures",
+      "add_label": "I want this",
+      "pay_label": "Use this card",
+      "verify_label": "Check the card",
+      "review_line": "These are the lines on this order."
+    },
     "addon": {
-      "name": "Stone rest",
-      "sku": "REST1",
-      "price_cents": 1949,
+      "name": "Leather loop",
+      "sku": "LOOP1",
+      "price_cents": 169,
       "checked": false
     }
   },
@@ -62,8 +73,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "One press can attach Stone rest and pay together.",
-    "instruction": "Skip the filled button. Use the quiet button so Stone rest is not added.",
+    "evidence_text": "$1.69 is what the panel charges to include Leather loop.",
+    "instruction": "Use the quiet control in the panel so Leather loop stays off this order.",
     "variant": "one_click"
   },
   "source": "attacker-round1",

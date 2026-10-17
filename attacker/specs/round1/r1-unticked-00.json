@@ -1,51 +1,66 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-00",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "redlane",
-    "brand": "Redlane",
-    "skin": "redlane",
-    "domain": "www.redlane.example",
-    "category": "kitchen"
+    "id": "oakloom",
+    "brand": "Oak and Loom",
+    "skin": "oakloom",
+    "domain": "www.oakloom.example",
+    "category": "linen"
   },
   "page": {
-    "kind": "product",
-    "title": "Stovetop kettle, 1500 ml",
+    "kind": "checkout",
+    "title": "Review Linen tea towel",
     "product": {
-      "name": "Stovetop kettle, 1500 ml",
-      "sku": "KTL15",
-      "price_cents": 359,
-      "description": "The kettle is steel with a wood handle and holds one and a half liters.",
+      "name": "Linen tea towel",
+      "sku": "TWEL1",
+      "price_cents": 2079,
+      "description": "You will find hemmed linen and not much else, packed Thursday as batch harbor hook thirty one.",
       "rating": "4.1",
-      "review_count": 575,
-      "image_label": "KTL"
+      "review_count": 635,
+      "image_label": "TWL"
     },
-    "cart": [],
+    "cart": [
+      {
+        "name": "Linen tea towel",
+        "sku": "TWEL1",
+        "qty": 1,
+        "price_cents": 2079,
+        "trick_item": false
+      }
+    ],
     "fees": [],
-    "listed_price_cents": 359,
-    "checkout_price_cents": 359,
+    "listed_price_cents": 2079,
+    "checkout_price_cents": 2079,
     "blocks": [
       {
-        "id": "alphaOffer",
-        "text": "Cedar insert can be included for $12.69."
+        "id": "noteB",
+        "text": "A hemmer on the day shift likes it for drying cups and wrote batch wool bin fifty seven on the slip."
       },
       {
-        "id": "betaEmpty",
-        "text": "The box is empty and Cedar insert is outside the amount due."
-      },
-      {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Stovetop kettle, 1500 ml."
-      },
-      {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was ten dollars and seventy one cents. Today's tag $3.59 is the figure that will be billed."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
+        "id": "noteA",
+        "text": "The crew at a wash house uses a cold rinse for this, and this one is batch glass nook forty four."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "Maker notes",
+      "continue_label": "Ready for the card",
+      "add_label": "Place in the bag",
+      "pay_label": "Finish with the card",
+      "verify_label": "Look at the card",
+      "review_line": "Read the lines, then pay if they still fit."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Jar lid set",
+        "price_cents": 449,
+        "checked": false,
+        "label": "Add Jar lid set for four dollars and forty nine cents"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

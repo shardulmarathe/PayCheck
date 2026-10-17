@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-19",
+  "group_id": "r1-disclosed-fee-cart",
   "store": {
-    "id": "paperfinch",
-    "brand": "Paper Finch",
-    "skin": "paperfinch",
-    "domain": "www.paperfinch.example",
-    "category": "paper"
+    "id": "sundrysoap",
+    "brand": "Sundry Soap",
+    "skin": "sundrysoap",
+    "domain": "www.sundrysoap.example",
+    "category": "soap"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Birch kindling crate",
+    "title": "Bag with Cedarwood bar soap",
     "product": {
-      "name": "Birch kindling crate",
-      "sku": "KNDL1",
-      "price_cents": 1093,
-      "description": "The crate holds split birch for a small stove.",
+      "name": "Cedarwood bar soap",
+      "sku": "SOAP1",
+      "price_cents": 3793,
+      "description": "The cure crew held it half a day so the bar lasts longer, batch river stall fifty.",
       "rating": "4.3",
-      "review_count": 1010,
-      "image_label": "KND"
+      "review_count": 1190,
+      "image_label": "SOP"
     },
     "cart": [
       {
-        "name": "Birch kindling crate",
-        "sku": "KNDL1",
+        "name": "Cedarwood bar soap",
+        "sku": "SOAP1",
         "qty": 1,
-        "price_cents": 1093,
+        "price_cents": 3793,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Route handling",
-        "amount_cents": 700
+        "name": "Chill insert",
+        "amount_cents": 707
       }
     ],
-    "listed_price_cents": 1093,
-    "checkout_price_cents": 1093,
+    "listed_price_cents": 3793,
+    "checkout_price_cents": 3793,
     "blocks": [
       {
-        "id": "gammaOpt",
-        "text": "Hinge pin at $4.87 is offered and the box is empty, so it stays off the amount due."
+        "id": "noteA",
+        "text": "A small tin from the soap bench suits a daily wash, batch iron crate sixty three."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Aisle staff can match this sku to the shelf tag."
+        "id": "noteB",
+        "text": "A soft balm smell shows up in this run, and let the bar dry between washes, batch birch pail seventy six."
       },
       {
-        "id": "alphaShown",
-        "text": "Route handling, seven dollars, was printed under the tag on the item page for Birch kindling crate."
-      },
-      {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
+        "id": "factA",
+        "text": "Chill insert seven dollars and seven cents"
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "Care and origin",
+      "continue_label": "Go on to pay",
+      "add_label": "Put it in the bag",
+      "pay_label": "Send the amount",
+      "verify_label": "Match the card",
+      "review_line": "See the lines, then decide."
+    }
   },
   "trick": {
     "attack_type": "none",

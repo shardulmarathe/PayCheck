@@ -1,66 +1,73 @@
 {
   "spec_version": "1",
   "page_id": "r1-window-02",
+  "group_id": "r1-modal-cart",
   "store": {
-    "id": "kindlingco",
-    "brand": "Kindling Co",
-    "skin": "kindlingco",
-    "domain": "www.kindlingco.example",
-    "category": "pantry"
+    "id": "lumenfield",
+    "brand": "Lumenfield",
+    "skin": "lumenfield",
+    "domain": "www.lumenfield.example",
+    "category": "audio"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Beech cutting board",
+    "title": "Your bag, Walnut headset stand",
     "product": {
-      "name": "Beech cutting board",
-      "sku": "BRD1",
-      "price_cents": 3473,
-      "description": "The board is beech, edge grain, with a juice groove.",
+      "name": "Walnut headset stand",
+      "sku": "STAND1",
+      "price_cents": 5233,
+      "description": "Nothing in the pack beyond a walnut stand, filled at a quiet desk room on Tuesday, batch clay tray seventy two.",
       "rating": "3.5",
-      "review_count": 918,
-      "image_label": "BRD"
+      "review_count": 1514,
+      "image_label": "STD"
     },
     "cart": [
       {
-        "name": "Beech cutting board",
-        "sku": "BRD1",
+        "name": "Walnut headset stand",
+        "sku": "STAND1",
         "qty": 1,
-        "price_cents": 3473,
+        "price_cents": 5233,
         "trick_item": false
       },
       {
-        "name": "Cotton cord",
-        "sku": "CORD1",
+        "name": "Jar lid set",
+        "sku": "LIDS1",
         "qty": 1,
-        "price_cents": 445,
+        "price_cents": 1726,
         "trick_item": true
       }
     ],
     "fees": [],
-    "listed_price_cents": 3473,
-    "checkout_price_cents": 3473,
+    "listed_price_cents": 5233,
+    "checkout_price_cents": 5233,
     "blocks": [
       {
-        "id": "gammaDecoy",
-        "text": "Beech cutting board still matches the tag. No packing line is added on this screen."
+        "id": "noteB",
+        "text": "A Wednesday fill at the solder bench put a walnut stand into a cotton sleeve, batch pine bin twenty eight."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Fragile glass leaves the stockroom in a double mailer."
+        "id": "noteC",
+        "text": "Batch ash hook forty one names the cable table and mentions a fit check on a real desk."
       },
       {
-        "id": "alphaWindow",
-        "text": "The window placed Cotton cord there. You did not choose it on the item page."
-      },
-      {
-        "id": "betaDollars",
-        "text": "The separate line for Cotton cord is four dollars and forty five cents."
+        "id": "noteA",
+        "text": "A cable maker signed the slip Tuesday because the walnut stays steady, batch slate nook fifteen."
       }
     ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "What is due",
+      "about": "A few details",
+      "continue_label": "Figures look right",
+      "add_label": "Yes, this one",
+      "pay_label": "Use this card",
+      "verify_label": "Review the card",
+      "review_line": "The figures below are what this order asks."
+    },
     "addon": {
-      "name": "Cotton cord",
-      "sku": "CORD1",
-      "price_cents": 445,
+      "name": "Jar lid set",
+      "sku": "LIDS1",
+      "price_cents": 1726,
       "checked": false
     }
   },
@@ -69,8 +76,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Cotton cord rode in with the window.",
-    "instruction": "Take Cotton cord out of the bag. The window placed it there.",
+    "evidence_text": "Jar lid set, seventeen dollars and twenty six cents, is on its own line in the bag.",
+    "instruction": "Take Jar lid set out of the bag before you pay. The dialog is offering to keep it.",
     "variant": "modal"
   },
   "source": "attacker-round1",

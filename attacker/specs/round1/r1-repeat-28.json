@@ -1,60 +1,71 @@
 {
   "spec_version": "1",
   "page_id": "r1-repeat-28",
+  "group_id": "r1-autorenew-checkout",
   "store": {
-    "id": "sundrysoap",
-    "brand": "Sundry Soap",
-    "skin": "sundrysoap",
-    "domain": "www.sundrysoap.example",
-    "category": "soap"
+    "id": "lumenfield",
+    "brand": "Lumenfield",
+    "skin": "lumenfield",
+    "domain": "www.lumenfield.example",
+    "category": "audio"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Cotton percale sheet, queen",
+    "title": "Cloth braid audio lead, 1 m before you pay",
     "product": {
-      "name": "Cotton percale sheet, queen",
-      "sku": "SHETQ",
-      "price_cents": 2739,
-      "description": "The sheet is cotton percale sized for a queen bed.",
+      "name": "Cloth braid audio lead, 1 m",
+      "sku": "AUD1M",
+      "price_cents": 4739,
+      "description": "A cable maker likes it for a short run across a desk and wrote batch cedar bin forty two on the slip.",
       "rating": "3.9",
-      "review_count": 792,
-      "image_label": "SHT"
+      "review_count": 636,
+      "image_label": "AUD"
     },
     "cart": [
       {
-        "name": "Cotton percale sheet, queen",
-        "sku": "SHETQ",
+        "name": "Cloth braid audio lead, 1 m",
+        "sku": "AUD1M",
         "qty": 1,
-        "price_cents": 2739,
+        "price_cents": 4739,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 2739,
-    "checkout_price_cents": 2739,
+    "listed_price_cents": 4739,
+    "checkout_price_cents": 4739,
     "blocks": [
       {
-        "id": "alphaLater",
-        "text": "The later bill is $27.39 every month."
+        "id": "noteA",
+        "text": "Bring it out for a short run across a desk, packed in a cotton sleeve from a quiet desk room, batch hemp hook fifty five."
       },
       {
-        "id": "betaFirst",
-        "text": "The first parcel is five dollars and thirty one cents. The single parcel choice is the other line, and it is not the one marked."
+        "id": "noteB",
+        "text": "A light machine-oil note is the note on batch tin loft sixty eight, and do not kink the braid."
       },
       {
-        "id": "gammaDecoy",
-        "text": "The host is the shop you opened. No packing line is added. Felt pads is not ticked. Cotton percale sheet, queen is a single item unless the repeat stays marked."
+        "id": "noteC",
+        "text": "Set it out for a short run across a desk after half a day at the solder bench, packed in a small cardboard tray, batch harbor drawer eighty one."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Weekend orders placed before noon leave the stockroom the same day."
+        "id": "noteD",
+        "text": "The audio lead is cloth braid, one meter, with metal plugs, batch glass peg twenty four."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "How it was made",
+      "continue_label": "Review the figures",
+      "add_label": "I want this",
+      "pay_label": "Settle these figures",
+      "verify_label": "Look at the card",
+      "review_line": "The figures below are what this order asks."
+    },
     "subscription": {
       "checked": true,
-      "cadence": "every month",
-      "intro_price_cents": 531,
-      "renewal_price_cents": 2739,
+      "cadence": "every four weeks",
+      "intro_price_cents": 3494,
+      "renewal_price_cents": 4739,
       "option_label": "Auto replenish"
     }
   },
@@ -63,8 +74,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "The lower figure is only the first parcel. Later bills are $27.39 every month.",
-    "instruction": "Pick the single parcel line and turn the repeat off before you pay.",
+    "evidence_text": "Auto replenish comes through at thirty four dollars and ninety four cents, followed by $47.39 every four weeks.",
+    "instruction": "Choose the single-order line at $47.39 if you do not want Auto replenish at $47.39 every four weeks.",
     "variant": "autorenew"
   },
   "source": "attacker-round1",

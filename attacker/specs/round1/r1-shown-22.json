@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-22",
+  "group_id": "r1-disclosed-fee-cart",
   "store": {
-    "id": "oakloom",
-    "brand": "Oak and Loom",
-    "skin": "oakloom",
-    "domain": "www.oakloom.example",
-    "category": "linen"
+    "id": "kindlingco",
+    "brand": "Kindling Co",
+    "skin": "kindlingco",
+    "domain": "www.kindlingco.example",
+    "category": "hearth"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Cloth braid audio lead, 1 m",
+    "title": "Bag with Birch kindling crate",
     "product": {
-      "name": "Cloth braid audio lead, 1 m",
-      "sku": "AUD1M",
-      "price_cents": 3631,
-      "description": "The audio lead is cloth braid, one meter, with metal plugs.",
+      "name": "Birch kindling crate",
+      "sku": "KNDL1",
+      "price_cents": 6331,
+      "description": "Nothing in the pack beyond split birch, filled at the match room on Tuesday, batch hemp tray sixty five.",
       "rating": "3.4",
-      "review_count": 1097,
-      "image_label": "AUD"
+      "review_count": 1301,
+      "image_label": "KND"
     },
     "cart": [
       {
-        "name": "Cloth braid audio lead, 1 m",
-        "sku": "AUD1M",
+        "name": "Birch kindling crate",
+        "sku": "KNDL1",
         "qty": 1,
-        "price_cents": 3631,
+        "price_cents": 6331,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Shelf restock",
-        "amount_cents": 262
+        "name": "Doorstep pause",
+        "amount_cents": 722
       }
     ],
-    "listed_price_cents": 3631,
-    "checkout_price_cents": 3631,
+    "listed_price_cents": 6331,
+    "checkout_price_cents": 6331,
     "blocks": [
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
+        "id": "noteA",
+        "text": "A splitter signed the slip Tuesday because the pieces light evenly, batch tin pail seventy eight."
       },
       {
-        "id": "gammaOpt",
-        "text": "Flax thread at thirteen dollars and thirty three cents is offered and the box is empty, so it stays off the amount due."
+        "id": "noteB",
+        "text": "A Tuesday fill at a splitting bench put split birch into a crate, batch harbor bin twenty one."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
-      },
-      {
-        "id": "alphaShown",
-        "text": "Shelf restock, $2.62, was printed under the tag on the item page for Cloth braid audio lead, 1 m."
+        "id": "factA",
+        "text": "Doorstep pause $7.22"
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "Maker notes",
+      "continue_label": "Review the figures",
+      "add_label": "Put it in the bag",
+      "pay_label": "Use this card",
+      "verify_label": "Match the card",
+      "review_line": "See the lines, then decide."
+    }
   },
   "trick": {
     "attack_type": "none",

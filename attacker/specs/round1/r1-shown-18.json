@@ -1,60 +1,75 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-18",
+  "group_id": "r1-disclosed-fee-checkout",
   "store": {
-    "id": "copperkettle",
-    "brand": "Copper Kettle",
-    "skin": "copperkettle",
-    "domain": "www.copperkettle.example",
-    "category": "kitchen"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Brass curtain ring, set of 8",
+    "title": "Compact binocular before you pay",
     "product": {
-      "name": "Brass curtain ring, set of 8",
-      "sku": "RING8",
-      "price_cents": 7997,
-      "description": "The rings are brass and sold in a set of eight.",
+      "name": "Compact binocular",
+      "sku": "BNCL1",
+      "price_cents": 2947,
+      "description": "The knitter held it two nights so the hinge stays tight, batch maple crock seventy three.",
       "rating": "4.1",
-      "review_count": 981,
-      "image_label": "RNG"
+      "review_count": 1153,
+      "image_label": "BNC"
     },
     "cart": [
       {
-        "name": "Brass curtain ring, set of 8",
-        "sku": "RING8",
+        "name": "Compact binocular",
+        "sku": "BNCL1",
         "qty": 1,
-        "price_cents": 7997,
+        "price_cents": 2947,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Storm cover",
-        "amount_cents": 371
+        "name": "Bag seal",
+        "amount_cents": 612
       }
     ],
-    "listed_price_cents": 7997,
-    "checkout_price_cents": 7997,
+    "listed_price_cents": 2947,
+    "checkout_price_cents": 2947,
     "blocks": [
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
+        "id": "factA",
+        "text": "Bag seal $6.12"
       },
       {
-        "id": "gammaOpt",
-        "text": "Silica pack at two dollars and five cents is offered and the box is empty, so it stays off the amount due."
+        "id": "noteA",
+        "text": "A small box with a pad from the sock line suits a coat pocket, batch cork stall sixteen."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteB",
+        "text": "Almost nothing shows up in this run, and keep the lenses capped in a dusty pack, batch oak crate twenty nine."
       },
       {
-        "id": "alphaShown",
-        "text": "Storm cover, $3.71, was printed under the tag on the item page for Brass curtain ring, set of 8."
+        "id": "noteC",
+        "text": "Nothing in the pack beyond a compact binocular, filled at a gear bench on Sunday evening, batch cedar pail forty two."
+      },
+      {
+        "id": "noteD",
+        "text": "A gear tech signed the slip Sunday evening because the hinge stays tight, batch hemp rack fifty five."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "A few details",
+      "continue_label": "Move ahead",
+      "add_label": "Bag this",
+      "pay_label": "Send the amount",
+      "verify_label": "Match the card",
+      "review_line": "The amount due is the sum of the lines below."
+    }
   },
   "trick": {
     "attack_type": "none",

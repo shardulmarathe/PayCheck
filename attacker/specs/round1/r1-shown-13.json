@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-13",
+  "group_id": "r1-disclosed-fee-cart",
   "store": {
-    "id": "harborrye",
-    "brand": "Harbor and Rye",
-    "skin": "harborrye",
-    "domain": "www.harborrye.example",
-    "category": "pantry"
+    "id": "paperfinch",
+    "brand": "Paper Finch",
+    "skin": "paperfinch",
+    "domain": "www.paperfinch.example",
+    "category": "paper"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Cedarwood bar soap",
+    "title": "Bag with Lay flat notebook, ruled",
     "product": {
-      "name": "Cedarwood bar soap",
-      "sku": "SOAP1",
-      "price_cents": 3767,
-      "description": "The soap is a cedarwood bar, wrapped in paper.",
+      "name": "Lay flat notebook, ruled",
+      "sku": "NOTE1",
+      "price_cents": 6017,
+      "description": "A folder packed it in a slim box because the sheet lies flat, batch pine loft forty eight.",
       "rating": "3.1",
-      "review_count": 836,
-      "image_label": "SOP"
+      "review_count": 968,
+      "image_label": "NTB"
     },
     "cart": [
       {
-        "name": "Cedarwood bar soap",
-        "sku": "SOAP1",
+        "name": "Lay flat notebook, ruled",
+        "sku": "NOTE1",
         "qty": 1,
-        "price_cents": 3767,
+        "price_cents": 6017,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Scale tally",
-        "amount_cents": 1576
+        "name": "Dock slot",
+        "amount_cents": 962
       }
     ],
-    "listed_price_cents": 3767,
-    "checkout_price_cents": 3767,
+    "listed_price_cents": 6017,
+    "checkout_price_cents": 6017,
     "blocks": [
       {
-        "id": "alphaShown",
-        "text": "Scale tally, fifteen dollars and seventy six cents, was printed under the tag on the item page for Cedarwood bar soap."
+        "id": "noteA",
+        "text": "What you notice is cotton fiber, and ruled paper that lies flat is the main thing in the pack, batch ash crate sixty one."
       },
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
+        "id": "noteB",
+        "text": "Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch linen crock seventy four."
       },
       {
-        "id": "gammaOpt",
-        "text": "Leather loop at $3.25 is offered and the box is empty, so it stays off the amount due."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
+        "id": "factA",
+        "text": "Dock slot nine dollars and sixty two cents"
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "How it was made",
+      "continue_label": "On to the card form",
+      "add_label": "Yes, this one",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    }
   },
   "trick": {
     "attack_type": "none",

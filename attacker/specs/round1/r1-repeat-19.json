@@ -1,61 +1,72 @@
 {
   "spec_version": "1",
   "page_id": "r1-repeat-19",
+  "group_id": "r1-autorenew-checkout",
   "store": {
-    "id": "brightwire",
-    "brand": "Brightwire",
-    "skin": "brightwire",
-    "domain": "www.brightwire.example",
-    "category": "audio"
+    "id": "kindlingco",
+    "brand": "Kindling Co",
+    "skin": "kindlingco",
+    "domain": "www.kindlingco.example",
+    "category": "hearth"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Walnut headset stand",
+    "title": "Firestarter puck, 8 count before you pay",
     "product": {
-      "name": "Walnut headset stand",
-      "sku": "STAND1",
-      "price_cents": 7964,
-      "description": "The stand is walnut and holds a headset.",
+      "name": "Firestarter puck, 8 count",
+      "sku": "FIRE8",
+      "price_cents": 1864,
+      "description": "The match packer signed the slip Wednesday because the puck catches damp wood, batch brass loft sixty seven.",
       "rating": "2.7",
-      "review_count": 531,
-      "image_label": "STD"
+      "review_count": 303,
+      "image_label": "FIR"
     },
     "cart": [
       {
-        "name": "Walnut headset stand",
-        "sku": "STAND1",
+        "name": "Firestarter puck, 8 count",
+        "sku": "FIRE8",
         "qty": 1,
-        "price_cents": 7964,
+        "price_cents": 1864,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 7964,
-    "checkout_price_cents": 7964,
+    "listed_price_cents": 1864,
+    "checkout_price_cents": 1864,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "Weekend orders placed before noon leave the stockroom the same day."
+        "id": "noteD",
+        "text": "A crate holds dry wood in, which is what the yard crew wanted for batch oak crate forty nine."
       },
       {
-        "id": "alphaLater",
-        "text": "The later bill is eighty three dollars and fourteen cents every quarter."
+        "id": "noteA",
+        "text": "A Wednesday fill at the wood yard put firestarter pucks into a crate, batch copper drawer eighty."
       },
       {
-        "id": "betaFirst",
-        "text": "The first parcel is $51.26. The single parcel choice is the other line, and it is not the one marked."
+        "id": "noteB",
+        "text": "Batch maple crock twenty three names the match room and mentions hand splitting."
       },
       {
-        "id": "gammaDecoy",
-        "text": "The host is the shop you opened. No packing line is added. Pine wedge is not ticked. Walnut headset stand is a single item unless the repeat stays marked."
+        "id": "noteC",
+        "text": "For damp kindling, start with firestarter pucks, and batch cork stall thirty six is on the slip."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "Maker notes",
+      "continue_label": "Figures look right",
+      "add_label": "Bag this",
+      "pay_label": "Use this card",
+      "verify_label": "Confirm the card",
+      "review_line": "See the lines, then decide."
+    },
     "subscription": {
       "checked": true,
-      "cadence": "every quarter",
-      "intro_price_cents": 5126,
-      "renewal_price_cents": 8314,
-      "option_label": "Member rate"
+      "cadence": "every ninety days",
+      "intro_price_cents": 1038,
+      "renewal_price_cents": 2076,
+      "option_label": "Parcel cadence"
     }
   },
   "trick": {
@@ -63,8 +74,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "The marked line repeats after the first parcel at eighty three dollars and fourteen cents every quarter.",
-    "instruction": "Pick the single parcel line and turn the repeat off before you pay.",
+    "evidence_text": "Parcel cadence takes $10.38 this round and twenty dollars and seventy six cents every ninety days next.",
+    "instruction": "Choose the single-order line at eighteen dollars and sixty four cents if you do not want Parcel cadence at twenty dollars and seventy six cents every ninety days.",
     "variant": "autorenew"
   },
   "source": "attacker-round1",

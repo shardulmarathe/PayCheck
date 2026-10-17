@@ -1,63 +1,65 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-23",
+  "group_id": "r1-real-drop-checkout",
   "store": {
-    "id": "paperfinch",
-    "brand": "Paper Finch",
-    "skin": "paperfinch",
-    "domain": "www.paperfinch.example",
-    "category": "paper"
+    "id": "lumenfield",
+    "brand": "Lumenfield",
+    "skin": "lumenfield",
+    "domain": "www.lumenfield.example",
+    "category": "audio"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Washed linen napkin, set of 4",
+    "title": "Review Braided linen lead, 2 m",
     "product": {
-      "name": "Washed linen napkin, set of 4",
-      "sku": "NAP4",
-      "price_cents": 5673,
-      "description": "The napkins are washed linen and soften after a cold rinse.",
+      "name": "Braided linen lead, 2 m",
+      "sku": "LEAD2M",
+      "price_cents": 1273,
+      "description": "The crew at a quiet desk room uses hand soldering for this, and this one is batch river crock forty.",
       "rating": "3.8",
-      "review_count": 1358,
-      "image_label": "NAP"
+      "review_count": 1634,
+      "image_label": "CBL"
     },
     "cart": [
       {
-        "name": "Washed linen napkin, set of 4",
-        "sku": "NAP4",
+        "name": "Braided linen lead, 2 m",
+        "sku": "LEAD2M",
         "qty": 1,
-        "price_cents": 5673,
+        "price_cents": 1273,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 5673,
-    "checkout_price_cents": 5673,
+    "listed_price_cents": 1273,
+    "checkout_price_cents": 1273,
     "blocks": [
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Washed linen napkin, set of 4 was $70.88."
+        "id": "noteA",
+        "text": "A cable maker likes it for a desk setup and wrote batch iron stall fifty three on the slip."
       },
       {
-        "id": "betaNow",
-        "text": "Today's tag is fifty six dollars and seventy three cents, and that is what will be billed."
+        "id": "noteB",
+        "text": "Bring it out for a desk setup, packed in a cotton sleeve from the solder bench, batch birch tray sixty six."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
-      },
-      {
-        "id": "epsilonOpt",
-        "text": "Linen sleeve is available for $6.42 and is not ticked."
-      },
-      {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
+        "id": "factA",
+        "text": "Last week $13.81. This week twelve dollars and seventy three cents."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "How it was made",
+      "continue_label": "Go on to pay",
+      "add_label": "Take this along",
+      "pay_label": "Pay these figures",
+      "verify_label": "Check the card",
+      "review_line": "The figures below are what this order asks."
+    },
+    "offers": {
+      "was_cents": 1381
+    }
   },
   "trick": {
     "attack_type": "none",

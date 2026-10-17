@@ -1,66 +1,77 @@
 {
   "spec_version": "1",
   "page_id": "r1-window-03",
+  "group_id": "r1-modal-cart",
   "store": {
-    "id": "brightwire",
-    "brand": "Brightwire",
-    "skin": "brightwire",
-    "domain": "www.brightwire.example",
+    "id": "lanternline",
+    "brand": "Lanternline",
+    "skin": "lanternline",
+    "domain": "www.lanternline.example",
     "category": "audio"
   },
   "page": {
-    "kind": "checkout",
-    "title": "Review Glass storage jar, 1 liter",
+    "kind": "cart",
+    "title": "Warm desk lamp in the bag",
     "product": {
-      "name": "Glass storage jar, 1 liter",
-      "sku": "JAR1L",
-      "price_cents": 4930,
-      "description": "The jar is clear glass and holds one liter.",
+      "name": "Warm desk lamp",
+      "sku": "LAMP1",
+      "price_cents": 6690,
+      "description": "A cable maker signed the slip Friday because the shade sits level, batch brass peg seventy seven.",
       "rating": "3.3",
-      "review_count": 947,
-      "image_label": "JAR"
+      "review_count": 1551,
+      "image_label": "LMP"
     },
     "cart": [
       {
-        "name": "Glass storage jar, 1 liter",
-        "sku": "JAR1L",
+        "name": "Warm desk lamp",
+        "sku": "LAMP1",
         "qty": 1,
-        "price_cents": 4930,
+        "price_cents": 6690,
         "trick_item": false
       },
       {
-        "name": "Glass coaster",
-        "sku": "CSTR1",
+        "name": "Cedar insert",
+        "sku": "CEDR1",
         "qty": 1,
-        "price_cents": 1338,
+        "price_cents": 1005,
         "trick_item": true
       }
     ],
     "fees": [],
-    "listed_price_cents": 4930,
-    "checkout_price_cents": 4930,
+    "listed_price_cents": 6690,
+    "checkout_price_cents": 6690,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteD",
+        "text": "A cotton sleeve holds a hint of walnut oil in, which is what the bench tech wanted for batch oak stall fifty nine."
       },
       {
-        "id": "alphaWindow",
-        "text": "The window placed Glass coaster there. You did not choose it on the item page."
+        "id": "noteA",
+        "text": "A Friday fill at the solder bench put a warm lamp into a cotton sleeve, batch copper loft twenty."
       },
       {
-        "id": "betaDollars",
-        "text": "The separate line for Glass coaster is $13.38."
+        "id": "noteB",
+        "text": "Batch maple crate thirty three names the cable table and mentions a fit check on a real desk."
       },
       {
-        "id": "gammaDecoy",
-        "text": "Glass storage jar, 1 liter still matches the tag. No packing line is added on this screen."
+        "id": "noteC",
+        "text": "For a reading desk, start with a warm lamp, and batch cork crock forty six is on the slip."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "A few details",
+      "continue_label": "Figures look right",
+      "add_label": "Yes, this one",
+      "pay_label": "Use this card",
+      "verify_label": "Review the card",
+      "review_line": "The figures below are what this order asks."
+    },
     "addon": {
-      "name": "Glass coaster",
-      "sku": "CSTR1",
-      "price_cents": 1338,
+      "name": "Cedar insert",
+      "sku": "CEDR1",
+      "price_cents": 1005,
       "checked": false
     }
   },
@@ -69,8 +80,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "The bag now holds Glass coaster as well as Glass storage jar, 1 liter.",
-    "instruction": "Take Glass coaster out of the bag. The window placed it there.",
+    "evidence_text": "You will see Cedar insert in the bag for $10.05.",
+    "instruction": "Take Cedar insert out of the bag before you pay. The dialog is offering to keep it.",
     "variant": "modal"
   },
   "source": "attacker-round1",

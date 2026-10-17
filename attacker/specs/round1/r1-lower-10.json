@@ -1,63 +1,73 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-10",
+  "group_id": "r1-real-drop-cart",
   "store": {
-    "id": "copperkettle",
-    "brand": "Copper Kettle",
-    "skin": "copperkettle",
-    "domain": "www.copperkettle.example",
-    "category": "kitchen"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Brass curtain ring, set of 8",
+    "title": "Compact binocular in the bag",
     "product": {
-      "name": "Brass curtain ring, set of 8",
-      "sku": "RING8",
-      "price_cents": 4319,
-      "description": "The rings are brass and sold in a set of eight.",
+      "name": "Compact binocular",
+      "sku": "BNCL1",
+      "price_cents": 6319,
+      "description": "Plain wool shows up in this run, and keep the lenses capped in a dusty pack, batch amber bin fifty nine.",
       "rating": "4.1",
-      "review_count": 981,
-      "image_label": "RNG"
+      "review_count": 1153,
+      "image_label": "BNC"
     },
     "cart": [
       {
-        "name": "Brass curtain ring, set of 8",
-        "sku": "RING8",
+        "name": "Compact binocular",
+        "sku": "BNCL1",
         "qty": 1,
-        "price_cents": 4319,
+        "price_cents": 6319,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 4319,
-    "checkout_price_cents": 4319,
+    "listed_price_cents": 6319,
+    "checkout_price_cents": 6319,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "factA",
+        "text": "Previous eighty five dollars and six cents. Current $63.19."
       },
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Brass curtain ring, set of 8 was fifty four dollars and sixty one cents."
+        "id": "noteA",
+        "text": "Nothing in the pack beyond a compact binocular, filled at a gear bench on Wednesday, batch clay peg seventy two."
       },
       {
-        "id": "betaNow",
-        "text": "Today's tag is $43.19, and that is what will be billed."
+        "id": "noteB",
+        "text": "The seam lead signed the slip Wednesday because the hinge stays tight, batch slate loft fifteen."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteC",
+        "text": "A Wednesday fill at the stitch room put a compact binocular into a cotton stuff sack, batch pine drawer twenty eight."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Wool washer is available for two dollars and seventy nine cents and is not ticked."
-      },
-      {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "noteD",
+        "text": "Batch ash crock forty one names the sock line and mentions a cap torque check."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "A few details",
+      "continue_label": "Move ahead",
+      "add_label": "Bag this",
+      "pay_label": "Send the amount",
+      "verify_label": "Match the card",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "was_cents": 8506
+    }
   },
   "trick": {
     "attack_type": "none",

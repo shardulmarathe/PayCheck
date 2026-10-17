@@ -1,60 +1,71 @@
 {
   "spec_version": "1",
   "page_id": "r1-repeat-25",
+  "group_id": "r1-autorenew-checkout",
   "store": {
-    "id": "copperkettle",
-    "brand": "Copper Kettle",
-    "skin": "copperkettle",
-    "domain": "www.copperkettle.example",
-    "category": "kitchen"
+    "id": "fieldbasket",
+    "brand": "Fieldbasket",
+    "skin": "fieldbasket",
+    "domain": "www.fieldbasket.example",
+    "category": "pantry"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Warm desk lamp",
+    "title": "Buckwheat groats, 24 oz before you pay",
     "product": {
-      "name": "Warm desk lamp",
-      "sku": "LAMP1",
-      "price_cents": 7114,
-      "description": "The lamp throws a warm pool on a desk.",
+      "name": "Buckwheat groats, 24 oz",
+      "sku": "BWHT24",
+      "price_cents": 1227,
+      "description": "Hand filling on Friday is how the filling crew still finishes these, batch wool pail twenty seven.",
       "rating": "3.7",
-      "review_count": 705,
-      "image_label": "LMP"
+      "review_count": 525,
+      "image_label": "BWH"
     },
     "cart": [
       {
-        "name": "Warm desk lamp",
-        "sku": "LAMP1",
+        "name": "Buckwheat groats, 24 oz",
+        "sku": "BWHT24",
         "qty": 1,
-        "price_cents": 7114,
+        "price_cents": 1227,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 7114,
-    "checkout_price_cents": 7114,
+    "listed_price_cents": 1227,
+    "checkout_price_cents": 1227,
     "blocks": [
       {
-        "id": "betaFirst",
-        "text": "The first parcel is $11.66. The single parcel choice is the other line, and it is not the one marked."
+        "id": "noteB",
+        "text": "The crew at Two Harbors uses a slow toast for this, and this one is batch iron hook fifty three."
       },
       {
-        "id": "gammaDecoy",
-        "text": "The host is the shop you opened. No packing line is added. Wick trim is not ticked. Warm desk lamp is a single item unless the repeat stays marked."
+        "id": "noteC",
+        "text": "The miller likes it for a savory bowl and wrote batch birch nook sixty six on the slip."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
+        "id": "noteD",
+        "text": "Bring it out for a savory bowl, packed in a glass jar from the mill shed, batch amber bin seventy nine."
       },
       {
-        "id": "alphaLater",
-        "text": "The later bill is eighty dollars and forty six cents every quarter."
+        "id": "noteA",
+        "text": "You will find toasted buckwheat and not much else, packed a market morning as batch river rack forty."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "Item notes",
+      "continue_label": "Move ahead",
+      "add_label": "I want this",
+      "pay_label": "Pay these figures",
+      "verify_label": "Look at the card",
+      "review_line": "Look over the figures before you pay."
+    },
     "subscription": {
       "checked": true,
-      "cadence": "every quarter",
-      "intro_price_cents": 1166,
-      "renewal_price_cents": 8046,
+      "cadence": "every ninety days",
+      "intro_price_cents": 597,
+      "renewal_price_cents": 1410,
       "option_label": "Pantry repeat"
     }
   },
@@ -63,8 +74,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "The marked line repeats after the first parcel at eighty dollars and forty six cents every quarter.",
-    "instruction": "Pick the single parcel line and turn the repeat off before you pay.",
+    "evidence_text": "Pantry repeat lists $5.97 for now and fourteen dollars and ten cents every ninety days going on.",
+    "instruction": "Choose the single-order line at twelve dollars and twenty seven cents if you do not want Pantry repeat at fourteen dollars and ten cents every ninety days.",
     "variant": "autorenew"
   },
   "source": "attacker-round1",

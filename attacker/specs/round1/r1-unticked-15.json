@@ -1,51 +1,66 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-15",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "paperfinch",
-    "brand": "Paper Finch",
-    "skin": "paperfinch",
-    "domain": "www.paperfinch.example",
-    "category": "paper"
+    "id": "sundrysoap",
+    "brand": "Sundry Soap",
+    "skin": "sundrysoap",
+    "domain": "www.sundrysoap.example",
+    "category": "soap"
   },
   "page": {
-    "kind": "product",
-    "title": "Birch kindling crate",
+    "kind": "checkout",
+    "title": "Review Cedarwood bar soap",
     "product": {
-      "name": "Birch kindling crate",
-      "sku": "KNDL1",
-      "price_cents": 4159,
-      "description": "The crate holds split birch for a small stove.",
+      "name": "Cedarwood bar soap",
+      "sku": "SOAP1",
+      "price_cents": 6309,
+      "description": "A small tin from the balm table suits a daily wash, batch tin pail seventy eight.",
       "rating": "4.3",
-      "review_count": 1010,
-      "image_label": "KND"
+      "review_count": 1190,
+      "image_label": "SOP"
     },
-    "cart": [],
+    "cart": [
+      {
+        "name": "Cedarwood bar soap",
+        "sku": "SOAP1",
+        "qty": 1,
+        "price_cents": 6309,
+        "trick_item": false
+      }
+    ],
     "fees": [],
-    "listed_price_cents": 4159,
-    "checkout_price_cents": 4159,
+    "listed_price_cents": 6309,
+    "checkout_price_cents": 6309,
     "blocks": [
       {
-        "id": "alphaOffer",
-        "text": "Hinge pin can be included for seventeen dollars and sixty four cents."
+        "id": "noteA",
+        "text": "Cedarwood shows up in this run, and let the bar dry between washes, batch harbor bin twenty one."
       },
       {
-        "id": "betaEmpty",
-        "text": "The box is empty and Hinge pin is outside the amount due."
-      },
-      {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Birch kindling crate."
-      },
-      {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was $50.51. Today's tag forty one dollars and fifty nine cents is the figure that will be billed."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "Aisle staff can match this sku to the shelf tag."
+        "id": "noteB",
+        "text": "Nothing in the pack beyond a cedarwood bar, filled at a curing rack on Wednesday, batch glass hook thirty four."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "Care and origin",
+      "continue_label": "Go on to pay",
+      "add_label": "Put it in the bag",
+      "pay_label": "Send the amount",
+      "verify_label": "Match the card",
+      "review_line": "See the lines, then decide."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Silica pack",
+        "price_cents": 865,
+        "checked": false,
+        "label": "Add Silica pack for $8.65"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

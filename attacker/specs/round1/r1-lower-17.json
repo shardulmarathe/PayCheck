@@ -1,6 +1,7 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-17",
+  "group_id": "r1-real-drop-checkout",
   "store": {
     "id": "harborrye",
     "brand": "Harbor and Rye",
@@ -14,10 +15,10 @@
     "product": {
       "name": "Stoneground rye flour, 2 lb",
       "sku": "RYE2LB",
-      "price_cents": 1725,
-      "description": "The flour is milled from whole rye berries and packed in a paper sack.",
+      "price_cents": 4125,
+      "description": "For a dense country loaf, start with whole rye berries, and batch pine peg thirty eight is on the slip.",
       "rating": "4.0",
-      "review_count": 1184,
+      "review_count": 1412,
       "image_label": "RYE"
     },
     "cart": [
@@ -25,39 +26,40 @@
         "name": "Stoneground rye flour, 2 lb",
         "sku": "RYE2LB",
         "qty": 1,
-        "price_cents": 1725,
+        "price_cents": 4125,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 1725,
-    "checkout_price_cents": 1725,
+    "listed_price_cents": 4125,
+    "checkout_price_cents": 4125,
     "blocks": [
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Stoneground rye flour, 2 lb was $31.34."
+        "id": "noteA",
+        "text": "A cloth bag holds a faint smoke in, which is what the miller wanted for batch ash stall fifty one."
       },
       {
-        "id": "betaNow",
-        "text": "Today's tag is seventeen dollars and twenty five cents, and that is what will be billed."
+        "id": "noteB",
+        "text": "Give it one night at Water Street, and batch linen crate sixty four stays with a tin with a slip lid."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
-      },
-      {
-        "id": "epsilonOpt",
-        "text": "Rubber foot is available for $6.89 and is not ticked."
-      },
-      {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "Returns are accepted within 30 days when the seal is still intact."
+        "id": "factA",
+        "text": "Last week $47.26. This week forty one dollars and twenty five cents."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "From the maker",
+      "continue_label": "On to the card form",
+      "add_label": "I want this",
+      "pay_label": "Finish with the card",
+      "verify_label": "Review the card",
+      "review_line": "Look over the figures before you pay."
+    },
+    "offers": {
+      "was_cents": 4726
+    }
   },
   "trick": {
     "attack_type": "none",

@@ -1,59 +1,70 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-01",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "fieldbasket",
-    "brand": "Fieldbasket",
-    "skin": "fieldbasket",
-    "domain": "www.fieldbasket.example",
-    "category": "pantry"
+    "id": "marigold",
+    "brand": "Marigold",
+    "skin": "marigold",
+    "domain": "www.marigold.example",
+    "category": "linen"
   },
   "page": {
-    "kind": "cart",
-    "title": "Bag holding Linen tea towel",
+    "kind": "checkout",
+    "title": "Confirm Linen washcloth, pair",
     "product": {
-      "name": "Linen tea towel",
-      "sku": "TWEL1",
-      "price_cents": 1111,
-      "description": "The towel is linen, hemmed, for drying cups.",
+      "name": "Linen washcloth, pair",
+      "sku": "WASH2",
+      "price_cents": 2831,
+      "description": "The crew at a wash house uses a cold rinse for this, and this one is batch birch peg thirty six.",
       "rating": "4.3",
-      "review_count": 604,
-      "image_label": "TWL"
+      "review_count": 672,
+      "image_label": "WSH"
     },
     "cart": [
       {
-        "name": "Linen tea towel",
-        "sku": "TWEL1",
+        "name": "Linen washcloth, pair",
+        "sku": "WASH2",
         "qty": 1,
-        "price_cents": 1111,
+        "price_cents": 2831,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 1111,
-    "checkout_price_cents": 1111,
+    "listed_price_cents": 2831,
+    "checkout_price_cents": 2831,
     "blocks": [
       {
-        "id": "betaEmpty",
-        "text": "The box is empty and Felt pads is outside the amount due."
+        "id": "noteB",
+        "text": "Bring it out for a sink, packed in a paper band from the loom room, batch clay crate sixty two."
       },
       {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Linen tea towel."
+        "id": "noteC",
+        "text": "A little cedar from the cupboard is the note on batch slate crock seventy five, and wash the cloths with the towels."
       },
       {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was $18.95. Today's tag eleven dollars and eleven cents is the figure that will be billed."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shelf card lists nine on hand in the stockroom."
-      },
-      {
-        "id": "alphaOffer",
-        "text": "Felt pads can be included for sixteen dollars and ninety two cents."
+        "id": "noteA",
+        "text": "A hemmer on the day shift likes it for a sink and wrote batch amber stall forty nine on the slip."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "What is due",
+      "about": "Maker notes",
+      "continue_label": "Move ahead",
+      "add_label": "Place in the bag",
+      "pay_label": "Pay these figures",
+      "verify_label": "Look at the card",
+      "review_line": "Read the lines, then pay if they still fit."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Cedar insert",
+        "price_cents": 418,
+        "checked": false,
+        "label": "Add Cedar insert for $4.18"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

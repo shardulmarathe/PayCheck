@@ -1,63 +1,73 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-04",
+  "group_id": "r1-real-drop-cart",
   "store": {
-    "id": "brightwire",
-    "brand": "Brightwire",
-    "skin": "brightwire",
-    "domain": "www.brightwire.example",
-    "category": "audio"
+    "id": "copperkettle",
+    "brand": "Copper Kettle",
+    "skin": "copperkettle",
+    "domain": "www.copperkettle.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Compact binocular",
+    "title": "Oak picture ledge, 24 in in the bag",
     "product": {
-      "name": "Compact binocular",
-      "sku": "BNCL1",
-      "price_cents": 371,
-      "description": "The binocular is compact and fits a coat pocket.",
+      "name": "Oak picture ledge, 24 in",
+      "sku": "LEDG24",
+      "price_cents": 2371,
+      "description": "What you notice is bare steel, and oak with a low lip is the main thing in the pack, batch oak crate twenty nine.",
       "rating": "3.2",
-      "review_count": 807,
-      "image_label": "BNC"
+      "review_count": 931,
+      "image_label": "LDG"
     },
     "cart": [
       {
-        "name": "Compact binocular",
-        "sku": "BNCL1",
+        "name": "Oak picture ledge, 24 in",
+        "sku": "LEDG24",
         "qty": 1,
-        "price_cents": 371,
+        "price_cents": 2371,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 371,
-    "checkout_price_cents": 371,
+    "listed_price_cents": 2371,
+    "checkout_price_cents": 2371,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
+        "id": "noteD",
+        "text": "A board maker held it one night so the lip stays low and even, batch harbor nook eighty one."
       },
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Compact binocular was fifteen dollars and seven cents."
+        "id": "factA",
+        "text": "Previous twenty seven dollars and fifty six cents. Current $23.71."
       },
       {
-        "id": "betaNow",
-        "text": "Today's tag is $3.71, and that is what will be billed."
+        "id": "noteA",
+        "text": "Wipe the oak with a barely damp cloth, which is the right habit for a short row of pictures, batch cedar pail forty two."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteB",
+        "text": "It rested the next morning at the enamel shop, then went into paper and a cardboard edge, batch hemp rack fifty five."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Brass hook is available for three dollars and thirty nine cents and is not ticked."
-      },
-      {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "noteC",
+        "text": "Monday at the enamel shop was for edge-grain glue-up, and the slip reads tin tray sixty eight."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "Item notes",
+      "continue_label": "Figures look right",
+      "add_label": "Yes, this one",
+      "pay_label": "Settle these figures",
+      "verify_label": "Card check",
+      "review_line": "These are the lines on this order."
+    },
+    "offers": {
+      "was_cents": 2756
+    }
   },
   "trick": {
     "attack_type": "none",

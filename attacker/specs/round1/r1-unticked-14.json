@@ -1,59 +1,74 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-14",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "copperkettle",
-    "brand": "Copper Kettle",
-    "skin": "copperkettle",
-    "domain": "www.copperkettle.example",
-    "category": "kitchen"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Brass curtain ring, set of 8",
+    "title": "Compact binocular before you pay",
     "product": {
-      "name": "Brass curtain ring, set of 8",
-      "sku": "RING8",
-      "price_cents": 3407,
-      "description": "The rings are brass and sold in a set of eight.",
+      "name": "Compact binocular",
+      "sku": "BNCL1",
+      "price_cents": 5557,
+      "description": "A small box with a pad from the stitch room suits a coat pocket, batch ash tray thirty one.",
       "rating": "4.1",
-      "review_count": 981,
-      "image_label": "RNG"
+      "review_count": 1153,
+      "image_label": "BNC"
     },
     "cart": [
       {
-        "name": "Brass curtain ring, set of 8",
-        "sku": "RING8",
+        "name": "Compact binocular",
+        "sku": "BNCL1",
         "qty": 1,
-        "price_cents": 3407,
+        "price_cents": 5557,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 3407,
-    "checkout_price_cents": 3407,
+    "listed_price_cents": 5557,
+    "checkout_price_cents": 5557,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteB",
+        "text": "Nothing in the pack beyond a compact binocular, filled at the sock line on Monday, batch brass bin fifty seven."
       },
       {
-        "id": "alphaOffer",
-        "text": "Silica pack can be included for $13.41."
+        "id": "noteC",
+        "text": "The knitter signed the slip Tuesday because the hinge stays tight, batch copper hook seventy."
       },
       {
-        "id": "betaEmpty",
-        "text": "The box is empty and Silica pack is outside the amount due."
+        "id": "noteD",
+        "text": "A Tuesday fill at a gear bench put a compact binocular into a cotton stuff sack, batch maple nook thirteen."
       },
       {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Brass curtain ring, set of 8."
-      },
-      {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was forty two dollars and twenty seven cents. Today's tag $34.07 is the figure that will be billed."
+        "id": "noteA",
+        "text": "A little aluminum shows up in this run, and keep the lenses capped in a dusty pack, batch linen pail forty four."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "A few details",
+      "continue_label": "Move ahead",
+      "add_label": "Bag this",
+      "pay_label": "Send the amount",
+      "verify_label": "Match the card",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Beeswax puck",
+        "price_cents": 983,
+        "checked": false,
+        "label": "Add Beeswax puck for nine dollars and eighty three cents"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

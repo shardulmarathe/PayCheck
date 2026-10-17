@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-repeat-03",
+  "group_id": "r1-autorenew-checkout",
   "store": {
-    "id": "trailmeter",
-    "brand": "Trailmeter",
-    "skin": "trailmeter",
-    "domain": "www.trailmeter.example",
-    "category": "trail"
+    "id": "copperkettle",
+    "brand": "Copper Kettle",
+    "skin": "copperkettle",
+    "domain": "www.copperkettle.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Cotton paper envelopes, 20",
+    "title": "Confirm Beech cutting board",
     "product": {
-      "name": "Cotton paper envelopes, 20",
-      "sku": "ENV20",
-      "price_cents": 4964,
-      "description": "The envelopes are cotton paper, twenty in a wrap.",
+      "name": "Beech cutting board",
+      "sku": "BRD1",
+      "price_cents": 6164,
+      "description": "The crew at the pottery yard uses an enamel fire for this, and this one is batch brass crock fifty seven.",
       "rating": "3.2",
-      "review_count": 1667,
-      "image_label": "ENV"
+      "review_count": 1311,
+      "image_label": "BRD"
     },
     "cart": [
       {
-        "name": "Cotton paper envelopes, 20",
-        "sku": "ENV20",
+        "name": "Beech cutting board",
+        "sku": "BRD1",
         "qty": 1,
-        "price_cents": 4964,
+        "price_cents": 6164,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 4964,
-    "checkout_price_cents": 4964,
+    "listed_price_cents": 6164,
+    "checkout_price_cents": 6164,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "Fragile glass leaves the stockroom in a double mailer."
+        "id": "noteB",
+        "text": "Bring it out for daily chopping, packed in a cardboard cradle from a board mill, batch maple tray thirteen."
       },
       {
-        "id": "alphaLater",
-        "text": "The later bill is fifty three dollars and twelve cents every 30 days."
+        "id": "noteC",
+        "text": "Bare steel is the note on batch cork pail twenty six, and oil the board when the wood looks pale."
       },
       {
-        "id": "betaFirst",
-        "text": "The first parcel is $49.64. The single parcel choice is the other line, and it is not the one marked."
-      },
-      {
-        "id": "gammaDecoy",
-        "text": "The host is the shop you opened. No packing line is added. Brass hook is not ticked. Cotton paper envelopes, 20 is a single item unless the repeat stays marked."
+        "id": "noteA",
+        "text": "The kiln tech likes it for daily chopping and wrote batch copper rack seventy on the slip."
       }
     ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "This order",
+      "about": "From the maker",
+      "continue_label": "Go on to pay",
+      "add_label": "Take this along",
+      "pay_label": "Pay these figures",
+      "verify_label": "Review the card",
+      "review_line": "These are the lines on this order."
+    },
     "subscription": {
       "checked": true,
-      "cadence": "every 30 days",
-      "intro_price_cents": 4964,
-      "renewal_price_cents": 5312,
+      "cadence": "every forty five days",
+      "intro_price_cents": 6164,
+      "renewal_price_cents": 6585,
       "option_label": "Member rate"
     }
   },
@@ -63,8 +70,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Member rate will bill again every 30 days for fifty three dollars and twelve cents.",
-    "instruction": "Pick the single parcel line and turn the repeat off before you pay.",
+    "evidence_text": "Join Member rate. $61.64 today, sixty five dollars and eighty five cents every forty five days afterwards.",
+    "instruction": "Choose the single-order line at sixty one dollars and sixty four cents if you do not want Member rate at sixty five dollars and eighty five cents every forty five days.",
     "variant": "autorenew"
   },
   "source": "attacker-round1",

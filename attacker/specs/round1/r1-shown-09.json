@@ -1,60 +1,75 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-09",
+  "group_id": "r1-disclosed-fee-checkout",
   "store": {
-    "id": "sundrysoap",
-    "brand": "Sundry Soap",
-    "skin": "sundrysoap",
-    "domain": "www.sundrysoap.example",
-    "category": "soap"
+    "id": "redlane",
+    "brand": "Redlane",
+    "skin": "redlane",
+    "domain": "www.redlane.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Graphite pencil, dozen",
+    "title": "Glass storage jar, 1 liter before you pay",
     "product": {
-      "name": "Graphite pencil, dozen",
-      "sku": "PEN12",
-      "price_cents": 383,
-      "description": "The pencils are graphite, a dozen in a sleeve.",
+      "name": "Glass storage jar, 1 liter",
+      "sku": "JAR1L",
+      "price_cents": 2633,
+      "description": "Bare steel is the note on batch pine tray twenty eight, and wash the glass and dry the lid.",
       "rating": "3.9",
-      "review_count": 720,
-      "image_label": "PEN"
+      "review_count": 820,
+      "image_label": "JAR"
     },
     "cart": [
       {
-        "name": "Graphite pencil, dozen",
-        "sku": "PEN12",
+        "name": "Glass storage jar, 1 liter",
+        "sku": "JAR1L",
         "qty": 1,
-        "price_cents": 383,
+        "price_cents": 2633,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Aisle wrap",
-        "amount_cents": 260
+        "name": "Signature pad",
+        "amount_cents": 407
       }
     ],
-    "listed_price_cents": 383,
-    "checkout_price_cents": 383,
+    "listed_price_cents": 2633,
+    "checkout_price_cents": 2633,
     "blocks": [
       {
-        "id": "alphaShown",
-        "text": "Aisle wrap, two dollars and sixty cents, was printed under the tag on the item page for Graphite pencil, dozen."
+        "id": "noteA",
+        "text": "Set it out for a liter of dry goods after a short afternoon at the enamel shop, packed in paper and a cardboard edge, batch ash pail forty one."
       },
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
+        "id": "noteB",
+        "text": "The jar is clear glass and holds one liter, batch linen rack fifty four."
       },
       {
-        "id": "gammaOpt",
-        "text": "Mesh pouch at $7.27 is offered and the box is empty, so it stays off the amount due."
+        "id": "noteC",
+        "text": "It left the pottery yard on Wednesday after a stoneware firing, and the batch is brass hook sixty seven."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteD",
+        "text": "The kiln tech packed it in paper and a cardboard edge because the lid seats square, batch copper nook eighty."
+      },
+      {
+        "id": "factA",
+        "text": "Signature pad four dollars and seven cents"
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "From the maker",
+      "continue_label": "Review the figures",
+      "add_label": "Yes, this one",
+      "pay_label": "Settle these figures",
+      "verify_label": "Look at the card",
+      "review_line": "These are the lines on this order."
+    }
   },
   "trick": {
     "attack_type": "none",

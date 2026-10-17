@@ -1,60 +1,71 @@
 {
   "spec_version": "1",
   "page_id": "r1-repeat-07",
+  "group_id": "r1-autorenew-checkout",
   "store": {
-    "id": "brightwire",
-    "brand": "Brightwire",
-    "skin": "brightwire",
-    "domain": "www.brightwire.example",
-    "category": "audio"
+    "id": "copperkettle",
+    "brand": "Copper Kettle",
+    "skin": "copperkettle",
+    "domain": "www.copperkettle.example",
+    "category": "kitchen"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Compact binocular",
+    "title": "Oak picture ledge, 24 in before you pay",
     "product": {
-      "name": "Compact binocular",
-      "sku": "BNCL1",
-      "price_cents": 1764,
-      "description": "The binocular is compact and fits a coat pocket.",
+      "name": "Oak picture ledge, 24 in",
+      "sku": "LEDG24",
+      "price_cents": 3164,
+      "description": "Set it out for a short row of pictures after one night at the enamel shop, packed in paper and a cardboard edge, batch brass drawer seventy seven.",
       "rating": "3.3",
-      "review_count": 183,
-      "image_label": "BNC"
+      "review_count": 1459,
+      "image_label": "LDG"
     },
     "cart": [
       {
-        "name": "Compact binocular",
-        "sku": "BNCL1",
+        "name": "Oak picture ledge, 24 in",
+        "sku": "LEDG24",
         "qty": 1,
-        "price_cents": 1764,
+        "price_cents": 3164,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 1764,
-    "checkout_price_cents": 1764,
+    "listed_price_cents": 3164,
+    "checkout_price_cents": 3164,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
+        "id": "noteD",
+        "text": "What you notice is bare steel, and oak with a low lip is the main thing in the pack, batch oak crock fifty nine."
       },
       {
-        "id": "alphaLater",
-        "text": "The later bill is twenty four dollars every quarter."
+        "id": "noteA",
+        "text": "The ledge is oak, twenty four inches, with a low lip, batch copper peg twenty."
       },
       {
-        "id": "betaFirst",
-        "text": "The first parcel is $9.94. The single parcel choice is the other line, and it is not the one marked."
+        "id": "noteB",
+        "text": "It left the pottery yard on Friday after edge-grain glue-up, and the batch is maple stall thirty three."
       },
       {
-        "id": "gammaDecoy",
-        "text": "The host is the shop you opened. No packing line is added. Maple spoon is not ticked. Compact binocular is a single item unless the repeat stays marked."
+        "id": "noteC",
+        "text": "A board maker packed it in paper and a cardboard edge because the lip stays low and even, batch cork crate forty six."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "Item notes",
+      "continue_label": "Figures look right",
+      "add_label": "Place in the bag",
+      "pay_label": "Settle these figures",
+      "verify_label": "Review the card",
+      "review_line": "These are the lines on this order."
+    },
     "subscription": {
       "checked": true,
-      "cadence": "every quarter",
-      "intro_price_cents": 994,
-      "renewal_price_cents": 2400,
+      "cadence": "every ninety days",
+      "intro_price_cents": 554,
+      "renewal_price_cents": 3623,
       "option_label": "Parcel cadence"
     }
   },
@@ -63,8 +74,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "The marked line repeats after the first parcel at twenty four dollars every quarter.",
-    "instruction": "Pick the single parcel line and turn the repeat off before you pay.",
+    "evidence_text": "Under Parcel cadence this order is $5.54, and the follow-up is thirty six dollars and twenty three cents every ninety days.",
+    "instruction": "Choose the single-order line at thirty one dollars and sixty four cents if you do not want Parcel cadence at thirty six dollars and twenty three cents every ninety days.",
     "variant": "autorenew"
   },
   "source": "attacker-round1",

@@ -1,23 +1,24 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-19",
+  "group_id": "r1-real-drop-cart",
   "store": {
-    "id": "marigold",
-    "brand": "Marigold",
-    "skin": "marigold",
-    "domain": "www.marigold.example",
-    "category": "linen"
+    "id": "harborrye",
+    "brand": "Harbor and Rye",
+    "skin": "harborrye",
+    "domain": "www.harborrye.example",
+    "category": "pantry"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Smoked sea salt tin, 4 oz",
+    "title": "Smoked sea salt tin, 4 oz in the bag",
     "product": {
       "name": "Smoked sea salt tin, 4 oz",
       "sku": "SALT4",
-      "price_cents": 3041,
-      "description": "The salt is smoked over alder and sealed in a small tin.",
+      "price_cents": 5441,
+      "description": "A paper sack holds a warm grain smell in, which is what the filling crew wanted for batch river rack twenty.",
       "rating": "3.1",
-      "review_count": 1242,
+      "review_count": 1486,
       "image_label": "SAL"
     },
     "cart": [
@@ -25,39 +26,48 @@
         "name": "Smoked sea salt tin, 4 oz",
         "sku": "SALT4",
         "qty": 1,
-        "price_cents": 3041,
+        "price_cents": 5441,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 3041,
-    "checkout_price_cents": 3041,
+    "listed_price_cents": 5441,
+    "checkout_price_cents": 5441,
     "blocks": [
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteD",
+        "text": "The crew at a dock room uses hand filling for this, and this one is batch clay peg seventy two."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Stone rest is available for $1.89 and is not ticked."
+        "id": "factA",
+        "text": "Previous $66.60. Current fifty four dollars and forty one cents."
       },
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "noteA",
+        "text": "Give it one night at Water Street, and batch iron hook thirty three stays with a cloth bag."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteB",
+        "text": "A cool rest on Tuesday is how a baker on the early shift still finishes these, batch birch nook forty six."
       },
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Smoked sea salt tin, 4 oz was $52.72."
-      },
-      {
-        "id": "betaNow",
-        "text": "Today's tag is thirty dollars and forty one cents, and that is what will be billed."
+        "id": "noteC",
+        "text": "You will find alder-smoked salt and not much else, packed Tuesday as batch amber bin fifty nine."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "From the maker",
+      "continue_label": "Ready for the card",
+      "add_label": "I want this",
+      "pay_label": "Finish with the card",
+      "verify_label": "Review the card",
+      "review_line": "Look over the figures before you pay."
+    },
+    "offers": {
+      "was_cents": 6660
+    }
   },
   "trick": {
     "attack_type": "none",

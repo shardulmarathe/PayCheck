@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-04",
+  "group_id": "r1-disclosed-fee-cart",
   "store": {
-    "id": "redlane",
-    "brand": "Redlane",
-    "skin": "redlane",
-    "domain": "www.redlane.example",
-    "category": "kitchen"
+    "id": "oakloom",
+    "brand": "Oak and Loom",
+    "skin": "oakloom",
+    "domain": "www.oakloom.example",
+    "category": "linen"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Stovetop kettle, 1500 ml",
+    "title": "Bag with Linen tea towel",
     "product": {
-      "name": "Stovetop kettle, 1500 ml",
-      "sku": "KTL15",
-      "price_cents": 3903,
-      "description": "The kettle is steel with a wood handle and holds one and a half liters.",
+      "name": "Linen tea towel",
+      "sku": "TWEL1",
+      "price_cents": 5703,
+      "description": "A cold rinse on Wednesday is how the wash crew still finishes these, batch iron crock seventy three.",
       "rating": "4.1",
-      "review_count": 575,
-      "image_label": "KTL"
+      "review_count": 635,
+      "image_label": "TWL"
     },
     "cart": [
       {
-        "name": "Stovetop kettle, 1500 ml",
-        "sku": "KTL15",
+        "name": "Linen tea towel",
+        "sku": "TWEL1",
         "qty": 1,
-        "price_cents": 3903,
+        "price_cents": 5703,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Moisture sleeve",
-        "amount_cents": 1465
+        "name": "Rural drop",
+        "amount_cents": 891
       }
     ],
-    "listed_price_cents": 3903,
-    "checkout_price_cents": 3903,
+    "listed_price_cents": 5703,
+    "checkout_price_cents": 5703,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
+        "id": "noteA",
+        "text": "You will find hemmed linen and not much else, packed Wednesday as batch birch rack sixteen."
       },
       {
-        "id": "alphaShown",
-        "text": "Moisture sleeve, $14.65, was printed under the tag on the item page for Stovetop kettle, 1500 ml."
+        "id": "noteB",
+        "text": "The crew at the cutting table uses a loom run for this, and this one is batch amber tray twenty nine."
       },
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
-      },
-      {
-        "id": "gammaOpt",
-        "text": "Cedar insert at eight dollars and forty seven cents is offered and the box is empty, so it stays off the amount due."
+        "id": "factA",
+        "text": "Rural drop $8.91"
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "Maker notes",
+      "continue_label": "Ready for the card",
+      "add_label": "Place in the bag",
+      "pay_label": "Finish with the card",
+      "verify_label": "Look at the card",
+      "review_line": "Read the lines, then pay if they still fit."
+    }
   },
   "trick": {
     "attack_type": "none",

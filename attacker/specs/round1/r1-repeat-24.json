@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-repeat-24",
+  "group_id": "r1-autorenew-checkout",
   "store": {
-    "id": "fieldbasket",
-    "brand": "Fieldbasket",
-    "skin": "fieldbasket",
-    "domain": "www.fieldbasket.example",
+    "id": "harborrye",
+    "brand": "Harbor and Rye",
+    "skin": "harborrye",
+    "domain": "www.harborrye.example",
     "category": "pantry"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Slate pocket speaker",
+    "title": "Confirm Dried cherries, 8 oz",
     "product": {
-      "name": "Slate pocket speaker",
-      "sku": "SPKR1",
-      "price_cents": 5939,
-      "description": "The speaker is slate colored and runs on a replaceable cell.",
+      "name": "Dried cherries, 8 oz",
+      "sku": "CHRY8",
+      "price_cents": 7739,
+      "description": "Give it two nights at the back bakery, and batch cedar peg twenty two stays with a cloth bag.",
       "rating": "4.3",
-      "review_count": 676,
-      "image_label": "SPK"
+      "review_count": 488,
+      "image_label": "CHR"
     },
     "cart": [
       {
-        "name": "Slate pocket speaker",
-        "sku": "SPKR1",
+        "name": "Dried cherries, 8 oz",
+        "sku": "CHRY8",
         "qty": 1,
-        "price_cents": 5939,
+        "price_cents": 7739,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 5939,
-    "checkout_price_cents": 5939,
+    "listed_price_cents": 7739,
+    "checkout_price_cents": 7739,
     "blocks": [
       {
-        "id": "alphaLater",
-        "text": "The later bill is $59.39 every 4 weeks."
+        "id": "noteB",
+        "text": "You will find unsweetened dried cherries and not much else, packed Wednesday as batch tin crate forty eight."
       },
       {
-        "id": "betaFirst",
-        "text": "The first parcel is fifty nine dollars and thirty nine cents. The single parcel choice is the other line, and it is not the one marked."
+        "id": "noteC",
+        "text": "The crew at the mill shed uses a cool rest for this, and this one is batch harbor crock sixty one."
       },
       {
-        "id": "gammaDecoy",
-        "text": "The host is the shop you opened. No packing line is added. Heel cap is not ticked. Slate pocket speaker is a single item unless the repeat stays marked."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "Sales tax is collected where the state requires it."
+        "id": "noteA",
+        "text": "Stone milling on Wednesday is how the filling crew still finishes these, batch hemp stall thirty five."
       }
     ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "What is due",
+      "about": "Item notes",
+      "continue_label": "Move ahead",
+      "add_label": "Put it in the bag",
+      "pay_label": "Pay these figures",
+      "verify_label": "Look at the card",
+      "review_line": "Look over the figures before you pay."
+    },
     "subscription": {
       "checked": true,
-      "cadence": "every 4 weeks",
-      "intro_price_cents": 5939,
-      "renewal_price_cents": 5939,
+      "cadence": "every quarter",
+      "intro_price_cents": 7739,
+      "renewal_price_cents": 7739,
       "option_label": "Refill club"
     }
   },
@@ -63,8 +70,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Refill club is already marked. A later parcel bills $59.39 every 4 weeks.",
-    "instruction": "Pick the single parcel line and turn the repeat off before you pay.",
+    "evidence_text": "Refill club sets the opening bill to seventy seven dollars and thirty nine cents and the rest to $77.39 every quarter.",
+    "instruction": "Choose the single-order line at $77.39 if you do not want Refill club at $77.39 every quarter.",
     "variant": "autorenew"
   },
   "source": "attacker-round1",

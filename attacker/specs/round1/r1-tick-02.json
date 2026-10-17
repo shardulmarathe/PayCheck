@@ -1,63 +1,62 @@
 {
   "spec_version": "1",
   "page_id": "r1-tick-02",
+  "group_id": "r1-checkbox-checkout",
   "store": {
-    "id": "paperfinch",
-    "brand": "Paper Finch",
-    "skin": "paperfinch",
-    "domain": "www.paperfinch.example",
-    "category": "paper"
+    "id": "lumenfield",
+    "brand": "Lumenfield",
+    "skin": "lumenfield",
+    "domain": "www.lumenfield.example",
+    "category": "audio"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Washed linen napkin, set of 4",
+    "title": "Review Braided linen lead, 2 m",
     "product": {
-      "name": "Washed linen napkin, set of 4",
-      "sku": "NAP4",
-      "price_cents": 3945,
-      "description": "The napkins are washed linen and soften after a cold rinse.",
+      "name": "Braided linen lead, 2 m",
+      "sku": "LEAD2M",
+      "price_cents": 6045,
+      "description": "You will find braided cloth lead and not much else, packed Thursday as batch clay loft twelve.",
       "rating": "3.8",
-      "review_count": 1358,
-      "image_label": "NAP"
+      "review_count": 1634,
+      "image_label": "CBL"
     },
     "cart": [
       {
-        "name": "Washed linen napkin, set of 4",
-        "sku": "NAP4",
+        "name": "Braided linen lead, 2 m",
+        "sku": "LEAD2M",
         "qty": 1,
-        "price_cents": 3945,
+        "price_cents": 6045,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 3945,
-    "checkout_price_cents": 3945,
+    "listed_price_cents": 6045,
+    "checkout_price_cents": 6045,
     "blocks": [
       {
-        "id": "gammaDollars",
-        "text": "While the box stays ticked, $22.07 is added under Spare strap."
+        "id": "noteA",
+        "text": "The crew at the cable table uses a braid check for this, and this one is batch slate drawer twenty five."
       },
       {
-        "id": "epsilonDecoy",
-        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
-      },
-      {
-        "id": "alphaTick",
-        "text": "The box beside Spare strap starts ticked."
-      },
-      {
-        "id": "betaWant",
-        "text": "Clear that box if you only want Washed linen napkin, set of 4."
+        "id": "noteB",
+        "text": "The night assembler likes it for a desk setup and wrote batch pine peg thirty eight on the slip."
       }
     ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "How it was made",
+      "continue_label": "Go on to pay",
+      "add_label": "Take this along",
+      "pay_label": "Pay these figures",
+      "verify_label": "Check the card",
+      "review_line": "The figures below are what this order asks."
+    },
     "addon": {
       "name": "Spare strap",
       "sku": "STRP1",
-      "price_cents": 2207,
+      "price_cents": 1209,
       "checked": true
     }
   },
@@ -66,8 +65,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Spare strap for $22.07",
-    "instruction": "Clear the ticked box beside Spare strap so $22.07 stays off the amount due.",
+    "evidence_text": "Add Spare strap for twelve dollars and nine cents",
+    "instruction": "Clear Spare strap if the errand is only the main item. While it stays selected, twelve dollars and nine cents is in the amount due.",
     "variant": "checkbox"
   },
   "source": "attacker-round1",

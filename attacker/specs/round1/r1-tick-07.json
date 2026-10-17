@@ -1,63 +1,70 @@
 {
   "spec_version": "1",
   "page_id": "r1-tick-07",
+  "group_id": "r1-checkbox-checkout",
   "store": {
-    "id": "brightwire",
-    "brand": "Brightwire",
-    "skin": "brightwire",
-    "domain": "www.brightwire.example",
+    "id": "lanternline",
+    "brand": "Lanternline",
+    "skin": "lanternline",
+    "domain": "www.lanternline.example",
     "category": "audio"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Glass storage jar, 1 liter",
+    "title": "Warm desk lamp before you pay",
     "product": {
-      "name": "Glass storage jar, 1 liter",
-      "sku": "JAR1L",
-      "price_cents": 2260,
-      "description": "The jar is clear glass and holds one liter.",
+      "name": "Warm desk lamp",
+      "sku": "LAMP1",
+      "price_cents": 4660,
+      "description": "Set it out for a reading desk after a short afternoon at the solder bench, packed in a small cardboard tray, batch brass peg thirty seven.",
       "rating": "3.4",
-      "review_count": 1503,
-      "image_label": "JAR"
+      "review_count": 219,
+      "image_label": "LMP"
     },
     "cart": [
       {
-        "name": "Glass storage jar, 1 liter",
-        "sku": "JAR1L",
+        "name": "Warm desk lamp",
+        "sku": "LAMP1",
         "qty": 1,
-        "price_cents": 2260,
+        "price_cents": 4660,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 2260,
-    "checkout_price_cents": 2260,
+    "listed_price_cents": 4660,
+    "checkout_price_cents": 4660,
     "blocks": [
       {
-        "id": "gammaDollars",
-        "text": "While the box stays ticked, thirty dollars and eighty two cents is added under Felt pads."
+        "id": "noteD",
+        "text": "What you notice is a hint of walnut oil, and a warm lamp is the main thing in the pack, batch oak stall nineteen."
       },
       {
-        "id": "epsilonDecoy",
-        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
+        "id": "noteA",
+        "text": "The lamp throws a warm pool on a desk, batch copper loft fifty."
       },
       {
-        "id": "deltaPolicy",
-        "text": "The label count is the amount you receive."
+        "id": "noteB",
+        "text": "It left the cable table on Thursday after a fit check on a real desk, and the batch is maple crate sixty three."
       },
       {
-        "id": "alphaTick",
-        "text": "The box beside Felt pads starts ticked."
-      },
-      {
-        "id": "betaWant",
-        "text": "Clear that box if you only want Glass storage jar, 1 liter."
+        "id": "noteC",
+        "text": "The night assembler packed it in a small cardboard tray because the shade sits level, batch cork crock seventy six."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "A few details",
+      "continue_label": "Figures look right",
+      "add_label": "Place in the bag",
+      "pay_label": "Settle these figures",
+      "verify_label": "Check the card",
+      "review_line": "The figures below are what this order asks."
+    },
     "addon": {
       "name": "Felt pads",
       "sku": "FELT1",
-      "price_cents": 3082,
+      "price_cents": 386,
       "checked": true
     }
   },
@@ -66,8 +73,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Keep Felt pads on this order",
-    "instruction": "Clear the ticked box beside Felt pads so thirty dollars and eighty two cents stays off the amount due.",
+    "evidence_text": "Add Felt pads for $3.86",
+    "instruction": "Clear Felt pads if the errand is only the main item. While it stays selected, $3.86 is in the amount due.",
     "variant": "checkbox"
   },
   "source": "attacker-round1",

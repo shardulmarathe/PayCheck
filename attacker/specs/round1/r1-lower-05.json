@@ -1,63 +1,65 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-05",
+  "group_id": "r1-real-drop-checkout",
   "store": {
-    "id": "harborrye",
-    "brand": "Harbor and Rye",
-    "skin": "harborrye",
-    "domain": "www.harborrye.example",
-    "category": "pantry"
+    "id": "paperfinch",
+    "brand": "Paper Finch",
+    "skin": "paperfinch",
+    "domain": "www.paperfinch.example",
+    "category": "paper"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Cedarwood bar soap",
+    "title": "Review Lay flat notebook, ruled",
     "product": {
-      "name": "Cedarwood bar soap",
-      "sku": "SOAP1",
-      "price_cents": 1029,
-      "description": "The soap is a cedarwood bar, wrapped in paper.",
+      "name": "Lay flat notebook, ruled",
+      "sku": "NOTE1",
+      "price_cents": 3029,
+      "description": "Store the notebook flat, away from a damp wall, which is the right habit for a daily note, batch glass hook thirty four.",
       "rating": "3.1",
-      "review_count": 836,
-      "image_label": "SOP"
+      "review_count": 968,
+      "image_label": "NTB"
     },
     "cart": [
       {
-        "name": "Cedarwood bar soap",
-        "sku": "SOAP1",
+        "name": "Lay flat notebook, ruled",
+        "sku": "NOTE1",
         "qty": 1,
-        "price_cents": 1029,
+        "price_cents": 3029,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 1029,
-    "checkout_price_cents": 1029,
+    "listed_price_cents": 3029,
+    "checkout_price_cents": 3029,
     "blocks": [
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Cedarwood bar soap was $13.46."
+        "id": "noteA",
+        "text": "It rested one night at the press room, then went into a slim box, batch wool nook forty seven."
       },
       {
-        "id": "betaNow",
-        "text": "Today's tag is ten dollars and twenty nine cents, and that is what will be billed."
+        "id": "noteB",
+        "text": "Wednesday at the press room was for hand folding, and the slip reads river drawer sixty."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
-      },
-      {
-        "id": "epsilonOpt",
-        "text": "Cotton cord is available for $8.09 and is not ticked."
-      },
-      {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
+        "id": "factA",
+        "text": "Last week $40.80. This week thirty dollars and twenty nine cents."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "How it was made",
+      "continue_label": "On to the card form",
+      "add_label": "Yes, this one",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "was_cents": 4080
+    }
   },
   "trick": {
     "attack_type": "none",

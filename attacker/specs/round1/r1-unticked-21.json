@@ -1,6 +1,7 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-21",
+  "group_id": "r1-opt-in-checkout",
   "store": {
     "id": "harborrye",
     "brand": "Harbor and Rye",
@@ -9,43 +10,57 @@
     "category": "pantry"
   },
   "page": {
-    "kind": "product",
-    "title": "Stoneground rye flour, 2 lb",
+    "kind": "checkout",
+    "title": "Review Stoneground rye flour, 2 lb",
     "product": {
       "name": "Stoneground rye flour, 2 lb",
       "sku": "RYE2LB",
-      "price_cents": 1191,
-      "description": "The flour is milled from whole rye berries and packed in a paper sack.",
+      "price_cents": 3771,
+      "description": "Batch copper nook eighty names Water Street and mentions stone milling.",
       "rating": "4.0",
-      "review_count": 1184,
+      "review_count": 1412,
       "image_label": "RYE"
     },
-    "cart": [],
+    "cart": [
+      {
+        "name": "Stoneground rye flour, 2 lb",
+        "sku": "RYE2LB",
+        "qty": 1,
+        "price_cents": 3771,
+        "trick_item": false
+      }
+    ],
     "fees": [],
-    "listed_price_cents": 1191,
-    "checkout_price_cents": 1191,
+    "listed_price_cents": 3771,
+    "checkout_price_cents": 3771,
     "blocks": [
       {
-        "id": "betaEmpty",
-        "text": "The box is empty and Stone rest is outside the amount due."
+        "id": "noteA",
+        "text": "For a dense country loaf, start with whole rye berries, and batch maple bin twenty three is on the slip."
       },
       {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Stoneground rye flour, 2 lb."
-      },
-      {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was $16.15. Today's tag eleven dollars and ninety one cents is the figure that will be billed."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "Returns are accepted within 30 days when the seal is still intact."
-      },
-      {
-        "id": "alphaOffer",
-        "text": "Stone rest can be included for four dollars and two cents."
+        "id": "noteB",
+        "text": "A glass jar holds a faint smoke in, which is what a baker on the early shift wanted for batch cork peg thirty six."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Your items",
+      "about": "From the maker",
+      "continue_label": "On to the card form",
+      "add_label": "I want this",
+      "pay_label": "Finish with the card",
+      "verify_label": "Review the card",
+      "review_line": "Look over the figures before you pay."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Canvas bib",
+        "price_cents": 756,
+        "checked": false,
+        "label": "Add Canvas bib for $7.56"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

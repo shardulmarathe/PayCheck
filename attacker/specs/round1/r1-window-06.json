@@ -1,6 +1,7 @@
 {
   "spec_version": "1",
   "page_id": "r1-window-06",
+  "group_id": "r1-modal-checkout",
   "store": {
     "id": "marigold",
     "brand": "Marigold",
@@ -9,58 +10,68 @@
     "category": "linen"
   },
   "page": {
-    "kind": "cart",
-    "title": "Bag holding Buckwheat groats, 24 oz",
+    "kind": "checkout",
+    "title": "Cotton percale sheet, queen before you pay",
     "product": {
-      "name": "Buckwheat groats, 24 oz",
-      "sku": "BWHT24",
-      "price_cents": 581,
-      "description": "The groats are toasted buckwheat for a savory bowl.",
+      "name": "Cotton percale sheet, queen",
+      "sku": "SHETQ",
+      "price_cents": 2561,
+      "description": "For a queen bed, start with cotton percale, and batch clay stall twenty two is on the slip.",
       "rating": "4.3",
-      "review_count": 1034,
-      "image_label": "BWH"
+      "review_count": 1662,
+      "image_label": "SHT"
     },
     "cart": [
       {
-        "name": "Buckwheat groats, 24 oz",
-        "sku": "BWHT24",
+        "name": "Cotton percale sheet, queen",
+        "sku": "SHETQ",
         "qty": 1,
-        "price_cents": 581,
+        "price_cents": 2561,
         "trick_item": false
       },
       {
-        "name": "Tin clasp",
-        "sku": "CLSP1",
+        "name": "Cloth sack",
+        "sku": "SACK1",
         "qty": 1,
-        "price_cents": 1287,
+        "price_cents": 501,
         "trick_item": true
       }
     ],
     "fees": [],
-    "listed_price_cents": 581,
-    "checkout_price_cents": 581,
+    "listed_price_cents": 2561,
+    "checkout_price_cents": 2561,
     "blocks": [
       {
-        "id": "gammaDecoy",
-        "text": "Buckwheat groats, 24 oz still matches the tag. No packing line is added on this screen."
+        "id": "noteC",
+        "text": "Hand hemming on Sunday evening is how the weaver still finishes these, batch ash rack sixty one."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
+        "id": "noteD",
+        "text": "You will find cotton percale and not much else, packed Sunday evening as batch linen tray seventy four."
       },
       {
-        "id": "alphaWindow",
-        "text": "The window placed Tin clasp there. You did not choose it on the item page."
+        "id": "noteA",
+        "text": "A paper band holds wet linen in, which is what a hemmer on the day shift wanted for batch slate crate thirty five."
       },
       {
-        "id": "betaDollars",
-        "text": "The separate line for Tin clasp is twelve dollars and eighty seven cents."
+        "id": "noteB",
+        "text": "Give it half a day at a wash house, and batch pine pail forty eight stays with a flat mailer."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "Care and origin",
+      "continue_label": "Ready for the card",
+      "add_label": "Bag this",
+      "pay_label": "Finish with the card",
+      "verify_label": "Check the card",
+      "review_line": "Read the lines, then pay if they still fit."
+    },
     "addon": {
-      "name": "Tin clasp",
-      "sku": "CLSP1",
-      "price_cents": 1287,
+      "name": "Cloth sack",
+      "sku": "SACK1",
+      "price_cents": 501,
       "checked": false
     }
   },
@@ -69,8 +80,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Tin clasp is in the bag beside Buckwheat groats, 24 oz.",
-    "instruction": "Take Tin clasp out of the bag. The window placed it there.",
+    "evidence_text": "This bag includes a line for Cloth sack, five dollars and one cent.",
+    "instruction": "Take Cloth sack out of the bag before you pay. The dialog is offering to keep it.",
     "variant": "modal"
   },
   "source": "attacker-round1",

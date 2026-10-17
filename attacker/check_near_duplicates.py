@@ -42,6 +42,9 @@ KNOWN_VARIANTS = frozenset(
         "real_drop",
         "legit_card",
         "mixed_honest",
+        "sub_opt_in",
+        "popup_decline",
+        "offer_pass",
     }
 )
 
@@ -53,6 +56,8 @@ SKIP_KEYS = frozenset(
         "family",
         "verdict",
         "selector",
+        "group_id",
+        "layout",
     }
 )
 
@@ -68,11 +73,13 @@ EXPECTED_ATTACKS = {
 }
 EXPECTED_ADDON_VARIANTS = {"checkbox": 10, "modal": 10, "one_click": 10}
 EXPECTED_CLEAN_VARIANTS = {
-    "disclosed_fee": 30,
-    "opt_in_clear": 30,
-    "real_drop": 30,
-    "legit_card": 30,
-    "mixed_honest": 30,
+    "disclosed_fee": 25,
+    "opt_in_clear": 25,
+    "real_drop": 25,
+    "legit_card": 25,
+    "sub_opt_in": 25,
+    "popup_decline": 15,
+    "offer_pass": 10,
 }
 
 
@@ -101,10 +108,71 @@ def _add_phrase(bucket: set[tuple[str, ...]], slices: set[tuple[str, ...]], text
                 slices.add(tokens[index : index + length])
 
 
+def assert_frozen_testset() -> set[str]:
+    """Fail closed when the frozen test set or its pile is missing.
+
+    An empty corpus would otherwise let every spec pass the near-duplicate check.
+    """
+    problems: list[str] = []
+    text_paths = sorted(TEST_TEXT.glob("*.txt")) if TEST_TEXT.is_dir() else []
+    spec_paths = sorted(TEST_SPECS.glob("*.json")) if TEST_SPECS.is_dir() else []
+    html_dir = TEST_TEXT.parent / "html"
+    html_paths = sorted(html_dir.glob("*.html")) if html_dir.is_dir() else []
+    labels_path = TEST_TEXT.parent / "labels.jsonl"
+    labels: list[dict] = []
+    if not labels_path.is_file():
+        problems.append("missing data/testset/labels.jsonl")
+    else:
+        for line in labels_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                labels.append(json.loads(line))
+            except json.JSONDecodeError:
+                problems.append("data/testset/labels.jsonl has a row that is not JSON")
+                break
+    if len(text_paths) != 300:
+        problems.append(f"test text pages {len(text_paths)} != 300")
+    if len(spec_paths) != 300:
+        problems.append(f"test specs {len(spec_paths)} != 300")
+    if len(html_paths) != 300:
+        problems.append(f"test html pages {len(html_paths)} != 300")
+    if len(labels) != 300:
+        problems.append(f"test labels {len(labels)} != 300")
+    text_ids = {path.stem for path in text_paths}
+    spec_ids = {path.stem for path in spec_paths}
+    html_ids = {path.stem for path in html_paths}
+    label_ids = {str(row.get("page_id", "")) for row in labels}
+    if len(text_paths) == 300 and len(spec_paths) == 300 and len(html_paths) == 300 and len(labels) == 300:
+        if not (text_ids == spec_ids == html_ids == label_ids):
+            problems.append("test page ids differ across text, specs, html, and labels")
+    if not TEST_IDS.is_file():
+        problems.append("missing gym/splits/test_page_ids.txt")
+        test_ids: set[str] = set()
+    else:
+        test_ids = {line.strip() for line in TEST_IDS.read_text(encoding="utf-8").splitlines() if line.strip()}
+        if not test_ids:
+            problems.append("gym/splits/test_page_ids.txt is empty")
+    pile_rows = 0
+    if not PILE.is_file():
+        problems.append("missing data/ec-darkpattern/dataset.tsv")
+    elif test_ids:
+        with PILE.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle, delimiter="\t"):
+                if row["page_id"].strip() in test_ids:
+                    pile_rows += 1
+        if pile_rows == 0:
+            problems.append("test pile is empty")
+    if problems:
+        raise SystemExit("frozen test set check failed: " + "; ".join(problems))
+    return test_ids
+
+
 def load_corpus() -> tuple[set[tuple[str, ...]], set[tuple[str, ...]]]:
     """Full phrases plus 6-word windows, and short slices for whole-field matches."""
     phrases: set[tuple[str, ...]] = set()
     slices: set[tuple[str, ...]] = set()
+    test_ids = assert_frozen_testset()
 
     for path in sorted(TEST_TEXT.glob("*.txt")):
         for line in path.read_text(encoding="utf-8").splitlines():
@@ -113,7 +181,6 @@ def load_corpus() -> tuple[set[tuple[str, ...]], set[tuple[str, ...]]]:
     for path in sorted(TEST_SPECS.glob("*.json")):
         _walk_strings(json.loads(path.read_text(encoding="utf-8")), phrases, slices)
 
-    test_ids = {line.strip() for line in TEST_IDS.read_text(encoding="utf-8").splitlines() if line.strip()}
     with PILE.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
             if row["page_id"].strip() in test_ids:
@@ -176,6 +243,11 @@ def find_hits(
         tokens = tuple(normalize(text).split())
         if not tokens:
             continue
+        # The honest-popup primary button is this exact label. Gym README
+        # requires it, and the frozen pages use the same control. Any other
+        # field that says "No thanks" still fails.
+        if path.endswith("modal.decline") and tokens == ("no", "thanks"):
+            continue
         for length in range(1, len(tokens) + 1):
             for index in range(len(tokens) - length + 1):
                 window = tokens[index : index + length]
@@ -235,6 +307,9 @@ def _check_round_shape(specs: list[dict], *, round1: bool) -> list[str]:
             problems.append(f"{spec['page_id']}: source/split must be attacker-round1/train")
         if "dataset_page_ids" in spec:
             problems.append(f"{spec['page_id']}: dataset_page_ids would tie the spec to the pile")
+        group_id = spec.get("group_id", "")
+        if not isinstance(group_id, str) or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,80}", group_id):
+            problems.append(f"{spec['page_id']}: group_id must name the near-duplicate family")
     return problems
 
 

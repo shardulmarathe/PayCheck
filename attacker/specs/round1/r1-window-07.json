@@ -1,66 +1,69 @@
 {
   "spec_version": "1",
   "page_id": "r1-window-07",
+  "group_id": "r1-modal-checkout",
   "store": {
-    "id": "redlane",
-    "brand": "Redlane",
-    "skin": "redlane",
-    "domain": "www.redlane.example",
-    "category": "kitchen"
+    "id": "oakloom",
+    "brand": "Oak and Loom",
+    "skin": "oakloom",
+    "domain": "www.oakloom.example",
+    "category": "linen"
   },
   "page": {
-    "kind": "cart",
-    "title": "Bag holding Stovetop kettle, 1500 ml",
+    "kind": "checkout",
+    "title": "Review Linen tea towel",
     "product": {
-      "name": "Stovetop kettle, 1500 ml",
-      "sku": "KTL15",
-      "price_cents": 2038,
-      "description": "The kettle is steel with a wood handle and holds one and a half liters.",
+      "name": "Linen tea towel",
+      "sku": "TWEL1",
+      "price_cents": 4018,
+      "description": "A paper band holds almost nothing after drying in, which is what a hemmer on the day shift wanted for batch brass bin twenty seven.",
       "rating": "3.7",
-      "review_count": 1063,
-      "image_label": "KTL"
+      "review_count": 99,
+      "image_label": "TWL"
     },
     "cart": [
       {
-        "name": "Stovetop kettle, 1500 ml",
-        "sku": "KTL15",
+        "name": "Linen tea towel",
+        "sku": "TWEL1",
         "qty": 1,
-        "price_cents": 2038,
+        "price_cents": 4018,
         "trick_item": false
       },
       {
-        "name": "Wool washer",
-        "sku": "WLSH1",
+        "name": "Cork grip",
+        "sku": "CORK1",
         "qty": 1,
-        "price_cents": 2180,
+        "price_cents": 366,
         "trick_item": true
       }
     ],
     "fees": [],
-    "listed_price_cents": 2038,
-    "checkout_price_cents": 2038,
+    "listed_price_cents": 4018,
+    "checkout_price_cents": 4018,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "The shop desk answers during open hours."
+        "id": "noteB",
+        "text": "Hand hemming on Tuesday is how a hemmer on the day shift still finishes these, batch maple nook fifty three."
       },
       {
-        "id": "alphaWindow",
-        "text": "The window placed Wool washer there. You did not choose it on the item page."
-      },
-      {
-        "id": "betaDollars",
-        "text": "The separate line for Wool washer is $21.80."
-      },
-      {
-        "id": "gammaDecoy",
-        "text": "Stovetop kettle, 1500 ml still matches the tag. No packing line is added on this screen."
+        "id": "noteA",
+        "text": "Give it a short afternoon at a wash house, and batch copper hook forty stays with a flat mailer."
       }
     ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "Maker notes",
+      "continue_label": "Ready for the card",
+      "add_label": "Bag this",
+      "pay_label": "Finish with the card",
+      "verify_label": "Check the card",
+      "review_line": "Read the lines, then pay if they still fit."
+    },
     "addon": {
-      "name": "Wool washer",
-      "sku": "WLSH1",
-      "price_cents": 2180,
+      "name": "Cork grip",
+      "sku": "CORK1",
+      "price_cents": 366,
       "checked": false
     }
   },
@@ -69,8 +72,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "A window put Wool washer in the bag.",
-    "instruction": "Take Wool washer out of the bag. The window placed it there.",
+    "evidence_text": "Cork grip, $3.66, is on its own line in the bag.",
+    "instruction": "Take Cork grip out of the bag before you pay. The dialog is offering to keep it.",
     "variant": "modal"
   },
   "source": "attacker-round1",

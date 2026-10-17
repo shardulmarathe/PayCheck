@@ -1,51 +1,66 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-12",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "redlane",
-    "brand": "Redlane",
-    "skin": "redlane",
-    "domain": "www.redlane.example",
-    "category": "kitchen"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
-    "kind": "product",
-    "title": "Oak picture ledge, 24 in",
+    "kind": "checkout",
+    "title": "Review Merino hiking sock, pair",
     "product": {
-      "name": "Oak picture ledge, 24 in",
-      "sku": "LEDG24",
-      "price_cents": 1903,
-      "description": "The ledge is oak, twenty four inches, with a low lip.",
+      "name": "Merino hiking sock, pair",
+      "sku": "SOK2",
+      "price_cents": 4053,
+      "description": "Tuesday at a gear bench was for a cap torque check, and the slip reads harbor bin twenty one.",
       "rating": "3.3",
-      "review_count": 923,
-      "image_label": "LDG"
+      "review_count": 1079,
+      "image_label": "SOK"
     },
-    "cart": [],
+    "cart": [
+      {
+        "name": "Merino hiking sock, pair",
+        "sku": "SOK2",
+        "qty": 1,
+        "price_cents": 4053,
+        "trick_item": false
+      }
+    ],
     "fees": [],
-    "listed_price_cents": 1903,
-    "checkout_price_cents": 1903,
+    "listed_price_cents": 4053,
+    "checkout_price_cents": 4053,
     "blocks": [
       {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Oak picture ledge, 24 in."
+        "id": "noteB",
+        "text": "A small box with a pad from the stitch room suits a day on foot, batch wool nook forty seven."
       },
       {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was twenty five dollars and seventy nine cents. Today's tag $19.03 is the figure that will be billed."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "Returns are accepted within 30 days when the seal is still intact."
-      },
-      {
-        "id": "alphaOffer",
-        "text": "Wool washer can be included for $4.95."
-      },
-      {
-        "id": "betaEmpty",
-        "text": "The box is empty and Wool washer is outside the amount due."
+        "id": "noteA",
+        "text": "A gear tech held it two nights so the cushion stays put, batch glass hook thirty four."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "A few details",
+      "continue_label": "Ready for the card",
+      "add_label": "Bag this",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Tin clasp",
+        "price_cents": 634,
+        "checked": false,
+        "label": "Add Tin clasp for six dollars and thirty four cents"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

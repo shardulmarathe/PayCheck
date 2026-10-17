@@ -1,55 +1,61 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-24",
+  "group_id": "r1-real-drop-product",
   "store": {
-    "id": "trailmeter",
-    "brand": "Trailmeter",
-    "skin": "trailmeter",
-    "domain": "www.trailmeter.example",
-    "category": "trail"
+    "id": "lanternline",
+    "brand": "Lanternline",
+    "skin": "lanternline",
+    "domain": "www.lanternline.example",
+    "category": "audio"
   },
   "page": {
     "kind": "product",
-    "title": "Heather wool throw",
+    "title": "Slate pocket speaker at the shop",
     "product": {
-      "name": "Heather wool throw",
-      "sku": "THRW1",
-      "price_cents": 6331,
-      "description": "The throw is heather wool and measures about fifty by sixty inches.",
+      "name": "Slate pocket speaker",
+      "sku": "SPKR1",
+      "price_cents": 1931,
+      "description": "A cable maker likes it for a small room and wrote batch slate nook forty five on the slip.",
       "rating": "4.1",
-      "review_count": 1387,
-      "image_label": "THR"
+      "review_count": 1671,
+      "image_label": "SPK"
     },
     "cart": [],
     "fees": [],
-    "listed_price_cents": 6331,
-    "checkout_price_cents": 6331,
+    "listed_price_cents": 1931,
+    "checkout_price_cents": 1931,
     "blocks": [
       {
-        "id": "betaNow",
-        "text": "Today's tag is $63.31, and that is what will be billed."
+        "id": "factA",
+        "text": "Earlier twenty one dollars and thirty eight cents, selling $19.31."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteA",
+        "text": "Bring it out for a small room, packed in a cotton sleeve from the solder bench, batch pine bin fifty eight."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Spare strap is available for eleven dollars and twelve cents and is not ticked."
+        "id": "noteB",
+        "text": "Almost no smell is the note on batch ash hook seventy one, and wipe the shell if the desk is dusty."
       },
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shelf card lists six on hand in the stockroom."
-      },
-      {
-        "id": "alphaWas",
-        "text": "Last week's tag on Heather wool throw was sixty nine dollars and twenty seven cents."
+        "id": "noteC",
+        "text": "Set it out for a small room after two nights at the cable table, packed in a small cardboard tray, batch linen loft fourteen."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "This order",
+      "about": "How it was made",
+      "continue_label": "Go on to pay",
+      "add_label": "Take this along",
+      "pay_label": "Pay these figures",
+      "verify_label": "Check the card",
+      "review_line": "The figures below are what this order asks."
+    },
+    "offers": {
+      "was_cents": 2138
+    }
   },
   "trick": {
     "attack_type": "none",

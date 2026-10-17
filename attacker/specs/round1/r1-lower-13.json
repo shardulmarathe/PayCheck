@@ -1,63 +1,73 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-13",
+  "group_id": "r1-real-drop-cart",
   "store": {
-    "id": "sundrysoap",
-    "brand": "Sundry Soap",
-    "skin": "sundrysoap",
-    "domain": "www.sundrysoap.example",
-    "category": "soap"
+    "id": "marigold",
+    "brand": "Marigold",
+    "skin": "marigold",
+    "domain": "www.marigold.example",
+    "category": "linen"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Firestarter puck, 8 count",
+    "title": "Brass curtain ring, set of 8 in the bag",
     "product": {
-      "name": "Firestarter puck, 8 count",
-      "sku": "FIRE8",
-      "price_cents": 6293,
-      "description": "The pucks light kindling and come eight to a tin.",
+      "name": "Brass curtain ring, set of 8",
+      "sku": "RING8",
+      "price_cents": 1493,
+      "description": "A hemmer on the day shift signed the slip Tuesday because the brass stays bright, batch birch nook forty six.",
       "rating": "5.0",
-      "review_count": 1068,
-      "image_label": "FIR"
+      "review_count": 1264,
+      "image_label": "RNG"
     },
     "cart": [
       {
-        "name": "Firestarter puck, 8 count",
-        "sku": "FIRE8",
+        "name": "Brass curtain ring, set of 8",
+        "sku": "RING8",
         "qty": 1,
-        "price_cents": 6293,
+        "price_cents": 1493,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 6293,
-    "checkout_price_cents": 6293,
+    "listed_price_cents": 1493,
+    "checkout_price_cents": 1493,
     "blocks": [
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteC",
+        "text": "For a light curtain, start with brass rings, and batch slate loft fifteen is on the slip."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Hinge pin is available for $2.49 and is not ticked."
+        "id": "noteD",
+        "text": "A paper band holds a little cedar from the cupboard in, which is what the weaver wanted for batch pine drawer twenty eight."
       },
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "factA",
+        "text": "Previous $16.55. Current fourteen dollars and ninety three cents."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
+        "id": "noteA",
+        "text": "A Tuesday fill at a wash house put brass rings into a paper band, batch amber bin fifty nine."
       },
       {
-        "id": "alphaWas",
-        "text": "Last week's tag on Firestarter puck, 8 count was $74.38."
-      },
-      {
-        "id": "betaNow",
-        "text": "Today's tag is sixty two dollars and ninety three cents, and that is what will be billed."
+        "id": "noteB",
+        "text": "Batch clay peg seventy two names a wash house and mentions a cold rinse."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "Care and origin",
+      "continue_label": "Review the figures",
+      "add_label": "Put it in the bag",
+      "pay_label": "Use this card",
+      "verify_label": "Match the card",
+      "review_line": "See the lines, then decide."
+    },
+    "offers": {
+      "was_cents": 1655
+    }
   },
   "trick": {
     "attack_type": "none",

@@ -1,63 +1,70 @@
 {
   "spec_version": "1",
   "page_id": "r1-tick-01",
+  "group_id": "r1-checkbox-checkout",
   "store": {
-    "id": "copperkettle",
-    "brand": "Copper Kettle",
-    "skin": "copperkettle",
-    "domain": "www.copperkettle.example",
-    "category": "kitchen"
+    "id": "fieldbasket",
+    "brand": "Fieldbasket",
+    "skin": "fieldbasket",
+    "domain": "www.fieldbasket.example",
+    "category": "pantry"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Warm desk lamp",
+    "title": "Buckwheat groats, 24 oz before you pay",
     "product": {
-      "name": "Warm desk lamp",
-      "sku": "LAMP1",
-      "price_cents": 2582,
-      "description": "The lamp throws a warm pool on a desk.",
+      "name": "Buckwheat groats, 24 oz",
+      "sku": "BWHT24",
+      "price_cents": 4682,
+      "description": "Hand filling on Monday is how a baker on the early shift still finishes these, batch wool pail seventy seven.",
       "rating": "3.3",
-      "review_count": 1329,
-      "image_label": "LMP"
+      "review_count": 1597,
+      "image_label": "BWH"
     },
     "cart": [
       {
-        "name": "Warm desk lamp",
-        "sku": "LAMP1",
+        "name": "Buckwheat groats, 24 oz",
+        "sku": "BWHT24",
         "qty": 1,
-        "price_cents": 2582,
+        "price_cents": 4682,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 2582,
-    "checkout_price_cents": 2582,
+    "listed_price_cents": 4682,
+    "checkout_price_cents": 4682,
     "blocks": [
       {
-        "id": "betaWant",
-        "text": "Clear that box if you only want Warm desk lamp."
+        "id": "noteB",
+        "text": "The crew at Water Street uses a slow toast for this, and this one is batch iron hook thirty three."
       },
       {
-        "id": "gammaDollars",
-        "text": "While the box stays ticked, fourteen dollars and eight cents is added under Linen sleeve."
+        "id": "noteC",
+        "text": "A baker on the early shift likes it for a savory bowl and wrote batch birch nook forty six on the slip."
       },
       {
-        "id": "epsilonDecoy",
-        "text": "Ordinary ground carrier cost is already inside the tag. A repeat parcel is not marked."
+        "id": "noteD",
+        "text": "Bring it out for a savory bowl, packed in a waxed wrap from a dock room, batch amber bin fifty nine."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
-      },
-      {
-        "id": "alphaTick",
-        "text": "The box beside Linen sleeve starts ticked."
+        "id": "noteA",
+        "text": "You will find toasted buckwheat and not much else, packed Tuesday as batch river rack twenty."
       }
     ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "Lines on this order",
+      "about": "Item notes",
+      "continue_label": "Move ahead",
+      "add_label": "Take this along",
+      "pay_label": "Pay these figures",
+      "verify_label": "Review the card",
+      "review_line": "Look over the figures before you pay."
+    },
     "addon": {
       "name": "Linen sleeve",
       "sku": "SLEE1",
-      "price_cents": 1408,
+      "price_cents": 668,
       "checked": true
     }
   },
@@ -66,8 +73,8 @@
     "family": "upsell",
     "verdict": "block",
     "selector": "#trick",
-    "evidence_text": "Keep Linen sleeve on this order",
-    "instruction": "Clear the ticked box beside Linen sleeve so fourteen dollars and eight cents stays off the amount due.",
+    "evidence_text": "Add Linen sleeve for $6.68",
+    "instruction": "Clear Linen sleeve if the errand is only the main item. While it stays selected, $6.68 is in the amount due.",
     "variant": "checkbox"
   },
   "source": "attacker-round1",

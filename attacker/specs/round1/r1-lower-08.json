@@ -1,63 +1,65 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-08",
+  "group_id": "r1-real-drop-checkout",
   "store": {
-    "id": "redlane",
-    "brand": "Redlane",
-    "skin": "redlane",
-    "domain": "www.redlane.example",
-    "category": "kitchen"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Oak picture ledge, 24 in",
+    "title": "Review Merino hiking sock, pair",
     "product": {
-      "name": "Oak picture ledge, 24 in",
-      "sku": "LEDG24",
-      "price_cents": 3003,
-      "description": "The ledge is oak, twenty four inches, with a low lip.",
+      "name": "Merino hiking sock, pair",
+      "sku": "SOK2",
+      "price_cents": 5003,
+      "description": "The seam lead held it one night so the cushion stays put, batch oak loft forty nine.",
       "rating": "3.3",
-      "review_count": 923,
-      "image_label": "LDG"
+      "review_count": 1079,
+      "image_label": "SOK"
     },
     "cart": [
       {
-        "name": "Oak picture ledge, 24 in",
-        "sku": "LEDG24",
+        "name": "Merino hiking sock, pair",
+        "sku": "SOK2",
         "qty": 1,
-        "price_cents": 3003,
+        "price_cents": 5003,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 3003,
-    "checkout_price_cents": 3003,
+    "listed_price_cents": 5003,
+    "checkout_price_cents": 5003,
     "blocks": [
       {
-        "id": "epsilonOpt",
-        "text": "Maple spoon is available for seven dollars and seventy nine cents and is not ticked."
+        "id": "noteA",
+        "text": "A small box with a pad from the sock line suits a day on foot, batch cedar drawer sixty two."
       },
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
+        "id": "noteB",
+        "text": "Plain wool shows up in this run, and air the socks after a long day, batch hemp crock seventy five."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Returns are accepted within 30 days when the seal is still intact."
-      },
-      {
-        "id": "alphaWas",
-        "text": "Last week's tag on Oak picture ledge, 24 in was thirty three dollars and twenty three cents."
-      },
-      {
-        "id": "betaNow",
-        "text": "Today's tag is $30.03, and that is what will be billed."
-      },
-      {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "factA",
+        "text": "Last week fifty nine dollars and sixty one cents. This week $50.03."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "A few details",
+      "continue_label": "Ready for the card",
+      "add_label": "Bag this",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "was_cents": 5961
+    }
   },
   "trick": {
     "attack_type": "none",

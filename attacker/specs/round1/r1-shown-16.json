@@ -1,60 +1,67 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-16",
+  "group_id": "r1-disclosed-fee-cart",
   "store": {
-    "id": "redlane",
-    "brand": "Redlane",
-    "skin": "redlane",
-    "domain": "www.redlane.example",
-    "category": "kitchen"
+    "id": "trailmeter",
+    "brand": "Trailmeter",
+    "skin": "trailmeter",
+    "domain": "www.trailmeter.example",
+    "category": "trail"
   },
   "page": {
     "kind": "cart",
-    "title": "Bag holding Oak picture ledge, 24 in",
+    "title": "Bag with Merino hiking sock, pair",
     "product": {
-      "name": "Oak picture ledge, 24 in",
-      "sku": "LEDG24",
-      "price_cents": 6305,
-      "description": "The ledge is oak, twenty four inches, with a low lip.",
+      "name": "Merino hiking sock, pair",
+      "sku": "SOK2",
+      "price_cents": 1255,
+      "description": "It rested a cool evening at the stitch room, then went into a small box with a pad, batch iron crate sixty three.",
       "rating": "3.3",
-      "review_count": 923,
-      "image_label": "LDG"
+      "review_count": 1079,
+      "image_label": "SOK"
     },
     "cart": [
       {
-        "name": "Oak picture ledge, 24 in",
-        "sku": "LEDG24",
+        "name": "Merino hiking sock, pair",
+        "sku": "SOK2",
         "qty": 1,
-        "price_cents": 6305,
+        "price_cents": 1255,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Label print",
-        "amount_cents": 1138
+        "name": "Aisle wrap",
+        "amount_cents": 216
       }
     ],
-    "listed_price_cents": 6305,
-    "checkout_price_cents": 6305,
+    "listed_price_cents": 1255,
+    "checkout_price_cents": 1255,
     "blocks": [
       {
-        "id": "deltaPolicy",
-        "text": "Returns are accepted within 30 days when the seal is still intact."
+        "id": "noteA",
+        "text": "Monday at the stitch room was for a merino knit, and the slip reads birch pail seventy six."
       },
       {
-        "id": "alphaShown",
-        "text": "Label print, $11.38, was printed under the tag on the item page for Oak picture ledge, 24 in."
+        "id": "noteB",
+        "text": "The seam lead held it two nights so the cushion stays put, batch amber rack nineteen."
       },
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
-      },
-      {
-        "id": "gammaOpt",
-        "text": "Wool washer at eleven dollars and seventy one cents is offered and the box is empty, so it stays off the amount due."
+        "id": "factA",
+        "text": "Aisle wrap $2.16"
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-right",
+      "summary": "Bag notes",
+      "about": "A few details",
+      "continue_label": "Ready for the card",
+      "add_label": "Bag this",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    }
   },
   "trick": {
     "attack_type": "none",

@@ -1,55 +1,61 @@
 {
   "spec_version": "1",
   "page_id": "r1-lower-06",
+  "group_id": "r1-real-drop-product",
   "store": {
-    "id": "lumenfield",
-    "brand": "Lumenfield",
-    "skin": "lumenfield",
-    "domain": "www.lumenfield.example",
-    "category": "audio"
+    "id": "paperfinch",
+    "brand": "Paper Finch",
+    "skin": "paperfinch",
+    "domain": "www.paperfinch.example",
+    "category": "paper"
   },
   "page": {
     "kind": "product",
-    "title": "Linen washcloth, pair",
+    "title": "Cotton paper envelopes, 20 at the shop",
     "product": {
-      "name": "Linen washcloth, pair",
-      "sku": "WASH2",
-      "price_cents": 1687,
-      "description": "The washcloths are linen and sold as a pair.",
+      "name": "Cotton paper envelopes, 20",
+      "sku": "ENV20",
+      "price_cents": 3687,
+      "description": "It rested the next morning at the press room, then went into a slim box, batch amber crock thirty nine.",
       "rating": "2.7",
-      "review_count": 865,
-      "image_label": "WSH"
+      "review_count": 1005,
+      "image_label": "ENV"
     },
     "cart": [],
     "fees": [],
-    "listed_price_cents": 1687,
-    "checkout_price_cents": 1687,
+    "listed_price_cents": 3687,
+    "checkout_price_cents": 3687,
     "blocks": [
       {
-        "id": "betaNow",
-        "text": "Today's tag is $16.87, and that is what will be billed."
+        "id": "noteB",
+        "text": "The pencil lead held it one night so the flap seals cleanly, batch slate crate sixty five."
       },
       {
-        "id": "gammaStay",
-        "text": "The card step will not raise it."
+        "id": "noteC",
+        "text": "A slim box from the pencil line suits a short letter, batch pine pail seventy eight."
       },
       {
-        "id": "epsilonOpt",
-        "text": "Glass coaster is available for twelve dollars and seventy nine cents and is not ticked."
+        "id": "factA",
+        "text": "Earlier forty eight dollars and forty eight cents, selling $36.87."
       },
       {
-        "id": "zetaPack",
-        "text": "Ordinary carrier cost is already inside today's tag. No packing line is added."
-      },
-      {
-        "id": "deltaPolicy",
-        "text": "The shelf card lists fourteen on hand in the stockroom."
-      },
-      {
-        "id": "alphaWas",
-        "text": "Last week's tag on Linen washcloth, pair was thirty six dollars and forty five cents."
+        "id": "noteA",
+        "text": "A market morning at the press room was for hand folding, and the slip reads clay stall fifty two."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "summary-left",
+      "summary": "This order",
+      "about": "How it was made",
+      "continue_label": "On to the card form",
+      "add_label": "Bag this",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    },
+    "offers": {
+      "was_cents": 4848
+    }
   },
   "trick": {
     "attack_type": "none",

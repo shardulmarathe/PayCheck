@@ -1,59 +1,74 @@
 {
   "spec_version": "1",
   "page_id": "r1-unticked-17",
+  "group_id": "r1-opt-in-checkout",
   "store": {
-    "id": "sundrysoap",
-    "brand": "Sundry Soap",
-    "skin": "sundrysoap",
-    "domain": "www.sundrysoap.example",
-    "category": "soap"
+    "id": "marigold",
+    "brand": "Marigold",
+    "skin": "marigold",
+    "domain": "www.marigold.example",
+    "category": "linen"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Firestarter puck, 8 count",
+    "title": "Brass curtain ring, set of 8 before you pay",
     "product": {
-      "name": "Firestarter puck, 8 count",
-      "sku": "FIRE8",
-      "price_cents": 5663,
-      "description": "The pucks light kindling and come eight to a tin.",
+      "name": "Brass curtain ring, set of 8",
+      "sku": "RING8",
+      "price_cents": 763,
+      "description": "Nothing in the pack beyond brass rings, filled at a wash house on Monday, batch pine rack eighteen.",
       "rating": "5.0",
-      "review_count": 1068,
-      "image_label": "FIR"
+      "review_count": 1264,
+      "image_label": "RNG"
     },
     "cart": [
       {
-        "name": "Firestarter puck, 8 count",
-        "sku": "FIRE8",
+        "name": "Brass curtain ring, set of 8",
+        "sku": "RING8",
         "qty": 1,
-        "price_cents": 5663,
+        "price_cents": 763,
         "trick_item": false
       }
     ],
     "fees": [],
-    "listed_price_cents": 5663,
-    "checkout_price_cents": 5663,
+    "listed_price_cents": 763,
+    "checkout_price_cents": 763,
     "blocks": [
       {
-        "id": "gammaWant",
-        "text": "Leave the offer alone if you only want Firestarter puck, 8 count."
+        "id": "noteA",
+        "text": "The weaver signed the slip Monday because the brass stays bright, batch ash tray thirty one."
       },
       {
-        "id": "epsilonDrop",
-        "text": "Last week's tag was $66.99. Today's tag fifty six dollars and sixty three cents is the figure that will be billed."
+        "id": "noteB",
+        "text": "A Monday fill at the loom room put brass rings into a paper band, batch linen pail forty four."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Ordinary ground carrier cost is already inside the tag."
+        "id": "noteC",
+        "text": "Batch brass bin fifty seven names the cutting table and mentions a loom run."
       },
       {
-        "id": "alphaOffer",
-        "text": "Copper rivet can be included for six dollars and sixty cents."
-      },
-      {
-        "id": "betaEmpty",
-        "text": "The box is empty and Copper rivet is outside the amount due."
+        "id": "noteD",
+        "text": "For a light curtain, start with brass rings, and batch copper hook seventy is on the slip."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "Care and origin",
+      "continue_label": "Review the figures",
+      "add_label": "Put it in the bag",
+      "pay_label": "Use this card",
+      "verify_label": "Match the card",
+      "review_line": "See the lines, then decide."
+    },
+    "offers": {
+      "checkbox": {
+        "name": "Oak plug",
+        "price_cents": 139,
+        "checked": false,
+        "label": "Add Oak plug for $1.39"
+      }
+    }
   },
   "trick": {
     "attack_type": "none",

@@ -1,60 +1,75 @@
 {
   "spec_version": "1",
   "page_id": "r1-shown-15",
+  "group_id": "r1-disclosed-fee-checkout",
   "store": {
-    "id": "marigold",
-    "brand": "Marigold",
-    "skin": "marigold",
-    "domain": "www.marigold.example",
-    "category": "linen"
+    "id": "paperfinch",
+    "brand": "Paper Finch",
+    "skin": "paperfinch",
+    "domain": "www.paperfinch.example",
+    "category": "paper"
   },
   "page": {
     "kind": "checkout",
-    "title": "Review Tin of balm, 1 oz",
+    "title": "Graphite pencil, dozen before you pay",
     "product": {
-      "name": "Tin of balm, 1 oz",
-      "sku": "BALM1",
-      "price_cents": 5459,
-      "description": "The balm sits in a small tin, one ounce.",
+      "name": "Graphite pencil, dozen",
+      "sku": "PEN12",
+      "price_cents": 7709,
+      "description": "Sharpen with a blade if you want a long point, which is the right habit for a sketch, batch tin drawer fifty eight.",
       "rating": "3.5",
-      "review_count": 894,
-      "image_label": "BAL"
+      "review_count": 1042,
+      "image_label": "PEN"
     },
     "cart": [
       {
-        "name": "Tin of balm, 1 oz",
-        "sku": "BALM1",
+        "name": "Graphite pencil, dozen",
+        "sku": "PEN12",
         "qty": 1,
-        "price_cents": 5459,
+        "price_cents": 7709,
         "trick_item": false
       }
     ],
     "fees": [
       {
-        "name": "Doorstep pause",
-        "amount_cents": 809
+        "name": "Twilight run",
+        "amount_cents": 1166
       }
     ],
-    "listed_price_cents": 5459,
-    "checkout_price_cents": 5459,
+    "listed_price_cents": 7709,
+    "checkout_price_cents": 7709,
     "blocks": [
       {
-        "id": "gammaOpt",
-        "text": "Tin clasp at $8.89 is offered and the box is empty, so it stays off the amount due."
+        "id": "noteB",
+        "text": "A market morning at the press room was for a short print run, and the slip reads glass loft fourteen."
       },
       {
-        "id": "deltaPolicy",
-        "text": "Weekend orders placed before noon leave the stockroom the same day."
+        "id": "noteC",
+        "text": "The pencil lead held it a cool evening so the point stays even, batch wool crate twenty seven."
       },
       {
-        "id": "alphaShown",
-        "text": "Doorstep pause, eight dollars and nine cents, was printed under the tag on the item page for Tin of balm, 1 oz."
+        "id": "noteD",
+        "text": "A slim box from the pencil line suits a sketch, batch river crock forty."
       },
       {
-        "id": "betaQuote",
-        "text": "The amount due on this screen is that same quote. Nothing further is introduced here."
+        "id": "factA",
+        "text": "Twilight run eleven dollars and sixty six cents"
+      },
+      {
+        "id": "noteA",
+        "text": "It rested two nights at the press room, then went into a slim box, batch harbor peg seventy one."
       }
-    ]
+    ],
+    "presentation": {
+      "layout": "stacked",
+      "summary": "The tally",
+      "about": "How it was made",
+      "continue_label": "Ready for the card",
+      "add_label": "Bag this",
+      "pay_label": "Pay the amount due",
+      "verify_label": "Card check",
+      "review_line": "The amount due is the sum of the lines below."
+    }
   },
   "trick": {
     "attack_type": "none",
