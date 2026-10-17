@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.node.json --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync-data": "node scripts/sync-data.mjs",
+    "test:data": "esbuild loader/runData.test.ts --bundle --platform=node --format=esm --external:node:* --outfile=/tmp/runData.test.mjs && node --test /tmp/runData.test.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.5",

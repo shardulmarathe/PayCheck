@@ -8,6 +8,9 @@ export const COPY = {
   catchLine(catchPct: string): string {
     return `Catches ${catchPct}% of checkout tricks.`;
   },
+  falseBlockLine(falseBlockPct: string): string {
+    return `False-blocks ${falseBlockPct}% of clean pages.`;
+  },
   useCase(addonPrice: string): string {
     return `You ask your AI agent to buy batteries. The checkout slips in a ${addonPrice} add-on. ${PRODUCT_NAME} stops it before your agent pays.`;
   },

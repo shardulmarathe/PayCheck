@@ -48,7 +48,7 @@ export function NavProvider({ children }: { children: ReactNode }) {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         const id = hit?.target.getAttribute("data-tab");
-        if (id === "demo" || id === "benchmarks" || id === "design" || id === "future") setActive(id);
+        if (id === "demo" || id === "benchmarks" || id === "browser" || id === "visa" || id === "design" || id === "future") setActive(id);
       },
       { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] },
     );
@@ -79,7 +79,17 @@ export function NavProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const tab = active === "demo" ? null : active;
     const label =
-      tab === "benchmarks" ? "Benchmarks" : tab === "design" ? "Design process" : tab === "future" ? "Future improvements" : "";
+      tab === "benchmarks"
+        ? "Benchmarks"
+        : tab === "browser"
+          ? "Browser Use"
+          : tab === "visa"
+            ? "Visa"
+            : tab === "design"
+              ? "Design process"
+              : tab === "future"
+                ? "Future improvements"
+                : "";
     document.title = label ? `${PRODUCT_NAME} · ${label}` : PRODUCT_NAME;
   }, [active]);
 

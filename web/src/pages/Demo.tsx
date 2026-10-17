@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Problem } from "../components/Problem";
 import { ReplayScene } from "../components/Replay";
+import { RoundReplay } from "../components/RoundReplay";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { useReplayChoice } from "../hooks/useRoute";
 import { useIntroPhase } from "../components/motion/Intro";
@@ -32,8 +33,13 @@ export function Demo({ data }: { data: Dataset }) {
     ? (data.replays.find((replay) => (choice === 2 ? replay.scene === "scam" : replay.scene === "upsell")) ?? data.replays[0])
     : undefined;
   const addon = upsell?.without.lines.find((line) => line.damage);
-  const catchPct = data.benchmarks.catch_pct;
+  const summary = data.headline.from_summary;
+  const catchPct = summary ? data.headline.catch_rate : claims ? data.benchmarks.catch_pct : null;
+  const showCatch = summary ? data.headline.catch_rate != null : claims;
+  const showFalseBlock = data.headline.false_block_rate != null;
   const catchLabel = catchPct == null || !Number.isFinite(catchPct) ? "[X]" : trimNum(Math.abs(catchPct));
+  const falseBlockLabel =
+    data.headline.false_block_rate == null ? "" : trimNum(Math.abs(data.headline.false_block_rate));
   const sonnet = heroClaim(data.results);
   const enter = (index: number) =>
     reduced || settled.current
@@ -66,11 +72,18 @@ export function Demo({ data }: { data: Dataset }) {
                 {COPY.useCase(formatUsd(addon.amount))}
               </motion.p>
             ) : null}
-            {claims ? (
+            {showCatch ? (
+              <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(3)}>
+                {COPY.catchLine(catchLabel)}
+              </motion.p>
+            ) : null}
+            {showFalseBlock ? (
+              <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(4)}>
+                {COPY.falseBlockLine(falseBlockLabel)}
+              </motion.p>
+            ) : null}
+            {!summary && claims ? (
               <>
-                <motion.p className="hero-claim" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(3)}>
-                  {COPY.catchLine(catchLabel)}
-                </motion.p>
                 <motion.p className="hero-sonnet" initial={false} animate={{ opacity: showCopy ? 1 : 0, y: showCopy ? 0 : 16 }} transition={enter(4)}>
                   {sonnet.sentence}
                 </motion.p>
@@ -85,6 +98,8 @@ export function Demo({ data }: { data: Dataset }) {
       </section>
 
       <Problem />
+
+      <RoundReplay rounds={data.round_replay} />
 
       {visible ? (
         <ReplayScene replay={visible} example={data.example.replays} choice={choice} onChoice={select} />

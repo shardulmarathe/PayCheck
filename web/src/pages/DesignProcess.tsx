@@ -20,6 +20,7 @@ export function DesignProcess({ data }: { data: Dataset }) {
           nodes={process.nodes}
           round={process.round_n}
           score={process.new_layout_pct}
+          placeholder={!data.headline.from_summary}
           caption={process.caught_caption}
         />
       </section>

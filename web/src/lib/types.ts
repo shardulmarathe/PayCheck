@@ -233,6 +233,73 @@ export interface ExampleFlags {
   tally: boolean;
 }
 
+/** Headline from `runs/r{N}/summary.json` → `test.heldout_template`. Rates are percents. Null hides that slot. */
+export interface HeadlineRates {
+  /** True once a summary file for some round parsed. Fixture catch rates do not fill these slots. */
+  from_summary: boolean;
+  round: number | null;
+  catch_rate: number | null;
+  false_block_rate: number | null;
+}
+
+/** One train or dev page from `runs/r{N}/replay.jsonl`. Test pages are not in this file. */
+export interface RoundReplayLine {
+  round: number;
+  page_id: string;
+  store: string;
+  page_kind: string;
+  trick: string;
+  split: "train" | "dev";
+  label: string;
+  verdict: string;
+  correct: boolean;
+  fed_back: boolean;
+  source: "fresh" | "from_miss";
+}
+
+export interface RoundReplay {
+  round: number;
+  /** False when this round only had a replay log. */
+  has_summary: boolean;
+  catch_rate: number | null;
+  false_block_rate: number | null;
+  lines: RoundReplayLine[];
+}
+
+export interface BrowserUseRun {
+  id: string;
+  errand_id: string;
+  mode: "unguarded" | "guarded";
+  scripted: boolean;
+  /** "Scripted", or the real provenance fields joined as stored. */
+  provenance: string;
+  attack_type: string;
+  overcharge_usd: number;
+  /** Public URL under `/recordings/`, or null when no MP4 is on disk. */
+  video: string | null;
+}
+
+export interface BrowserUseResults {
+  /** Percents. Null hides that side. */
+  paid_for_trick: { unguarded: number | null; guarded: number | null };
+  /** Percent of clean guarded runs where the guard blocked. Null hides the slot. */
+  false_block_rate: number | null;
+  /** Dollars. Null hides that side. */
+  overpaid: { unguarded: number | null; guarded: number | null };
+  runs: BrowserUseRun[];
+}
+
+export interface VisaStage {
+  key: "agent_request" | "store_signature" | "guard" | "decision";
+  label: string;
+  text: string;
+}
+
+export interface VisaTrace {
+  id: string;
+  stages: VisaStage[];
+}
+
 export interface ShownSections {
   /** False hides the Benchmarks page and its nav link. */
   benchmarks: boolean;
@@ -314,6 +381,12 @@ export interface Dataset {
    * publishable results (the checked-in file is synthetic).
    */
   results: ResultsView;
+  /** Held-out template rates from the latest `runs/r{N}/summary.json`. */
+  headline: HeadlineRates;
+  /** One entry per round that had a summary or a replay log. */
+  round_replay: RoundReplay[];
+  browser_use: BrowserUseResults;
+  visa: VisaTrace[];
   process: {
     kicker: string;
     title_lines: string[];

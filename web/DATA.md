@@ -14,7 +14,31 @@ Catch rates are percents from 0 to 100. Do not store fractions. `isExample` on t
 | `runs/replays/*.json` | the Demo replays, the kiosk screen, and the comparison line |
 | `runs/tally.json` | loaded, not drawn. v3 removed the tally strip |
 
-Citations are copy, not run data. They stay in the fixture.
+Citations are copy, not run data. They stay in the fixture. The problem-section source tags stay in `web/src/lib/problemSources.ts`.
+
+## Round logs
+
+`runs/r{N}/summary.json` and `runs/r{N}/replay.jsonl` use the pinned keys from `train/guardtrain/replay.py`. `npm run sync-data` copies them to `web/public/data/rounds/r{N}/`. The loader reads `runs/` and that public copy. `runs/` wins when the same round is in both.
+
+The headline is the latest summary's `test.heldout_template.catch_rate` and `false_block_rate`. Those fields are fractions from 0 to 1; the site shows them as percents. A value above 1 is already a percent. `null` hides that slot. There is no `[X]` and no fixture number in its place. The same catch rate fills the design-process ring. The replay section steps through `replay.jsonl` (fed-back lines first, 120 ms apart, then the next round). A round with no lines is not drawn.
+
+`summary.json` has no `synthetic` flag. A file that parses is real data, including in production.
+
+## Browser Use
+
+Per-run JSON lives in `runs/shopper/**/*.json` (not `tally.json` or `ledger.json`). `provenance` is `"scripted"` or `{ "kind": "real", "model", "timestamp", "browser_use_version" }`. Scripted runs are labeled "Scripted" and are omitted when examples are hidden. Real runs stay.
+
+The section shows three slots, and hides a slot that cannot be computed:
+
+- Paid-for-trick rate, unguarded and guarded. A run paid for the trick when `outcome` is `fell`, money was lost, a scam was recorded, or `unwanted_subscription` is true. The denominator is runs whose `attack_type` is not `none`.
+- False-block rate: guarded runs with no attack type where a step has `blocked: true`, divided by those clean guarded runs.
+- Dollars overpaid: the sum of `overcharge_usd` on each side. Unguarded money uses the red fill. Guarded money stays near-white.
+
+MP4 files are served from `web/public/recordings/`. A run embeds one when `video` or `{errand_id}_{mode}.mp4` is there. `npm run sync-data` copies referenced `.mp4` files and anything under `runs/recordings/`. `--examples` also copies scripted and `"synthetic": true` shopper JSON. Without that flag, those files stay out of `web/public/data`.
+
+## Visa
+
+`runs/visa/*.json` is a trace. The section title is "Signed agent check (Visa Trusted Agent Protocol)". Stages render in order when present: signed agent request, store signature check, guard check, then pay or block. A missing stage is left out. `"synthetic": true` is omitted when examples are hidden. `npm run sync-data` copies the traces to `web/public/data/visa/`.
 
 ## Eval
 

@@ -11,6 +11,7 @@ import type {
   Verdict,
 } from "../src/lib/types";
 import { fixtureDataset } from "./fixtures";
+import { headlineFromRounds, loadBrowserUse, loadRoundReplays, loadVisa } from "./runData";
 import { assertClaimRules, EMPTY_RESULTS, normalizeResults, type ResultsView } from "../src/lib/results";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -483,5 +484,31 @@ export function loadDataset(repoRoot: string): Dataset {
   ds.isExample = realCount === 0;
   ds.source = realCount === 0 ? "fixtures" : realCount === flags.length ? "runs" : "mixed";
   ds.notes = notes;
-  return applyDerived(ds);
+  const loaded = applyDerived(ds);
+  if (process.env.GUARD_GYM_FORCE_FIXTURES !== "1") applyRunArtifacts(loaded, repoRoot, show);
+  return loaded;
+}
+
+/** Summary rates and replay lines replace fixture numbers. A missing field stays null so the slot hides. */
+function applyRunArtifacts(ds: Dataset, repoRoot: string, show: boolean): void {
+  const rounds = loadRoundReplays([
+    path.join(repoRoot, "web", "public", "data", "rounds"),
+    path.join(repoRoot, "runs"),
+  ]);
+  ds.round_replay = rounds;
+  const headline = headlineFromRounds(rounds);
+  ds.headline = headline;
+  if (headline.from_summary) {
+    ds.process.round_n = headline.round;
+    ds.process.new_layout_pct = headline.catch_rate;
+  }
+  ds.browser_use = loadBrowserUse(
+    [path.join(repoRoot, "web", "public", "data", "browser-use"), path.join(repoRoot, "runs", "shopper")],
+    path.join(repoRoot, "web", "public", "recordings"),
+    show,
+  );
+  ds.visa = loadVisa([path.join(repoRoot, "web", "public", "data", "visa"), path.join(repoRoot, "runs", "visa")], show);
+  if (headline.from_summary) ds.example.training = false;
+  ds.isExample = Object.values(ds.example).every(Boolean);
+  if (!ds.isExample && ds.source === "fixtures") ds.source = "mixed";
 }

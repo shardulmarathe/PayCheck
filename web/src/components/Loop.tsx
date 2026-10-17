@@ -10,8 +10,8 @@ const SPOTS = [
   { t: 0.5, align: "below" },
 ] as const;
 
-function scoreLabel(score: number | null): string {
-  if (score == null || !Number.isFinite(score)) return "[X]%";
+function scoreLabel(score: number | null, placeholder: boolean): string {
+  if (score == null || !Number.isFinite(score)) return placeholder ? "[X]%" : "";
   const text = Number.isInteger(score) ? String(score) : String(Math.round(score * 10) / 10);
   return `${text}%`;
 }
@@ -25,11 +25,14 @@ export function LoopDiagram({
   nodes,
   round,
   score,
+  placeholder = true,
   caption,
 }: {
   nodes: { n: string; title: string; detail: string }[];
   round: number | null;
   score: number | null;
+  /** False hides the percent instead of showing the [X]% placeholder. */
+  placeholder?: boolean;
   caption: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,7 +80,7 @@ export function LoopDiagram({
         </svg>
         <div className="loop-center">
           <p className="loop-round">{roundLabel(round)}</p>
-          <p className="loop-pct">{scoreLabel(score)}</p>
+          <p className="loop-pct">{scoreLabel(score, placeholder)}</p>
           <p className="micro">{caption}</p>
         </div>
         <div className="loop-labels">

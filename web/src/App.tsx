@@ -9,11 +9,13 @@ import { ProgressHairline } from "./components/motion/ProgressHairline";
 import { SmoothScroll } from "./components/motion/SmoothScroll";
 import { getDataset } from "./data/dataset";
 import { EASE, ENTER } from "./lib/motion";
+import { BrowserUse } from "./components/BrowserUse";
+import { VisaSection } from "./components/VisaTrace";
 import { Benchmarks } from "./pages/Benchmarks";
 import { Demo } from "./pages/Demo";
 import { DesignProcess } from "./pages/DesignProcess";
 import { Future } from "./pages/Future";
-import { TABS } from "./hooks/useRoute";
+import { TABS, type TabId } from "./hooks/useRoute";
 import type { UpsellReplay } from "./lib/types";
 
 const data = getDataset();
@@ -42,7 +44,17 @@ function Site() {
   const screen = upsell
     ? screenFrom(upsell, data.example.replays, data.shown.benchmarks ? (guard?.catch_rate ?? null) : null)
     : neutralScreen();
-  const tabs = TABS.filter((tab) => tab.id !== "benchmarks" || data.shown.benchmarks);
+  const tabs: { id: TabId; href: string; label: string }[] = [];
+  for (const tab of TABS) {
+    if (tab.id === "benchmarks" && !data.shown.benchmarks) continue;
+    if (tab.id === "design" && data.browser_use.runs.length) {
+      tabs.push({ id: "browser", href: "#browser-use", label: "Browser Use" });
+    }
+    if (tab.id === "design" && data.visa.length) {
+      tabs.push({ id: "visa", href: "#visa", label: "Visa" });
+    }
+    tabs.push(tab);
+  }
   const dimmed = phase === "catch";
 
   return (
@@ -60,6 +72,16 @@ function Site() {
         {data.shown.benchmarks ? (
           <section id="benchmarks" data-tab="benchmarks" data-arrive={arriving === "benchmarks" ? "1" : undefined}>
             <Benchmarks data={data} />
+          </section>
+        ) : null}
+        {data.browser_use.runs.length ? (
+          <section id="browser-use" data-tab="browser" data-arrive={arriving === "browser" ? "1" : undefined}>
+            <BrowserUse data={data.browser_use} />
+          </section>
+        ) : null}
+        {data.visa.length ? (
+          <section id="visa" data-tab="visa" data-arrive={arriving === "visa" ? "1" : undefined}>
+            <VisaSection traces={data.visa} />
           </section>
         ) : null}
         <section id="design-process" data-tab="design" data-arrive={arriving === "design" ? "1" : undefined}>
