@@ -2,7 +2,7 @@
   "synthetic": true,
   "hero_slice": "in_dist",
   "models": {
-    "guard": { "label": "SureShop guard", "cost_per_page_usd": 0.00004 },
+    "guard": { "label": "PayCheck guard", "cost_per_page_usd": 0.00004 },
     "baseline": { "label": "Baseline model", "cost_per_page_usd": 0.0062 },
     "gemini": { "label": "Gemini 3.1 Pro", "cost_per_page_usd": 0.0016 }
   },

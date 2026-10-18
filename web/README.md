@@ -1,6 +1,6 @@
 # Showcase site
 
-Static SureShop site. The user-facing name is the `PRODUCT_NAME` constant in `src/lib/product.ts`. The npm package name stays `guard-gym`.
+Static PayCheck showcase site. The user-facing name is the `PRODUCT_NAME` constant in `src/lib/product.ts`. The npm package name stays `guard-gym`.
 
 ```bash
 cd web

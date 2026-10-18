@@ -10,7 +10,7 @@ Signature base, with a newline between lines and no trailing newline::
 
     "@authority": example.com
     "@path": /checkout
-    "@signature-params": ("@authority" "@path"); created=1700000000; expires=1700000480; keyId="sureshop-ab"; alg="ed25519"; nonce="..."; tag="agent-payer-auth"
+    "@signature-params": ("@authority" "@path"); created=1700000000; expires=1700000480; keyId="paycheck-ab"; alg="ed25519"; nonce="..."; tag="agent-payer-auth"
 
 Headers::
 

@@ -269,8 +269,8 @@ export const fixtureDataset: Dataset = {
   models: [
     {
       id: "guard",
-      model: "SureShop guard · Qwen3-4B fine-tuned",
-      short: "SureShop guard",
+      model: "PayCheck guard · Qwen3-4B fine-tuned",
+      short: "PayCheck guard",
       emphasis: true,
       pages: 300,
       catch_rate: 91,

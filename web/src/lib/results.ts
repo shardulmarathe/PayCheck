@@ -264,7 +264,7 @@ export function assertClaimRules(): void {
     synthetic: false,
     hero_slice: "heldout_attack",
     models: {
-      guard: { label: "SureShop guard", cost_per_page_usd: 0.00004 },
+      guard: { label: "PayCheck guard", cost_per_page_usd: 0.00004 },
       baseline: { label: "Baseline model", cost_per_page_usd: 0.0062 },
     },
     slices: {

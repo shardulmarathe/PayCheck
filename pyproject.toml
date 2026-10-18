@@ -1,7 +1,7 @@
 [project]
-name = "checkout-guard"
+name = "paycheck"
 version = "0.1.0"
-description = "Checkout-guard gym: fake stores, trick specs, and labeled pages for a shopping-agent guard."
+description = "PayCheck gym: fake stores, trick specs, and labeled pages for a shopping-agent guard."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

@@ -35,7 +35,7 @@ class AgentKey:
             serialization.PublicFormat.Raw,
         )
         if key_id is None:
-            key_id = "sureshop-" + raw_public[:8].hex()
+            key_id = "paycheck-" + raw_public[:8].hex()
         return cls(
             key_id=key_id,
             private_key=private_key,

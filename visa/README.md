@@ -45,7 +45,7 @@ Covered components are `@authority` and `@path` (path plus query). The signature
 ```text
 "@authority": store.example
 "@path": /checkout?order=clean
-"@signature-params": ("@authority" "@path"); created=1700000000; expires=1700000480; keyId="sureshop-ab"; alg="ed25519"; nonce="<uuid>"; tag="agent-payer-auth"
+"@signature-params": ("@authority" "@path"); created=1700000000; expires=1700000480; keyId="paycheck-ab"; alg="ed25519"; nonce="<uuid>"; tag="agent-payer-auth"
 ```
 
 Headers:

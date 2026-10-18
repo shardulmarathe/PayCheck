@@ -1,4 +1,4 @@
-"""Client for the SureShop guard's HTTP ``/check`` endpoint."""
+"""Client for the PayCheck guard's HTTP ``/check`` endpoint."""
 
 from __future__ import annotations
 

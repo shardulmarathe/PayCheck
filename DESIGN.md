@@ -1,4 +1,4 @@
-# Design System — SureShop
+# Design System — PayCheck
 
 > Private security room. Cold blue-black, near-white text, one signal red that only ever marks a trick or money lost. The guard is never shown; only its catches.
 
@@ -6,7 +6,7 @@
 
 ## Product context
 
-- **What this is:** SureShop is a small, fast guard model for AI shopping agents. It reads every page and cart before the agent pays, then blocks or steers around checkout tricks: pre-ticked add-ons, popup upsells, hidden fees, copycat stores, listing injection.
+- **What this is:** PayCheck is a small, fast guard model for AI shopping agents. It reads every page and cart before the agent pays, then blocks or steers around checkout tricks: pre-ticked add-ons, popup upsells, hidden fees, copycat stores, listing injection.
 - **Who it's for:** Primarily LA AI Hacks judges, who rank from memory using the title, their own notes and the Devpost description. Secondarily, teams building shopping agents.
 - **Project type:** Static showcase site (Next.js App Router + Tailwind + Framer Motion + React Three Fiber, deployed on Vercel). Every demo is a recording. Nothing runs live.
 - **The one thing judges must remember:** the catch moment. The page dims, red corner brackets lock onto the trick line, a `[N] ms` readout appears and the trick is quoted. Every other design decision supports that moment.
@@ -23,7 +23,7 @@
   | **Bracket stroke style** | **Dashed `[4, 3]` = scam** (copycat, injection, fake verification). **Solid = upsell** (add-on, pre-ticked box, drip fee) |
 - **Tab underline:** the 2 px red tab underline is the single UI use of red, per the T Tokens frame. It's chrome, not a claim, and it's the only exception.
 - **The guard is never shown.** No mascot, shield icon, robot, eye or character. We only show what it caught.
-- **Our own claims and points are never red.** Catch rate, the SureShop dot on charts, "Guarded: −$0.00", the headline number: all white or near-white. Red belongs to the trick and the loss, never to us.
+- **Our own claims and points are never red.** Catch rate, the PayCheck dot on charts, "Guarded: −$0.00", the headline number: all white or near-white. Red belongs to the trick and the loss, never to us.
 - **No gradients, no frosted glass, no glassmorphism, no backdrop-blur panels.** Flat fills only. The only soft edges allowed are the panel drop shadows and the blurred floor plane under the replay panels (see Motion).
 
 ## Color tokens (exact, from Figma T Tokens `18:159`)
@@ -80,7 +80,7 @@ Load with `next/font/google` (`IBM_Plex_Sans` weights 300/400, `IBM_Plex_Mono` w
 
 ## Copy rules
 
-- **Name:** `SureShop` (one word, capital S twice). Never "Sure Shop", "SURESHOP" or "sureshop" in UI.
+- **Name:** `PayCheck` (one word, capital S twice). Never "Sure Shop", "SURESHOP" or "sureshop" in UI.
 - **Tagline:** "Your agent shops. We check the checkout." Verbatim, everywhere: hero, Devpost first line, table card.
 - **Headline number slot:** "Catches [X]% of checkout tricks." It's the same sentence on the hero, the Benchmarks H1 and the table card. `[X]` stays a visible slot until the real frozen-test number lands; never invent one.
 - **Baseline line:** never say "beats". Say "level with" or "within [N] points of" the baseline model, and only with numbers from a checked eval. No cost-ratio phrase.
@@ -114,7 +114,7 @@ The site is **one continuous shot**. The hero is the 3D checkout kiosk, treated 
 
 | t (approx.) | Beat |
 |---|---|
-| 0 – 0.9 s | **Loader.** `bg` only. The `SureShop` wordmark (Plex Sans Light) and the red corner-bracket mark (four 1.5 px corners) sit centered. A near-white progress hairline runs along the top. |
+| 0 – 0.9 s | **Loader.** `bg` only. The `PayCheck` wordmark (Plex Sans Light) and the red corner-bracket mark (four 1.5 px corners) sit centered. A near-white progress hairline runs along the top. |
 | 0.9 – 2.0 s | **Bracket mark flies to the kiosk.** The kiosk poster/canvas is already behind the loader. The mark FLIPs from its loader rect to the **exact rect of the trick line on the kiosk screen** (`getBoundingClientRect` of `[data-trick-line]`) over 1.1 s ease-in-out, while the loader `bg` fades out over 250 ms. No fade between loader and hero: the mark *is* the hand-off. |
 | 2.0 – 4.4 s | **The catch plays on the kiosk screen** (the one beat allowed to run long). The page dims to 28% (300 ms). A near-white scan line sweeps the screen (900 ms). As it crosses the trick line, the four brackets close on it (250 ms), the red glow rises (300 ms), the `[N] ms` readout counts up in red mono, and the trick sentence is quoted below in mono. It holds for 600 ms, then the glow fades (600 ms), the brackets settle to near-white, and the label reads `Blocked · [N] ms` in `text-2`. |
 | 4.4 – 5.5 s | **Camera pull-back + tabs.** The R3F camera dollies back (z ≈ 2.2 → 4.0) and drifts right so the kiosk lands in its Figma position (right half, `17:553`), over 1.1 s ease-in-out. The dim lifts. The tab bar fades in (opacity 0→1, y −8→0, 250 ms) once the pull-back lands. Hero copy enters: eyebrow, tagline, headline number, sub-copy (800 ms, stagger 60 ms). |
@@ -124,7 +124,7 @@ Lenis is `stop()`ed during the intro and `start()`ed at `done` or on skip.
 
 ### After the intro: both full scroll and tabs work
 
-- **Tab bar:** slim, sticky, `bg` at 100% (no blur), with a 1 px `hairline` bottom. `SureShop` sits left; tabs **Demo · Benchmarks · Design process · Future improvements** sit right (Figma labels; "Future" is allowed on screens under 640 px). Its height is the `NAV_H` constant (56 px).
+- **Tab bar:** slim, sticky, `bg` at 100% (no blur), with a 1 px `hairline` bottom. `PayCheck` sits left; tabs **Demo · Benchmarks · Design process · Future improvements** sit right (Figma labels; "Future" is allowed on screens under 640 px). Its height is the `NAV_H` constant (56 px).
 - **Tab click = glide:** `lenis.scrollTo('#id', { offset: -NAV_H, duration: 1.1, easing: easeInOutCubic, lock: true, onComplete })`. While gliding, `isGliding = true`:
   - **Entrance reveals are suppressed.** Sections passed on the way are set straight to their settled state, so nothing flashes past at speed.
   - **Scroll-linked connectors** (below) are tied to scroll position, so they scrub naturally during the glide. That is the camera move.
@@ -143,8 +143,8 @@ Each boundary has one element that **carries across**, so the eye never loses it
 2. **Hero → Replay 1 ("the kiosk screen becomes the replay"):** as the hero scrolls out (`offset: ['start start', 'end start']`), the kiosk rotates about 20° on y (scroll-driven, never on its own) and **the kiosk screen card (DOM) travels and scales into the "With guard" panel**. Its bracketed trick line is the same line, in the same position, inside the guarded panel's popup. The "Without guard" panel slides in from the left at `rotateY(8deg)`. Both panels flatten to `rotateY(0)` as they reach viewport center.
 3. **Replay 1 → Replay 2 (in-section switcher, not a tab):** the browser chrome and URL bar **hold still**. Only the content crossfades (250 ms). Then the copycat letter flip plays: `brightcell.shop`, the `l` flips to `1` over 400 ms, and a **dashed** red bracket snaps around just those characters.
 4. **Replay → Benchmarks ("the counter becomes the headline number"):** the receipt prints (lines 120 ms apart), then the counters land: "Unguarded: −$X" (red fill) and "Guarded: −$0.00" (white). As Benchmarks enters, the **red counter fades out in place** (red never travels into our claims). The **white guarded counter is the carrier**: it rises into the Benchmarks H1 slot and its digits roll (tabular, 600 ms) from `$0.00` to `[X]%`, completing "Catches [X]% of checkout tricks."
-5. **Benchmarks headline → chart:** the hairline under the H1 extends full width and becomes the chart's 100% gridline. Gridlines draw left→right (stagger 60 ms). The SureShop dot (white) appears at its point, then the dashed connector draws from the baseline dot to ours (900 ms, `pathLength`).
-6. **Benchmarks → Design process ("the dot becomes the loop"):** the white ring around the SureShop dot is the carrier. It scales up and stretches into the Design-process loop ellipse (`hairline-strong`, 1 px). The four loop nodes then light in order 01 → 04 (stagger 120 ms), and a single near-white tick travels once around the loop. It isn't continuous: nothing moves when idle.
+5. **Benchmarks headline → chart:** the hairline under the H1 extends full width and becomes the chart's 100% gridline. Gridlines draw left→right (stagger 60 ms). The PayCheck dot (white) appears at its point, then the dashed connector draws from the baseline dot to ours (900 ms, `pathLength`).
+6. **Benchmarks → Design process ("the dot becomes the loop"):** the white ring around the PayCheck dot is the carrier. It scales up and stretches into the Design-process loop ellipse (`hairline-strong`, 1 px). The four loop nodes then light in order 01 → 04 (stagger 120 ms), and a single near-white tick travels once around the loop. It isn't continuous: nothing moves when idle.
 7. **Design process → Future ("the miss feeds the next lesson"):** node 04, "Misses go back into training", drops a near-white dot that runs down a vertical hairline into the `01` index of the Future list. Each row's top hairline draws left→right (stagger 60 ms), then the row text enters.
 8. **Future → Footer:** no carrier. The last hairline becomes the footer rule. The footer is static.
 
@@ -188,7 +188,7 @@ Tab glides pass through these same connectors (they're tied to scroll), so a cli
 - A floating or bobbing hero. The kiosk moves only with scroll or during the intro.
 - Per-letter or per-word text reveals, text scramble/scatter, typewriter headings (receipt lines typing out is the one exception, line by line)
 - Extra accent colors (no green "success", no blue links, no amber). Red is the only accent.
-- Red on our own claims, catch rates, the SureShop chart dot, the guard or decoration
+- Red on our own claims, catch rates, the PayCheck chart dot, the guard or decoration
 - "Example data" labels or placeholder numbers in production
 - Sponsor branding, model-vendor logos, hackathon badges in the UI
 - Shield, lock or robot icons representing the guard, and mascots
