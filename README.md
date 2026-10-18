@@ -24,8 +24,8 @@ The calibrated guard is level with Claude Haiku 5.5 on F1: the paired bootstrap 
 
 ### Data sources
 
-- `REPORT.md`: locked-test scores for r4 with and without the calibrated threshold, the Haiku 5.5 baseline, and the paired bootstrap.
-- `training-cycle-facts.md`: rows per round, Veri settings, and the Browser Use recount (run counts and guarded vs unguarded outcomes).
+- `REPORT.md` (internal eval report, not in this repo): locked-test scores for r4 with and without the calibrated threshold, the Haiku 5.5 baseline, and the paired bootstrap.
+- `training-cycle-facts.md` (internal fact sheet, not in this repo): rows per round, Veri settings, and the Browser Use recount (run counts and guarded vs unguarded outcomes).
 - Practice and test pages are built from fixed templates plus [yamanalab/ec-darkpattern](https://github.com/yamanalab/ec-darkpattern) (Apache-2.0).
 
 The locked test pages and labels are not in this repository (see below), so these scores cannot be recomputed from the repo alone.

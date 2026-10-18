@@ -1,4 +1,4 @@
-"""`python -m gym` prints the commands other agents will call."""
+"""`python -m gym` prints the gym commands the trainer and shopper call."""
 
 from __future__ import annotations
 
