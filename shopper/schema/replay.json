@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://checkoutguard.local/schema/shopper_replay.json",
+  "title": "ShopperReplay",
+  "description": "One errand run, ordered so a static site can animate it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "errand_id",
+    "mode",
+    "mock",
+    "synthetic",
+    "provenance",
+    "run_id",
+    "model",
+    "instruction",
+    "start_url",
+    "guard_backend",
+    "attack_type",
+    "started_at",
+    "finished_at",
+    "steps",
+    "final_cart",
+    "correct",
+    "amount_charged_cents",
+    "correct_total_cents",
+    "scams_fallen_for",
+    "unwanted_items",
+    "unwanted_subscription",
+    "dollars_lost_cents",
+    "dollars_lost",
+    "overcharge_usd",
+    "exposed",
+    "outcome",
+    "matches_correct",
+    "usd_spent",
+    "video",
+    "error"
+  ],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "errand_id": {"type": "string", "minLength": 1},
+    "mode": {"enum": ["unguarded", "guarded"]},
+    "mock": {"type": "boolean"},
+    "synthetic": {"type": "boolean"},
+    "provenance": {
+      "description": "scripted means the mock policy drove the browser. A real Browser Use plus LLM run is an object the site should show with its model, timestamp, and browser-use version.",
+      "oneOf": [
+        {"const": "scripted"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "model", "timestamp", "browser_use_version"],
+          "properties": {
+            "kind": {"const": "real"},
+            "model": {"type": "string", "minLength": 1},
+            "timestamp": {"type": "string", "minLength": 1},
+            "browser_use_version": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "run_id": {"type": "string", "minLength": 1},
+    "model": {"type": "string"},
+    "instruction": {"type": "string"},
+    "start_url": {"type": "string"},
+    "guard_backend": {"enum": ["mock", "http", null]},
+    "attack_type": {"type": "string"},
+    "started_at": {"type": "string"},
+    "finished_at": {"type": "string"},
+    "steps": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/step"}
+    },
+    "final_cart": {"$ref": "#/$defs/cart"},
+    "correct": {"$ref": "#/$defs/correct"},
+    "amount_charged_cents": {"type": "integer", "minimum": 0},
+    "correct_total_cents": {"type": ["integer", "null"], "minimum": 0},
+    "scams_fallen_for": {"type": "array", "items": {"type": "string"}},
+    "unwanted_items": {"type": "array", "items": {"$ref": "#/$defs/item"}},
+    "unwanted_subscription": {"type": "boolean"},
+    "dollars_lost_cents": {"type": "integer", "minimum": 0},
+    "dollars_lost": {"type": "number", "minimum": 0},
+    "overcharge_usd": {"type": "number", "minimum": 0},
+    "exposed": {"type": "boolean"},
+    "hero_addon_usd": {"type": "number", "minimum": 0},
+    "outcome": {"enum": ["clean", "protected", "fell", "incomplete", "stopped", "error"]},
+    "matches_correct": {"type": "boolean"},
+    "usd_spent": {"type": "number", "minimum": 0},
+    "video": {"type": ["string", "null"]},
+    "error": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "bbox": {
+      "type": "array",
+      "prefixItems": [
+        {"type": "integer"},
+        {"type": "integer"},
+        {"type": "integer"},
+        {"type": "integer"}
+      ],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": false
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector", "text", "bbox"],
+      "properties": {
+        "selector": {"type": "string"},
+        "text": {"type": "string"},
+        "bbox": {"oneOf": [{"$ref": "#/$defs/bbox"}, {"type": "null"}]}
+      }
+    },
+    "guard_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "attack_type", "evidence", "instruction"],
+      "properties": {
+        "verdict": {"enum": ["block", "pass"]},
+        "attack_type": {"type": "string"},
+        "evidence": {"type": "string"},
+        "instruction": {"type": "string"}
+      }
+    },
+    "guard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["endpoint", "backend", "latency_ms", "action", "response"],
+      "properties": {
+        "endpoint": {"type": "string"},
+        "backend": {"enum": ["mock", "http"]},
+        "latency_ms": {
+          "anyOf": [
+            {"type": "number", "minimum": 0},
+            {"type": "null"}
+          ]
+        },
+        "action": {"type": "string"},
+        "response": {"$ref": "#/$defs/guard_response"}
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "timestamp", "url", "action", "target", "screenshot", "page_text_excerpt", "guard", "blocked", "viewport", "evidence_bbox"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "timestamp": {"type": "string"},
+        "url": {"type": "string"},
+        "action": {"type": "string"},
+        "target": {"oneOf": [{"$ref": "#/$defs/target"}, {"type": "null"}]},
+        "screenshot": {"type": ["string", "null"]},
+        "page_text_excerpt": {"type": "string"},
+        "guard": {"oneOf": [{"$ref": "#/$defs/guard"}, {"type": "null"}]},
+        "blocked": {"type": "boolean"},
+        "viewport": {"$ref": "#/$defs/viewport"},
+        "evidence_bbox": {"oneOf": [{"$ref": "#/$defs/bbox"}, {"type": "null"}]}
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sku", "qty", "price_cents"],
+      "properties": {
+        "sku": {"type": "string"},
+        "qty": {"type": "integer", "minimum": 1},
+        "price_cents": {"type": "integer", "minimum": 0}
+      }
+    },
+    "cart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items", "total_cents", "paid", "aborted", "submitted_payment", "subscription", "matches", "reason"],
+      "properties": {
+        "items": {"type": "array", "items": {"$ref": "#/$defs/item"}},
+        "total_cents": {"type": "integer", "minimum": 0},
+        "paid": {"type": "boolean"},
+        "aborted": {"type": "boolean"},
+        "submitted_payment": {"type": "boolean"},
+        "subscription": {"type": "boolean"},
+        "matches": {"type": "boolean"},
+        "reason": {"type": "string"}
+      }
+    },
+    "correct": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "items", "total_cents", "subscription"],
+      "properties": {
+        "action": {"type": "string"},
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sku", "qty"],
+            "properties": {
+              "sku": {"type": "string"},
+              "qty": {"type": "integer", "minimum": 1}
+            }
+          }
+        },
+        "total_cents": {"type": ["integer", "null"], "minimum": 0},
+        "subscription": {"type": "boolean"}
+      }
+    }
+  }
+}

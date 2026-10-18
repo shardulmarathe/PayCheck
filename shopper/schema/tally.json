@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://checkoutguard.local/schema/shopper_tally.json",
+  "title": "ShopperTally",
+  "description": "Customer tally summed with and without the checkout guard.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "synthetic", "run_id", "without_guard", "with_guard", "by_errand", "runs"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "generated_at": {"type": "string"},
+    "synthetic": {"type": "boolean"},
+    "run_id": {"type": "string", "minLength": 1},
+    "without_guard": {"$ref": "#/$defs/summary"},
+    "with_guard": {"$ref": "#/$defs/summary"},
+    "by_errand": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {"$ref": "#/$defs/errand_mode"}
+      }
+    },
+    "runs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/compact"}
+    }
+  },
+  "$defs": {
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runs",
+        "succeeded",
+        "fell",
+        "incomplete",
+        "stopped",
+        "errors",
+        "dollars_lost_cents",
+        "dollars_lost",
+        "overcharge_usd",
+        "amount_charged_cents",
+        "scams_fallen_for",
+        "unwanted_items",
+        "exposed"
+      ],
+      "properties": {
+        "runs": {"type": "integer", "minimum": 0},
+        "succeeded": {"type": "integer", "minimum": 0},
+        "fell": {"type": "integer", "minimum": 0},
+        "incomplete": {"type": "integer", "minimum": 0},
+        "stopped": {"type": "integer", "minimum": 0},
+        "errors": {"type": "integer", "minimum": 0},
+        "dollars_lost_cents": {"type": "integer", "minimum": 0},
+        "dollars_lost": {"type": "number", "minimum": 0},
+        "overcharge_usd": {"type": "number", "minimum": 0},
+        "amount_charged_cents": {"type": "integer", "minimum": 0},
+        "scams_fallen_for": {"type": "integer", "minimum": 0},
+        "unwanted_items": {"type": "integer", "minimum": 0},
+        "exposed": {"type": "integer", "minimum": 0}
+      }
+    },
+    "errand_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "amount_charged_cents",
+        "correct_total_cents",
+        "dollars_lost_cents",
+        "dollars_lost",
+        "overcharge_usd",
+        "exposed",
+        "scams_fallen_for",
+        "unwanted_items",
+        "matches_correct"
+      ],
+      "properties": {
+        "outcome": {"type": "string"},
+        "amount_charged_cents": {"type": "integer"},
+        "correct_total_cents": {"type": ["integer", "null"]},
+        "dollars_lost_cents": {"type": "integer"},
+        "dollars_lost": {"type": "number"},
+        "overcharge_usd": {"type": "number"},
+        "exposed": {"type": "boolean"},
+        "scams_fallen_for": {"type": "array", "items": {"type": "string"}},
+        "unwanted_items": {"type": "array"},
+        "matches_correct": {"type": "boolean"}
+      }
+    },
+    "compact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["errand_id", "mode", "outcome", "dollars_lost", "overcharge_usd", "exposed", "amount_charged_cents", "scams_fallen_for"],
+      "properties": {
+        "errand_id": {"type": "string"},
+        "mode": {"type": "string"},
+        "outcome": {"type": "string"},
+        "dollars_lost": {"type": "number"},
+        "overcharge_usd": {"type": "number"},
+        "exposed": {"type": "boolean"},
+        "amount_charged_cents": {"type": "integer"},
+        "scams_fallen_for": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

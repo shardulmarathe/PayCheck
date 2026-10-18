@@ -8,7 +8,7 @@ This repository is private.
 | --- | --- |
 | `gym/` | Fake stores, trick specs, labels, the frozen test set, and the local shop server |
 | `train/` | Training and eval (another agent) |
-| `shopper/` | Browser Use shopper, with and without the guard |
+| `shopper/` | Browser Use shopper, with and without the guard. `python -m shopper.run --mock` runs offline |
 | `web/` | Showcase site |
 | `runs/` | JSON run data the showcase site reads |
 | `data/` | Yada dark-pattern strings and the frozen test pages |
@@ -33,7 +33,10 @@ python -m gym.train --round 1 --n-train 1500 --n-dev 300
 python -m gym.train --round 2 --n-train 1500 --n-dev 300
 python -m gym.render_specs --specs-dir DIR --out data/attacker-round2 --source attacker-round2
 python -m gym.serve --port 8765
+python -m shopper.run --errand all --mode both --mock --guard-backend mock
 ```
+
+Mock shopper runs are written to `runs/shopper/synthetic/` and are not site data. Real runs (a live model and, when guarded, an HTTP guard) go to `runs/shopper/`.
 
 `make testset` does not rewrite the committed files. `python -m gym.testset --write` does, and should be a no-op diff when the font and browser match.
 

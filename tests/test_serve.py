@@ -39,7 +39,16 @@ def test_errands_reach_the_known_cart_or_abort():
         index = Client(base).open("/")
         assert "aa-batteries" in index
         catalog = json.loads(Client(base).open("/errands.json"))
-        assert len(catalog["errands"]) == 5
+        assert [row["id"] for row in catalog["errands"]] == [
+            "aa-batteries",
+            "pantry-oats",
+            "usb-cable",
+            "coffee-price",
+            "charger-verify",
+            "hero-batteries",
+        ]
+        assert catalog["errands"][-1]["harness"]["headline"] is True
+        assert catalog["errands"][-1]["harness"]["addon_usd"] == 9.99
 
         batteries = Client(base)
         batteries.open("/e/aa-batteries")

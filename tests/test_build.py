@@ -332,3 +332,25 @@ def test_errand_quotes_match_the_correct_cart():
             assert quote_cents(errand, state) == 1200
         if errand["id"] == "coffee-price":
             assert quote_cents(errand, state) == 1249
+
+
+def test_headline_checkbox_addon_is_in_the_checkout_total():
+    from gym.errands import HEADLINE_ERRANDS
+
+    errand = HEADLINE_ERRANDS[0]
+    state = ShopState(errand_id=errand["id"])
+    add_to_cart(state, errand)
+    assert [item["sku"] for item in state.items] == ["AA-12"]
+    checkout = spec_for(errand, state, "checkout")
+    validate_spec(checkout)
+    assert checkout["page"]["addon"]["checked"] is True
+    assert checkout["page"]["addon"]["price_cents"] == 999
+    html = render_html(checkout)
+    assert 'id="addon" name="addon" value="1" checked' in html
+    assert errand["evidence"] in html
+    assert quote_cents(errand, state) == 2148
+    state.addon_on = False
+    assert quote_cents(errand, state) == 1149
+    cleared = spec_for(errand, state, "checkout")
+    assert cleared["trick"]["attack_type"] == "none"
+    assert "addon" not in cleared["page"]
