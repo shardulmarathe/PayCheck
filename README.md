@@ -10,6 +10,7 @@ This repository is private.
 | `train/` | Training and eval (another agent) |
 | `shopper/` | Browser Use shopper, with and without the guard. `python -m shopper.run --mock` runs offline |
 | `web/` | Showcase site |
+| `visa/` | Signed agent check (Visa Trusted Agent Protocol) and guarded payment |
 | `runs/` | JSON run data the showcase site reads |
 | `data/` | Yada dark-pattern strings and the frozen test pages |
 
@@ -34,6 +35,7 @@ python -m gym.train --round 2 --n-train 1500 --n-dev 300
 python -m gym.render_specs --specs-dir DIR --out data/attacker-round2 --source attacker-round2
 python -m gym.serve --port 8765
 python -m shopper.run --errand all --mode both --mock --guard-backend mock
+python -m visa.demo
 ```
 
 Mock shopper runs are written to `runs/shopper/synthetic/` and are not site data. Real runs (a live model and, when guarded, an HTTP guard) go to `runs/shopper/`.
@@ -75,3 +77,12 @@ Content hash (SHA-256, see `gym/schema/README.md`):
 Round-1 train and dev specs are `gym/rounds/r1/train.jsonl` and `gym/rounds/r1/dev.jsonl`. Shortcut-gate results for the test set and that round are in `gym/audit/shortcut_report.json`. The test token probe is 0.4236 and the test structure probe is 0.1362. Round-1 token AUCs are above the 0.65 gate (train 0.9582, dev 0.8208) and are listed there as known limitations.
 
 Schemas, the label row, and the guard output contract are in `gym/schema/README.md`.
+
+## Signed agent check (Visa Trusted Agent Protocol)
+
+The agent signs checkout requests. The demo store checks the signature, then `pay()` calls the guard at `SURESHOP_CHECK_URL` with gym reader text (including the advertised item and price) and only then submits a payment. A block logs the trick and evidence and does not pay. A guard error, including a timeout (`SURESHOP_GUARD_TIMEOUT_S`, default 60s), does not pay and is recorded as `guard error`. The demo processor is labeled `provenance: mock`.
+
+```bash
+python -m visa.demo
+python -m visa.demo --check-url "$SURESHOP_CHECK_URL"
+```

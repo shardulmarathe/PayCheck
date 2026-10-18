@@ -18,3 +18,9 @@ data/attacker-round*/
 runs/shopper/synthetic/
 runs/shopper/ledger.json
 runs/shopper/ledger.json.tmp
+
+# Private keys. Demo agent keys are generated in memory.
+*.pem
+*.p12
+*.key
+runs/visa/*.json
