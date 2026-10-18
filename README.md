@@ -16,7 +16,7 @@ All numbers below come from two checked files: `REPORT.md` (the calibrated-thres
 | PayCheck guard (r4), no threshold | 0.740 [0.673, 0.799] | 88 / 150 | 0 / 150 |
 | Claude Haiku 5.5 | 0.766 | 103 / 150 | 16 / 150 |
 
-The calibrated guard is level with Claude Haiku 5.5 on F1: the paired bootstrap difference is +0.010, 95% CI −0.035 to +0.056, which includes 0. Where it differs is false blocks: 0 of 150 honest checkouts against Haiku 5.5's 16 of 150.
+The calibrated guard is level with Claude Haiku 5.5 on F1: the paired bootstrap difference is +0.010, 95% CI −0.035 to +0.056, which includes 0. Where it differs is false blocks: 0 of 150 honest checkouts against Haiku 5.5's 16 of 150. It even catches some trick types it never saw in training.
 
 **Browser Use shoppers.** 1,140 real AI-shopper runs across four batches. In the three batches that used the shipped r4 guard, shoppers on trick pages paid for the trick or handed over card details 133 of 238 times without the guard and 18 of 234 times with it. With the guard, 3 of 88 honest checkouts were wrongly stopped.
 
