@@ -3,6 +3,7 @@ name = "paycheck"
 version = "0.1.0"
 description = "PayCheck gym: fake stores, trick specs, and labeled pages for a shopping-agent guard."
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.11"
 dependencies = [
   "cryptography==41.0.7",
