@@ -150,8 +150,6 @@ export const SITE = {
   /** F1 at the calibrated threshold. */
   accuracyF1: { paycheck: "0.78", haiku: "0.77" },
   accuracyF1Label: "Overall accuracy (F1)",
-  accuracyTrainedWin: "Level with Claude Haiku 5.5, or slightly ahead, on the attack types it was trained on",
-  accuracyTrainedDelta: "+0.07 F1",
   /** Full-load cost: PayCheck $0.1282 vs Claude Haiku 5.5 $0.2248 per 1,000 checks.
    *  Never put a speed figure in the same sentence: the 0.7 s figure is normal load; at full load a typical check took 2.9 s. */
   accuracyCostKicker: "Cost",
@@ -170,7 +168,6 @@ export const SITE = {
   heroVerdict: "Better than Claude Haiku 5.5 for checkout safety.",
   heroReasons: [
     "0 vs 16 honest checkouts blocked (of 150)",
-    "Level with it, or slightly ahead, on the attack types it was trained on",
     "Matches it on overall accuracy (0.78 vs 0.77)",
     "0.7s vs 1.5s on a typical check",
     "Cheaper per check",
@@ -204,15 +201,15 @@ export const SITE = {
   builtTitle: "Built with",
   builtWith: ["Browser Use", "Visa's Trusted Agent Protocol (our implementation)", "Modal", "veri.studio", "Qwen3-4B"],
   futureKicker: "What's next",
-  futureTitle: "What PayCheck learns next.",
-  futureTitles: ["Learns from its own misses", "Reads the whole checkout", "Built into agent frameworks"],
+  futureTitle: "Where PayCheck goes next.",
+  futureTitles: ["In every agent that spends money", "Inside the payment network", "A shared scam immune system"],
   futureItems: [
-    "An attacker that writes new trick pages from the guard's misses, so each round trains on the tricks it got wrong.",
-    "Multi-page context so padded totals and folded-in fees become catchable.",
-    "A default pre-payment hook inside agent frameworks, paired with signed agent identity.",
+    "A default check before payment in every agent framework, so no AI shopper pays without one.",
+    "Banks and card networks screen agent payments at authorization, paired with Visa's signed agent identity.",
+    "PayCheck rides along the whole session coaching the agent, and every new scam caught anywhere trains the next version.",
   ],
   futureDevice: {
-    title: "Runs on your own device",
-    body: "Run on your own device, PayCheck would be faster, cheaper and more secure than a cloud AI check. The checkout page and card details never leave your machine, there's no API bill per check, and no network round trip to wait on. For financial services, that means banks and card networks can screen agent payments without sending customer data to an outside AI company, which keeps sensitive data in-house, simplifies privacy and compliance reviews, and keeps costs flat as checks grow into the millions.",
+    title: "On every phone and laptop",
+    body: "Ships on-device in phones, laptops and browsers, so card details never leave the device",
   },
 };

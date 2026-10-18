@@ -5,7 +5,7 @@ import { Sign } from "./Sign";
 
 /**
  * "Coach" prototype. NOT a shipped feature: labelled Prototype, illustration on a practice store.
- * Honesty (Lauren 9:58): PayCheck judges the PAGE the agent is on at each step (trained on page text, not agent intent);
+ * Honesty: PayCheck judges the PAGE the agent is on at each step (it reads page text, not agent intent);
  * the agent's planned action is only displayed beside it. Trick names reuse the site's existing labels
  * (Protection plan add-on, Surprise final fee). No numbers.
  */

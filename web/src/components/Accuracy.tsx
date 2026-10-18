@@ -83,9 +83,8 @@ export function WinsHero() {
         </div>
       </div>
       <div className="win-row">
-        <TextWin n="03" k="Trained attack types" big="F1, PayCheck over Claude Haiku 5.5, calibrated threshold" num={SITE.accuracyTrainedDelta} />
         <TextWin
-          n="04"
+          n="03"
           k={SITE.accuracyCostKicker}
           num={SITE.accuracyCostDelta}
           unit={SITE.accuracyCostUnit}
@@ -206,14 +205,14 @@ export function FullResults({ models }: { models: ModelEval[] }) {
 
 /**
  * Section 4, Why it's better: one compact band. Heading, then four stat tiles, each fact once, using only
- * approved numbers from lib/copy.ts (heroReasons, accuracyF1, accuracyTrainedWin, accuracyCost*, speedStats).
+ * approved numbers from lib/copy.ts (heroReasons, accuracyF1, accuracyCost*, speedStats).
  * PayCheck's number bold off-white, Haiku's muted. Red stays reserved for tricks and money lost.
  */
 const WHY_TILES = [
   { k: "Safer", ours: "0", theirs: "16", cap: "honest checkouts wrongly blocked (of 150)" },
-  { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "overall accuracy, level or slightly ahead on trained attack types" },
+  { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "overall accuracy" },
   { k: "Cheaper", ours: "$0", theirs: "$0.22", cap: SITE.accuracyCostUnit, note: SITE.accuracyCostNote },
-  { k: "Faster", ours: "0.7s", theirs: "1.5s", cap: "on a typical check" },
+  { k: "Faster", ours: "0.7s", theirs: "1.5s", cap: "on a typical check, on one cloud GPU" },
 ];
 
 export function WhyBetter({ models }: { models: ModelEval[] }) {
