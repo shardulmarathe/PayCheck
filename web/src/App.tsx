@@ -1,22 +1,22 @@
 import { MotionConfig } from "framer-motion";
-import { BackgroundKiosk, neutralScreen, screenFrom } from "./components/BackgroundKiosk";
-import { Footer, TopBar } from "./components/Chrome";
-import { LiftCarrier } from "./components/LiftCarrier";
-import { StoryCarriers } from "./components/StoryCarriers";
-import { IntroProvider, useIntroPhase } from "./components/motion/Intro";
+import { TopBar } from "./components/Chrome";
+import { IntroProvider } from "./components/motion/Intro";
+import { ScanCursor } from "./components/motion/ScanCursor";
+import { useSectionReveal } from "./hooks/useSectionReveal";
 import { NavProvider, useNav } from "./components/motion/Nav";
 import { ProgressHairline } from "./components/motion/ProgressHairline";
 import { SmoothScroll } from "./components/motion/SmoothScroll";
 import { getDataset } from "./data/dataset";
 import { EASE, ENTER } from "./lib/motion";
-import { BrowserUse } from "./components/BrowserUse";
+import { Trained, WhyBetter } from "./components/Accuracy";
+import { Evidence } from "./components/Evidence";
+import { HowItWorks } from "./components/HowItWorks";
+import { SeeItWork } from "./components/RunTest";
+import { Coach } from "./components/Coach";
 import { VisaSection } from "./components/VisaTrace";
-import { Benchmarks } from "./pages/Benchmarks";
 import { Demo } from "./pages/Demo";
-import { DesignProcess } from "./pages/DesignProcess";
 import { Future } from "./pages/Future";
-import { TABS, type TabId } from "./hooks/useRoute";
-import type { UpsellReplay } from "./lib/types";
+import { TABS } from "./hooks/useRoute";
 
 const data = getDataset();
 
@@ -36,64 +36,49 @@ export function App() {
 
 function Site() {
   const { arriving } = useNav();
-  const phase = useIntroPhase();
-  const upsell = data.shown.replays
-    ? data.replays.find((replay): replay is UpsellReplay => replay.scene === "upsell")
-    : undefined;
-  const guard = data.models.find((model) => model.emphasis);
-  const screen = upsell
-    ? screenFrom(upsell, data.example.replays, data.shown.benchmarks ? (guard?.catch_rate ?? null) : null)
-    : neutralScreen();
-  const tabs: { id: TabId; href: string; label: string }[] = [];
-  for (const tab of TABS) {
-    if (tab.id === "benchmarks" && !data.shown.benchmarks) continue;
-    if (tab.id === "design" && data.browser_use.runs.length) {
-      tabs.push({ id: "browser", href: "#browser-use", label: "Browser Use" });
-    }
-    if (tab.id === "design" && data.visa.length) {
-      tabs.push({ id: "visa", href: "#visa", label: "Visa" });
-    }
-    tabs.push(tab);
-  }
-  const dimmed = phase === "catch";
+  const tabs = TABS.filter((tab) => tab.id !== "visa" || data.visa.length > 0);
+  const arrive = (id: string) => (arriving === id ? "1" : undefined);
+  useSectionReveal();
 
   return (
     <>
       <a className="skip" href="#content">
         Skip to content
       </a>
-      <BackgroundKiosk screen={screen} />
+      <ScanCursor />
       <ProgressHairline />
       <TopBar tabs={tabs} />
-      <main id="content" className="page" tabIndex={-1} style={{ opacity: dimmed ? 0.28 : 1 }}>
-        <section id="demo" data-tab="demo" data-arrive={arriving === "demo" ? "1" : undefined}>
+      <main id="content" className="page v10 flow18" tabIndex={-1}>
+        <section id="demo" data-tab="demo" data-arrive={arrive("demo")} aria-label="The problem">
+          <Evidence />
+        </section>
+        <section id="paycheck" data-tab="paycheck" data-arrive={arrive("paycheck")}>
           <Demo data={data} />
         </section>
-        {data.shown.benchmarks ? (
-          <section id="benchmarks" data-tab="benchmarks" data-arrive={arriving === "benchmarks" ? "1" : undefined}>
-            <Benchmarks data={data} />
-          </section>
-        ) : null}
-        {data.browser_use.runs.length ? (
-          <section id="browser-use" data-tab="browser" data-arrive={arriving === "browser" ? "1" : undefined}>
-            <BrowserUse data={data.browser_use} />
-          </section>
-        ) : null}
+        <section id="how-it-works" data-tab="how" data-arrive={arrive("how")}>
+          <HowItWorks />
+        </section>
+        <section id="why" data-tab="why" data-arrive={arrive("why")}>
+          <WhyBetter models={data.models} />
+        </section>
+        <section id="see-it-work" data-tab="see" data-arrive={arrive("see")}>
+          <SeeItWork />
+        </section>
+        <section id="coach" data-tab="coach" data-arrive={arrive("coach")}>
+          <Coach />
+        </section>
+        <section id="trained" data-tab="trained" data-arrive={arrive("trained")}>
+          <Trained />
+        </section>
         {data.visa.length ? (
-          <section id="visa" data-tab="visa" data-arrive={arriving === "visa" ? "1" : undefined}>
+          <section id="visa" data-tab="visa" data-arrive={arrive("visa")}>
             <VisaSection traces={data.visa} />
           </section>
         ) : null}
-        <section id="design-process" data-tab="design" data-arrive={arriving === "design" ? "1" : undefined}>
-          <DesignProcess data={data} />
-        </section>
-        <section id="future" data-tab="future" data-arrive={arriving === "future" ? "1" : undefined}>
+        <section id="future" data-tab="future" data-arrive={arrive("future")}>
           <Future data={data} />
         </section>
-        <Footer note={data.footer_note} />
       </main>
-      {upsell ? <LiftCarrier label={upsell.scene_view.popup_fine_print} /> : null}
-      <StoryCarriers />
     </>
   );
 }

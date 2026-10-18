@@ -1,0 +1,50 @@
+/* ───────────── Round 17 type pass (Shardul 8:12): less "AI" ─────────────
+   Display: Space Grotesk (self-hosted, @fontsource), tight tracking, real weight contrast.
+   Body and most labels: IBM Plex Sans, sentence case, normal tracking.
+   Mono (IBM Plex Mono) only for small form-field labels and IDs, tracking <= 0.04em.
+   Caps only on the stamp/tag verdict word (HELD / CLEARED / SHIPPED). Loaded last. */
+:root {
+  --display: "Space Grotesk", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono-real: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Every label that used the mono now reads in the sans; true form fields opt back in with --mono-real. */
+  --mono: var(--sans);
+}
+
+/* 1. No CSS caps, no wide tracking anywhere by default. */
+body *, body *::before, body *::after { text-transform: none !important; letter-spacing: 0 !important; }
+
+/* 2. Display headings: tight, heavy-vs-light contrast. */
+body :is(h1, h2, .h1, .h2, .hero11-head, .cp-title, .ev-title, .built-title, .how-title, .tx-title, .st-title) {
+  font-family: var(--display) !important; font-weight: 700 !important; letter-spacing: -0.03em !important;
+}
+body :is(h3, .h3, .rs-pane-title, .ev-h, .tl-st-t, .tl-io-t, .tl-card-t, .pl-title, .win-cost-big, .acc-metric) {
+  font-family: var(--display) !important; font-weight: 500 !important; letter-spacing: -0.015em !important;
+}
+/* Big figures in the display face, tabular. */
+body :is(.win-big, .win-cost-num, .tl-core-n, .ev-stat b, .race-time, .sbar-v, .si-chip-num, .hero-count, .hero-compare b) {
+  font-family: var(--display) !important; font-weight: 500 !important; letter-spacing: -0.02em !important; font-variant-numeric: tabular-nums;
+}
+/* Section signs: sentence case in the display face, red number kept. */
+body .cp-sign { font-family: var(--display) !important; font-weight: 500 !important; font-size: 17px !important; letter-spacing: -0.01em !important; }
+body .wordmark { font-family: var(--display) !important; font-weight: 700 !important; letter-spacing: -0.02em !important; font-size: 18px !important; }
+body .nav a, body .menu-button { font-size: 14px !important; }
+
+/* 3. Labels and list items: sentence case in the sans, readable size. */
+body :is(.label, .pl-kicker, .cp-doc-head, .ts-rail li, .ts-form-t, .tl-core-k, .tl-st-head, .tl-viz-read, .ev-why-k, .ev-stat span, .race-head, .race-label, .tx-lane, .rs-kicker, .tap-label, .sbars-k) {
+  font-family: var(--sans) !important; font-size: max(13px, 0.92em);
+}
+body .ts-rail li { font-size: 15px !important; }
+body .pl-kicker { font-size: 15px !important; font-weight: 500; }
+
+/* 4. Mono: stamped-form fields and IDs only. */
+body :is(.ts-meta dt, .ts-meta dd, .cp-n, .cp-tag-label, .rs-tag-label, .sk-bar span, .sk-field em, .tl-io-k, .tl-st-head em, .ev-cite, .illus-tag, .tx-verdict-meta, .ts-rail li em) {
+  font-family: var(--mono-real) !important; letter-spacing: 0.02em !important;
+}
+body .ev-cite a { font-family: var(--sans) !important; }
+
+/* 5. The one caps element per view: the stamp verdict. */
+body :is(.cp-tag-verdict, .rs-tag-verdict) { font-family: var(--display) !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; }
+/* Replay / Try-it / shield labels: their mono token reads in the sans too. */
+body :is(.rs, .tx, .si) { --rs-mono: var(--sans); }
+body .tl-st-head { font-size: 11px !important; }
+body .tl-st-head em { font-size: 10.5px !important; }

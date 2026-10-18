@@ -1,28 +1,33 @@
 import { useEffect, useState } from "react";
 
 export const TABS = [
-  { id: "demo", href: "#demo", label: "Demo" },
-  { id: "benchmarks", href: "#benchmarks", label: "Benchmarks" },
-  { id: "design", href: "#design-process", label: "Design process" },
-  { id: "future", href: "#future", label: "Future improvements" },
+  { id: "demo", href: "#demo", label: "The problem" },
+  { id: "paycheck", href: "#paycheck", label: "Meet PayCheck" },
+  { id: "how", href: "#how-it-works", label: "How it works" },
+  { id: "why", href: "#why", label: "Why it's better" },
+  { id: "see", href: "#see-it-work", label: "See it work" },
+  { id: "coach", href: "#coach", label: "Coach" },
+  { id: "trained", href: "#trained", label: "How we trained it" },
+  { id: "visa", href: "#visa", label: "Payments" },
+  { id: "future", href: "#future", label: "What's next" },
 ] as const;
 
-export type TabId = (typeof TABS)[number]["id"] | "browser" | "visa";
+export type TabId = (typeof TABS)[number]["id"];
 
-/** Element id the tab glides to. The design tab's id stays `design` for the observer. */
+export const TAB_IDS: readonly TabId[] = TABS.map((tab) => tab.id);
+
+/** Element id the tab glides to. */
 export function sectionId(tab: TabId): string {
-  if (tab === "design") return "design-process";
-  if (tab === "browser") return "browser-use";
-  return tab;
+  return TABS.find((t) => t.id === tab)!.href.slice(1);
 }
 
 export function tabFromHash(hash: string): TabId {
-  const path = hash.replace(/^#/, "").replace(/\/$/, "") || "/";
-  if (path === "/benchmarks" || path === "benchmarks") return "benchmarks";
-  if (path === "/browser-use" || path === "browser-use" || path === "/browser" || path === "browser") return "browser";
-  if (path === "/visa" || path === "visa") return "visa";
-  if (path === "/design-process" || path === "design-process" || path === "/design" || path === "design") return "design";
-  if (path === "/future" || path === "future" || path === "/future-improvements" || path === "future-improvements") return "future";
+  const path = hash.replace(/^#/, "").replace(/^\//, "").replace(/\/$/, "");
+  const hit = TABS.find((t) => t.href.slice(1) === path || t.id === path);
+  if (hit) return hit.id;
+  if (path === "accuracy" || path === "results") return "why";
+  if (path === "try-it" || path === "try") return "see";
+  if (path === "payments") return "visa";
   return "demo";
 }
 

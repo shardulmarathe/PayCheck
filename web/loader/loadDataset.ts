@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { lostCounterCopy, subscriptionCopy, trimNum } from "../src/lib/format";
+import { lostCounterCopy, subscriptionCopy } from "../src/lib/format";
 import { lossWindow, visualAt } from "../src/lib/replay";
 import type {
   Dataset,
@@ -76,12 +76,17 @@ function normalizeModel(raw: unknown, notes: string[], file: string): ModelEval 
   const id = str(raw.id);
   const model = str(raw.model);
   const catchRate = num(raw.catch_rate);
-  const latency = num(raw.latency_ms_median);
-  const cost = num(raw.cost_per_1k_checks_usd);
-  if (!id || !model || catchRate == null || latency == null || cost == null) {
-    notes.push(`${file} is missing id, model, catch_rate, latency_ms_median, or cost_per_1k_checks_usd`);
+  /** Per-model latency is optional: the site shows no per-model speed figures. */
+  const latency = raw.latency_ms_median === null ? null : (num(raw.latency_ms_median) ?? null);
+  if (!id || !model || catchRate == null) {
+    notes.push(`${file} is missing id, model, or catch_rate`);
     return undefined;
   }
+  const d = isRecord(raw.display) ? raw.display : undefined;
+  const display =
+    d && str(d.f1) && str(d.catch) && str(d.false_blocks) && str(d.unseen)
+      ? { f1: str(d.f1)!, catch: str(d.catch)!, false_blocks: str(d.false_blocks)!, unseen: str(d.unseen)! }
+      : undefined;
   const pages = num(raw.pages) ?? 300;
   const ciLow = num(raw.ci_low);
   const ciHigh = num(raw.ci_high);
@@ -101,7 +106,6 @@ function normalizeModel(raw: unknown, notes: string[], file: string): ModelEval 
         false_block_rate: cell.false_block_rate === null ? null : num(cell.false_block_rate),
         evidence_match: cell.evidence_match === null ? null : num(cell.evidence_match),
         latency_ms: cell.latency_ms === null ? null : num(cell.latency_ms),
-        cost_per_1k_checks_usd: cell.cost_per_1k_checks_usd === null ? null : num(cell.cost_per_1k_checks_usd),
       };
     }
   }
@@ -117,15 +121,16 @@ function normalizeModel(raw: unknown, notes: string[], file: string): ModelEval 
     false_block_rate: raw.false_block_rate === null ? null : (num(raw.false_block_rate) ?? null),
     evidence_match: raw.evidence_match === null ? null : (num(raw.evidence_match) ?? null),
     latency_ms_median: latency,
-    cost_per_1k_checks_usd: cost,
     ci_low: ci?.low ?? null,
     ci_high: ci?.high ?? null,
     catch_rate_by_attack: numMap(raw.catch_rate_by_attack) ?? {},
     by_attack: byAttack,
+    alongside: raw.alongside === true,
+    display,
   };
 }
 
-function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; claim?: "within" | "beats"; catch_pct: number | null; cost_ratio: number | null; point_gap: number | null } | "withheld" | undefined {
+function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; claim?: "within" | "beats"; catch_pct: number | null } | "withheld" | undefined {
   const evalDir = path.join(runsRoot, "eval");
   const leaderboardPath = path.join(evalDir, "leaderboard.json");
   const leaderboard = readJson(leaderboardPath, notes);
@@ -136,14 +141,10 @@ function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; c
   const rawModels: unknown[] = [];
   let claim: "within" | "beats" | undefined;
   let catchPct: number | null = null;
-  let costRatio: number | null = null;
-  let pointGap: number | null = null;
   if (publishable(leaderboard) && Array.isArray(leaderboard.models)) {
     rawModels.push(...leaderboard.models);
     if (leaderboard.claim === "beats" || leaderboard.claim === "within") claim = leaderboard.claim;
     catchPct = num(leaderboard.catch_pct) ?? null;
-    costRatio = num(leaderboard.cost_ratio) ?? null;
-    pointGap = num(leaderboard.point_gap) ?? null;
   } else if (Array.isArray(leaderboard)) {
     rawModels.push(...leaderboard);
   }
@@ -167,7 +168,7 @@ function loadModels(runsRoot: string, notes: string[]): { models: ModelEval[]; c
   const models = rawModels
     .map((raw, index) => normalizeModel(raw, notes, `eval model ${index}`))
     .filter((model): model is ModelEval => !!model);
-  return models.length ? { models, claim, catch_pct: catchPct, cost_ratio: costRatio, point_gap: pointGap } : undefined;
+  return models.length ? { models, claim, catch_pct: catchPct } : undefined;
 }
 
 function normalizeRound(raw: unknown): TrainingRound | undefined {
@@ -339,24 +340,15 @@ function applyDerived(ds: Dataset): Dataset {
   if (testSet) testSet.title = `${testPages} pages`;
 
   const claude = ds.models.find((model) => model.id === "claude" || /claude/i.test(model.model));
-  if (!ds.example.eval && guard && claude && guard.cost_per_1k_checks_usd > 0) {
+  if (!ds.example.eval && guard && claude) {
     if (ds.benchmarks.catch_pct == null) ds.benchmarks.catch_pct = guard.catch_rate;
-    if (ds.benchmarks.cost_ratio == null) ds.benchmarks.cost_ratio = claude.cost_per_1k_checks_usd / guard.cost_per_1k_checks_usd;
-    if (ds.benchmarks.point_gap == null) ds.benchmarks.point_gap = guard.catch_rate - claude.catch_rate;
-    const ratio = ds.benchmarks.cost_ratio;
-    const gap = ds.benchmarks.point_gap;
-    if (ratio != null && gap != null) {
-      const signed = `${gap > 0 ? "+" : gap < 0 ? "-" : ""}${trimNum(Math.abs(gap))}`;
-      ds.benchmarks.cost_annotation = `1/${trimNum(ratio)} the cost · ${signed} pts`;
-      ds.benchmarks.cost_placeholder = false;
-    }
   }
   return ds;
 }
 
 /**
  * Real slice scores come from runs/eval/results.json (or runs/results.json).
- * The checked-in mock is synthetic, so its scores, claims, gaps, and costs stay hidden.
+ * The checked-in mock is synthetic, so its scores, claims, and gaps stay hidden.
  */
 function loadResults(repoRoot: string, notes: string[]): ResultsView {
   const mockPath = path.join(repoRoot, "web", "loader", "results.mock.json");
@@ -415,15 +407,27 @@ function hideSynthetic(ds: Dataset, show: boolean, real: { models: boolean; roun
     if (!real.models) ds.models = [];
     if (!ds.shown.benchmarks) {
       ds.benchmarks.catch_pct = null;
-      ds.benchmarks.cost_ratio = null;
-      ds.benchmarks.point_gap = null;
-      ds.benchmarks.cost_annotation = "";
       ds.results = EMPTY_RESULTS;
     }
   }
   if (!ds.shown.replays) ds.replays = [];
   if (!ds.shown.training) ds.rounds = [];
   if (!ds.shown.tally) ds.tally.items = [];
+}
+
+/**
+ * Dev-only fixtures: 0142 is the Battery Care+ upsell illustration, 0207 a copycat replay that was never recorded.
+ * A production build drops them (and any synthetic replay) no matter what NEXT_PUBLIC_SHOW_EXAMPLES says.
+ */
+export const DEV_ONLY_REPLAYS = ["0142", "0207"];
+
+function stripDevOnlyReplays(ds: Dataset): void {
+  if (process.env.NODE_ENV !== "production") return;
+  ds.replays = ds.replays.filter((replay) => !replay.synthetic && !DEV_ONLY_REPLAYS.includes(replay.id));
+  if (!ds.replays.length) ds.shown.replays = false;
+  if (ds.replays.some((replay) => replay.synthetic || DEV_ONLY_REPLAYS.includes(replay.id))) {
+    throw new Error("a dev-only replay (0142 or 0207) leaked into a production build");
+  }
 }
 
 /** Build-time dataset. Real runs/ JSON replaces a section; synthetic sections are omitted unless examples are on. */
@@ -449,8 +453,6 @@ export function loadDataset(repoRoot: string): Dataset {
       real.models = true;
       if (models.claim) ds.benchmarks.claim = models.claim;
       if (models.catch_pct != null) ds.benchmarks.catch_pct = models.catch_pct;
-      if (models.cost_ratio != null) ds.benchmarks.cost_ratio = models.cost_ratio;
-      if (models.point_gap != null) ds.benchmarks.point_gap = models.point_gap;
     }
     if (rounds && rounds !== "withheld") {
       ds.rounds = rounds;
@@ -472,6 +474,7 @@ export function loadDataset(repoRoot: string): Dataset {
   }
 
   hideSynthetic(ds, show, real);
+  stripDevOnlyReplays(ds);
   if (!show && ds.replays.some((replay) => replay.synthetic)) {
     throw new Error("synthetic replays leaked into a build with examples hidden");
   }

@@ -16,6 +16,7 @@ export {
   SRGBColorSpace,
   UnsignedByteType,
   VSMShadowMap,
+  AdditiveBlending,
 } from "three/src/constants.js";
 
 export { Clock } from "three/src/core/Clock.js";
@@ -42,6 +43,7 @@ export { LineSegments } from "three/src/objects/LineSegments.js";
 
 export { AmbientLight } from "three/src/lights/AmbientLight.js";
 export { DirectionalLight } from "three/src/lights/DirectionalLight.js";
+export { PointLight } from "three/src/lights/PointLight.js";
 
 export { MeshBasicMaterial } from "three/src/materials/MeshBasicMaterial.js";
 export { MeshStandardMaterial } from "three/src/materials/MeshStandardMaterial.js";
@@ -50,6 +52,7 @@ export { ShaderMaterial } from "three/src/materials/ShaderMaterial.js";
 
 export { BoxGeometry } from "three/src/geometries/BoxGeometry.js";
 export { PlaneGeometry } from "three/src/geometries/PlaneGeometry.js";
+export { CircleGeometry } from "three/src/geometries/CircleGeometry.js";
 export { EdgesGeometry } from "three/src/geometries/EdgesGeometry.js";
 export { CanvasTexture } from "three/src/textures/CanvasTexture.js";
 

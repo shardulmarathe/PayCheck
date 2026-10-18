@@ -57,9 +57,9 @@ python -m pytest -q tests
 | `gym/` | Fake stores, trick specs, labels, test-set tooling, and the local shop server |
 | `train/` | Training and eval on Veri, local GGUF conversion, and offline scoring |
 | `shopper/` | Browser Use shopper, with and without the guard. `python -m shopper.run --mock` runs offline |
-| `web/` | Showcase site |
+| `web/` | PayCheck site (live at paycheck-guard.vercel.app) |
 | `visa/` | Signed agent check (our implementation of Visa's Trusted Agent Protocol) and guarded mock payment |
-| `runs/` | JSON run data the showcase site reads |
+| `runs/` | JSON run data the site loader can read |
 | `data/` | Yada dark-pattern strings (the frozen test pages are held back) |
 
 Python 3.11 or newer. Generation was checked with 3.12, Playwright 1.64.0, and Liberation Sans.
@@ -131,19 +131,17 @@ python -m visa.demo
 python -m visa.demo --check-url "$SURESHOP_CHECK_URL"
 ```
 
-## Showcase site (web/)
+## Site (web/)
 
-The static site lives in `web/`. The user-facing product name is PayCheck (`PRODUCT_NAME` in `web/src/lib/product.ts`). This folder is the early showcase build; the `web` npm package name is still `guard-gym`.
+`web/` is the source of the live PayCheck site, https://paycheck-guard.vercel.app. It is a Vite + React static site plus one server function, `web/api/check.ts`, which backs the "Try it" panel. The user-facing product name is `PRODUCT_NAME` in `web/src/lib/product.ts`; the npm package is `paycheck-site`.
 
 ```bash
 cd web && npm install && npm run dev
 cd web && npm ci && npm run build
 ```
 
-`npm run dev` serves the site on `0.0.0.0` and `$PORT` (or 5173). `npm run build` typechecks and writes static files to `web/dist`.
+`npm run dev` serves the site on `0.0.0.0` and `$PORT` (or 5173). `npm run build` typechecks and writes static files to `web/dist`. Site copy lives in `web/src/lib/copy.ts`; data shapes are in `web/DATA.md`.
 
-The Demo landing is three beats: the tagline with a lazy React Three Fiber checkout kiosk, a Replay 1 / Replay 2 switch in one slot, and one comparison line. The kiosk turns with scroll, pauses offscreen, and falls back to `kiosk-hero-crop.webp` for reduced motion, viewports under 768px, and no WebGL. Tab changes and the replay switch use a shutter cut. Latency readouts go through `formatLatency` and stay `[N] ms` until a real log exists. The Benchmarks headline and the comparison caption live in `web/src/lib/copy.ts`. The site is still a static Vite export.
+`web/api/check.ts` only forwards a fixed allowlist of recorded demo pages to the guard; visitor text is never forwarded. It reads two server-only environment variables, `PAYCHECK_GUARD_URL` and `PAYCHECK_GUARD_TOKEN`, set in the Vercel project settings (never `VITE_`-prefixed). Without them the panel plays the recorded results.
 
-The loader reads `runs/` at dev and build time and falls back, per section, to fixtures in `web/loader/fixtures.ts`. Blocks still on fixtures show an **example data** label. Drop real JSON in `runs/eval/`, `runs/training/`, `runs/replays/`, and `runs/tally.json` and the matching label goes away. Shapes are in `web/DATA.md`. `GUARD_GYM_FORCE_FIXTURES=1` keeps the fixtures even when `runs/` has files. There is no analytics and no live API.
-
-Vercel: import this repo, set Root Directory to `web`, framework preset Vite, build command `npm run build`, output directory `dist`. No environment variables are required.
+Vercel: import this repo, set Root Directory to `web`, framework preset Vite, build command `npm run build`, output directory `dist`.

@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { easeInOutCubic, GLIDE, NAV_H } from "../../lib/motion";
-import { PRODUCT_NAME } from "../../lib/product";
-import { kioskPose, type KioskMode } from "../kioskPose";
+import { PRODUCT_NAME, SITE_TITLE } from "../../lib/product";
+import { kioskPose } from "../kioskPose";
 import { usePrefersReducedMotion } from "../../hooks/useReplay";
-import { sectionId, tabFromHash, type TabId } from "../../hooks/useRoute";
+import { sectionId, tabFromHash, TABS, TAB_IDS, type TabId } from "../../hooks/useRoute";
 import { useLenis } from "./SmoothScroll";
 
 interface NavValue {
@@ -24,12 +24,6 @@ export function useNav(): NavValue {
   return useContext(NavContext);
 }
 
-function modeFor(tab: TabId): KioskMode {
-  if (tab === "benchmarks" || tab === "future") return tab;
-  if (tab === "design") return "design";
-  return "demo";
-}
-
 export function NavProvider({ children }: { children: ReactNode }) {
   const lenis = useLenis();
   const reduced = usePrefersReducedMotion();
@@ -48,7 +42,7 @@ export function NavProvider({ children }: { children: ReactNode }) {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         const id = hit?.target.getAttribute("data-tab");
-        if (id === "demo" || id === "benchmarks" || id === "browser" || id === "visa" || id === "design" || id === "future") setActive(id);
+        if (id && (TAB_IDS as readonly string[]).includes(id)) setActive(id as TabId);
       },
       { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] },
     );
@@ -78,45 +72,16 @@ export function NavProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const tab = active === "demo" ? null : active;
-    const label =
-      tab === "benchmarks"
-        ? "Benchmarks"
-        : tab === "browser"
-          ? "Browser Use"
-          : tab === "visa"
-            ? "Visa"
-            : tab === "design"
-              ? "Design process"
-              : tab === "future"
-                ? "Future improvements"
-                : "";
-    document.title = label ? `${PRODUCT_NAME} · ${label}` : PRODUCT_NAME;
+    const label = tab ? (TABS.find((entry) => entry.id === tab)?.label ?? "") : "";
+    document.title = label ? `${PRODUCT_NAME} · ${label}` : SITE_TITLE;
   }, [active]);
 
   useEffect(() => {
-    if (reduced) {
-      kioskPose.mode = "demo";
-      kioskPose.modeFrom = "demo";
-      kioskPose.modeMix = 1;
-      kioskPose.invalidate();
-      return;
-    }
-    const next = modeFor(active);
-    if (next === kioskPose.mode && kioskPose.modeMix >= 1) return;
-    kioskPose.modeFrom = kioskPose.mode;
-    kioskPose.mode = next;
-    kioskPose.modeMix = 0;
-    let start = 0;
-    let frame = 0;
-    const step = (now: number) => {
-      if (!start) start = now;
-      kioskPose.modeMix = Math.min(1, (now - start) / 250);
-      kioskPose.invalidate();
-      if (kioskPose.modeMix < 1) frame = requestAnimationFrame(step);
-    };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [active, reduced]);
+    kioskPose.mode = "demo";
+    kioskPose.modeFrom = "demo";
+    kioskPose.modeMix = 1;
+    kioskPose.invalidate();
+  }, []);
 
   const glideTo = (id: TabId) => {
     const hash = sectionId(id);

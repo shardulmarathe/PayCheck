@@ -118,31 +118,37 @@ test("browser use aggregates rates and drops scripted runs when examples are off
   assert.equal(shown.runs.some((run) => run.provenance === "Scripted"), true);
 });
 
-test("visa trace keeps the four stages and hides a missing one", () => {
-  const traces = [
-    {
-      synthetic: false,
-      id: "checkout-1",
-      signed_agent_request: { nonce: "abc" },
-      store_signature_check: { ok: true },
-      guard_check: { verdict: "block" },
-      decision: "block",
-    },
-  ];
+test("visa trace reads whitelisted scene fields only, in demo order, and never raw request fields", () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "visa-"));
-  fs.writeFileSync(path.join(root, "trace.json"), JSON.stringify(traces[0]));
-  fs.writeFileSync(path.join(root, "partial.json"), JSON.stringify({ signed_agent_request: { nonce: "x" }, decision: "pay" }));
-  fs.writeFileSync(path.join(root, "example.json"), JSON.stringify({ synthetic: true, decision: "block" }));
-  const hidden = loadVisa([root], false);
-  const full = hidden.find((trace) => trace.id === "checkout-1");
-  const partial = hidden.find((trace) => trace.id === "partial");
-  assert.equal(hidden.length, 2);
-  assert.deepEqual(full?.stages.map((stage) => stage.label), [
-    "Signed agent request",
-    "Store signature check",
-    "Guard check",
-    "Block",
-  ]);
-  assert.deepEqual(partial?.stages.map((stage) => stage.label), ["Signed agent request", "Pay"]);
-  assert.equal(hidden.some((trace) => trace.id === "example"), false);
+  fs.writeFileSync(
+    path.join(root, "trace.json"),
+    JSON.stringify({
+      guard: "r4 (8-bit copy)",
+      gate_format: "fixed gate",
+      payment: "mock",
+      scenes: [
+        { title: "Unsigned agent: rejected", store_status: 403, signature: { accepted: false, reason: "missing Signature-Input or Signature" }, paid: false },
+        {
+          title: "Price raised at checkout: blocked",
+          store_status: 200,
+          signature: { accepted: true, key_id: "k1", nonce: "abc", reason: "keyid=abc" },
+          headers: { "Signature-Input": "sig1=();keyid=abc" },
+          url: "http://127.0.0.1:8080/checkout?order=raised",
+          guard: { verdict: "block", trick: "price_change", evidence: "Item $12.49", latency_ms: 700 },
+          paid: false,
+        },
+        { title: "Agent shops the store", store_status: 200, signature: { accepted: true }, paid: false },
+      ],
+    }),
+  );
+  fs.writeFileSync(path.join(root, "example.json"), JSON.stringify({ synthetic: true, scenes: [{ title: "x", signature: { accepted: true } }] }));
+  const traces = loadVisa([root], false);
+  assert.equal(traces.length, 1);
+  const trace = traces[0];
+  assert.equal(trace.footer, "guard: r4 (8-bit copy), fixed gate · mock payment");
+  assert.deepEqual(trace.scenes.map((scene) => scene.title), ["Agent shops the store", "Price raised at checkout: blocked", "Unsigned agent: rejected"]);
+  assert.deepEqual(trace.scenes[1].guard, { verdict: "block", trick: "Price changed", evidence: "Item $12.49" });
+  assert.equal(trace.scenes[1].check.reason, null);
+  const text = JSON.stringify(trace);
+  for (const raw of ["nonce", "key_id", "keyid", "sig1", "127.0.0.1", "8080", "http", "latency"]) assert.equal(text.includes(raw), false, raw);
 });

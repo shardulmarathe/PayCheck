@@ -3,7 +3,7 @@ import type { MetricId } from "./taxonomy";
 
 export interface ModelEval {
   id: string;
-  /** Long name used on latency and cost charts. */
+  /** Long name used on latency charts. */
   model: string;
   /** Short name used as a table header. */
   short: string;
@@ -22,16 +22,18 @@ export interface ModelEval {
   evidence_match: number | null;
   /** Null until a real eval log has a median. The UI then shows "[N] ms". */
   latency_ms_median: number | null;
-  cost_per_1k_checks_usd: number;
   /** Lower end of the 95% confidence interval, catch-rate percent. Null hides the bar. */
   ci_low: number | null;
   /** Upper end of the 95% confidence interval, catch-rate percent. Null hides the bar. */
   ci_high: number | null;
   /** Catch rate 0–100 keyed by attack row id. */
   catch_rate_by_attack: Record<string, number>;
+  /** Shown alongside the headline row, never used to pick. */
+  alongside?: boolean;
+  display?: { f1: string; catch: string; false_blocks: string; unseen?: string };
   /**
    * Optional per-attack series. When a cell is missing, the table shows an em dash
-   * (latency and cost fall back to the model-level figure, because those are per check).
+   * (latency falls back to the model-level figure, because it is per check).
    */
   by_attack?: Record<string, Partial<Record<MetricId, number | null>>>;
 }
@@ -41,7 +43,6 @@ export interface TrainingRound {
   round: number;
   /** Catch rate on tricks like the ones in training, 0–100. */
   catch_seen: number;
-  /** Catch rate on trick types held out of training, 0–100. */
   catch_heldout: number;
 }
 
@@ -159,10 +160,6 @@ interface ReplayBase {
   exposed: boolean;
   /** Unwanted subscription, including shopper `final_cart.subscription`. */
   subscription: boolean;
-  /**
-   * Monthly price when the trap names one. `shopper/schema/replay.json` has no
-   * monthly field, so this stays null unless the showcase replay supplies it.
-   */
   subscription_monthly_usd: number | null;
 }
 
@@ -233,16 +230,13 @@ export interface ExampleFlags {
   tally: boolean;
 }
 
-/** Headline from `runs/r{N}/summary.json` → `test.heldout_template`. Rates are percents. Null hides that slot. */
 export interface HeadlineRates {
-  /** True once a summary file for some round parsed. Fixture catch rates do not fill these slots. */
   from_summary: boolean;
   round: number | null;
   catch_rate: number | null;
   false_block_rate: number | null;
 }
 
-/** One train or dev page from `runs/r{N}/replay.jsonl`. Test pages are not in this file. */
 export interface RoundReplayLine {
   round: number;
   page_id: string;
@@ -259,7 +253,6 @@ export interface RoundReplayLine {
 
 export interface RoundReplay {
   round: number;
-  /** False when this round only had a replay log. */
   has_summary: boolean;
   catch_rate: number | null;
   false_block_rate: number | null;
@@ -289,15 +282,25 @@ export interface BrowserUseResults {
   runs: BrowserUseRun[];
 }
 
-export interface VisaStage {
-  key: "agent_request" | "store_signature" | "guard" | "decision";
-  label: string;
-  text: string;
+/**
+ * One scene of the signed agent check. Only whitelisted, human-readable fields: no key ids,
+ * nonces, tags, signatures, headers, URLs, ports or timings ever reach this type.
+ */
+export interface VisaScene {
+  title: string;
+  /** The store's signed agent check. */
+  check: { accepted: boolean; status: number | null; reason: string | null };
+  /** Null when the guard was not called (browse) or not reached (rejected request). */
+  guard: { verdict: "allow" | "block"; trick: string | null; evidence: string | null } | null;
+  /** Mock payment only. */
+  paid: boolean;
 }
 
 export interface VisaTrace {
   id: string;
-  stages: VisaStage[];
+  heading: string;
+  footer: string;
+  scenes: VisaScene[];
 }
 
 export interface ShownSections {
@@ -305,7 +308,6 @@ export interface ShownSections {
   benchmarks: boolean;
   /** False hides the recorded replays. The landing is then the tagline and the kiosk. */
   replays: boolean;
-  /** False hides the training-round statistic. The design-process page stays. */
   training: boolean;
   /** False drops tally numbers. The tally strip is not drawn. */
   tally: boolean;
@@ -336,7 +338,6 @@ export interface Dataset {
   citations: { kicker: string; title: string; blocks: CitationBlock[] };
   benchmarks: {
     kicker: string;
-    title_lines: string[];
     body: string;
     test_pages: number;
     roster: { label: string; title: string; detail: string }[];
@@ -345,8 +346,6 @@ export interface Dataset {
     heldout_legend: string;
     latency_title: string;
     latency_note: string;
-    cost_kicker: string;
-    cost_headline: string;
     /**
      * "beats" only when the JSON says so. Anything else, including a missing
      * field, renders the "within" headline.
@@ -354,18 +353,6 @@ export interface Dataset {
     claim: "within" | "beats";
     /** Guard catch rate for the headline. Null renders the literal [X]. */
     catch_pct: number | null;
-    /** Claude cost divided by the guard cost. Null renders the literal [N]. */
-    cost_ratio: number | null;
-    /**
-     * Guard catch rate minus Claude's, in points. Positive means the guard is
-     * ahead. Null renders [N] in the headline and [+N] on the gap line.
-     */
-    point_gap: number | null;
-    /** True while [N] and [X] are still literal placeholders. */
-    cost_placeholder: boolean;
-    cost_note: string;
-    cost_annotation: string;
-    cost_axis: string;
     hollow_caption: string;
     attack_kicker: string;
     attack_title: string;
@@ -377,13 +364,11 @@ export interface Dataset {
   rounds: TrainingRound[];
   models: ModelEval[];
   /**
-   * Slice claims. Empty slices and a null cost ratio mean production has no
+   * Slice claims. Empty slices mean production has no
    * publishable results (the checked-in file is synthetic).
    */
   results: ResultsView;
-  /** Held-out template rates from the latest `runs/r{N}/summary.json`. */
   headline: HeadlineRates;
-  /** One entry per round that had a summary or a replay log. */
   round_replay: RoundReplay[];
   browser_use: BrowserUseResults;
   visa: VisaTrace[];
@@ -393,24 +378,14 @@ export interface Dataset {
     body: string;
     sources_label: string;
     sources: { title: string; detail: string }[];
-    feeds_label: string;
     nodes: { n: string; title: string; detail: string; place: "left" | "right" | "bottom" }[];
-    /**
-     * Round index printed in the ring. Null stays the `r[n]` placeholder.
-     * Training-round files do not fill this.
-     */
     round_n: number | null;
-    /**
-     * New-layout test score, the headline number. Null stays `[X]%`.
-     * Never copy a training-round catch rate into this field.
-     */
     new_layout_pct: number | null;
     caught_caption: string;
     steps_kicker: string;
     steps: ProcessStep[];
     plug_kicker: string;
     plug_title_lines: string[];
-    plug_body: string;
     request_label: string;
     request_code: string;
     response_label: string;

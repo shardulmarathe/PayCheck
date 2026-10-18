@@ -1,7 +1,12 @@
-/** User-facing product name. The repo and the npm package stay guard-gym. */
 export const PRODUCT_NAME = "PayCheck";
 
-/** Locked tagline. The line break after the first sentence is part of the lockup. */
-export const TAGLINE_LINES = ["Your agent shops.", "We check the checkout."] as const;
+/** Descriptor, always lower case after the name. */
+export const DESCRIPTOR = "the checkout guard for AI shoppers";
 
-export const TAGLINE = "Your agent shops. We check the checkout.";
+/** Locked tagline. The line break after the first sentence is part of the lockup. */
+export const TAGLINE_LINES = ["Every payment,", "checked first."] as const;
+
+export const TAGLINE = "Every payment, checked first.";
+
+/** Page title and share title. */
+export const SITE_TITLE = `${PRODUCT_NAME}: ${DESCRIPTOR}`;

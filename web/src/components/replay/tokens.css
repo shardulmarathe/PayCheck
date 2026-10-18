@@ -1,0 +1,37 @@
+/* Shared tokens for ReplayStage (.rs) and the Try-it demo (.tx). Fonts vendored, SIL OFL (fonts/LICENSE-*). */
+@font-face { font-family: "RS Grotesk"; font-weight: 400; font-display: swap; src: url("./fonts/space-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "RS Grotesk"; font-weight: 500; font-display: swap; src: url("./fonts/space-grotesk-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "RS Grotesk"; font-weight: 600; font-display: swap; src: url("./fonts/space-grotesk-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "RS Grotesk"; font-weight: 700; font-display: swap; src: url("./fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "RS Mono"; font-weight: 400; font-display: swap; src: url("./fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "RS Mono"; font-weight: 500; font-display: swap; src: url("./fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "RS Mono"; font-weight: 700; font-display: swap; src: url("./fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2"); }
+
+.rs, .tx, .si {
+  --rs-bg: #0a0c0f;
+  --rs-panel: #11141a;
+  --rs-panel-2: #171b22;
+  --rs-line: #232932;
+  --rs-line-2: #323a45;
+  --rs-text: #eef1f5;
+  --rs-text-2: #9aa3ae;
+  --rs-text-3: #7a838f;
+  --rs-red: #ff453a;
+  --rs-red-neon: #ff453a;
+  --rs-green: #eef1f5;
+  --rs-green-soft: #9aa3ae;
+  --rs-glow-red: none;
+  --rs-glow-green: none;
+  --rs-sans: "RS Grotesk", "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --rs-mono: "RS Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  --rs-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 2.5D tilt (Tilt.tsx). The wrapper gets perspective; the inner panel rotates; [data-depth] layers float forward. */
+.tilt { perspective: 1400px; }
+.tilt > .tilt-inner { transform-style: preserve-3d; transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform .5s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform; position: relative; }
+.tilt.is-tilting > .tilt-inner { transition: none; }
+.tilt [data-depth="1"] { transform: translateZ(10px); }
+.tilt [data-depth="2"] { transform: translateZ(22px); }
+.tilt [data-depth="3"] { transform: translateZ(36px); }
+@media (prefers-reduced-motion: reduce) { .tilt > .tilt-inner { transform: none !important; } .tilt [data-depth] { transform: none !important; } }

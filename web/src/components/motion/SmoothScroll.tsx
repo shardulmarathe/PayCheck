@@ -14,8 +14,10 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
+    // Reduced motion: native scrolling, no smoothing.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const instance = new Lenis({
-      lerp: 0.09,
+      lerp: 0.085,
       smoothWheel: true,
       syncTouch: false,
       autoRaf: false,

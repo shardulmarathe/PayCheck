@@ -48,7 +48,6 @@ export const METRICS = [
   { id: "false_block_rate", label: "False blocks" },
   { id: "evidence_match", label: "Evidence match" },
   { id: "latency_ms", label: "Latency" },
-  { id: "cost_per_1k_checks_usd", label: "Cost per 1k" },
 ] as const;
 
 export type MetricId = (typeof METRICS)[number]["id"];

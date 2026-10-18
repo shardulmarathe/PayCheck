@@ -57,11 +57,6 @@ export function formatPct(n: number | null | undefined): string {
   return `${trimNum(n)}%`;
 }
 
-export function formatCost(n: number | null | undefined): string {
-  if (n == null || !Number.isFinite(n)) return "—";
-  return formatUsd(n);
-}
-
 /** m:ss from milliseconds. */
 export function clock(ms: number): string {
   const total = Math.max(0, Math.round(ms / 1000));

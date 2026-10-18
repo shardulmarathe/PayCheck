@@ -1,6 +1,12 @@
 import { EMPTY_RESULTS } from "../src/lib/results";
 import type { Dataset } from "../src/lib/types";
 
+/**
+ * Optional 4th node on the training path ("round 4 = round 3 + attacker round 1").
+ * Turn on only if P4b actually trained and evaluated that round. Off by default.
+ */
+export const SHOW_ATTACKER_ROUND = true;
+
 const REQUEST_CODE = `const verdict = await guard.check({ page, cart, budget: 15 });
 if (verdict.action === "block") return agent.follow(verdict.steer);
 await agent.pay();`;
@@ -186,7 +192,7 @@ export const fixtureDataset: Dataset = {
         with_guard: 3,
         without_guard: 0,
         format: "count",
-        note: "the honest cost",
+        note: "the honest trade-off",
         from_tone: "muted",
       },
     ],
@@ -217,7 +223,6 @@ export const fixtureDataset: Dataset = {
   },
   benchmarks: {
     kicker: "Benchmarks · frozen test set",
-    title_lines: ["Catches [X]% of checkout tricks.", "Within [N] points of the baseline model."],
     body: "Every model sees the same 300 pages, held back before any training data was generated.",
     test_pages: 300,
     roster: [
@@ -227,19 +232,11 @@ export const fixtureDataset: Dataset = {
     ],
     training_title: "Catch rate by training round",
     seen_legend: "Tricks like ones seen in training",
-    heldout_legend: "Held-out trick types",
+    heldout_legend: "Unseen trick types",
     latency_title: "Latency per check · median",
     latency_note: "Log scale · lower is better",
-    cost_kicker: "Cost per 1,000 checks vs catch rate",
-    cost_headline: "Within [N] points of the baseline model.",
     claim: "within",
     catch_pct: null,
-    cost_ratio: null,
-    point_gap: null,
-    cost_placeholder: true,
-    cost_note: "Never say beats. No cost phrase is shown.",
-    cost_annotation: "",
-    cost_axis: "Cost per 1,000 checks · log scale",
     hollow_caption:
       "Hollow point: ran on the 100-page slice only. Switch to the slice to compare all five models on the same pages.",
     attack_kicker: "Catch rate by attack type",
@@ -248,7 +245,7 @@ export const fixtureDataset: Dataset = {
     summary_kicker: "Summary · per model",
     summary_title: "The whole frozen set, one row each.",
     summary_note:
-      "False blocks are the share of clean pages (trick: none) the model stopped. Evidence match is the share of blocks whose quoted sentence matches the labeled trick.",
+      "Locked test, 300 pages, graded once. Values as in our figures pack: F1 [95% CI]; catch and false blocks as a share with counts. False blocks are honest pages blocked, of 150. Italic rows are reported alongside and were never used to pick. Gemini 3.1 Pro is shown below the table: it ran on a 100-page slice only (50 tricks / 50 clean). Haiku rerun with a higher token limit; the first run truncated 16 answers.",
   },
   results: EMPTY_RESULTS,
   headline: { from_summary: false, round: null, catch_rate: null, false_block_rate: null },
@@ -279,7 +276,6 @@ export const fixtureDataset: Dataset = {
       false_block_rate: 3,
       evidence_match: 88,
       latency_ms_median: null,
-      cost_per_1k_checks_usd: 0.04,
       ci_low: 87.8,
       ci_high: 94.2,
       catch_rate_by_attack: {
@@ -295,8 +291,8 @@ export const fixtureDataset: Dataset = {
     },
     {
       id: "gemini",
-      model: "Gemini 3.1 Pro",
-      short: "Gemini 3.1 Pro",
+      model: "Example baseline A",
+      short: "Example A",
       emphasis: false,
       pages: 100,
       catch_rate: 94,
@@ -305,7 +301,6 @@ export const fixtureDataset: Dataset = {
       false_block_rate: 2,
       evidence_match: 90,
       latency_ms_median: 3400,
-      cost_per_1k_checks_usd: 1.6,
       ci_low: 89.3,
       ci_high: 98.7,
       catch_rate_by_attack: {
@@ -321,8 +316,8 @@ export const fixtureDataset: Dataset = {
     },
     {
       id: "claude",
-      model: "Baseline model",
-      short: "Baseline model",
+      model: "Example baseline B",
+      short: "Example B",
       emphasis: false,
       pages: 300,
       catch_rate: 89,
@@ -331,7 +326,6 @@ export const fixtureDataset: Dataset = {
       false_block_rate: 4,
       evidence_match: 83,
       latency_ms_median: 1900,
-      cost_per_1k_checks_usd: 6.2,
       ci_low: 85.5,
       ci_high: 92.5,
       catch_rate_by_attack: {
@@ -347,8 +341,8 @@ export const fixtureDataset: Dataset = {
     },
     {
       id: "qwen-base",
-      model: "Qwen3-4B, untrained",
-      short: "Qwen3-4B base",
+      model: "Example baseline C",
+      short: "Example C",
       emphasis: false,
       pages: 300,
       catch_rate: 47,
@@ -357,7 +351,6 @@ export const fixtureDataset: Dataset = {
       false_block_rate: 9,
       evidence_match: 41,
       latency_ms_median: 43,
-      cost_per_1k_checks_usd: 0.04,
       ci_low: 41.4,
       ci_high: 52.6,
       catch_rate_by_attack: {
@@ -373,8 +366,8 @@ export const fixtureDataset: Dataset = {
     },
     {
       id: "qwenguard",
-      model: "Qwen3Guard-4B",
-      short: "Qwen3Guard-4B",
+      model: "Example baseline D",
+      short: "Example D",
       emphasis: false,
       pages: 300,
       catch_rate: 38,
@@ -383,7 +376,6 @@ export const fixtureDataset: Dataset = {
       false_block_rate: 6,
       evidence_match: null,
       latency_ms_median: 58,
-      cost_per_1k_checks_usd: 0.05,
       ci_low: 32.5,
       ci_high: 43.5,
       catch_rate_by_attack: {
@@ -400,18 +392,20 @@ export const fixtureDataset: Dataset = {
   ],
   process: {
     kicker: "Design process · how it is built",
-    title_lines: ["Every miss becomes", "the next lesson."],
-    body: "Each round brings new practice pages. The guard reads each one and passes or blocks it. Misses on dev pages seed the next round.",
+    title_lines: ["Practice pages in.", "A guard that blocks, and says why."],
+    body: "We generate practice stores that each hide one checkout trick, next to a clean twin. A small open model learns to pass or block the checkout, and say why. Winners are picked on a separate dev set; the locked test is graded once.",
     sources_label: "Real dark-pattern sources",
     sources: [
       { title: "Princeton dark-patterns study", detail: "11K shopping sites, 2019" },
       { title: "ec-darkpattern", detail: "labeled e-commerce text" },
     ],
-    feeds_label: "feeds the attacker",
     nodes: [
-      { n: "01", title: "New practice pages", detail: "each hiding one trick", place: "left" },
-      { n: "02", title: "Guard reads each page", detail: "Qwen3-4B, QLoRA · passes or blocks", place: "right" },
-      { n: "03", title: "Misses seed the next round", detail: "misses on dev pages · fresh dev split each round", place: "bottom" },
+      { n: "01", title: "Practice pages", detail: "each hiding one trick, with a clean twin", place: "left" },
+      { n: "02", title: "Guard reads the checkout", detail: "Qwen3-4B · bf16 LoRA · passes or blocks, and says why", place: "right" },
+      ...(SHOW_ATTACKER_ROUND
+        ? [{ n: "03", title: "Attacker round", detail: "round 3 + 300 attacker-written pages = round 4", place: "bottom" as const }]
+        : []),
+      { n: SHOW_ATTACKER_ROUND ? "04" : "03", title: "Pick on dev, test once", detail: "locked 300-page test, graded once", place: "bottom" },
     ],
     round_n: null,
     new_layout_pct: null,
@@ -420,8 +414,6 @@ export const fixtureDataset: Dataset = {
     steps: [],
     plug_kicker: "Plug it in",
     plug_title_lines: ["One call before", "your agent pays."],
-    plug_body:
-      "Send the page, the cart and the budget. The guard answers allow or block, quotes the evidence, and gives your agent one plain instruction to steer around the trick.",
     request_label: "Request · TypeScript",
     request_code: REQUEST_CODE,
     response_label: "Response",
@@ -434,14 +426,14 @@ export const fixtureDataset: Dataset = {
     items: [
       {
         n: "01",
-        title: "More trick types",
-        body: "Drip pricing that grows one fee at a time, and subscription traps that renew after the first order.",
+        title: "An attacker that learns from misses",
+        body: "An attacker that writes new trick pages from the guard's misses, so each round trains on the tricks it got wrong.",
         status: "Next",
       },
       {
         n: "02",
         title: "Multilingual stores",
-        body: "The same tricks in Spanish, Hindi and Japanese storefronts, where agents are easier to fool.",
+        body: "The same tricks in Spanish, Hindi and Japanese storefronts.",
         status: "Next",
       },
       {
@@ -453,10 +445,10 @@ export const fixtureDataset: Dataset = {
       {
         n: "04",
         title: "An open benchmark",
-        body: "The frozen test set and a public leaderboard, so other guards are measured the same way.",
+        body: "Our locked benchmark and a public leaderboard, so other guards are measured the same way.",
         status: "Research",
       },
     ],
   },
-  footer_note: "Recorded demos. Nothing on this site runs live.",
+  footer_note: "",
 };

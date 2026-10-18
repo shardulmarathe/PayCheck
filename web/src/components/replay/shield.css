@@ -1,0 +1,43 @@
+/* ShieldIntercept: payment token vs PayCheck shield. Uses tokens.css variables (.rs / .tx / .si). */
+@import "./tokens.css";
+.si {
+  --si-red: var(--rs-red, #ff453a); --si-green: var(--rs-text, #eef1f5); --si-text: var(--rs-text, #eef1f5); --si-text-2: var(--rs-text-2, #a3adb9); --si-line: var(--rs-line-2, #2a3540);
+  --si-pay-room: 120px;
+  position: relative; height: 96px; overflow: visible; font-family: var(--rs-mono, ui-monospace, monospace); color: var(--si-text-2);
+  border-radius: 12px; background: var(--rs-panel, #11141a); border: 1px solid var(--rs-line, #1d2630);
+}
+.si-node { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; z-index: 2; }
+.si-agent { left: 3%; color: var(--si-text-2); }
+.si-agent svg { width: 22px; height: 22px; }
+.si-pay { right: 2.5%; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--si-line); background: #0b0f14; color: var(--si-text); min-width: 92px; transition: border-color .25s, box-shadow .25s, color .25s; }
+.si-pay-amt { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: none; }
+.si-pay-sub { font-size: 9.5px; color: var(--si-text-2); }
+.si-pay.is-hit.tone-red { border-color: var(--si-red); color: var(--si-red);  }
+.si-pay.is-hit.tone-red .si-pay-sub { color: var(--si-red); }
+.si-pay.is-hit.tone-green { border-color: var(--si-green); color: var(--si-green);  }
+.si-pay.is-hit.tone-green .si-pay-sub { color: var(--si-green); }
+.si-pay.is-hit.tone-neutral { border-color: var(--si-text-2); }
+.si-pay.is-safe { opacity: .55; }
+.si-track { position: absolute; left: 11%; right: 14%; top: 50%; height: 2px; margin-top: -1px; background: repeating-linear-gradient(90deg, var(--si-line) 0 6px, transparent 6px 11px); }
+.si-fill { position: absolute; top: 50%; height: 2px; margin-top: -1px; background: var(--si-text-2); }
+.si-fill.tone-red { background: var(--si-red);  }
+.si-fill.tone-green { background: var(--si-green);  }
+
+.si-chip { position: absolute; top: 50%; z-index: 3; display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 9px 0 7px; border-radius: 7px; white-space: nowrap;
+  background: #171b22; border: 1px solid #323a45; color: var(--si-text); font-size: 10.5px;  will-change: transform, left; }
+.si-chip-gold { width: 13px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, #e9c46a, #b08a2e); }
+.si-chip.tone-check { border-color: rgba(238, 241, 245, .6);  }
+.si-chip.tone-red { border-color: var(--si-red); color: #ff8a82;  }
+.si-chip.tone-green { border-color: var(--si-green);  }
+
+.si-shield { position: absolute; top: 50%; z-index: 4; width: 52px; height: 58px; color: var(--si-green); transition: color .2s, opacity .2s;  }
+.si-shield svg { width: 100%; height: 100%; overflow: visible; }
+.si-shield.is-block { color: var(--si-red);  }
+.si-shield.is-pass { color: var(--si-green);  }
+.si-ring { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; border: 1.5px solid var(--si-green); opacity: 0; animation: si-ring 1.1s ease-out infinite; }
+@keyframes si-ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+.si-flash { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--si-red); pointer-events: none; }
+.si-flash.is-green { border-color: var(--si-green); }
+.si-shard { position: absolute; top: 50%; z-index: 4; margin-top: -3px; background: var(--si-red); clip-path: polygon(0 0, 100% 40%, 30% 100%);  }
+@media (max-width: 600px) { .si { height: 88px; --si-pay-room: 100px; } .si-chip-num { display: none; } .si-chip { padding: 0 7px; } .si-pay { min-width: 76px; padding: 6px 8px; } }
+@media (prefers-reduced-motion: reduce) { .si-ring { animation: none; opacity: 0; } }

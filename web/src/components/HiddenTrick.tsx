@@ -1,107 +1,85 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
-import { useNav } from "./motion/Nav";
 
-const KEY = "sureshopCaught";
-
-function TrickCorners({ tone, dashed }: { tone: "red" | "white"; dashed: boolean }) {
-  const stroke = tone === "red" ? "#FF453A" : "#EEF1F5";
-  const dash = dashed ? "4 3" : undefined;
-  const paths = ["M9 1 H1 V9", "M1 1 H9 V9", "M9 9 H1 V1", "M1 9 H9 V1"];
-  return (
-    <span className={`ht-set ht-${tone}`}>
-      {paths.map((d) => (
-        <svg key={d} viewBox="0 0 10 10" aria-hidden="true">
-          <path d={d} fill="none" stroke={stroke} strokeWidth="1.5" strokeDasharray={dash} />
-        </svg>
-      ))}
-    </span>
-  );
-}
-
-function readCaught(): string[] {
-  try {
-    const parsed = JSON.parse(sessionStorage.getItem(KEY) || "[]");
-    return Array.isArray(parsed) ? parsed.filter((item) => typeof item === "string") : [];
-  } catch {
-    return [];
-  }
-}
-
-function remember(id: string) {
-  const next = new Set(readCaught());
-  next.add(id);
-  try {
-    sessionStorage.setItem(KEY, JSON.stringify([...next]));
-  } catch {
-    /* private mode */
-  }
+export interface TrickItem {
+  /** The trick as it reads on the checkout page. */
+  text: ReactNode;
+  /** Stamp text, e.g. "Blocked · subscription trap". */
+  label: string;
+  /** Show a pre-ticked checkbox in front of the item. */
+  box?: boolean;
 }
 
 /**
- * A small checkout trick the page catches once it is actually on screen.
- * Decorative: it is not a result, a control, or part of the recorded data.
+ * The catch, as a looping sequence: the shopper's cursor heads for a checkout item, PayCheck scans it,
+ * red brackets snap shut, a red X and a strikethrough draw over it, and the BLOCKED stamp slams in.
+ * Decorative (aria-hidden): it is not a result, a control, or part of the recorded data.
+ * Loops only while on screen; reduced motion shows the caught state, still.
  */
-export function HiddenTrick({
-  id,
-  kind,
-  label,
-  children,
-}: {
-  id: string;
-  kind: "solid" | "dashed";
-  label: string;
-  children: ReactNode;
-}) {
+export function TrickCatch({ items, size = "l" }: { items: TrickItem[]; size?: "l" | "m" }) {
   const reduced = usePrefersReducedMotion();
-  const { isGliding } = useNav();
   const ref = useRef<HTMLDivElement>(null);
-  const visible = useRef(false);
-  const gliding = useRef(isGliding);
-  gliding.current = isGliding;
-  const [state, setState] = useState<"idle" | "play" | "done">(() =>
-    reduced || readCaught().includes(id) ? "done" : "idle",
-  );
+  const [run, setRun] = useState(false);
+  const [index, setIndex] = useState(0);
+  const item = items[index % items.length];
 
   useEffect(() => {
-    if (state !== "idle") return;
     const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        visible.current = !!entry?.isIntersecting && entry.intersectionRatio >= 0.6;
-        if (visible.current && !gliding.current) {
-          remember(id);
-          setState("play");
-        }
-      },
-      { threshold: [0, 0.6, 1] },
-    );
+    if (!node || reduced) return;
+    const observer = new IntersectionObserver(([entry]) => setRun(!!entry?.isIntersecting && entry.intersectionRatio >= 0.35), {
+      threshold: [0, 0.35, 0.7],
+    });
     observer.observe(node);
     return () => observer.disconnect();
-  }, [id, state]);
-
-  useEffect(() => {
-    if (state === "idle" && !isGliding && visible.current) {
-      remember(id);
-      setState("play");
-    }
-  }, [id, isGliding, state]);
-
-  useEffect(() => {
-    if (state !== "play") return;
-    const timer = window.setTimeout(() => setState("done"), 1400);
-    return () => window.clearTimeout(timer);
-  }, [state]);
+  }, [reduced]);
 
   return (
-    <div ref={ref} className={`hidden-trick is-${state} is-${kind}`} aria-hidden="true">
-      <div className="hidden-trick-body">
-        <span className="hidden-trick-copy">{children}</span>
-        <TrickCorners tone="red" dashed={kind === "dashed"} />
-        <TrickCorners tone="white" dashed={kind === "dashed"} />
+    <div
+      ref={ref}
+      className={`tc tc-${size}`}
+      data-run={run && !reduced ? "1" : "0"}
+      data-still={reduced ? "1" : "0"}
+      aria-hidden="true"
+      onAnimationIteration={(event) => {
+        if (event.target === event.currentTarget && items.length > 1) setIndex((i) => (i + 1) % items.length);
+      }}
+    >
+      <div className="tc-card">
+        <span className="tc-scan" />
+        <div className="tc-item">
+          {item.box ? (
+            <span className="tc-box">
+              <svg viewBox="0 0 12 12">
+                <path d="M2.5 6.2l2.4 2.3L9.6 3.6" />
+              </svg>
+            </span>
+          ) : null}
+          <span className="tc-text">
+            {item.text}
+            <span className="tc-strike" />
+          </span>
+          <span className="tc-brackets">
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+          <svg className="tc-x">
+            {/* Percentage coordinates (no viewBox stretch) keep the stroke uniform and the 0..1 dash draw-on exact. */}
+            <line x1="4%" y1="8%" x2="96%" y2="92%" pathLength="1" />
+            <line x1="96%" y1="8%" x2="4%" y2="92%" pathLength="1" />
+          </svg>
+        </div>
+        <p className="tc-stamp">{item.label}</p>
       </div>
-      <p className="hidden-trick-label">{label}</p>
+      <svg className="tc-cursor" viewBox="0 0 24 24" width="28" height="28">
+        <path d="M3 2 L20 12 L12.5 13.6 L9 21 Z" />
+      </svg>
     </div>
   );
+}
+
+/** Back-compat wrapper for the single subscription example. */
+export function HiddenTrick({ label, children }: { id?: string; kind?: "solid" | "dashed"; label: string; children: ReactNode }) {
+  return <TrickCatch items={[{ text: children, label, box: true }]} />;
 }

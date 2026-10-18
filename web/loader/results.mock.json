@@ -2,36 +2,66 @@
   "synthetic": true,
   "hero_slice": "in_dist",
   "models": {
-    "guard": { "label": "PayCheck guard", "cost_per_page_usd": 0.00004 },
-    "baseline": { "label": "Baseline model", "cost_per_page_usd": 0.0062 },
-    "gemini": { "label": "Gemini 3.1 Pro", "cost_per_page_usd": 0.0016 }
+    "guard": {
+      "label": "PayCheck guard",
+      "cost_per_page_usd": 4e-05
+    },
+    "baseline": {
+      "label": "Baseline model",
+      "cost_per_page_usd": null
+    },
+    "gemini": {
+      "label": "Gemini 3.1 Pro",
+      "cost_per_page_usd": 0.0016
+    }
   },
   "slices": {
     "in_dist": {
       "claim": "beats",
       "gap_points": 2.4,
       "scores": {
-        "guard": { "score": 93.1, "ci_low": 89.4, "ci_high": 95.8 },
-        "baseline": { "score": null, "ci_low": null, "ci_high": null },
-        "gemini": { "score": 94.0, "ci_low": 88.2, "ci_high": 97.4 }
+        "guard": {
+          "score": 93.1,
+          "ci_low": 89.4,
+          "ci_high": 95.8
+        },
+        "gemini": {
+          "score": 94.0,
+          "ci_low": 88.2,
+          "ci_high": 97.4
+        }
       }
     },
     "heldout_attack": {
       "claim": "within",
       "gap_points": 5.5,
       "scores": {
-        "guard": { "score": 84.0, "ci_low": 79.1, "ci_high": 88.2 },
-        "baseline": { "score": null, "ci_low": null, "ci_high": null },
-        "gemini": { "score": 90.2, "ci_low": 84.0, "ci_high": 94.6 }
+        "guard": {
+          "score": 84.0,
+          "ci_low": 79.1,
+          "ci_high": 88.2
+        },
+        "gemini": {
+          "score": 90.2,
+          "ci_low": 84.0,
+          "ci_high": 94.6
+        }
       }
     },
     "heldout_template": {
       "claim": "within",
       "gap_points": 3.1,
       "scores": {
-        "guard": { "score": 88.4, "ci_low": 83.6, "ci_high": 92.1 },
-        "baseline": { "score": null, "ci_low": null, "ci_high": null },
-        "gemini": { "score": 92.0, "ci_low": 86.1, "ci_high": 95.9 }
+        "guard": {
+          "score": 88.4,
+          "ci_low": 83.6,
+          "ci_high": 92.1
+        },
+        "gemini": {
+          "score": 92.0,
+          "ci_low": 86.1,
+          "ci_high": 95.9
+        }
       }
     }
   }

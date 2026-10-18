@@ -1,70 +1,42 @@
-import { useEffect, useRef } from "react";
-import { HiddenTrick } from "../components/HiddenTrick";
-import { useNav } from "../components/motion/Nav";
+import { motion } from "framer-motion";
+import { SITE } from "../lib/copy";
+import { Sign } from "../components/Sign";
 import { usePrefersReducedMotion } from "../hooks/useReplay";
 import type { Dataset } from "../lib/types";
 
-export function Future({ data }: { data: Dataset }) {
-  const future = data.future;
-  const list = useRef<HTMLElement>(null);
+/** What's next (round 19): the existing items as a numbered roadmap row, animated in on scroll. No new claims. */
+export function Future({ data: _data }: { data: Dataset }) {
   const reduced = usePrefersReducedMotion();
-  const { isGliding } = useNav();
-
-  useEffect(() => {
-    const root = list.current;
-    if (!root) return;
-    const rows = [...root.querySelectorAll<HTMLElement>(".future-row")];
-    if (reduced || isGliding) {
-      root.classList.remove("will-draw");
-      rows.forEach((row) => row.classList.add("is-drawn"));
-      return;
-    }
-    root.classList.add("will-draw");
-    const seen = new WeakSet<Element>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting || seen.has(entry.target)) return;
-          seen.add(entry.target);
-          entry.target.classList.add("is-drawn");
-        });
-      },
-      { rootMargin: "0px 0px -15% 0px", threshold: 0.2 },
-    );
-    rows.forEach((row) => observer.observe(row));
-    return () => observer.disconnect();
-  }, [reduced, isGliding]);
-
+  const steps = [
+    ...SITE.futureItems.map((body, i) => ({ title: SITE.futureTitles[i], body })),
+    // One line each: the device item keeps its first sentence only (existing copy).
+    { title: SITE.futureDevice.title, body: SITE.futureDevice.body.split(". ")[0] + "." },
+  ];
   return (
     <div className="wrap">
-      <section className="section">
-        <p className="label">{future.kicker}</p>
-        <h1 className="h1">
-          {future.title_lines[0]}
-          <br />
-          {future.title_lines[1]}
-        </h1>
-        <p className="body-l" style={{ marginTop: 20 }}>
-          {future.body}
-        </p>
-      </section>
-      <section className="section future-list" ref={list}>
-        {future.items.map((item, index) => (
-          <article key={item.n} className="future-row">
-            <p className="micro" data-future-first={index === 0 ? "" : undefined}>
-              {item.n}
-            </p>
-            <div>
-              <h2>{item.title}</h2>
-              <p className="body">{item.body}</p>
-            </div>
-            <p className="micro future-status">{item.status}</p>
-          </article>
-        ))}
-        <HiddenTrick id="future-sub" kind="solid" label="Blocked · subscription trap">
-          <span className="trick-box" />
-          Subscribe & save 10% · renews at $12.99/mo
-        </HiddenTrick>
+      <section className="section road" aria-labelledby="future-title">
+        <Sign n="07" id="future-title">
+          {SITE.futureKicker}
+        </Sign>
+        <h2 className="road-h">{SITE.futureTitle}</h2>
+        <ol className="road-row">
+          {steps.map((s, i) => (
+            <motion.li
+              key={s.title}
+              className="road-step"
+              initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
+              whileInView={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: reduced ? 0.3 : 0.5, delay: reduced ? 0 : i * 0.12, ease: [0.2, 0.8, 0.2, 1] }}
+            >
+              <span className="road-node" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="road-t">{s.title}</h3>
+              <p className="road-b">{s.body}</p>
+            </motion.li>
+          ))}
+        </ol>
       </section>
     </div>
   );

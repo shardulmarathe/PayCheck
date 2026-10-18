@@ -1,5 +1,5 @@
 {
-  "name": "guard-gym",
+  "name": "paycheck-site",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.5",
     "@fontsource/ibm-plex-sans": "^5.2.5",
+    "@fontsource/space-grotesk": "^5.3.0",
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
     "framer-motion": "^12.23.12",

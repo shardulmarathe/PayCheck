@@ -38,13 +38,13 @@ MP4 files are served from `web/public/recordings/`. A run embeds one when `video
 
 ## Visa
 
-`runs/visa/*.json` is a trace. The section title is "Signed agent check (Visa Trusted Agent Protocol)". Stages render in order when present: signed agent request, store signature check, guard check, then pay or block. A missing stage is left out. `"synthetic": true` is omitted when examples are hidden. `npm run sync-data` copies the traces to `web/public/data/visa/`.
+`runs/visa/*.json` is a trace. The section title is "Signed agent check (our implementation of Visa's Trusted Agent Protocol)". Stages render in order when present: signed agent request, store signature check, guard check, then pay or block. A missing stage is left out. `"synthetic": true` is omitted when examples are hidden. `npm run sync-data` copies the traces to `web/public/data/visa/`.
 
 ## Eval
 
 `leaderboard.json` is `{ "synthetic": false, "models": [ Model, ... ] }`. A bare array, or a file without `"synthetic": false`, is hidden. Other files in `runs/eval/` are used only when the leaderboard is absent, and each of those also needs `"synthetic": false`.
 
-The object form may also carry the headline slot. `claim` is `"within"` unless it is exactly `"beats"`. `catch_pct`, `cost_ratio`, and `point_gap` are numbers. Leave them out and, once the eval is real, the loader fills them from the guard and baseline-model rows: catch rate, Claude’s cost divided by the guard’s cost, and the guard’s catch rate minus Claude’s. `point_gap` is signed; positive means the guard is ahead.
+The object form may also carry the headline slot. `claim` is `"within"` unless it is exactly `"beats"`. `catch_pct`, `cost_ratio`, and `point_gap` are numbers. Leave them out and, once the eval is real, the loader fills them from the guard and baseline model rows: catch rate, the baseline’s cost divided by the guard’s cost, and the guard’s catch rate minus Claude’s. `point_gap` is signed; positive means the guard is ahead.
 
 ```json
 {
@@ -97,28 +97,43 @@ While `catch_pct` is null, the catch line shows the literal `[X]`. The catch sen
   "synthetic": false,
   "hero_slice": "in_dist",
   "models": {
-    "guard": { "label": "Guard" },
-    "baseline": { "label": "Baseline model" }
+    "guard": { "label": "PayCheck guard", "cost_per_page_usd": 0.00004 },
+    "baseline": { "label": "Baseline model", "cost_per_page_usd": null }
   },
   "slices": {
     "in_dist": {
-      "claim": "within",
-      "gap_points": 0,
+      "claim": "beats",
+      "gap_points": 2.4,
       "scores": {
-        "guard": { "score": 0, "ci_low": 0, "ci_high": 0 },
+        "guard": { "score": 93.1, "ci_low": 89.4, "ci_high": 95.8 },
+        "baseline": { "score": null, "ci_low": null, "ci_high": null }
+      }
+    },
+    "heldout_attack": {
+      "claim": "within",
+      "gap_points": 5.5,
+      "scores": {
+        "guard": { "score": 84, "ci_low": 79.1, "ci_high": 88.2 },
+        "baseline": { "score": null, "ci_low": null, "ci_high": null }
+      }
+    },
+    "heldout_template": {
+      "claim": "within",
+      "gap_points": 3.1,
+      "scores": {
+        "guard": { "score": 88.4, "ci_low": 83.6, "ci_high": 92.1 },
         "baseline": { "score": null, "ci_low": null, "ci_high": null }
       }
     }
   }
 }
 ```
-Shape only. The scores above are zero placeholders, not results. Real results are in the repository README.
 
 - `hero_slice` is `in_dist` (familiar pages), `heldout_attack` (new attacks), or `heldout_template` (new templates). Anything else, including a missing field, is `in_dist`. The hero speaks only that slice, then a 12 px tag such as "on familiar pages".
-- `claim` is `"within"` or `"beats"`. The hero never says "beats": it says "Level with the baseline model" or "Within [N] points of the baseline model". `[N]` is `gap_points` when that number is present.
-- Benchmarks joins the slices that exist, one phrase per slice, with no cost phrase.
+- `claim` is `"within"` unless it is exactly `"beats"`. The hero says "Level with the baseline model" or "Within [N] points of the baseline model". `[N]` is `gap_points` when that number is present.
+- Benchmarks joins the slices that exist: "Level with the baseline model on familiar pages, within 5.5 points on new attacks, within 3.1 points on new templates."
 - Each score is a catch rate, 0–100. `ci_low` and `ci_high` together draw that model's error bar on the slice. One without the other draws the point only.
-- `cost_per_page_usd` is read but no cost ratio is spoken on the site.
+- `cost_per_page_usd` must be set on both `guard` (or `sureshop`) and `baseline` (or `claude`) or the words "at 1/[N] the cost" are omitted. The ratio is the baseline model's page cost divided by ours. `cost_per_1k_checks_usd` does not fill this phrase.
 - Model ids on a score row should match `models`. `guard` is drawn in near-white. Other dots stay `#9AA3AE`.
 
 ## Training

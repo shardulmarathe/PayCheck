@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { BrowserUseResults, BrowserUseRun, HeadlineRates, RoundReplay, RoundReplayLine, VisaStage, VisaTrace } from "../src/lib/types";
+import type { BrowserUseResults, BrowserUseRun, HeadlineRates, RoundReplay, RoundReplayLine, VisaScene, VisaTrace } from "../src/lib/types";
 
 const REPLAY_KEYS = [
   "round",
@@ -280,62 +280,92 @@ export function loadBrowserUse(roots: string[], recordingsDir: string, showExamp
   };
 }
 
-const VISA_KINDS: Record<string, VisaStage["key"]> = {
-  signed_agent_request: "agent_request",
-  agent_request: "agent_request",
-  signed_request: "agent_request",
-  store_signature_check: "store_signature",
-  store_signature: "store_signature",
-  signature_check: "store_signature",
-  guard_check: "guard",
-  guard: "guard",
-  decision: "decision",
-  result: "decision",
-  pay: "decision",
-  block: "decision",
+/** The approved heading. The trace file's own title is never printed in its place. */
+export const VISA_HEADING = "Signed agent check (our implementation of Visa's Trusted Agent Protocol)";
+
+/** Fixed demo lookup (visa-run/visa/video.py TRICK_LABELS, from demo/shell-spec.md). */
+const TRICK_LABELS: Record<string, string> = {
+  preselected_addon: "Pre-ticked add-on",
+  hidden_fees: "Hidden fee",
+  price_change: "Price changed",
+  fake_card_verification: "Fake card check",
+  subscription_trap: "Subscription trap",
+  none: "No trick found",
 };
 
-function jsonText(value: unknown): string {
-  if (typeof value === "string") return value;
-  return JSON.stringify(value, null, 2);
+/** Scene order on screen: browse → clean → disclosed fee → raised → tampered → unsigned. */
+const SCENE_ORDER: RegExp[] = [/^agent shops|browse/i, /^clean/i, /disclosed fee/i, /raised/i, /tamper/i, /unsigned/i];
+
+function sceneRank(title: string): number {
+  const rank = SCENE_ORDER.findIndex((pattern) => pattern.test(title));
+  return rank === -1 ? SCENE_ORDER.length : rank;
 }
 
-function decisionLabel(value: unknown): string {
-  if (value === "pay" || (isRecord(value) && value.decision === "pay") || (isRecord(value) && value.result === "pay")) return "Pay";
-  if (value === "block" || (isRecord(value) && value.decision === "block") || (isRecord(value) && value.result === "block")) return "Block";
-  if (typeof value === "string") return value;
-  return "Pay or block";
+/**
+ * Raw request material never reaches the page: anything that looks like a URL, host:port, header,
+ * key id, nonce, tag, signature value or timing is dropped, even when it sits in a whitelisted field.
+ */
+const RAW_REQUEST = [
+  /:\/\//,
+  /\blocalhost\b|\b\d{1,3}(\.\d{1,3}){3}\b/i,
+  /:\d{2,5}\b/,
+  /\b(key_?id|keyid|nonce|tag|created|expires|alg)\s*[=:]/i,
+  /\bsig\d*\s*=|signature-input\s*:|signature\s*:/i,
+  /\b[A-Za-z0-9+/_-]{32,}={0,2}/,
+  /\b\d+(\.\d+)?\s*ms\b/i,
+  /^\s*(GET|POST|PUT|PATCH|DELETE)\s+\//,
+  /(^|\s)\/[a-z0-9_-]+(\?|\/)/i,
+];
+
+export function safeText(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const text = value.trim();
+  if (!text || text.length > 240) return null;
+  return RAW_REQUEST.some((pattern) => pattern.test(text)) ? null : text;
 }
 
-function stage(key: VisaStage["key"], label: string, value: unknown): VisaStage {
-  return { key, label, text: jsonText(value) };
+function trickLabel(value: unknown): string | null {
+  const text = safeText(value);
+  if (!text) return null;
+  return TRICK_LABELS[text] ?? text;
 }
 
-export function parseVisa(raw: unknown, id: string): VisaTrace | undefined {
-  if (Array.isArray(raw)) {
-    const stages: VisaStage[] = [];
-    for (const item of raw) {
-      if (!isRecord(item)) continue;
-      const kind = typeof item.kind === "string" ? VISA_KINDS[item.kind] : undefined;
-      if (!kind || stages.some((existing) => existing.key === kind)) continue;
-      if (kind === "agent_request") stages.push(stage(kind, "Signed agent request", item));
-      else if (kind === "store_signature") stages.push(stage(kind, "Store signature check", item));
-      else if (kind === "guard") stages.push(stage(kind, "Guard check", item));
-      else stages.push(stage(kind, decisionLabel(item.kind === "pay" || item.kind === "block" ? item.kind : item), item));
-    }
-    return stages.length ? { id, stages } : undefined;
-  }
+function parseScene(raw: unknown): VisaScene | undefined {
   if (!isRecord(raw)) return undefined;
-  const stages: VisaStage[] = [];
-  const request = raw.signed_agent_request ?? raw.agent_request ?? raw.signed_request;
-  const signature = raw.store_signature_check ?? raw.store_signature ?? raw.signature_check;
-  const guard = raw.guard_check ?? raw.guard;
-  const decision = raw.decision ?? raw.result ?? raw.outcome;
-  if (request !== undefined) stages.push(stage("agent_request", "Signed agent request", request));
-  if (signature !== undefined) stages.push(stage("store_signature", "Store signature check", signature));
-  if (guard !== undefined) stages.push(stage("guard", "Guard check", guard));
-  if (decision !== undefined) stages.push(stage("decision", decisionLabel(decision), decision));
-  return stages.length ? { id, stages } : undefined;
+  const title = safeText(raw.title);
+  if (!title) return undefined;
+  const sig = isRecord(raw.signature) ? raw.signature : {};
+  const status = num(raw.store_status);
+  const accepted = sig.accepted === true;
+  let guard: VisaScene["guard"] = null;
+  if (accepted && isRecord(raw.guard) && (raw.guard.verdict === "allow" || raw.guard.verdict === "block")) {
+    guard = { verdict: raw.guard.verdict, trick: trickLabel(raw.guard.trick), evidence: safeText(raw.guard.evidence) };
+  }
+  return {
+    title,
+    check: { accepted, status: status != null && Number.isInteger(status) ? status : null, reason: safeText(sig.reason) },
+    guard,
+    paid: raw.paid === true,
+  };
+}
+
+/**
+ * Reads a sanitized trace (runs/visa/trace-trimmed.json shape). Only whitelisted keys are read;
+ * every other key in the file is ignored, so raw request fields can't render even if present.
+ */
+export function parseVisa(raw: unknown, id: string): VisaTrace | undefined {
+  if (!isRecord(raw) || !Array.isArray(raw.scenes)) return undefined;
+  const scenes = raw.scenes
+    .map(parseScene)
+    .filter((scene): scene is VisaScene => !!scene)
+    .map((scene, index) => ({ scene, index }))
+    .sort((a, b) => sceneRank(a.scene.title) - sceneRank(b.scene.title) || a.index - b.index)
+    .map(({ scene }) => scene);
+  if (!scenes.length) return undefined;
+  const guard = safeText(raw.guard) ?? "r4 (8-bit copy)";
+  const gate = safeText(raw.gate_format) ?? "fixed gate";
+  const payment = safeText(raw.payment) ?? "mock";
+  return { id, heading: VISA_HEADING, footer: `guard: ${guard}, ${gate} · ${payment} payment`, scenes };
 }
 
 function collectJson(roots: string[]): string[] {
