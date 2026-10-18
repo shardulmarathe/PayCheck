@@ -5,7 +5,7 @@ import { usePrefersReducedMotion } from "../hooks/useReplay";
 import { INCIDENTS, SIMULATIONS, type Incident } from "../data/incidents";
 
 /**
- * Section 1, The problem (round 18, Shardul 9:06): compact, about one screen. One headline, one short line, then the
+ * Section 1, The problem: compact, about one screen. One headline, one short line, then the
  * sources as small chips (name · date · a few words), each linking to its source; hover/focus shows the full line and
  * quote. One stat as a small line (76% of 642, FTC). Chip copy: data/incidents.ts. Stat: lib/copy.ts EVIDENCE.bigStats.
  */

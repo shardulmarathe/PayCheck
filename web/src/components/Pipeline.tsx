@@ -3,7 +3,7 @@ import { useDriver } from "./motion/Pin";
 
 /**
  * How PayCheck was built, as a pipeline that lights up stage by stage with particles flowing between stages.
- * Every line restates site copy or /workspace/final/PROVISIONAL-FINAL.md in plain words:
+ * Every line restates site copy in plain words:
  * practice stores with honest twins (howSteps[1]); trick text from ec-darkpattern / Mathur et al. (accuracyOrigin);
  * test pages split off before training (accuracyOrigin; 300 pages, half tricks: accuracyTest);
  * Qwen3-4B trained with veri.studio (builtWith; PF:400–402 Veri datasets); 300 attacker-written pages,

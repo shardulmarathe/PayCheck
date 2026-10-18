@@ -22,9 +22,9 @@ STORE_DOMAIN = "sureshop.example"
 
 CLEAN_HTML = f"""<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><title>SureShop checkout</title></head>
+<head><meta charset="utf-8"><title>PayCheck checkout</title></head>
 <body data-store-domain="{STORE_DOMAIN}" data-page-kind="checkout">
-  <h1>SureShop</h1>
+  <h1>PayCheck</h1>
   <p>{ADVERTISED_ITEM}</p>
   <p data-price="1149" data-price-label="{ADVERTISED_ITEM}">Item {ADVERTISED_PRICE}</p>
   <p data-total="1149">Total {ADVERTISED_PRICE}</p>
@@ -35,9 +35,9 @@ CLEAN_HTML = f"""<!DOCTYPE html>
 
 FEE_HTML = f"""<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><title>SureShop checkout</title></head>
+<head><meta charset="utf-8"><title>PayCheck checkout</title></head>
 <body data-store-domain="{STORE_DOMAIN}" data-page-kind="checkout">
-  <h1>SureShop</h1>
+  <h1>PayCheck</h1>
   <p>{ADVERTISED_ITEM}</p>
   <p data-price="1149" data-price-label="{ADVERTISED_ITEM}">Item {ADVERTISED_PRICE}</p>
   <p data-price="299" data-price-label="Care &amp; handling">Care &amp; handling $2.99</p>
@@ -49,9 +49,9 @@ FEE_HTML = f"""<!DOCTYPE html>
 
 PRODUCT_HTML = f"""<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><title>SureShop</title></head>
+<head><meta charset="utf-8"><title>PayCheck</title></head>
 <body data-store-domain="{STORE_DOMAIN}" data-page-kind="product">
-  <h1>SureShop</h1>
+  <h1>PayCheck</h1>
   <p>{ADVERTISED_ITEM}</p>
   <p data-price="1149" data-price-label="{ADVERTISED_ITEM}">{ADVERTISED_PRICE}</p>
 </body>
@@ -73,7 +73,7 @@ def page_for(order: str) -> dict[str, object]:
             "order_id": "ord-fee",
             "amount_cents": 1448,
             "currency": "USD",
-            "merchant": "SureShop",
+            "merchant": "PayCheck",
             "description": "AA batteries with a handling line",
             "html": html,
             "text": _reader_text(html, path),
@@ -88,7 +88,7 @@ def page_for(order: str) -> dict[str, object]:
             "order_id": "ord-clean",
             "amount_cents": 1149,
             "currency": "USD",
-            "merchant": "SureShop",
+            "merchant": "PayCheck",
             "description": "AA batteries",
             "html": html,
             "text": _reader_text(html, path),
@@ -182,7 +182,7 @@ class StoreHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(data)))
         self.send_header("Cache-Control", "no-store")
-        self.send_header("X-SureShop-Check", CHECK_NAME)
+        self.send_header("X-PayCheck-Check", CHECK_NAME)
         self.end_headers()
         self.wfile.write(data)
 

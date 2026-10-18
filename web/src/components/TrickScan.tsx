@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { Tag } from "./Sign";
 
 /**
- * Every trick type on the site, caught in turn on a checkout page, then one honest page allowed (Shardul 8:09: no repeats).
+ * Every trick type on the site, caught in turn on a checkout page, then one honest page allowed (no repeats).
  * Each lane is a DIFFERENT store with its own skin (demo store skins where they exist: Desklane, Homegoods Direct,
  * Beanbarn, Chargehub; Soundnest and Voltmart are neutral skins),
  * and each shows the actual trick on the page. The scan bracket lands on the offending element; the tag says what it found.

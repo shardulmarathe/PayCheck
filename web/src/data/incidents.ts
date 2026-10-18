@@ -1,7 +1,7 @@
 /**
- * "Real incidents" row in The problem section. Verified wording from the parent (8:32), word for word; quotes unchanged.
+ * "Real incidents" row in The problem section. Wording kept word for word; quotes unchanged.
  * Swap wording here only. Source URLs as given, no utm params.
- * Three cards only (Shardul 8:33), equal size, Operator first. Never "the AI bought the wrong item".
+ * Three cards only, equal size, Operator first. Never "the AI bought the wrong item".
  */
 export type Incident = {
   name: string;
@@ -9,7 +9,7 @@ export type Incident = {
   /** Small tag shown when the agent isn't a shopping agent. */
   tag?: string;
   body: string;
-  /** Extra approved line kept word for word (card 1: Shardul requires the "likely because" line). */
+  /** Extra approved line kept word for word (card 1 keeps the "likely because" line). */
   detail?: string;
   quote: string;
   speaker?: string;
@@ -18,7 +18,7 @@ export type Incident = {
   links: { label: string; href: string }[];
   /** Headline money figure; the card with one renders as the big card. */
   figure?: string;
-  /** Round 18 chip text (Shardul 9:06): a few words after "name · date". */
+  /** Round 18 chip text: a few words after "name · date". */
   chip?: string;
 };
 
@@ -57,8 +57,8 @@ export const INCIDENTS: Incident[] = [
 ];
 
 /**
- * "Security research" row (Shardul 8:45): Guardio + Microsoft. Each card tagged with what it is.
- * Guardio copy word for word from /workspace/final/aux/citations/BIG-PROBLEM.md 0.1 (lines 11-18); never say it
+ * "Security research" row: Guardio + Microsoft. Each card tagged with what it is.
+ * Guardio copy word for word from the cited source; never say it
  * happened every time or to a real user. Microsoft copy word for word from 0.3 (lines 29-36); never "all AI agents".
  */
 export const SIMULATIONS_TITLE = "Security research";

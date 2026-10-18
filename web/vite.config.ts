@@ -23,7 +23,7 @@ function siteBundle(data: ReturnType<typeof loadDataset>) {
     replays: [],
     models: data.models
       .filter((model) => model.id in SITE_MODELS)
-      // Compliance (Shardul 10:08): the unseen-trick-type slice score is never shipped or shown. Only the approved
+      // Compliance: the unseen-trick-type slice score is never shipped or shown. Only the approved
       // public line may speak to unseen tricks, so `display.unseen` is dropped from the bundle here.
       .map((model) => ({ id: model.id, model: SITE_MODELS[model.id], short: SITE_MODELS[model.id], display: model.display ? { f1: model.display.f1, catch: model.display.catch, false_blocks: model.display.false_blocks } : undefined })),
     visa: data.visa.map((trace) => ({ ...trace, footer: "PayCheck guard, 8-bit copy · mock payments" })),

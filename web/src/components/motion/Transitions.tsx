@@ -3,7 +3,7 @@ import { useRef, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "../../hooks/useReplay";
 
 /**
- * Round 17 section transitions (Shardul 8:20). Flat palette, no glow. Transform/opacity/clip-path only (compositor),
+ * Section transitions. Flat palette, no glow. Transform/opacity/clip-path only (compositor),
  * fixed heights (no layout shift). Reduced motion: no movement, simple fades or static.
  */
 

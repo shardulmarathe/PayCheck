@@ -5,14 +5,14 @@ import { Sign, Tag } from "./Sign";
 import { Bar, Row, Target, type Fx } from "./TrickScan";
 
 /**
- * "Run a test" (Shardul 8:27): the judge picks a trick, a store skin is drawn at random, the page assembles, then two
+ * "Run a test": the judge picks a trick, a store skin is drawn at random, the page assembles, then two
  * lanes run on that same page: "No guard" pays and a receipt prints; "PayCheck" scans at the pay button, locks onto
  * the trick, drops the gate and stamps what it caught. Client-side only, no network calls. Labelled
  * "Illustration, recorded behavior". Prices are ILLUSTRATIVE and avoid every demo/Try-it number ($8.99/$8.69).
  * Skins reuse the six-lane replay skins (demo store skins: Desklane, Homegoods Direct, Beanbarn, Chargehub;
  * neutral: Soundnest, Voltmart). Card data is the public 4242 test card.
  */
-// Only tricks r4 actually caught in the shopper runs (Researcher, 8:29). Never padded total; no subscription trap.
+// Only tricks r4 actually caught in the shopper runs. Never padded total; no subscription trap.
 type TrickId = "price" | "verify" | "copycat" | "finalfee" | "plan" | "clean";
 const TRICKS: { id: TrickId; button: string; label: string; why: string }[] = [
   { id: "price", button: "Price changed", label: "Price changed", why: "Checkout charges more than the product page showed." },

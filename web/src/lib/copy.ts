@@ -1,10 +1,10 @@
 
 /**
- * Hero result (Shardul approved 8:41 via parent; replaces the removed 34/52 vs 4/51). All r4 live AI-shopper runs.
+ * Hero result. All r4 live AI-shopper runs.
  * Never call it "test set" or "test". No honest-checkout figure.
  */
 export const HERO_RESULT = {
-  // Source: /workspace/final/aux/training-cycle-facts.md:190 (md5 ecd5d29c), r4 live AI-shopper runs.
+  // Source: r4 live AI-shopper runs.
   line: "Without a guard, AI shoppers fell for the trick 133 of 238 times. With PayCheck, 18 of 234.",
   scope: "All r4 live AI-shopper runs (Browser Use agents on our practice stores).",
   bars: [
@@ -37,10 +37,8 @@ export const DEMO_PAGES: { title: string; verdict: "BLOCK" | "PASS" }[] = [
 ];
 
 /**
- * Training loop (round 17, high level per Shardul 8:01): one cycle, a pass counter 1..6, one caption. No per-round numbers.
- * Sources: six rounds CF:22; r4 shipped CF:18 and /workspace/r1eval/reports/SELECTED.md:3 (d50a5f87);
- * attacker is a seeded template generator, not an LLM CF:81, CF:125.
- * CF = /workspace/final/aux/training-cycle-facts.md (read at md5 46960e25; lines re-checked at ecd5d29c).
+ * Training loop (high level): one cycle, a pass counter 1..6, one caption. No per-round numbers.
+ * Six rounds; r4 shipped. The attacker is a seeded template generator, not an LLM.
  */
 export const LOOP = {
   kicker: "Processing line · How PayCheck was built",
@@ -51,7 +49,7 @@ export const LOOP = {
     { k: "IN", title: "Practice stores", body: "Generated stores, each hiding one trick next to an honest twin. Trick text from the ec-darkpattern dataset, built on Mathur et al., \"Dark Patterns at Scale\" (Princeton, 2019)." },
     { k: "LOCK", title: "Test pages locked away", body: "300 checkout pages, half with a hidden trick, half honest, split off before training." },
   ],
-  // Shardul 8:11 wording and order around the cycle. Never "LLM". No per-round numbers.
+  // Wording and order around the cycle. Never "LLM". No per-round numbers.
   stations: [
     { k: "01", viz: "attack", short: "Attack", title: "Attacker agent", body: "Generates trick pages." },
     { k: "02", viz: "shop", short: "Shop", title: "Browser Use agent", body: "AI shoppers run errands on our practice stores, with and without PayCheck." },
@@ -67,13 +65,12 @@ export const LOOP = {
 };
 
 /**
- * Evidence: shopping agents already fail. Wording from /workspace/p7/devpost-submission.md:19-22 (md5 c6cb3ec4) and
- * /workspace/final/aux/citations/CITATIONS.md (md5 bcd8ab29): WaPo CIT:6-14, SusBench CIT:16-24 (63–87% CIT:22),
- * WebDecept CIT:26-38 (75–100% CIT:33,38). Card 3 body exact per parent (8:01). No other numbers.
+ * Evidence: shopping agents already fail. Sources: The Washington Post, SusBench (63–87%), WebDecept (75–100%).
+ * No other numbers.
  */
 /**
- * Big-picture row and incidents row: /workspace/final/aux/citations/BIG-PROBLEM.md (md5 9a52db1d; BP lines unchanged at b69e79ea).
- * Each item follows its "Do not say" note. Left out on purpose: Adobe 693.4% (BP:61-68), Visa 4,700% (BP:95-103).
+ * Big-picture row and incidents row.
+ * Each item follows its "Do not say" note. Left out on purpose: Adobe 693.4%, Visa 4,700%.
  */
 export type BigStat =
   | { kind: "count"; prefix: string; to: number; suffix: string; tag: string | null; label: string; source: string; href: string }
@@ -82,7 +79,7 @@ export const EVIDENCE = {
   kicker: "The problem",
   bigStats: [
     {
-      // BP:52-59. FORECAST; "up to", "could", US retail, 2030. Never "today", never "agents will spend".
+      // FORECAST; "up to", "could", US retail, 2030. Never "today", never "agents will spend".
       kind: "count",
       prefix: "$",
       to: 1,
@@ -93,7 +90,7 @@ export const EVIDENCE = {
       href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-agentic-commerce-opportunity-how-ai-agents-are-ushering-in-a-new-era-for-consumers-and-merchants",
     },
     {
-      // BP:74-81 (verbatim BP:79). "possible", subscription services only; never "checkouts" or "illegal".
+      // Verbatim. "possible", subscription services only; never "checkouts" or "illegal".
       kind: "count",
       prefix: "",
       to: 76,
@@ -104,7 +101,7 @@ export const EVIDENCE = {
       href: "https://www.ftc.gov/news-events/news/press-releases/2024/07/ftc-icpen-gpen-announce-results-review-use-dark-patterns-affecting-subscription-services-privacy",
     },
     {
-      // BP:38-46, quote verbatim BP:43. No claim that Atlas lost anyone's money.
+      // Quote verbatim. No claim that Atlas lost anyone's money.
       kind: "quote",
       quote: "Prompt injection, much like scams and social engineering on the web, is unlikely to ever be fully \u201csolved\u201d.",
       label: "OpenAI, on attacks hidden in web pages against its own browser agent.",
@@ -150,12 +147,12 @@ export const SITE = {
   accuracyKicker: "Results",
   accuracyTitle: "Matches Claude Haiku 5.5 on overall accuracy.",
   accuracyCalibration: "With a threshold calibrated on our attacker dev set.",
-  /** Researcher-approved (/workspace/final/aux/14b REPORT 6ce8ced6): F1 at the calibrated threshold. */
+  /** F1 at the calibrated threshold. */
   accuracyF1: { paycheck: "0.78", haiku: "0.77" },
   accuracyF1Label: "Overall accuracy (F1)",
-  accuracyTrainedWin: "Beats Claude Haiku 5.5 on the attack types it was trained on",
+  accuracyTrainedWin: "Level with Claude Haiku 5.5, or slightly ahead, on the attack types it was trained on",
   accuracyTrainedDelta: "+0.07 F1",
-  /** Researcher-verified full-load cost (/workspace/cost/fullload/RESULT.md 4836da37): PayCheck $0.1282 vs Claude Haiku 5.5 $0.2248 per 1,000 checks.
+  /** Full-load cost: PayCheck $0.1282 vs Claude Haiku 5.5 $0.2248 per 1,000 checks.
    *  Never put a speed figure in the same sentence: the 0.7 s figure is normal load; at full load a typical check took 2.9 s. */
   accuracyCostKicker: "Cost",
   accuracyCostDelta: "$0 vs $0.22",
@@ -173,7 +170,7 @@ export const SITE = {
   heroVerdict: "Better than Claude Haiku 5.5 for checkout safety.",
   heroReasons: [
     "0 vs 16 honest checkouts blocked (of 150)",
-    "Beats it on the attack types it was trained on",
+    "Level with it, or slightly ahead, on the attack types it was trained on",
     "Matches it on overall accuracy (0.78 vs 0.77)",
     "0.7s vs 1.5s on a typical check",
     "Cheaper per check",

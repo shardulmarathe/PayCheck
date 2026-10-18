@@ -1,4 +1,4 @@
-"""Fill the SCENARIOS allowlist in api/check.ts with the exact guard request bodies from /workspace/demo
+"""Fill the SCENARIOS allowlist in api/check.ts with the exact guard request bodies from the recorded demo runs
 (scenarios.json order; same ids as src/components/tryit/tryitRecorded.ts). Run: python3 scripts/gen-check-scenarios.py"""
 import json, hashlib, re
 from pathlib import Path

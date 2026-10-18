@@ -122,7 +122,7 @@ def _page() -> dict:
         "amount_cents": 1149,
         "currency": "USD",
         "order_id": "ord-1",
-        "merchant": "SureShop",
+        "merchant": "PayCheck",
         "description": "AA batteries",
     }
 
@@ -551,7 +551,7 @@ def test_sandbox_stub_does_not_call_visa(monkeypatch, tmp_path):
         raise AssertionError("a Visa API was called")
 
     monkeypatch.setattr(urllib.request, "urlopen", explode)
-    payment = PaymentRequest(1149, "USD", "ord-1", "SureShop", "AA batteries")
+    payment = PaymentRequest(1149, "USD", "ord-1", "PayCheck", "AA batteries")
     bare = VisaSandboxProcessor.from_env()
     with pytest.raises(VisaSandboxNotConfigured) as missing:
         bare.charge(payment)

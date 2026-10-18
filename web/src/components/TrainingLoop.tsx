@@ -4,7 +4,7 @@ import { LOOP } from "../lib/copy";
 import { useDriver } from "./motion/Pin";
 
 /**
- * How PayCheck was built, as one cycle (Shardul 8:01, high level): train the guard -> Browser Use agents test it ->
+ * How PayCheck was built, as one cycle (high level): train the guard -> Browser Use agents test it ->
  * the attacker builds new tricks -> mistakes go back into training -> repeat. A page token runs the lane once per pass,
  * a counter counts passes 1..6 (a count only: no meter, no rising bars, nothing implying a pass beat the last), and the
  * line holds on the caption "...shipped round 4". Replaces the round-14 linear Pipeline; the intake/outro facts moved here.

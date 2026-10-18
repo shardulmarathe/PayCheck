@@ -8,7 +8,7 @@ import { TrainingLoop } from "./TrainingLoop";
 import { Sign, Tag } from "./Sign";
 
 /**
- * The wins, shown big. Benchmark numbers appear only where PayCheck wins (Shardul's call).
+ * The wins, shown big. Benchmark numbers appear only where PayCheck wins.
  * Honest pages wrongly blocked on the 300-page benchmark: PayCheck 0 of 150, Claude Haiku 16 of 150 (11%).
  * Each square is one honest page; which squares light is decorative, the counts are exact.
  */
@@ -100,7 +100,7 @@ export function WinsHero() {
 
 /**
  * Small win cards under the grids. The trained-types win carries its qualifier; the cost win carries its
- * Researcher-verified number and the full-load label, and never shares a sentence with a speed figure.
+ * verified number and the full-load label, and never shares a sentence with a speed figure.
  */
 function TextWin({ n, k, big, num, unit, note, aria }: { n: string; k: string; big: string; num?: string; unit?: string; note?: string; aria?: string }) {
   return (
@@ -205,13 +205,13 @@ export function FullResults({ models }: { models: ModelEval[] }) {
 }
 
 /**
- * Section 4, Why it's better (Shardul 9:17): one compact band. Heading, then four stat tiles, each fact once, using only
+ * Section 4, Why it's better: one compact band. Heading, then four stat tiles, each fact once, using only
  * approved numbers from lib/copy.ts (heroReasons, accuracyF1, accuracyTrainedWin, accuracyCost*, speedStats).
  * PayCheck's number bold off-white, Haiku's muted. Red stays reserved for tricks and money lost.
  */
 const WHY_TILES = [
   { k: "Safer", ours: "0", theirs: "16", cap: "honest checkouts wrongly blocked (of 150)" },
-  { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "overall accuracy, and beats it on trained attack types" },
+  { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "overall accuracy, level or slightly ahead on trained attack types" },
   { k: "Cheaper", ours: "$0", theirs: "$0.22", cap: SITE.accuracyCostUnit, note: SITE.accuracyCostNote },
   { k: "Faster", ours: "0.7s", theirs: "1.5s", cap: "on a typical check" },
 ];

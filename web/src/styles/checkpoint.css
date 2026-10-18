@@ -523,7 +523,7 @@ main.v10 #speed .section::before, main.v10 #built-with .section::before { displa
 .tl-page, .tl-ghost { z-index: 1; }
 .tl-st-head { white-space: nowrap; }
 
-/* ───────────── Round 17: Trick replay, one store skin per lane (Shardul 8:09) ─────────────
+/* ───────────── Round 17: Trick replay, one store skin per lane ─────────────
    Store colours come from the demo store skins or are neutral.
    No red, green, neon, glow or gradients inside the skins; red stays the scanner's (bracket, X, HELD). */
 .ts-doc > .ts-content { padding: 0; }

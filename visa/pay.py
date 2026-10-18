@@ -112,6 +112,6 @@ def _payment_for(page: Mapping[str, Any]) -> PaymentRequest:
         amount_cents=amount,
         currency=str(page.get("currency", "USD")),
         order_id=str(page.get("order_id", "")),
-        merchant=str(page.get("merchant", "SureShop")),
-        description=str(page.get("description", "SureShop checkout")),
+        merchant=str(page.get("merchant", "PayCheck")),
+        description=str(page.get("description", "PayCheck checkout")),
     )
