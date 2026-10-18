@@ -1,0 +1,11 @@
+# Learning rate by LoRA rank. Four jobs is Veri's concurrency cap.
+# The winner is chosen on the round's dev split only.
+max_parallel: 4
+spend_cap: "55.00"
+dpo: false
+huggingface:
+  artifact: merged
+  private: true
+grid:
+  learning_rate: [0.0001, 0.00005]
+  lora_rank: [8, 16]
