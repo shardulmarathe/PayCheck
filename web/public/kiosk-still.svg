@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" fill="none" role="img" aria-label="Checkout kiosk">
+  <g transform="translate(150 70)">
+    <path d="M40 560 L170 620 L340 560 L210 500 Z" fill="#11141A" stroke="#232932"/>
+    <path d="M70 160 L200 220 L200 520 L70 460 Z" fill="#171B22" stroke="#232932"/>
+    <path d="M200 220 L330 160 L330 460 L200 520 Z" fill="#1E232B" stroke="#232932"/>
+    <path d="M70 160 L200 100 L330 160 L200 220 Z" fill="#11141A" stroke="#232932"/>
+    <path d="M96 210 L186 255 L186 455 L96 410 Z" fill="#0A0C0F"/>
+    <path d="M116 268 L166 292" stroke="#EEF1F5" stroke-width="6" stroke-linecap="square"/>
+    <path d="M116 300 L166 324" stroke="#9AA3AE" stroke-width="6" stroke-linecap="square"/>
+    <path d="M126 332 L156 346" stroke="#323A45" stroke-width="6" stroke-linecap="square"/>
+    <path d="M120 430 L160 450" stroke="#323A45" stroke-width="8" stroke-linecap="square"/>
+  </g>
+</svg>

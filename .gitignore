@@ -12,6 +12,10 @@ node_modules/
 .DS_Store
 uploads/
 data/trainset/
+web/public/data/**
+!web/public/data/.gitkeep
+web/public/recordings/**
+!web/public/recordings/.gitkeep
 data/attacker/
 data/attacker-round*/
 *.log

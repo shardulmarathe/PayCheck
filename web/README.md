@@ -1,4 +1,17 @@
-# web/
+# Showcase site
+
+Static SureShop site. The user-facing name is the `PRODUCT_NAME` constant in `src/lib/product.ts`. The npm package name stays `guard-gym`.
+
+```bash
+cd web
+npm install
+npm run dev
+npm run build
+```
+
+Dev and preview bind to `0.0.0.0` and `PORT` (default 5173). `npm run build` typechecks, then writes `dist/`.
+
+Data shapes and the `runs/` layout are in [DATA.md](./DATA.md).
 
 Showcase site. It reads JSON run data from `runs/`. Shopper replays for the site are the non-synthetic files in `runs/shopper/` (`synthetic: false`, and `guard_backend: http` when the run is guarded). Mock runs live in `runs/shopper/synthetic/` and are not site data.
 
