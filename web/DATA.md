@@ -44,7 +44,7 @@ MP4 files are served from `web/public/recordings/`. A run embeds one when `video
 
 `leaderboard.json` is `{ "synthetic": false, "models": [ Model, ... ] }`. A bare array, or a file without `"synthetic": false`, is hidden. Other files in `runs/eval/` are used only when the leaderboard is absent, and each of those also needs `"synthetic": false`.
 
-The object form may also carry the headline slot. `claim` is `"within"` unless it is exactly `"beats"`. `catch_pct`, `cost_ratio`, and `point_gap` are numbers. Leave them out and, once the eval is real, the loader fills them from the guard and Claude Sonnet rows: catch rate, Claude’s cost divided by the guard’s cost, and the guard’s catch rate minus Claude’s. `point_gap` is signed; positive means the guard is ahead.
+The object form may also carry the headline slot. `claim` is `"within"` unless it is exactly `"beats"`. `catch_pct`, `cost_ratio`, and `point_gap` are numbers. Leave them out and, once the eval is real, the loader fills them from the guard and baseline-model rows: catch rate, Claude’s cost divided by the guard’s cost, and the guard’s catch rate minus Claude’s. `point_gap` is signed; positive means the guard is ahead.
 
 ```json
 {
@@ -86,54 +86,39 @@ Required: `id`, `model`, `catch_rate`, `latency_ms_median`, `cost_per_1k_checks_
 
 Latency cells use `formatLatency` in `web/src/lib/format.ts`. While a section is still example data, or the log has no latency, the site shows the literal `[N] ms`. A real value under 1000 ms renders as `212 ms`; 1000 ms or more renders as `1.4 s`.
 
-While `catch_pct` is null, the catch line shows the literal `[X]`. The catch sentence lives in `web/src/lib/copy.ts`. The Sonnet sentence does **not** use `cost_ratio` or `point_gap`. It is built from the results file below. The cost-scatter gap line is labeled only when that file has a page-cost ratio, or when `point_gap` is a real number. It does not say `1/[N] the cost` as a placeholder.
+While `catch_pct` is null, the catch line shows the literal `[X]`. The catch sentence lives in `web/src/lib/copy.ts`. The baseline sentence does **not** use `cost_ratio` or `point_gap`. It is built from the results file below. The cost-scatter gap line is labeled only when that file has a page-cost ratio, or when `point_gap` is a real number. It does not say `1/[N] the cost` as a placeholder.
 
 ## Results slices
 
-`runs/eval/results.json` wins, then `runs/results.json`. Both need `"synthetic": false` or the scores stay out. Until one of those is present and not synthetic, the checked-in mock at `web/loader/results.mock.json` is schema only. With examples hidden, the Benchmarks page and its nav link are omitted entirely (no "Within [N]" placeholder, no slice bars). With examples on, the page shows fixture scores and an example-data label, and the Sonnet line stays "Within [N] points of the baseline model." because the mock slices are not rendered.
+`runs/eval/results.json` wins, then `runs/results.json`. Both need `"synthetic": false` or the scores stay out. Until one of those is present and not synthetic, the checked-in mock at `web/loader/results.mock.json` is schema only. With examples hidden, the Benchmarks page and its nav link are omitted entirely (no "Within [N]" placeholder, no slice bars). With examples on, the page shows fixture scores and an example-data label, and the baseline line stays "Within [N] points of the baseline model." because the mock slices are not rendered.
 
 ```json
 {
   "synthetic": false,
   "hero_slice": "in_dist",
   "models": {
-    "guard": { "label": "SureShop guard", "cost_per_page_usd": 0.00004 },
-    "sonnet": { "label": "Baseline model", "cost_per_page_usd": 0.0062 }
+    "guard": { "label": "Guard" },
+    "baseline": { "label": "Baseline model" }
   },
   "slices": {
     "in_dist": {
-      "claim": "beats",
-      "gap_points": 2.4,
-      "scores": {
-        "guard": { "score": 93.1, "ci_low": 89.4, "ci_high": 95.8 },
-        "baseline": { "score": null, "ci_low": null, "ci_high": null }
-      }
-    },
-    "heldout_attack": {
       "claim": "within",
-      "gap_points": 5.5,
+      "gap_points": 0,
       "scores": {
-        "guard": { "score": 84, "ci_low": 79.1, "ci_high": 88.2 },
-        "baseline": { "score": null, "ci_low": null, "ci_high": null }
-      }
-    },
-    "heldout_template": {
-      "claim": "within",
-      "gap_points": 3.1,
-      "scores": {
-        "guard": { "score": 88.4, "ci_low": 83.6, "ci_high": 92.1 },
+        "guard": { "score": 0, "ci_low": 0, "ci_high": 0 },
         "baseline": { "score": null, "ci_low": null, "ci_high": null }
       }
     }
   }
 }
 ```
+Shape only. The scores above are zero placeholders, not results. Real results are in the repository README.
 
 - `hero_slice` is `in_dist` (familiar pages), `heldout_attack` (new attacks), or `heldout_template` (new templates). Anything else, including a missing field, is `in_dist`. The hero speaks only that slice, then a 12 px tag such as "on familiar pages".
-- `claim` is `"within"` unless it is exactly `"beats"`. The hero says "Level with the baseline model" or "Within [N] points of the baseline model". `[N]` is `gap_points` when that number is present.
-- Benchmarks joins the slices that exist: "Level with the baseline model on familiar pages, within 5.5 points on new attacks, within 3.1 points on new templates."
+- `claim` is `"within"` or `"beats"`. The hero never says "beats": it says "Level with the baseline model" or "Within [N] points of the baseline model". `[N]` is `gap_points` when that number is present.
+- Benchmarks joins the slices that exist, one phrase per slice, with no cost phrase.
 - Each score is a catch rate, 0–100. `ci_low` and `ci_high` together draw that model's error bar on the slice. One without the other draws the point only.
-- `cost_per_page_usd` must be set on both `guard` (or `sureshop`) and `sonnet` (or `claude`) or the words "at 1/[N] the cost" are omitted. The ratio is Sonnet's page cost divided by ours. `cost_per_1k_checks_usd` does not fill this phrase.
+- `cost_per_page_usd` is read but no cost ratio is spoken on the site.
 - Model ids on a score row should match `models`. `guard` is drawn in near-white. Other dots stay `#9AA3AE`.
 
 ## Training

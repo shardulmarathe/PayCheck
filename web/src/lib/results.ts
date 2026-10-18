@@ -36,7 +36,7 @@ export interface ResultsView {
   /** Which slice the hero claims. Defaults to in_dist. */
   heroSlice: SliceId;
   /**
-   * Sonnet cost_per_page_usd / ours. Null hides the cost phrase.
+   * Baseline cost_per_page_usd / ours (not spoken). Null hides the cost phrase.
    * Never derived from cost_per_1k_checks_usd.
    */
   costRatio: number | null;
@@ -68,7 +68,7 @@ function finite(value: unknown): number | null {
 
 /**
  * "beats" is spoken only when the file says so AND the paired bootstrap 95% CI on
- * (guard − Sonnet) excludes 0 on the positive side. Read from `paired_ci95: [lo, hi]`
+ * (guard − baseline) excludes 0 on the positive side. Read from `paired_ci95: [lo, hi]`
  * or `diff_ci_low` / `diff_ci_high`. Anything else downgrades to "within".
  */
 function sliceClaim(cell: Record<string, unknown>): Claim {
@@ -83,9 +83,9 @@ function gapToken(gap: number | null): string {
   return gap == null ? "[N]" : trimNum(Math.abs(gap));
 }
 
-function withCost(sentence: string, costRatio: number | null): string {
-  if (costRatio == null || !(costRatio > 0)) return sentence;
-  return `${sentence} at 1/${trimNum(costRatio)} the cost`;
+/** Cost ratios are not spoken: no checked cost comparison ships with this repo. */
+function withCost(sentence: string, _costRatio: number | null): string {
+  return sentence;
 }
 
 /** One slice, for the hero. Cost is appended only when the ratio came from data. */
@@ -114,8 +114,7 @@ export function benchmarksSonnetLine(results: ResultsView): string {
   });
   const sentence = parts.filter(Boolean).join(", ");
   const capped = sentence.charAt(0).toUpperCase() + sentence.slice(1);
-  const cost = results.costRatio != null && results.costRatio > 0 ? `, at 1/${trimNum(results.costRatio)} the cost` : "";
-  return `${capped}${cost}.`;
+  return `${capped}.`;
 }
 
 /**
@@ -141,7 +140,7 @@ function oursId(id: string): boolean {
 }
 
 function sonnetId(id: string, label: string): boolean {
-  return id === "sonnet" || id === "claude" || /sonnet/i.test(id) || /sonnet/i.test(label);
+  return id === "baseline" || id === "sonnet" || id === "claude" || /baseline/i.test(label);
 }
 
 interface RawModel {
@@ -245,7 +244,7 @@ export function normalizeResults(raw: unknown): NormalizedResults | undefined {
     return null;
   };
   const oursCost = costFor(["guard", "sureshop"], (id) => oursId(id));
-  const sonnetCost = costFor(["sonnet", "claude"], sonnetId);
+  const sonnetCost = costFor(["baseline", "claude"], sonnetId);
   const costRatio = oursCost != null && sonnetCost != null ? sonnetCost / oursCost : null;
   if (synthetic) return { synthetic: true };
   return { synthetic: false, view: { heroSlice, costRatio, slices } };
@@ -259,14 +258,14 @@ export function assertClaimRules(): void {
   }
   if (hidden.tag !== "on familiar pages") throw new Error(`hidden hero tag changed: ${hidden.tag}`);
   if (hidden.sentence.includes("1/") || hidden.sentence.toLowerCase().includes("sonnet-level")) {
-    throw new Error("hidden hero claim hardcodes a cost or overclaims Sonnet");
+    throw new Error("hidden hero claim hardcodes a cost or overclaims the baseline");
   }
   const sample = normalizeResults({
     synthetic: false,
     hero_slice: "heldout_attack",
     models: {
       guard: { label: "SureShop guard", cost_per_page_usd: 0.00004 },
-      sonnet: { label: "Baseline model", cost_per_page_usd: 0.0062 },
+      baseline: { label: "Baseline model", cost_per_page_usd: 0.0062 },
     },
     slices: {
       in_dist: {
@@ -275,7 +274,7 @@ export function assertClaimRules(): void {
         paired_ci95: [0.4, 3.8],
         scores: {
           guard: { score: 93, ci_low: 89, ci_high: 96 },
-          baseline: { score: null, ci_low: null, ci_high: null },
+          baseline: { score: 91, ci_low: 87, ci_high: 94 },
         },
       },
       heldout_attack: {
@@ -283,7 +282,7 @@ export function assertClaimRules(): void {
         gap_points: 5.5,
         scores: {
           guard: { score: 84, ci_low: 79, ci_high: 88 },
-          baseline: { score: null, ci_low: null, ci_high: null },
+          baseline: { score: 89.5, ci_low: 85, ci_high: 93 },
         },
       },
       heldout_template: {
@@ -291,19 +290,19 @@ export function assertClaimRules(): void {
         gap_points: 3,
         scores: {
           guard: { score: 88, ci_low: 83, ci_high: 92 },
-          baseline: { score: null, ci_low: null, ci_high: null },
+          baseline: { score: 91, ci_low: 87, ci_high: 94 },
         },
       },
     },
   });
   if (!sample || sample.synthetic) throw new Error("sample results did not parse");
   const attack = heroClaim(sample.view);
-  if (attack.sentence !== "Within 5.5 points of the baseline model at 1/[N] the cost.") {
+  if (attack.sentence !== "Within 5.5 points of the baseline model.") {
     throw new Error(`hero slice claim changed: ${attack.sentence}`);
   }
   if (attack.tag !== "on new attacks") throw new Error(`hero slice tag changed: ${attack.tag}`);
   const line = benchmarksSonnetLine(sample.view);
-  if (line !== "Level with the baseline model on familiar pages, within 5.5 points on new attacks, within 3 points on new templates, at 1/[N] the cost.") {
+  if (line !== "Level with the baseline model on familiar pages, within 5.5 points on new attacks, within 3 points on new templates.") {
     throw new Error(`benchmarks slice line changed: ${line}`);
   }
   const beatOnly = heroClaim({

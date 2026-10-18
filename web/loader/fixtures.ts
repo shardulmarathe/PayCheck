@@ -237,7 +237,7 @@ export const fixtureDataset: Dataset = {
     cost_ratio: null,
     point_gap: null,
     cost_placeholder: true,
-    cost_note: "Say beats only when that slice's claim is exactly beats. The cost phrase appears only when both models have cost_per_page_usd.",
+    cost_note: "Never say beats. No cost phrase is shown.",
     cost_annotation: "",
     cost_axis: "Cost per 1,000 checks · log scale",
     hollow_caption:

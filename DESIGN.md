@@ -83,7 +83,7 @@ Load with `next/font/google` (`IBM_Plex_Sans` weights 300/400, `IBM_Plex_Mono` w
 - **Name:** `SureShop` (one word, capital S twice). Never "Sure Shop", "SURESHOP" or "sureshop" in UI.
 - **Tagline:** "Your agent shops. We check the checkout." Verbatim, everywhere: hero, Devpost first line, table card.
 - **Headline number slot:** "Catches [X]% of checkout tricks." It's the same sentence on the hero, the Benchmarks H1 and the table card. `[X]` stays a visible slot until the real frozen-test number lands; never invent one.
-- **Sonnet line:** say "level with the baseline model" **only if** the gap clears the bootstrap 95% CI (the CI of the difference excludes 0). Otherwise say "within [N] points of the baseline model". Either version ends "at 1/[N] the cost."
+- **Baseline line:** never say "beats". Say "level with" or "within [N] points of" the baseline model, and only with numbers from a checked eval. No cost-ratio phrase.
 - **Never show "example data" labels** to judges. If a block has no real data at freeze, **hide the whole block** (render nothing, collapse its space). There are no placeholders in production.
 - **Latency:** show the measured value. Below 1000 ms show `[N] ms` (integer, e.g. `412 ms`). At 1000 ms and above show seconds with one decimal (`1.3 s`). Never hard-code a number in markup; it comes from the run data.
 - **Footer, verbatim:** "Recorded demos. Nothing on this site runs live."
@@ -143,7 +143,7 @@ Each boundary has one element that **carries across**, so the eye never loses it
 2. **Hero → Replay 1 ("the kiosk screen becomes the replay"):** as the hero scrolls out (`offset: ['start start', 'end start']`), the kiosk rotates about 20° on y (scroll-driven, never on its own) and **the kiosk screen card (DOM) travels and scales into the "With guard" panel**. Its bracketed trick line is the same line, in the same position, inside the guarded panel's popup. The "Without guard" panel slides in from the left at `rotateY(8deg)`. Both panels flatten to `rotateY(0)` as they reach viewport center.
 3. **Replay 1 → Replay 2 (in-section switcher, not a tab):** the browser chrome and URL bar **hold still**. Only the content crossfades (250 ms). Then the copycat letter flip plays: `brightcell.shop`, the `l` flips to `1` over 400 ms, and a **dashed** red bracket snaps around just those characters.
 4. **Replay → Benchmarks ("the counter becomes the headline number"):** the receipt prints (lines 120 ms apart), then the counters land: "Unguarded: −$X" (red fill) and "Guarded: −$0.00" (white). As Benchmarks enters, the **red counter fades out in place** (red never travels into our claims). The **white guarded counter is the carrier**: it rises into the Benchmarks H1 slot and its digits roll (tabular, 600 ms) from `$0.00` to `[X]%`, completing "Catches [X]% of checkout tricks."
-5. **Benchmarks headline → chart:** the hairline under the H1 extends full width and becomes the chart's 100% gridline. Gridlines draw left→right (stagger 60 ms). The SureShop dot (white) appears at its point, then the dashed "1/[N] the cost" connector draws from the Sonnet dot to ours (900 ms, `pathLength`).
+5. **Benchmarks headline → chart:** the hairline under the H1 extends full width and becomes the chart's 100% gridline. Gridlines draw left→right (stagger 60 ms). The SureShop dot (white) appears at its point, then the dashed connector draws from the baseline dot to ours (900 ms, `pathLength`).
 6. **Benchmarks → Design process ("the dot becomes the loop"):** the white ring around the SureShop dot is the carrier. It scales up and stretches into the Design-process loop ellipse (`hairline-strong`, 1 px). The four loop nodes then light in order 01 → 04 (stagger 120 ms), and a single near-white tick travels once around the loop. It isn't continuous: nothing moves when idle.
 7. **Design process → Future ("the miss feeds the next lesson"):** node 04, "Misses go back into training", drops a near-white dot that runs down a vertical hairline into the `01` index of the Future list. Each row's top hairline draws left→right (stagger 60 ms), then the row text enters.
 8. **Future → Footer:** no carrier. The last hairline becomes the footer rule. The footer is static.
@@ -241,5 +241,5 @@ Tab glides pass through these same connectors (they're tied to scroll), so a cli
 ## Open questions
 
 - Demo format (laptop, projector or recorded video): on a projector, raise `text-2` usage to `text` for captions and bump Micro to 13 px.
-- Final `[X]`, `[N]` and Sonnet gap/CI land after the frozen-test run. The copy rule above decides "beats" vs "within".
+- Final `[X]` and `[N]` land after the frozen-test run. The copy rule above applies.
 - Site URL for the table-card QR (after Vercel deploy).

@@ -1,7 +1,7 @@
 import { PRODUCT_NAME } from "./product";
 
 /**
- * Claim lines a real eval can replace. The Sonnet sentence is built in
+ * Claim lines a real eval can replace. The baseline comparison sentence is built in
  * `results.ts` from slice claims, not from a hardcoded cost ratio.
  */
 export const COPY = {
