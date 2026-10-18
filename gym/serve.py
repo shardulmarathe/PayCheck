@@ -247,7 +247,7 @@ def _index() -> str:
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Checkout guard gym</title>
+  <title>PayCheck gym</title>
   <style>
     body {{ font-family: "Liberation Sans", sans-serif; margin: 32px; color: #1c1c1c; }}
     table {{ border-collapse: collapse; width: 100%; }}
@@ -256,7 +256,7 @@ def _index() -> str:
   </style>
 </head>
 <body>
-  <h1>Checkout guard gym</h1>
+  <h1>PayCheck gym</h1>
   <p>Fake stores for a shopping agent. Give the agent the instruction and the start URL. The trick type and the correct cart are for the harness, not the shopper.</p>
   <p>Machine-readable list: <a href="/errands.json"><code>/errands.json</code></a>. Frozen pages: <code>/snapshot/&lt;page_id&gt;</code>.</p>
   <table>

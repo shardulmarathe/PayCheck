@@ -82,52 +82,10 @@ export function WinsHero() {
           <Tag verdict="held" className="win-count" />
         </div>
       </div>
-      <div className="win-row">
-        <TextWin
-          n="03"
-          k={SITE.accuracyCostKicker}
-          num={SITE.accuracyCostDelta}
-          unit={SITE.accuracyCostUnit}
-          big={SITE.accuracyCostWin}
-          note={SITE.accuracyCostNote}
-          aria={SITE.accuracyCostAria}
-        />
-      </div>
     </figure>
   );
 }
 
-/**
- * Small win cards under the grids. The trained-types win carries its qualifier; the cost win carries its
- * verified number and the full-load label, and never shares a sentence with a speed figure.
- */
-function TextWin({ n, k, big, num, unit, note, aria }: { n: string; k: string; big: string; num?: string; unit?: string; note?: string; aria?: string }) {
-  return (
-    <div className="win-cost" role={aria ? "group" : undefined} aria-label={aria}>
-      <p className="win-cost-k">
-        <span className="cp-n">{n}</span> {k}
-      </p>
-      {num ? <p className={num.includes(" vs ") ? "win-cost-num win-cost-pair" : "win-cost-num"}>{pair(num)}</p> : null}
-      {unit ? <p className="win-cost-unit">{unit}</p> : null}
-      <p className="win-cost-big">{big}</p>
-      {note ? <p className="win-cost-note">{note}</p> : null}
-      <Tag verdict="cleared" className="win-stamp win-cost-stamp" />
-    </div>
-  );
-}
-
-/** "$0.13 vs $0.22" -> both figures big, "vs" small, on one line. */
-function pair(num: string) {
-  const at = num.indexOf(" vs ");
-  if (at < 0) return num;
-  return (
-    <>
-      {num.slice(0, at)}
-      <span className="win-cost-vs"> vs </span>
-      {num.slice(at + 4)}
-    </>
-  );
-}
 
 const FULL_ROWS: { id: string; name: string }[] = [
   { id: "guard", name: "PayCheck" },
@@ -204,15 +162,13 @@ export function FullResults({ models }: { models: ModelEval[] }) {
 }
 
 /**
- * Section 4, Why it's better: one compact band. Heading, then four stat tiles, each fact once, using only
- * approved numbers from lib/copy.ts (heroReasons, accuracyF1, accuracyCost*, speedStats).
+ * Section 4, Why it's better: one compact band. Heading, then the stat tiles, each fact once, using only
+ * approved numbers from lib/copy.ts (heroReasons, accuracyF1).
  * PayCheck's number bold off-white, Haiku's muted. Red stays reserved for tricks and money lost.
  */
-const WHY_TILES = [
+const WHY_TILES: { k: string; ours: string; theirs: string; cap: string; note?: string }[] = [
   { k: "Safer", ours: "0", theirs: "16", cap: "honest checkouts wrongly blocked (of 150)" },
   { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "overall accuracy" },
-  { k: "Cheaper", ours: "$0", theirs: "$0.22", cap: SITE.accuracyCostUnit, note: SITE.accuracyCostNote },
-  { k: "Faster", ours: "0.7s", theirs: "1.5s", cap: "on a typical check, on one cloud GPU" },
 ];
 
 export function WhyBetter({ models }: { models: ModelEval[] }) {

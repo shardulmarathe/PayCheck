@@ -1,6 +1,6 @@
-# Checkout guard training runbook
+# PayCheck training runbook
 
-Run every command from the `train/` directory after the package is installed. The default output directory is the repository `runs/` folder (the showcase site reads it). This repository is private. Do not make it public, do not push it anywhere else, and do not put API keys in files, command lines, or logs.
+Run every command from the `train/` directory after the package is installed. The default output directory is the repository `runs/` folder (the site loader can read it). Do not put API keys in files, command lines, or logs.
 
 `gym/schema/README.md` is the label contract: `page_id`, `store`, `family`, `attack_type`, `verdict`, `selector`, `bbox`, `evidence_text`, `instruction`, `source`, `split`, and `group_id` (the template or near-duplicate family). On a pass, `attack_type` is `none` and both `evidence_text` and `instruction` are empty strings. Page text is not inside the JSONL. It lives at `<directory of the labels file>/text/<page_id>.txt`. Every eval and round reads that directory by default and exits 2 if a row still has no text. Each round report records whether the schema file exists. If field names differ, update `FIELD_ALIASES` in `guardtrain/schema.py` before a paid run.
 
@@ -192,7 +192,7 @@ python -m guardtrain baseline-anthropic \
   --dry-run
 ```
 
-Sonnet 5.5 is called with `output_config.effort=low` and no temperature, top_p, or thinking budget. List price used for the cost column is $2 / MTok input and $10 / MTok output. Cache is not used. Drop `--dry-run` for the real score. Published prices, retrieved 2026-10-17: Gemini 3 Flash preview $0.50 / $3, Gemini 3.7 Flash $0.75 / $3.75 through 2026-12-31 and $1.50 / $7.50 after that, Gemini 3.1 Pro preview $2 / $12 (output includes thinking, prompts at or under 200k). Unknown model names are refused rather than priced at $0. Override both `--input-usd-per-mtok` and `--output-usd-per-mtok` if the gateway markup differs.
+The baseline is called with `output_config.effort=low`. Cache is not used. Drop `--dry-run` for the real score. Published prices, retrieved 2026-10-17: Gemini 3 Flash preview $0.50 / $3, Gemini 3.7 Flash $0.75 / $3.75 through 2026-12-31 and $1.50 / $7.50 after that, Gemini 3.1 Pro preview $2 / $12 (output includes thinking, prompts at or under 200k). Unknown model names are refused rather than priced at $0. Override both `--input-usd-per-mtok` and `--output-usd-per-mtok` if the gateway markup differs.
 
 Show the ledger, generate round 1, distill the train pages, then launch the round. Round 1 starts from `Qwen/Qwen3-4B-Instruct-2507`.
 

@@ -1,5 +1,7 @@
 # PayCheck
 
+Live demo: https://paycheck-guard.vercel.app · About level with Claude Haiku 5.5 on F1 (0.776 calibrated vs 0.766; difference not significant), with 0/150 honest checkouts blocked vs 16/150.
+
 PayCheck is a checkout guard for AI shopping agents. Before the agent pays, it sends the page to a small model. The model returns block or pass, the trick type, the exact quoted evidence, and a short instruction for how to steer around the trick.
 
 The guard is Qwen3-4B-Instruct-2507 with a LoRA adapter trained on Veri. The demo shopper is a Browser Use agent, and payment goes through a signed agent check (our implementation of Visa's Trusted Agent Protocol) with mock payments only.
@@ -86,7 +88,7 @@ Mock shopper runs are written to `runs/shopper/synthetic/` and are not site data
 
 The shop server is at [PayCheck gym](http://127.0.0.1:8765) once `python -m gym.serve --port 8765` is running. Give the agent the errand instruction and the start URL only. Trick type and the correct cart are on `/errands.json` for the harness. Card fields are discarded and not stored.
 
-Sixty test pages are a template holdout: different stores and `reserved.html.j2`, which the train generator does not import. `copycat_domain` and `listing_injection` are tagged `heldout_attack`. The rest of the in-template pages are `in_dist`. Similarity against round 1 is in the test-set manifest.
+Sixty test pages are a template holdout: different stores and `reserved.html.j2`, which the train generator does not import. The in-template pages are `in_dist`. Similarity against round 1 is in the test-set manifest.
 
 ## Frozen test set
 
@@ -115,8 +117,6 @@ Content hash (SHA-256, see `gym/schema/README.md`):
 ```
 6370babfc63770777827e113eb5e04cf48cc304e18cb16333e23351d85f22fcc
 ```
-
-`gym/testset/slice100.txt` is the 100-page stratified slice (50 clean, and every attack, including all three add-on variants).
 
 Round-1 train and dev specs are `gym/rounds/r1/train.jsonl` and `gym/rounds/r1/dev.jsonl`. Shortcut-gate results for the test set and that round are in `gym/audit/shortcut_report.json`. The test token probe is 0.4236 and the test structure probe is 0.1362. Round-1 token AUCs are above the 0.65 gate (train 0.9582, dev 0.8208) and are listed there as known limitations.
 

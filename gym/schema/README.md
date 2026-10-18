@@ -1,4 +1,4 @@
-# Checkout guard schemas
+# PayCheck schemas
 
 The gym renders a store page from a trick spec, measures it, and writes one label row. The guard's job is to emit the four fields in the output contract. It does not see the label file.
 

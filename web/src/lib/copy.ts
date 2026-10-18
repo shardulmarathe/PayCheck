@@ -150,16 +150,6 @@ export const SITE = {
   /** F1 at the calibrated threshold. */
   accuracyF1: { paycheck: "0.78", haiku: "0.77" },
   accuracyF1Label: "Overall accuracy (F1)",
-  /** Full-load cost: PayCheck $0.1282 vs Claude Haiku 5.5 $0.2248 per 1,000 checks.
-   *  Never put a speed figure in the same sentence: the 0.7 s figure is normal load; at full load a typical check took 2.9 s. */
-  accuracyCostKicker: "Cost",
-  accuracyCostDelta: "$0 vs $0.22",
-  accuracyCostUnit: "per 1,000 checks, on your Mac or phone vs Claude Haiku 5.5",
-  accuracyCostWin: "Cheaper than Claude Haiku 5.5",
-  // Source detail kept here only: best case, at full load, one busy T4 server (7,882 checks/hour).
-  accuracyCostNote: "",
-  accuracyCostAria:
-    "Cheaper than Claude Haiku 5.5: $0 per 1,000 checks on your own Mac or phone, vs $0.22 for Claude Haiku 5.5.",
   heroTrickLine: "The trick: a fake verification page asks for your full card details and online banking password.",
   heroOutcomeUnguarded: "Handed over card details",
   heroOutcomeGuarded: "Blocked before paying",
@@ -169,7 +159,6 @@ export const SITE = {
   heroReasons: [
     "0 vs 16 honest checkouts blocked (of 150)",
     "Matches it on overall accuracy (0.78 vs 0.77)",
-    "0.7s vs 1.5s on a typical check",
     "Cheaper per check",
   ],
   heroVerdictLink: "See the results",
