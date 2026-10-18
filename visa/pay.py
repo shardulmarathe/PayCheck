@@ -2,7 +2,8 @@
 
 ``pay`` calls the guard at ``SURESHOP_CHECK_URL`` first. A block logs the
 trick type and evidence and does not call the processor. An allow submits
-exactly one payment.
+exactly one payment. A timeout or any other guard error does not call the
+processor, and the result says ``guard error`` rather than ``blocked``.
 """
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ class PayResult:
     evidence: str
     instruction: str
     reason: str
+    outcome: str
     payment: PaymentResult | None
 
     def to_dict(self) -> dict[str, object]:
@@ -37,6 +39,7 @@ class PayResult:
             "evidence": self.evidence,
             "instruction": self.instruction,
             "reason": self.reason,
+            "outcome": self.outcome,
             "payment": None if self.payment is None else self.payment.to_dict(),
         }
 
@@ -52,7 +55,8 @@ def pay(
     try:
         decision = call_check(page, check_url)
     except GuardError as exc:
-        logger.error("payment not sent: %s", exc)
+        reason = f"guard error: {exc}"
+        logger.error("payment not sent: %s", reason)
         return PayResult(
             paid=False,
             payment_calls=0,
@@ -60,7 +64,8 @@ def pay(
             attack_type="",
             evidence="",
             instruction="",
-            reason=str(exc),
+            reason=reason,
+            outcome="guard error",
             payment=None,
         )
     if decision.verdict != "allow":
@@ -74,6 +79,7 @@ def pay(
             evidence=decision.evidence,
             instruction=decision.instruction,
             reason=reason,
+            outcome="blocked",
             payment=None,
         )
     result = processor.charge(_payment_for(page))
@@ -85,6 +91,7 @@ def pay(
         evidence=decision.evidence,
         instruction=decision.instruction,
         reason="guard allowed payment",
+        outcome="allowed",
         payment=result,
     )
 

@@ -42,14 +42,31 @@ def resolve_check_url(raw: str | None = None) -> str:
     return value + "/check"
 
 
+def guard_timeout() -> float:
+    """Seconds to wait for ``/check``. ``SURESHOP_GUARD_TIMEOUT_S`` overrides 60."""
+
+    raw = os.environ.get("SURESHOP_GUARD_TIMEOUT_S", "").strip()
+    if not raw:
+        return 60.0
+    try:
+        value = float(raw)
+    except ValueError:
+        return 60.0
+    if value <= 0:
+        return 60.0
+    return value
+
+
 def call_check(
     page: Mapping[str, Any],
     check_url: str | None = None,
     *,
-    timeout: float = 5,
+    timeout: float | None = None,
 ) -> GuardDecision:
     """POST the cart or checkout page. Fail closed on any unusable response."""
 
+    if timeout is None:
+        timeout = guard_timeout()
     url = resolve_check_url(check_url)
     body = json.dumps(guard_payload(page)).encode("utf-8")
     request = urllib.request.Request(

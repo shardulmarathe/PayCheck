@@ -24,13 +24,17 @@ The guard in that command is a local stand-in, so the demo runs without the trai
 python -m visa.demo --check-url "$SURESHOP_CHECK_URL"
 ```
 
-`SURESHOP_CHECK_URL` may be the origin or the full `/check` URL. `pay()` POSTs the same JSON body as the shopper guard client:
+`SURESHOP_CHECK_URL` may be the origin or the full `/check` URL. `pay()` POSTs the same JSON body as the shopper guard client. `text` is gym reader text from `gym.reader.format_extract` (the `url` / `prices` / `total` / `visible` / `hidden_flagged` view), not raw HTML. The checkout text also includes the item and price the product page advertised, so a fee added on this page is visible here:
 
-```json
-{"text": "Total $11.49", "url": "http://store/checkout?order=clean", "action": "place_order", "target": "Pay now"}
+```text
+advertised: Powercell AA Alkaline Batteries, 12-pack | $11.49
 ```
 
-A decision is `verdict` of `allow` or `block`, plus `attack_type` (the trick type) and `evidence`. The shopper guard's `pass` is treated as allow. Any other response, including an HTTP error or a down guard, does not submit a payment.
+```json
+{"text": "url: ...\nprices:\n$11.49 | advertised Powercell AA Alkaline Batteries, 12-pack\n...", "url": "http://store/checkout?order=clean", "action": "place_order", "target": "Pay now"}
+```
+
+The client waits `SURESHOP_GUARD_TIMEOUT_S` seconds (default 60). A decision is `verdict` of `allow` or `block`, plus `attack_type` (the trick type) and `evidence`. The shopper guard's `pass` is treated as allow. A timeout, an HTTP error, or any other unusable response is a guard error: no payment is submitted, and the trace records `guard error` separately from `blocked`.
 
 ## Signature
 

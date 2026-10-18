@@ -3,6 +3,7 @@
 import base64
 import json
 import threading
+import time
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -11,7 +12,7 @@ from pathlib import Path
 import pytest
 
 from visa.demo import run_demo
-from visa.guard import parse_decision
+from visa.guard import call_check, guard_timeout, parse_decision
 from visa.keys import AgentKey, KeyDirectory
 from visa.pay import pay
 from visa.processors import (
@@ -20,7 +21,13 @@ from visa.processors import (
     VisaSandboxNotConfigured,
     VisaSandboxProcessor,
 )
-from visa.store import FEE_EVIDENCE, make_server
+from visa.store import (
+    ADVERTISED_ITEM,
+    ADVERTISED_PRICE,
+    FEE_EVIDENCE,
+    make_server,
+    page_for,
+)
 from visa.tap import (
     TAG_BROWSER,
     TAG_PAYER,
@@ -363,6 +370,7 @@ def test_block_sends_no_payment_and_logs_the_reason(caplog):
     assert result.payment_calls == 0
     assert result.paid is False
     assert result.verdict == "block"
+    assert result.outcome == "blocked"
     assert result.attack_type == "hidden_fees"
     assert result.evidence == FEE_EVIDENCE
     assert FEE_EVIDENCE in caplog.text
@@ -383,6 +391,7 @@ def test_allow_submits_exactly_one_payment():
     assert len(processor.payments) == 1
     assert result.payment_calls == 1
     assert result.paid is True
+    assert result.outcome == "allowed"
     assert result.payment is not None
     assert result.payment.provenance == "mock"
     assert result.payment.status == "approved"
@@ -411,6 +420,9 @@ def test_guard_pass_is_allow_and_a_down_guard_sends_nothing():
     assert len(processor.payments) == 1
     assert blocked.payment_calls == 0
     assert blocked.paid is False
+    assert blocked.outcome == "guard error"
+    assert blocked.outcome != "blocked"
+    assert "guard error:" in blocked.reason
     assert "HTTP 500" in blocked.reason
 
 
@@ -419,6 +431,9 @@ def test_guard_error_sends_no_payment():
     assert refused.payment_calls == 0
     assert refused.paid is False
     assert refused.payment is None
+    assert refused.outcome == "guard error"
+    assert refused.verdict == ""
+    assert "guard error:" in refused.reason
 
     class GarbageHandler(CheckHandler):
         def do_POST(self) -> None:
@@ -441,6 +456,89 @@ def test_guard_error_sends_no_payment():
     assert processor.calls == 0
     assert result.payment_calls == 0
     assert result.paid is False
+    assert result.outcome == "guard error"
+
+
+def test_checkout_text_is_reader_format_with_the_advertised_price():
+    advertised = f"advertised: {ADVERTISED_ITEM} | {ADVERTISED_PRICE}"
+    fee = page_for("fee")
+    text = str(fee["text"])
+    assert text.startswith("url:")
+    assert "prices:" in text
+    assert "visible:" in text
+    assert "hidden_flagged:" in text
+    assert advertised in text
+    assert f"{ADVERTISED_PRICE} | advertised {ADVERTISED_ITEM}" in text
+    assert FEE_EVIDENCE in text
+    assert "Total $14.48" in text
+    assert "<!DOCTYPE" not in text
+    assert "<html" not in text
+    assert "kind: checkout" in text
+    clean = str(page_for("clean")["text"])
+    assert advertised in clean
+    assert FEE_EVIDENCE not in clean
+    assert "Total $11.49" in clean
+
+
+def test_guard_timeout_defaults_to_sixty_seconds(monkeypatch):
+    monkeypatch.delenv("SURESHOP_GUARD_TIMEOUT_S", raising=False)
+    assert guard_timeout() == 60
+
+    seen: dict[str, float] = {}
+
+    class _Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self):
+            return b'{"verdict":"allow","attack_type":"none","evidence":"","instruction":""}'
+
+    def fake_urlopen(request, timeout):
+        seen["timeout"] = timeout
+        return _Response()
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setenv("SURESHOP_GUARD_TIMEOUT_S", "33")
+    call_check(_page(), "http://guard.example/check")
+    assert seen["timeout"] == 33
+    assert guard_timeout() == 33
+    monkeypatch.setenv("SURESHOP_GUARD_TIMEOUT_S", "0")
+    assert guard_timeout() == 60
+    monkeypatch.setenv("SURESHOP_GUARD_TIMEOUT_S", "nope")
+    assert guard_timeout() == 60
+
+
+def test_guard_timeout_is_a_guard_error_and_sends_no_payment(monkeypatch):
+    class SlowHandler(CheckHandler):
+        def do_POST(self) -> None:
+            length = int(self.headers.get("Content-Length", "0"))
+            self.rfile.read(length)
+            time.sleep(0.4)
+            data = b'{"verdict":"allow","attack_type":"none","evidence":"","instruction":""}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+
+    monkeypatch.setenv("SURESHOP_GUARD_TIMEOUT_S", "0.1")
+    httpd = _serve(CheckServer(("127.0.0.1", 0), SlowHandler))
+    processor = BoomProcessor()
+    try:
+        result = pay(_page(), processor, check_url=_check_url(httpd))
+    finally:
+        httpd.shutdown()
+        httpd.server_close()
+    assert processor.calls == 0
+    assert result.payment_calls == 0
+    assert result.paid is False
+    assert result.outcome == "guard error"
+    assert result.outcome != "blocked"
+    assert result.verdict == ""
+    assert "guard error:" in result.reason
 
 
 def test_unusable_verdict_is_not_an_allow():
@@ -492,8 +590,21 @@ def test_demo_trace_allow_block_and_rejects(tmp_path):
     assert scenarios["block"]["paid"] is False
     assert scenarios["block"]["payment_calls"] == 0
     assert scenarios["block"]["guard"]["verdict"] == "block"
+    assert scenarios["block"]["guard"]["outcome"] == "blocked"
     assert scenarios["block"]["guard"]["evidence"] == FEE_EVIDENCE
     assert scenarios["block"]["payment"] is None
+    advertised = f"advertised: {ADVERTISED_ITEM} | {ADVERTISED_PRICE}"
+    block_text = scenarios["block"]["guard_text"]
+    allow_text = scenarios["allow"]["guard_text"]
+    assert block_text.startswith("url:")
+    assert "prices:" in block_text
+    assert "visible:" in block_text
+    assert advertised in block_text
+    assert FEE_EVIDENCE in block_text
+    assert not block_text.lstrip().startswith("<!DOCTYPE")
+    assert advertised in allow_text
+    assert FEE_EVIDENCE not in allow_text
+    assert scenarios["allow"]["guard"]["outcome"] == "allowed"
     assert scenarios["tampered path"]["store_status"] == 403
     assert scenarios["tampered path"]["payment_calls"] == 0
     assert scenarios["unsigned"]["store_status"] == 403

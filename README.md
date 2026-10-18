@@ -73,7 +73,7 @@ Schemas, the label row, and the guard output contract are in `gym/schema/README.
 
 ## Signed agent check (Visa Trusted Agent Protocol)
 
-The agent signs checkout requests. The demo store checks the signature, then `pay()` calls the guard at `SURESHOP_CHECK_URL` and only then submits a payment. A block logs the trick and evidence and does not pay. A guard error does not pay. The demo processor is labeled `provenance: mock`.
+The agent signs checkout requests. The demo store checks the signature, then `pay()` calls the guard at `SURESHOP_CHECK_URL` with gym reader text (including the advertised item and price) and only then submits a payment. A block logs the trick and evidence and does not pay. A guard error, including a timeout (`SURESHOP_GUARD_TIMEOUT_S`, default 60s), does not pay and is recorded as `guard error`. The demo processor is labeled `provenance: mock`.
 
 ```bash
 python -m visa.demo

@@ -31,7 +31,10 @@ from urllib.parse import urlparse
 from visa.keys import AgentKey, KeyDirectory
 from visa.pay import pay
 from visa.processors import MockProcessor, PaymentProcessor
+from visa.reader_text import checkout_reader_text
 from visa.store import (
+    ADVERTISED_ITEM,
+    ADVERTISED_PRICE,
     CHECK_NAME,
     FEE_EVIDENCE,
     StoreServer,
@@ -173,11 +176,18 @@ def _scenario_checkout(
             _say("  3. guard /check")
     payment_calls_before = _call_count(processor)
     pay_result = None
+    guard_text = ""
     if accepted:
         page = page_for(order)
         page["html"] = body
-        page["text"] = body
         page["url"] = base + path
+        guard_text = checkout_reader_text(
+            body,
+            str(page["url"]),
+            item=ADVERTISED_ITEM,
+            price=ADVERTISED_PRICE,
+        )
+        page["text"] = guard_text
         page["action"] = "place_order"
         page["target"] = "Pay now"
         pay_result = pay(page, processor, check_url=check_url)
@@ -188,7 +198,9 @@ def _scenario_checkout(
         "store_status": status,
         "store_accepted": accepted,
         "store_body": None if accepted else _maybe_json(body),
+        "guard_text": guard_text,
         "guard": None if pay_result is None else {
+            "outcome": pay_result.outcome,
             "verdict": pay_result.verdict,
             "attack_type": pay_result.attack_type,
             "evidence": pay_result.evidence,
@@ -373,6 +385,7 @@ def _print_signed_request(signed: SignedRequest, method: str, path: str) -> None
 def _print_guard_and_payment(scenario: dict[str, object]) -> None:
     guard = scenario.get("guard")
     if isinstance(guard, dict):
+        _say(f"     outcome: {guard.get('outcome', '')}")
         _say(f"     verdict: {guard['verdict']}")
         _say(f"     trick: {guard['attack_type']}")
         _say(f"     evidence: {guard['evidence']!r}")
@@ -417,6 +430,7 @@ def _echo_scenario(scenario: dict[str, object]) -> None:
     guard = scenario.get("guard")
     if isinstance(guard, dict):
         _say("  3. guard /check")
+        _say(f"     outcome: {guard.get('outcome', '')}")
         _say(f"     verdict: {guard['verdict']}")
         _say(f"     trick: {guard['attack_type']}")
         _say(f"     evidence: {guard['evidence']!r}")
