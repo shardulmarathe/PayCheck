@@ -380,11 +380,24 @@ def check_testset() -> str:
     return digest
 
 
+def _locked_inputs_present() -> bool:
+    from gym.paths import manifest_path, testset_dir
+
+    split = Path(__file__).resolve().parent / "splits" / "test_page_ids.txt"
+    return split.is_file() and manifest_path().is_file() and (testset_dir() / "labels.jsonl").is_file()
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Write or verify the frozen test set.")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args(argv)
+    if not _locked_inputs_present():
+        print(
+            "skipped: the locked test set (data/testset, gym/testset, gym/splits/test_page_ids.txt) "
+            "is held back from this repository on purpose. Supply it separately to write or check it."
+        )
+        return
     if args.check:
         check_testset()
         return

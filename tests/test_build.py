@@ -346,7 +346,9 @@ def test_headline_checkbox_addon_is_in_the_checkout_total():
     assert checkout["page"]["addon"]["checked"] is True
     assert checkout["page"]["addon"]["price_cents"] == 999
     html = render_html(checkout)
-    assert 'id="addon" name="addon" value="1" checked' in html
+    from gym.ids import CHECKBOX_ID, CHECKBOX_NAME
+
+    assert f'id="{CHECKBOX_ID}" name="{CHECKBOX_NAME}" value="1" checked' in html
     assert errand["evidence"] in html
     assert quote_cents(errand, state) == 2148
     state.addon_on = False

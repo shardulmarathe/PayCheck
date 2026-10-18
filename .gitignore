@@ -28,3 +28,10 @@ runs/shopper/ledger.json.tmp
 *.p12
 *.key
 runs/visa/*.json
+
+# Locked test set: held back from the public repo on purpose.
+data/testset/
+gym/testset/
+gym/splits/test_page_ids.txt
+test_preds/
+score_test_*.log
