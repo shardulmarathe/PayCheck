@@ -421,11 +421,36 @@ export default function KioskCanvas({
           onLost?.();
         };
         gl.domElement.addEventListener("webglcontextlost", lost);
+        // Blank-render probe: some (software) GL stacks create a context but draw nothing.
+        // preserveDrawingBuffer is on, so the last frame can be sampled after a short wait.
+        window.setTimeout(() => {
+          try {
+            const ctx = gl.getContext();
+            if (ctx.isContextLost()) return onLost?.();
+            const w = ctx.drawingBufferWidth;
+            const h = ctx.drawingBufferHeight;
+            const px = new Uint8Array(4);
+            let drawn = 0;
+            for (let i = 1; i < 8; i += 1) {
+              for (let j = 1; j < 8; j += 1) {
+                ctx.readPixels(Math.floor((w * i) / 8), Math.floor((h * j) / 8), 1, 1, ctx.RGBA, ctx.UNSIGNED_BYTE, px);
+                if (px[3] > 8 && px[0] + px[1] + px[2] > 24) drawn += 1;
+              }
+            }
+            if (drawn === 0) onLost?.();
+          } catch {
+            onLost?.();
+          }
+        }, 1800);
         if (!ready.current) {
           ready.current = true;
-          const shell = gl.domElement.parentElement;
-          if (shell) shell.style.opacity = "1";
-          gl.domElement.style.opacity = "1";
+          // R3F wraps the canvas in two divs; the faded-in style sits on the OUTER one.
+          // Only the inner one was being revealed, so the kiosk stayed at opacity 0.
+          let node: HTMLElement | null = gl.domElement;
+          while (node && !node.classList.contains("bg-kiosk")) {
+            node.style.opacity = "1";
+            node = node.parentElement;
+          }
         }
         invalidate();
       }}

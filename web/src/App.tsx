@@ -59,13 +59,13 @@ function Site() {
 
   return (
     <>
+      <a className="skip" href="#content">
+        Skip to content
+      </a>
       <BackgroundKiosk screen={screen} />
       <ProgressHairline />
       <TopBar tabs={tabs} />
       <main id="content" className="page" tabIndex={-1} style={{ opacity: dimmed ? 0.28 : 1 }}>
-        <a className="skip" href="#content">
-          Skip to content
-        </a>
         <section id="demo" data-tab="demo" data-arrive={arriving === "demo" ? "1" : undefined}>
           <Demo data={data} />
         </section>

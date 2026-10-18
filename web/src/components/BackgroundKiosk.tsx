@@ -72,7 +72,6 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
   const [webgl] = useState(() => webglOk() && !slowDevice());
   const quiet = screen.quiet === true;
   const fallback = reduced || !webgl || lost;
-  const still = quiet ? <div className="kiosk-quiet" /> : <img src="/kiosk-hero-crop.webp" alt="" />;
   const activeRef = useRef(active);
   activeRef.current = active;
 
@@ -124,15 +123,8 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
       node.style.transform = `translate3d(${box.x}px, ${box.y}px, 0)`;
       node.style.visibility = hide ? "hidden" : "visible";
 
-      const replay = document.querySelector(".replay-section")?.getBoundingClientRect();
-      const bench = document.getElementById("benchmarks")?.getBoundingClientRect();
-      const centered = (rect: DOMRect | undefined) => {
-        if (!rect) return false;
-        const mid = rect.top + Math.min(rect.height, vh) / 2;
-        return Math.abs(mid - vh / 2) < vh * 0.35 && rect.top < vh * 0.7 && rect.bottom > vh * 0.3;
-      };
-      const crowded = centered(replay) || centered(bench) || activeRef.current === "benchmarks";
-      const floor = crowded ? 0.2 : 0.35;
+      // Brightness floor raised to 35% everywhere (was 20% next to replay/benchmarks).
+      const floor = 0.35;
       kioskPose.presence = lerp(1, floor, t);
       kioskPose.yaw = poster ? 0 : scrolled * ((20 * Math.PI) / 180);
       kioskPose.invalidate();
@@ -156,12 +148,20 @@ export function BackgroundKiosk({ screen }: { screen: KioskScreen }) {
     placeKioskNow();
   }, [active]);
 
+  // No working 3D (no WebGL, lost context, or a blank render): hide the kiosk and center the hero text.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (fallback) root.dataset.kiosk = "off";
+    else delete root.dataset.kiosk;
+    return () => {
+      delete root.dataset.kiosk;
+    };
+  }, [fallback]);
+
   return (
     <div ref={shell} className="bg-kiosk" aria-hidden="true">
-      {fallback ? (
-        still
-      ) : (
-        <Suspense fallback={still}>
+      {fallback ? null : (
+        <Suspense fallback={null}>
           <KioskCanvas screen={screen} scanRef={scanRef} onLost={() => setLost(true)} />
         </Suspense>
       )}

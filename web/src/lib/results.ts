@@ -66,6 +66,19 @@ function finite(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
+/**
+ * "beats" is spoken only when the file says so AND the paired bootstrap 95% CI on
+ * (guard − Sonnet) excludes 0 on the positive side. Read from `paired_ci95: [lo, hi]`
+ * or `diff_ci_low` / `diff_ci_high`. Anything else downgrades to "within".
+ */
+function sliceClaim(cell: Record<string, unknown>): Claim {
+  if (claimOf(cell.claim) !== "beats") return "within";
+  const pair = Array.isArray(cell.paired_ci95) ? cell.paired_ci95 : [cell.diff_ci_low, cell.diff_ci_high];
+  const lo = finite(pair[0]);
+  const hi = finite(pair[1]);
+  return lo != null && hi != null && Math.min(lo, hi) > 0 ? "beats" : "within";
+}
+
 function gapToken(gap: number | null): string {
   return gap == null ? "[N]" : trimNum(Math.abs(gap));
 }
@@ -213,7 +226,7 @@ export function normalizeResults(raw: unknown): NormalizedResults | undefined {
     const models = readScores(cell.scores ?? cell.models, catalog);
     slices.push({
       id,
-      claim: claimOf(cell.claim),
+      claim: sliceClaim(cell),
       gapPoints: finite(cell.gap_points),
       models,
     });
@@ -259,6 +272,7 @@ export function assertClaimRules(): void {
       in_dist: {
         claim: "beats",
         gap_points: 2,
+        paired_ci95: [0.4, 3.8],
         scores: {
           guard: { score: 93, ci_low: 89, ci_high: 96 },
           baseline: { score: null, ci_low: null, ci_high: null },
@@ -298,6 +312,13 @@ export function assertClaimRules(): void {
     slices: [{ id: "in_dist", claim: "beats", gapPoints: 2, models: [] }],
   });
   if (beatOnly.sentence !== "Level with the baseline model.") throw new Error(`beats claim changed: ${beatOnly.sentence}`);
+  const noCi = normalizeResults({
+    synthetic: false,
+    slices: { heldout_template: { claim: "beats", gap_points: 2, paired_ci95: [-0.5, 4], scores: {} } },
+  });
+  if (!noCi || noCi.synthetic || noCi.view.slices[0]?.claim !== "within") {
+    throw new Error("beats was spoken without a paired CI that excludes 0");
+  }
   const mockShaped = normalizeResults({
     synthetic: true,
     hero_slice: "in_dist",

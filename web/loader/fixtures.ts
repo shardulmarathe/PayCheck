@@ -406,7 +406,6 @@ export const fixtureDataset: Dataset = {
     sources: [
       { title: "Princeton dark-patterns study", detail: "11K shopping sites, 2019" },
       { title: "ec-darkpattern", detail: "labeled e-commerce text" },
-      { title: "FTC", detail: "dark-pattern enforcement reports" },
     ],
     feeds_label: "feeds the attacker",
     nodes: [
@@ -417,33 +416,8 @@ export const fixtureDataset: Dataset = {
     round_n: null,
     new_layout_pct: null,
     caught_caption: "new-layout test · the headline",
-    steps_kicker: "Step by step",
-    steps: [
-      {
-        n: "01",
-        title: "Collect real tricks",
-        body: "Princeton's 11K-site crawl, labeled ec-darkpattern text and FTC cases. Test pages are split off first.",
-        meta: "",
-      },
-      {
-        n: "02",
-        title: "New practice pages",
-        body: "Each round brings new practice pages, each hiding one of five tricks: hidden fees, pre-selected add-ons (pre-checked box, popup, one-click offer), price changes, subscription traps or fake card verification. Copycat stores and listing injection are held out (never trained on).",
-        meta: "",
-      },
-      {
-        n: "03",
-        title: "The guard reads each page",
-        body: "Qwen3-4B, fine-tuned with QLoRA on veri.studio, passes or blocks every page.",
-        meta: "",
-      },
-      {
-        n: "04",
-        title: "Misses seed the next round",
-        body: "Misses on dev pages seed the next round. Each round is scored on a fresh dev split; the headline is the new-layout test, on page layouts it never trains on.",
-        meta: "",
-      },
-    ],
+    steps_kicker: "Where practice pages come from",
+    steps: [],
     plug_kicker: "Plug it in",
     plug_title_lines: ["One call before", "your agent pays."],
     plug_body:

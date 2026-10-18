@@ -1,5 +1,6 @@
 import { HiddenTrick } from "../components/HiddenTrick";
 import { LoopDiagram } from "../components/Loop";
+import { COPY } from "../lib/copy";
 import type { Dataset } from "../lib/types";
 
 export function DesignProcess({ data }: { data: Dataset }) {
@@ -24,19 +25,8 @@ export function DesignProcess({ data }: { data: Dataset }) {
           caption={process.caught_caption}
         />
       </section>
-      <section className="section">
-        <p className="label">{process.steps_kicker}</p>
-        <div className="steps-v3">
-          {process.steps.map((step) => (
-            <article key={step.n} className="step-v3">
-              <p className="micro">{step.n}</p>
-              <div>
-                <h3>{step.title}</h3>
-                <p className="body">{step.body}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+      <section className="section practice-sources">
+        <p className="body-l">{COPY.practiceSources}</p>
       </section>
       <section className="section plug-v3">
         <div>

@@ -65,18 +65,38 @@ h1, h2, h3, p { margin: 0; }
   border: 0;
 }
 
+/* Skip link: screen-reader only until it gets keyboard focus. */
 .skip {
   position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  z-index: 50;
+}
+.skip:focus-visible {
+  position: fixed;
   left: 16px;
-  top: -48px;
-  z-index: 30;
+  top: 12px;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
   background: var(--text);
   color: var(--bg);
   padding: 8px 12px;
   border-radius: 2px;
   font-size: 14px;
+  outline: 2px solid var(--red, #FF453A);
+  outline-offset: 2px;
 }
-.skip:focus { top: 12px; }
 
 .wrap {
   width: min(var(--content), calc(100% - 2 * var(--margin)));
@@ -1935,3 +1955,28 @@ section[data-arrive="1"] > .wrap {
   .will-draw .future-row .body,
   .will-draw .future-row > .micro { opacity: 1; transform: none; }
 }
+
+/* --- Designer fixes (Oct 17) --- */
+/* Fix 3: no working 3D kiosk -> hide it and center the hero copy. */
+html[data-kiosk="off"] .bg-kiosk,
+html[data-kiosk="off"] .kiosk-slot { display: none; }
+html[data-kiosk="off"] .hero-lockup { width: 100vw; margin-left: calc((min(var(--content), calc(100vw - 2 * var(--margin))) - 100vw) / 2); padding-inline: 24px; box-sizing: border-box; grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+html[data-kiosk="off"] .hero-copy { margin-inline: auto; }
+html[data-kiosk="off"] .hero-copy .use-case,
+html[data-kiosk="off"] .hero-copy .hero-claim { margin-inline: auto; }
+
+/* Fix 5: trick tags readable. Min 12px, near-white text, red brackets. */
+.hidden-trick-copy { color: var(--text); font-size: 14px; }
+.hidden-trick-label { color: var(--text); font-size: 12px; }
+.trick-badge { font-size: 13px; color: var(--text); }
+.ht-set i, .ht-white i { border-color: #FF453A; }
+.ht-set svg path { stroke: #FF453A; }
+.is-done .ht-red { opacity: 1; }
+.is-done .ht-white { opacity: 0; }
+.is-done .hidden-trick-copy { opacity: 0.85; }
+@keyframes trick-dim { to { opacity: 0.85; } }
+
+/* Fix 6: one source line replaces the step list. */
+.practice-sources .body-l { max-width: 60ch; color: var(--text-2); }
+/* Fix 3: kiosk renders but reads too dark on #0A0C0F; lift it ~35%. */
+.bg-kiosk canvas { filter: brightness(1.35); }

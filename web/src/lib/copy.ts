@@ -5,6 +5,9 @@ import { PRODUCT_NAME } from "./product";
  * `results.ts` from slice claims, not from a hardcoded cost ratio.
  */
 export const COPY = {
+  /** Researcher-verified source line. Replaces the old four-step list. */
+  practiceSources:
+    "Practice pages are generated stores whose trick text comes from the ec-darkpattern dataset, built on Princeton's 11K-site crawl. Test pages are split off first.",
   catchLine(catchPct: string): string {
     return `Catches ${catchPct}% of checkout tricks.`;
   },
