@@ -1,5 +1,5 @@
 import { MotionConfig } from "framer-motion";
-import { TopBar } from "./components/Chrome";
+import { Footer, TopBar } from "./components/Chrome";
 import { IntroProvider } from "./components/motion/Intro";
 import { ScanCursor } from "./components/motion/ScanCursor";
 import { useSectionReveal } from "./hooks/useSectionReveal";
@@ -79,6 +79,7 @@ function Site() {
           <Future data={data} />
         </section>
       </main>
+      <Footer note={data.footer_note} />
     </>
   );
 }

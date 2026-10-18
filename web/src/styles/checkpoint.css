@@ -999,3 +999,11 @@ h1, h2, h3, .road-h, .why19-h, .ev18 h1 { line-height: 1.15 !important; padding-
 /* Round 21: the shared section entrance hairline sits at var(--sec) - 34px, which assumes 150px top padding. The Coach
    section has 64px, so the line crossed its heading and Prototype label. Keep it 34px above the eyebrow instead. */
 html.reveal-on main.v10 > section#coach .section.coach::before, html.reveal-on main.v10 > section#coach .section.coach::after { top: 30px !important; }
+
+.sk-wordmark{height:26px;width:auto;max-width:120px;display:block;object-fit:contain}
+.sk-real .sk-word{display:none}
+
+/* Two tiles now (Safer, Better); GitHub link in the footer. */
+.why19-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; }
+.footer-link { color: var(--text-2); text-decoration: none; border-bottom: 1px solid var(--hairline-strong); }
+.footer-link:hover { color: var(--text); border-color: var(--text-2); }

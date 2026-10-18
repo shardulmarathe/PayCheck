@@ -168,7 +168,7 @@ export function FullResults({ models }: { models: ModelEval[] }) {
  */
 const WHY_TILES: { k: string; ours: string; theirs: string; cap: string; note?: string }[] = [
   { k: "Safer", ours: "0", theirs: "16", cap: "honest checkouts wrongly blocked (of 150)" },
-  { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "overall accuracy" },
+  { k: "Better", ours: SITE.accuracyF1.paycheck, theirs: SITE.accuracyF1.haiku, cap: "F1 score" },
 ];
 
 export function WhyBetter({ models }: { models: ModelEval[] }) {

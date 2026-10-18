@@ -129,7 +129,10 @@ export function Footer({ note }: { note: string }) {
             <span className="example-tag">Illustration</span>
           </div>
         ) : null}
-        <p className="micro">{note}</p>
+        <a className="micro footer-link" href="https://github.com/shardulmarathe/PayCheck" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        {note ? <p className="micro">{note}</p> : null}
       </div>
     </footer>
   );

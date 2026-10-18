@@ -23,14 +23,12 @@ const TRICKS: { id: TrickId; button: string; label: string; why: string }[] = [
   { id: "clean", button: "No trick", label: "No trick found", why: "Every price matches the product page and the shipping fee was shown up front." },
 ];
 
-type Skin = { cls: string; name: string; slug: string; logo?: string; mark?: "sn" | "vm"; thumb: string; product: string; price: number };
+type Skin = { cls: string; name: string; slug: string; logo?: string; wordmark?: boolean; mark?: "sn" | "vm"; thumb: string; product: string; price: number };
 const SKINS: Skin[] = [
-  { cls: "sk-dl", name: "Desklane", slug: "desklane", logo: "/skins/desklane.svg", thumb: "sk-thumb-note", product: "Dot-grid notebook, A5", price: 16 },
-  { cls: "sk-hg", name: "Homegoods Direct", slug: "homegoodsdirect", logo: "/skins/homegoodsdirect.svg", thumb: "sk-thumb-kettle", product: "Enamel stovetop kettle, 2 L", price: 34 },
-  { cls: "sk-bb", name: "Beanbarn", slug: "beanbarn", logo: "/skins/beanbarn.svg", thumb: "sk-thumb-bag", product: "House Medium Roast, 12 oz", price: 14 },
-  { cls: "sk-ch", name: "Chargehub", slug: "chargehub", logo: "/skins/chargehub.svg", thumb: "sk-thumb-plug", product: "Wall charger, 65 W", price: 29 },
-  { cls: "sk-sn", name: "soundnest", slug: "soundnest", mark: "sn", thumb: "sk-thumb-phones", product: "Studio headphones, closed-back", price: 59 },
-  { cls: "sk-vm", name: "Voltmart", slug: "voltmart", mark: "vm", thumb: "sk-thumb-cable", product: "USB-C cable, 2 m", price: 24 },
+  { cls: "sk-hg sk-real", name: "eBay", slug: "ebay", logo: "/skins/real-ebay.svg", wordmark: true, thumb: "sk-thumb-kettle", product: "Enamel stovetop kettle, 2 L", price: 34 },
+  { cls: "sk-dl sk-real", name: "Temu", slug: "temu", logo: "/skins/real-temu.svg", wordmark: true, thumb: "sk-thumb-phones", product: "Wireless earbuds", price: 19 },
+  { cls: "sk-ch sk-real", name: "Alibaba", slug: "alibaba", logo: "/skins/real-alibaba.svg", wordmark: true, thumb: "sk-thumb-plug", product: "Wall charger, 65 W", price: 29 },
+  { cls: "sk-bb sk-real", name: "PandaBuy", slug: "pandabuy", logo: "/skins/real-pandabuy.svg", wordmark: true, thumb: "sk-thumb-bag", product: "Canvas tote bag", price: 24 },
 ];
 
 const ADDON = 4.5;
@@ -102,8 +100,8 @@ function Store({ skin, trick, t, fx, outline }: { skin: Skin; trick: TrickId; t:
     <div className={`sk ${skin.cls} rt-sk`}>
       {trick === "copycat" ? slot(<Bar domain={`${copyDomain(skin)}/checkout`} />, "sk-urlslot") : <Bar domain={domain} />}
       <div className="sk-head" style={a(T.head)}>
-        {skin.logo ? <img className="sk-logo" src={skin.logo} alt="" /> : skin.mark === "sn" ? <span className="sk-mark"><i /><i /><i /><i /></span> : <span className="sk-bolt" />}
-        <span className="sk-word">{skin.name}</span>
+        {skin.wordmark ? <img className="sk-wordmark" src={skin.logo} alt={skin.name} /> : skin.logo ? <img className="sk-logo" src={skin.logo} alt="" /> : skin.mark === "sn" ? <span className="sk-mark"><i /><i /><i /><i /></span> : <span className="sk-bolt" />}
+        {!skin.wordmark && <span className="sk-word">{skin.name}</span>}
         {lastStep ? (
           <span className="sk-step">
             Cart › Shipping › <b>Review</b>

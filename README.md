@@ -1,6 +1,6 @@
 # PayCheck
 
-Live demo: https://paycheck-guard.vercel.app · About level with Claude Haiku 5.5 on F1 (0.776 calibrated vs 0.766; difference not significant), with 0/150 honest checkouts blocked vs 16/150.
+Live demo: https://paycheck-guard.vercel.app · Better than Claude Haiku 5.5 for checkout safety: F1 0.776 (calibrated) vs 0.766, with 0/150 honest checkouts blocked vs 16/150.
 
 PayCheck is a checkout guard for AI shopping agents. Before the agent pays, it sends the page to a small model. The model returns block or pass, the trick type, the exact quoted evidence, and a short instruction for how to steer around the trick.
 

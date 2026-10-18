@@ -159,7 +159,6 @@ export const SITE = {
   heroReasons: [
     "0 vs 16 honest checkouts blocked (of 150)",
     "Matches it on overall accuracy (0.78 vs 0.77)",
-    "Cheaper per check",
   ],
   heroVerdictLink: "See the results",
   accuracyLead:
